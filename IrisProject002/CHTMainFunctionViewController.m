@@ -29,9 +29,9 @@
     flag1=true;
     i=1;
     NSURL *url = [NSURL URLWithString:@"http://auth.emome.net/emome/membersvc/AuthServlet?serviceId=mobilebms&url=qryTelnum.jsp"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [self.CHTWebView loadRequest:request];
-    _CHTWebView.delegate = self;
+     NSURLRequest *request = [NSURLRequest requestWithURL:url];
+     [self.CHTWebView loadRequest:request];
+     _CHTWebView.delegate = self;
     //_webView.hidden=YES;隱藏web view視窗
 }
 
@@ -41,37 +41,25 @@
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     
-    
-    
     if(pagenumber==1){
         pagenumber+=1;
         
         [_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('uid').value='0919552512'"];
         [_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('pw').value='1222o3o9'"];
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            self.CHTWebView.scrollView.contentOffset = CGPointMake(50, 100);
-        });
+        [_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('btn-login').click()"];
     }
     else if(pagenumber==2){
         
         if (i>=1) {
             NSString *formwhichcpy = [_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('telnum').parentNode.parentNode.parentNode.rows[1].cells[0].innerHTML"];
             NSLog(@"%@",formwhichcpy);
-            
-            NSArray *phonenumeber=@[@"0919552512",@"0912912192",@"0932642551",@"0913145161"];
-            
+            NSArray *phonenumeber=@[@"0",@"0919552512",@"0912912192",@"0932642551",@"0913145161"];
             
             NSString*phnumlist=phonenumeber[i-1];
-            i+=1;
             NSString *script1 = [NSString stringWithFormat:@"document.getElementById('telnum').value='%@'", phnumlist];
+            i+=1;
             [_CHTWebView stringByEvaluatingJavaScriptFromString:script1];
             [_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('btn_submit').click()"];
-            
-            
-            
-            
-            
             
         }
     }

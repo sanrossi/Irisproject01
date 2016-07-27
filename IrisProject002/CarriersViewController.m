@@ -1,44 +1,27 @@
 //
-//  LoginViewController.m
+//  CarriersViewController.m
 //  IrisProject001
 //
-//  Created by 沈秋蕙 on 2016/7/22.
+//  Created by 沈秋蕙 on 2016/7/27.
 //  Copyright © 2016年 iris shen. All rights reserved.
 //
 
-#import "LoginViewController.h"
+#import "CarriersViewController.h"
 
-@interface LoginViewController ()
-
+@interface CarriersViewController ()
 
 @end
 
-@implementation LoginViewController
+@implementation CarriersViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
-    self.UserPhoneNumber=@"0919552512";
-    self.Carriers=@"中華電信";
-    self.PasswrdTextField.secureTextEntry =YES;
-    
-    
-    
-    
+    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    [self.view endEditing:YES];
-//    if(){
-//    
-//    }
-}
-- (IBAction)ChLoginSubmit:(id)sender {
-    
 }
 
 /*
@@ -50,6 +33,5 @@
     // Pass the selected object to the new view controller.
 }
 */
-
 
 @end

@@ -14,7 +14,9 @@
 		030AF6021D41BDE6004C451F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 030AF6001D41BDE6004C451F /* LaunchScreen.storyboard */; };
 		030AF60D1D41BDE6004C451F /* IrisProject001Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 030AF60C1D41BDE6004C451F /* IrisProject001Tests.m */; };
 		030AF6181D41BDE6004C451F /* IrisProject001UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 030AF6171D41BDE6004C451F /* IrisProject001UITests.m */; };
-		030AF6271D41C5C6004C451F /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 030AF6261D41C5C6004C451F /* LoginViewController.m */; };
+		03922FDA1D48929C009C3E0F /* CarriersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03922FD91D48929C009C3E0F /* CarriersViewController.m */; };
+		03A01CF71D48F19F00882331 /* CHTLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A01CF61D48F19F00882331 /* CHTLoginViewController.m */; };
+		03A01CFA1D48F22000882331 /* CHTMainFunctionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A01CF91D48F22000882331 /* CHTMainFunctionViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,8 +51,12 @@
 		030AF6131D41BDE6004C451F /* IrisProject001UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IrisProject001UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		030AF6171D41BDE6004C451F /* IrisProject001UITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IrisProject001UITests.m; sourceTree = "<group>"; };
 		030AF6191D41BDE6004C451F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		030AF6251D41C5C6004C451F /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
-		030AF6261D41C5C6004C451F /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		03922FD81D48929C009C3E0F /* CarriersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CarriersViewController.h; path = ../CarriersViewController.h; sourceTree = "<group>"; };
+		03922FD91D48929C009C3E0F /* CarriersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CarriersViewController.m; path = ../CarriersViewController.m; sourceTree = "<group>"; };
+		03A01CF51D48F19F00882331 /* CHTLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHTLoginViewController.h; path = ../CHTLoginViewController.h; sourceTree = "<group>"; };
+		03A01CF61D48F19F00882331 /* CHTLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHTLoginViewController.m; path = ../CHTLoginViewController.m; sourceTree = "<group>"; };
+		03A01CF81D48F22000882331 /* CHTMainFunctionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHTMainFunctionViewController.h; path = ../CHTMainFunctionViewController.h; sourceTree = "<group>"; };
+		03A01CF91D48F22000882331 /* CHTMainFunctionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHTMainFunctionViewController.m; path = ../CHTMainFunctionViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,8 +108,12 @@
 			isa = PBXGroup;
 			children = (
 				030AF5F51D41BDE6004C451F /* AppDelegate.h */,
-				030AF6251D41C5C6004C451F /* LoginViewController.h */,
-				030AF6261D41C5C6004C451F /* LoginViewController.m */,
+				03922FD81D48929C009C3E0F /* CarriersViewController.h */,
+				03922FD91D48929C009C3E0F /* CarriersViewController.m */,
+				03A01CF51D48F19F00882331 /* CHTLoginViewController.h */,
+				03A01CF61D48F19F00882331 /* CHTLoginViewController.m */,
+				03A01CF81D48F22000882331 /* CHTMainFunctionViewController.h */,
+				03A01CF91D48F22000882331 /* CHTMainFunctionViewController.m */,
 				030AF5F61D41BDE6004C451F /* AppDelegate.m */,
 				030AF5FB1D41BDE6004C451F /* Main.storyboard */,
 				030AF5FE1D41BDE6004C451F /* Assets.xcassets */,
@@ -271,8 +281,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				030AF5F71D41BDE6004C451F /* AppDelegate.m in Sources */,
+				03A01CFA1D48F22000882331 /* CHTMainFunctionViewController.m in Sources */,
+				03922FDA1D48929C009C3E0F /* CarriersViewController.m in Sources */,
+				03A01CF71D48F19F00882331 /* CHTLoginViewController.m in Sources */,
 				030AF5F41D41BDE6004C451F /* main.m in Sources */,
-				030AF6271D41C5C6004C451F /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,6 +508,7 @@
 				030AF61E1D41BDE6004C451F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		030AF61F1D41BDE6004C451F /* Build configuration list for PBXNativeTarget "IrisProject001Tests" */ = {
 			isa = XCConfigurationList;
@@ -504,6 +517,7 @@
 				030AF6211D41BDE6004C451F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		030AF6221D41BDE6004C451F /* Build configuration list for PBXNativeTarget "IrisProject001UITests" */ = {
 			isa = XCConfigurationList;
@@ -512,6 +526,7 @@
 				030AF6241D41BDE6004C451F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

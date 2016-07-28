@@ -52,7 +52,7 @@
                     if (granted) { //if user allow to access a contacts in this app.
                         [self fetchContactsFromContactsFrameWork]; //access contacts
                         //增加一個寫入方法
-                        [self creatContact];
+                     //   [self creatContact];
                     } else { // else ask to get a permission to access a contacts in this app.
                         [self getPermissionToUser]; //Ask permission to user
                         
@@ -63,7 +63,7 @@
             case kABAuthorizationStatusAuthorized: { //Contact access permission is already authorized.
                 [self fetchContactsFromContactsFrameWork]; //access contacts
                 //增加一個寫入方法
-                [self creatContact];
+              //  [self creatContact];
             }
                 break;
             default: { //else ask permission to user
@@ -307,7 +307,12 @@
     
 }
 
+#pragma mark - Modify Contacts
+- (void)ModifyContact{
 
+
+
+}
 
 
 

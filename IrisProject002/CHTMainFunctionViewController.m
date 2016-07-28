@@ -7,15 +7,14 @@
 //
 
 #import "CHTMainFunctionViewController.h"
-
+#import "MyContactList.h"
 @interface CHTMainFunctionViewController ()<UIWebViewDelegate>
 
 {
-    NSInteger pagenumber;
-    NSInteger i;
-    BOOL flag1 ;
+    NSInteger WebPageNum;
+    NSInteger ArrayNum;
+    
 }
-
 @property (weak, nonatomic) IBOutlet UIWebView *CHTWebView;
 
 @end
@@ -25,14 +24,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    pagenumber =1;
-    flag1=true;
-    i=1;
+    WebPageNum =1;
+    ArrayNum=1;
     NSURL *url = [NSURL URLWithString:@"http://auth.emome.net/emome/membersvc/AuthServlet?serviceId=mobilebms&url=qryTelnum.jsp"];
      NSURLRequest *request = [NSURLRequest requestWithURL:url];
      [self.CHTWebView loadRequest:request];
      _CHTWebView.delegate = self;
-    //_webView.hidden=YES;隱藏web view視窗
+     _CHTWebView.hidden=YES;
+    
+    [[ContactList sharedContacts] fetchAllContacts]; //fetch all contacts by calling single to method
+    
+    if ([[ContactList sharedContacts]totalPhoneNumberArray].count !=0) {
+        NSLog(@"Fetched Contact Details : %ld",[[ContactList sharedContacts]totalPhoneNumberArray].count);
+        NSLog(@"姓名：%@ ", [[ContactList sharedContacts]totalPhoneNumberArray]);
+        //        for(int i=0; i<[[ContactList sharedContacts]totalPhoneNumberArray].count;i++)
+        //        {NSLog(@"電話：%@ ",[[[ContactList sharedContacts]totalPhoneNumberArray][i] objectForKey:@"phone"]);
+        //        }
+    
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -41,24 +50,24 @@
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     
-    if(pagenumber==1){
-        pagenumber+=1;
+    if(WebPageNum==1){
+        WebPageNum+=1;
         
         [_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('uid').value='0919552512'"];
         [_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('pw').value='1222o3o9'"];
         [_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('btn-login').click()"];
     }
-    else if(pagenumber==2){
+    else if(WebPageNum==2){
         
-        if (i>=1) {
+        if (ArrayNum>=1) {
             NSString *formwhichcpy = [_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('telnum').parentNode.parentNode.parentNode.rows[1].cells[0].innerHTML"];
             NSLog(@"%@",formwhichcpy);
             NSArray *phonenumeber=@[@"0",@"0919552512",@"0912912192",@"0932642551",@"0913145161"];
             
-            NSString*phnumlist=phonenumeber[i-1];
-            NSString *script1 = [NSString stringWithFormat:@"document.getElementById('telnum').value='%@'", phnumlist];
-            i+=1;
-            [_CHTWebView stringByEvaluatingJavaScriptFromString:script1];
+            NSString*phnumlist=phonenumeber[ArrayNum-1];
+            NSString *script = [NSString stringWithFormat:@"document.getElementById('telnum').value='%@'", phnumlist];
+            ArrayNum+=1;
+            [_CHTWebView stringByEvaluatingJavaScriptFromString:script];
             [_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('btn_submit').click()"];
             
         }

@@ -17,6 +17,9 @@
 		03922FDA1D48929C009C3E0F /* CarriersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03922FD91D48929C009C3E0F /* CarriersViewController.m */; };
 		03A01CF71D48F19F00882331 /* CHTLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A01CF61D48F19F00882331 /* CHTLoginViewController.m */; };
 		03A01CFA1D48F22000882331 /* CHTMainFunctionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A01CF91D48F22000882331 /* CHTMainFunctionViewController.m */; };
+		03A039A01D499C9700B017F8 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03A0399F1D499C9700B017F8 /* Contacts.framework */; };
+		03A039A21D499CA500B017F8 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03A039A11D499CA500B017F8 /* AddressBook.framework */; };
+		03A039A51D499D8F00B017F8 /* MyContactList.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A039A41D499D8F00B017F8 /* MyContactList.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +60,10 @@
 		03A01CF61D48F19F00882331 /* CHTLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHTLoginViewController.m; path = ../CHTLoginViewController.m; sourceTree = "<group>"; };
 		03A01CF81D48F22000882331 /* CHTMainFunctionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHTMainFunctionViewController.h; path = ../CHTMainFunctionViewController.h; sourceTree = "<group>"; };
 		03A01CF91D48F22000882331 /* CHTMainFunctionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHTMainFunctionViewController.m; path = ../CHTMainFunctionViewController.m; sourceTree = "<group>"; };
+		03A0399F1D499C9700B017F8 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
+		03A039A11D499CA500B017F8 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		03A039A31D499D8F00B017F8 /* MyContactList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyContactList.h; sourceTree = "<group>"; };
+		03A039A41D499D8F00B017F8 /* MyContactList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyContactList.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +71,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03A039A21D499CA500B017F8 /* AddressBook.framework in Frameworks */,
+				03A039A01D499C9700B017F8 /* Contacts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +96,8 @@
 		030AF5E61D41BDE6004C451F = {
 			isa = PBXGroup;
 			children = (
+				03A039A11D499CA500B017F8 /* AddressBook.framework */,
+				03A0399F1D499C9700B017F8 /* Contacts.framework */,
 				030AF5F11D41BDE6004C451F /* IrisProject001 */,
 				030AF60B1D41BDE6004C451F /* IrisProject001Tests */,
 				030AF6161D41BDE6004C451F /* IrisProject001UITests */,
@@ -108,13 +119,15 @@
 			isa = PBXGroup;
 			children = (
 				030AF5F51D41BDE6004C451F /* AppDelegate.h */,
+				030AF5F61D41BDE6004C451F /* AppDelegate.m */,
 				03922FD81D48929C009C3E0F /* CarriersViewController.h */,
 				03922FD91D48929C009C3E0F /* CarriersViewController.m */,
 				03A01CF51D48F19F00882331 /* CHTLoginViewController.h */,
 				03A01CF61D48F19F00882331 /* CHTLoginViewController.m */,
 				03A01CF81D48F22000882331 /* CHTMainFunctionViewController.h */,
 				03A01CF91D48F22000882331 /* CHTMainFunctionViewController.m */,
-				030AF5F61D41BDE6004C451F /* AppDelegate.m */,
+				03A039A31D499D8F00B017F8 /* MyContactList.h */,
+				03A039A41D499D8F00B017F8 /* MyContactList.m */,
 				030AF5FB1D41BDE6004C451F /* Main.storyboard */,
 				030AF5FE1D41BDE6004C451F /* Assets.xcassets */,
 				030AF6001D41BDE6004C451F /* LaunchScreen.storyboard */,
@@ -284,6 +297,7 @@
 				03A01CFA1D48F22000882331 /* CHTMainFunctionViewController.m in Sources */,
 				03922FDA1D48929C009C3E0F /* CarriersViewController.m in Sources */,
 				03A01CF71D48F19F00882331 /* CHTLoginViewController.m in Sources */,
+				03A039A51D499D8F00B017F8 /* MyContactList.m in Sources */,
 				030AF5F41D41BDE6004C451F /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -12,7 +12,7 @@
 #import <Contacts/Contacts.h> //Contacts.framework for above iOS 9
 #import "CHTMainFunctionViewController.h"
 
-@interface ContactList : NSObject{
+@interface MyContactList : NSObject{
     
     NSMutableArray *totalPhoneNumberArray; //Total Mobile Contacts from access from this variable
     
@@ -22,6 +22,7 @@
     ABAddressBookRef addressBook; //Address Book Object
     
     CNContactStore *contactStore; //ContactStore Object
+    NSDictionary *peopleDic;
 }
 
 //@property(nonatomic)NSMutableDictionary *contantDic;
@@ -32,6 +33,9 @@
 
 ///fetch contacts from Addressbooks or Contacts framework
 -(void)fetchAllContacts; //Method of fetch contacts from Addressbooks or Contacts framework
+- (void)updateContact:(CNMutableContact *)newContact;
+
+
 @end
 
 

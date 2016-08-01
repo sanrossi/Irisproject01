@@ -9,14 +9,13 @@
 
 
 #import "MyContactList.h"
-
-@implementation ContactList
+@implementation MyContactList
 @synthesize totalPhoneNumberArray;
 
 #pragma mark - Singleton Methods
 + (id)sharedContacts { //Shared instance method
     
-    static ContactList *sharedMyContacts = nil; //create contactsList Object
+    static MyContactList *sharedMyContacts = nil; //create contactsList Object
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{ //for first time create shared instance object
@@ -36,8 +35,7 @@
 #pragma mark - Fetch All Contacts from Addressbooks or Contacts framework
 //Method of fetch contacts from Addressbooks or Contacts framework
 - (void)fetchAllContacts {
-    //獲取所有聯絡人
-    groupsOfContact = [@[] mutableCopy]; //init a mutable array初始化一個mutablearray
+    groupsOfContact = [@[] mutableCopy]; //init a mutable array
     
     //In iOS 9 and above, use Contacts.framework
     if (NSClassFromString(@"CNContactStore")) { //if Contacts.framework is available
@@ -52,10 +50,10 @@
                     if (granted) { //if user allow to access a contacts in this app.
                         [self fetchContactsFromContactsFrameWork]; //access contacts
                         //增加一個寫入方法
-                     //   [self creatContact];
+                        [self updateContact];
                     } else { // else ask to get a permission to access a contacts in this app.
                         [self getPermissionToUser]; //Ask permission to user
-                        
+                      
                     }
                 }];
             }
@@ -63,7 +61,7 @@
             case kABAuthorizationStatusAuthorized: { //Contact access permission is already authorized.
                 [self fetchContactsFromContactsFrameWork]; //access contacts
                 //增加一個寫入方法
-              //  [self creatContact];
+                [self updateContact];
             }
                 break;
             default: { //else ask permission to user
@@ -82,6 +80,18 @@
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
 #pragma mark - Contacts.framework method
 - (void)fetchContactsFromContactsFrameWork { //access contacts using contacts.framework
     
@@ -95,7 +105,7 @@
     
     NSMutableArray *phoneNumberArray = [@[] mutableCopy]; // init a mutable array初始化一個array
     
-    NSDictionary *peopleDic; // create object建立一個dictionary的物件
+    // create object建立一個dictionary的物件
     
     //generate a custom dictionary to access
     for (CNContact *contact in groupsOfContact) {
@@ -233,86 +243,135 @@
 
 
 
-
-
-
-#pragma mark - 添加联系人
-- (void)creatContact{
-    
-    CNMutableContact *contact = [[CNMutableContact alloc] init]; // 第一次运行的时候，会获取通讯录的授权（对通讯录进行操作，有权限设置）
-    
-    // 1、添加姓名（姓＋名）
-    contact.givenName = @"san";
-    contact.familyName = @"wangg";
-    //    contact.nickname = @"hahahah"; // 昵称
-    //    contact.nameSuffix = @"nameSuffix"; // 名字后缀
-    //    contact.namePrefix = @"namePrefix"; // 前字后缀
-    //    contact.previousFamilyName = @"previousFamilyName"; // 之前的familyName
-    
-    // 2、添加职位相关
-    contact.organizationName = @"公司名称";
-    contact.departmentName = @"开发部门";
-    contact.jobTitle = @"工程师";
-    
-    // 3、这一部分内容会显示在联系人名字的下面，phoneticFamilyName属性设置的话，会影响联系人列表界面的排序
-    //    contact.phoneticGivenName = @"GivenName";
-    //    contact.phoneticFamilyName = @"FamilyName";
-    //    contact.phoneticMiddleName = @"MiddleName";
-    
-    // 4、备注
-    contact.note = @"同事";
-    
-    // 5、头像
-    contact.imageData = UIImagePNGRepresentation([UIImage imageNamed:@"1"]);
-    
-    // 6、添加生日
-    NSDateComponents *birthday = [[NSDateComponents alloc] init];
-    birthday.year = 1990;
-    birthday.month = 6;
-    birthday.day = 6;
-    contact.birthday = birthday;
-    
-    
-    // 7、添加邮箱
-    CNLabeledValue *homeEmail = [CNLabeledValue labeledValueWithLabel:CNLabelEmailiCloud value:@"bvbdsmv@icloud.com"];
-    //    CNLabeledValue *workEmail = [CNLabeledValue labeledValueWithLabel:CNLabelWork value:@"11111888888"];
-    //    CNLabeledValue *iCloudEmail = [CNLabeledValue labeledValueWithLabel:CNLabelHome value:@"34454554"];
-    //    CNLabeledValue *otherEmail = [CNLabeledValue labeledValueWithLabel:CNLabelOther value:@"6565448"];
-    contact.emailAddresses = @[homeEmail];
-    
-    
-    // 8、添加电话
-    CNLabeledValue *homePhone = [CNLabeledValue labeledValueWithLabel:CNLabelPhoneNumberiPhone value:[CNPhoneNumber phoneNumberWithStringValue:@"11122233344"]];
-    contact.phoneNumbers = @[homePhone];
-    
-    // 9、添加urlAddresses,
-    CNLabeledValue *homeurl = [CNLabeledValue labeledValueWithLabel:CNLabelURLAddressHomePage value:@"http://baidu.com"];
-    contact.urlAddresses = @[homeurl];
-    
-    // 10、添加邮政地址
-    CNMutablePostalAddress *postal = [[CNMutablePostalAddress alloc] init];
-    postal.city = @"北京";
-    postal.country =  @"中国";
-    CNLabeledValue *homePostal = [CNLabeledValue labeledValueWithLabel:CNLabelHome value:postal];
-    contact.postalAddresses = @[homePostal];
-    
-    
-    // 获取通讯录操作请求对象
-    CNSaveRequest *request = [[CNSaveRequest alloc] init];
-    [request addContact:contact toContainerWithIdentifier:nil]; // 添加联系人操作（同一个联系人可以重复添加）
-    // 获取通讯录
-    CNContactStore *store = [[CNContactStore alloc] init];
-    // 保存联系人
-    [store executeSaveRequest:request error:nil]; // 通讯录有变化之后，还可以监听是否改变（CNContactStoreDidChangeNotification）
+- (void)updateContact{
+     CNContactStore * store = [[CNContactStore alloc]init];
+         //检索条件，检索所有名字中有zhang的联系人
+         NSPredicate * predicate = [CNContact predicateForContactsMatchingName:@"san"];
+         //提取数据
+         NSArray * contacts = [store unifiedContactsMatchingPredicate:predicate keysToFetch:@[CNContactGivenNameKey] error:nil];
+         CNMutableContact *contact2 = [[contacts objectAtIndex:0] mutableCopy];
+     //    修改联系人的属性
+         contact2.givenName = @"win";
+     //    实例化一个CNSaveRequest
+         CNSaveRequest * saveRequest = [[CNSaveRequest alloc]init];
+         [saveRequest updateContact:contact2];
+         [store executeSaveRequest:saveRequest error:nil];
     
 }
 
-#pragma mark - Modify Contacts
-- (void)ModifyContact{
+
+////- (void) deleteAllContacts {
+////    CNContactStore *contactStore = [[CNContactStore alloc] init];
+////  
+////            NSArray *keys = @[CNContactPhoneNumbersKey];
+////            NSString *containerId = contactStore.defaultContainerIdentifier;
+////            NSPredicate *predicate = [CNContact predicateForContactsInContainerWithIdentifier:containerId];
+////            NSError *error;
+////            NSArray *cnContacts = [contactStore unifiedContactsMatchingPredicate:predicate keysToFetch:keys error:&error];
+////            
+////            if (error) {
+////                NSLog(@"error fetching contacts %@", error);
+////            } else {
+////                CNSaveRequest *saveRequest = [[CNSaveRequest alloc] init];
+////                
+////                for (CNContact *contact in cnContacts) {
+////                    [saveRequest deleteContact:[contact mutableCopy]];
+////                }
+////                
+////                [contactStore executeSaveRequest:saveRequest error:nil];
+////                NSLog(@"Deleted contacts %lu", cnContacts.count);
+////            }
+////        }
+//
+//    
+//
+//
+//
+//
+//
+//
+//#pragma mark - 添加联系人
+//- (void) CreatContact{
+//    
+//    CNMutableContact *contact = [[CNMutableContact alloc] init]; // 第一次运行的时候，会获取通讯录的授权（对通讯录进行操作，有权限设置）
+//    
+//    // 1、添加姓名（姓＋名）
+//    contact.givenName = @"kent";
+//    contact.familyName = @"wangg";
+//        contact.nickname = @"hahahah"; // 昵称
+//        contact.nameSuffix = @"nameSuffix"; // 名字后缀
+//        contact.namePrefix = @"namePrefix"; // 前字后缀
+//        contact.previousFamilyName = @"previousFamilyName"; // 之前的familyName
+//    
+//    // 2、添加职位相关
+//    contact.organizationName = @"公司名称";
+//    contact.departmentName = @"开发部门";
+//    contact.jobTitle = @"工程师";
+//    
+//    // 3、这一部分内容会显示在联系人名字的下面，phoneticFamilyName属性设置的话，会影响联系人列表界面的排序
+//        contact.phoneticGivenName = @"GivenName";
+//        contact.phoneticFamilyName = @"FamilyName";
+//        contact.phoneticMiddleName = @"MiddleName";
+//    
+//    // 4、备注
+//    contact.note = @"同事";
+//    
+//    // 5、头像
+//    contact.imageData = UIImagePNGRepresentation([UIImage imageNamed:@"1"]);
+//    
+//    // 6、添加生日
+//    NSDateComponents *birthday = [[NSDateComponents alloc] init];
+//    birthday.year = 1990;
+//    birthday.month = 6;
+//    birthday.day = 6;
+//    contact.birthday = birthday;
+//    
+//    
+//    // 7、添加邮箱
+//    CNLabeledValue *homeEmail = [CNLabeledValue labeledValueWithLabel:CNLabelEmailiCloud value:@"bvbdsmv@icloud.com"];
+//        CNLabeledValue *workEmail = [CNLabeledValue labeledValueWithLabel:CNLabelWork value:@"11111888888"];
+//        CNLabeledValue *iCloudEmail = [CNLabeledValue labeledValueWithLabel:CNLabelHome value:@"34454554"];
+//        CNLabeledValue *otherEmail = [CNLabeledValue labeledValueWithLabel:CNLabelOther value:@"6565448"];
+//    contact.emailAddresses = @[homeEmail];
+//    
+//    
+//    // 8、添加电话
+//    CNLabeledValue *homePhone = [CNLabeledValue labeledValueWithLabel:CNLabelPhoneNumberiPhone value:[CNPhoneNumber phoneNumberWithStringValue:@"0975175323"]];
+//    contact.phoneNumbers = @[homePhone];
+//    
+//    // 9、添加urlAddresses,
+//    CNLabeledValue *homeurl = [CNLabeledValue labeledValueWithLabel:CNLabelURLAddressHomePage value:@"http://baidu.com"];
+//    contact.urlAddresses = @[homeurl];
+//    
+//    // 10、添加邮政地址
+//    CNMutablePostalAddress *postal = [[CNMutablePostalAddress alloc] init];
+//    postal.city = @"北京";
+//    postal.country =  @"中国";
+//    CNLabeledValue *homePostal = [CNLabeledValue labeledValueWithLabel:CNLabelHome value:postal];
+//    contact.postalAddresses = @[homePostal];
+//    
+//    
+//    // 获取通讯录操作请求对象
+//    CNSaveRequest *request = [[CNSaveRequest alloc] init];
+//    [request addContact:contact toContainerWithIdentifier:nil]; // 添加联系人操作（同一个联系人可以重复添加）
+//    // 获取通讯录
+//    CNContactStore *store = [[CNContactStore alloc] init];
+//    // 保存联系人
+//    [store executeSaveRequest:request error:nil]; // 通讯录有变化之后，还可以监听是否改变（CNContactStoreDidChangeNotification）
+//    
+//}
+//
 
 
 
-}
+
+
+
+
+
+
+
+
 
 
 

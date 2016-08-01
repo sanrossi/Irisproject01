@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 @import WebKit;
 @import UIKit;
-@interface CHTMainFunctionViewController : UIViewController
 
+@interface CHTMainFunctionViewController : UIViewController
+@property(nonatomic)NSMutableArray *FormWhichCompanyList;
 
 @end

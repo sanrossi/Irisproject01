@@ -8,12 +8,13 @@
 
 #import "CHTMainFunctionViewController.h"
 #import "MyContactList.h"
+
 @interface CHTMainFunctionViewController ()<UIWebViewDelegate>
 
 {
     NSInteger WebPageNum;
     NSInteger PhoneElementNum;
-    BOOL flage;
+    BOOL flag;
 }
 
 
@@ -21,6 +22,7 @@
 @property(weak,nonatomic)NSMutableArray*thefirstphone;
 @property(weak,nonatomic)NSString*phnumlist;
 @property(nonatomic)NSMutableArray *TheFirstPhoneNumberarray;
+@property(nonatomic)NSString*FromWhichCompanyinfo;
 @end
 
 @implementation CHTMainFunctionViewController
@@ -29,40 +31,51 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _FormWhichCompanyList = [NSMutableArray array];
+
     // Do any additional setup after loading the view.
     WebPageNum =1;
     PhoneElementNum=1;
-    flage = true;
+    flag = true;
     _TheFirstPhoneNumberarray = [NSMutableArray array];
+    
     NSURL *url = [NSURL URLWithString:@"http://auth.emome.net/emome/membersvc/AuthServlet?serviceId=mobilebms&url=qryTelnum.jsp"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self.CHTWebView loadRequest:request];
     //load CHT Web page
     
     _CHTWebView.delegate = self;
-    _CHTWebView.hidden=YES;
+    //_CHTWebView.hidden=YES;
     //hidden the UIWebview
     
-    [[ContactList sharedContacts] fetchAllContacts];
+    [[MyContactList sharedContacts] fetchAllContacts];
     //fetch all contacts by calling single to method
-    
-    if ([[ContactList sharedContacts]totalPhoneNumberArray].count !=0) {
-        NSLog(@"Fetched Contact Details : %ld",[[ContactList sharedContacts]totalPhoneNumberArray].count);
-        //        NSLog(@"%@", [[ContactList sharedContacts]totalPhoneNumberArray]);
+   
+    if ([[MyContactList sharedContacts]totalPhoneNumberArray].count !=0) {
+        NSLog(@"Fetched Contact Details : %ld",[[MyContactList sharedContacts]totalPhoneNumberArray].count);
+                NSLog(@"%@", [[MyContactList sharedContacts]totalPhoneNumberArray]);
         
         
         
-        for(int i=0; i<[[ContactList sharedContacts]totalPhoneNumberArray].count;i++)
-        {self.thefirstphone=[[[ContactList sharedContacts]totalPhoneNumberArray][i] objectForKey:@"phone"];
+        for(int i=0; i<[[MyContactList sharedContacts]totalPhoneNumberArray].count;i++)
+        {self.thefirstphone=[[[MyContactList sharedContacts]totalPhoneNumberArray][i] objectForKey:@"phone"];
             
             NSLog(@"%@",_thefirstphone[0]);
             
-            [_TheFirstPhoneNumberarray insertObject:[NSString stringWithFormat:@"%@",_thefirstphone[0]] atIndex:0];
+            [_TheFirstPhoneNumberarray addObject:[NSString stringWithFormat:@"%@",_thefirstphone[0]]];
             NSLog(@"test%@",_TheFirstPhoneNumberarray);
-            
-            //check the firstphone
+             //check the firstphone
         }
         
+        
+//        for(int m=0;m<=[[MyContactList sharedContacts]totalPhoneNumberArray].count;m++){
+//                            FormWhichCompanyList[m];
+//        
+//        }
+        
+
+    
     }
 }
 
@@ -83,14 +96,29 @@
     else if(WebPageNum==2){
         
         if (PhoneElementNum>=1) {
-            NSString *FormWhichCompany = [_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('telnum').parentNode.parentNode.parentNode.rows[1].cells[0].innerHTML"];
-            NSLog(@"%@",FormWhichCompany);
+           
+            NSString* FormWhichCompany = [_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('telnum').parentNode.parentNode.parentNode.rows[1].cells[0].innerHTML"];
             //get the information about the Internal network or external network
+         
+            if ([FormWhichCompany rangeOfString:@"查無相關資料"].location != NSNotFound) {
+            _FromWhichCompanyinfo=@"其他";
+            }else if([FormWhichCompany rangeOfString:@"網內"].location != NSNotFound){
+            _FromWhichCompanyinfo=@"網內";
+            }else if([FormWhichCompany rangeOfString:@"網外"].location != NSNotFound){
+            _FromWhichCompanyinfo=@"網外";
+            }
             
-
+           
+           
+//            [[[MyContactList sharedContacts]totalPhoneNumberArray][PhoneElementNum-1]
+//            setObject:_FromWhichCompanyinfo forKey:@"name"];
+            
+            
+            
+        
+            
             _phnumlist=_TheFirstPhoneNumberarray[PhoneElementNum-1];
             PhoneElementNum+=1;
-            
             if(_phnumlist.length<=10 && [_phnumlist hasPrefix:@"09"]){
             
                 NSString *script = [NSString stringWithFormat:@"document.getElementById('telnum').value='%@'", _phnumlist];
@@ -107,12 +135,12 @@
                 //delay 1 sencond to click the submit
             }
             else{
-                if(flage){
+                if(flag){
                 _phnumlist=@"0999876654";
-                    flage=false;
+                    flag=false;
                 }else{
                 _phnumlist=@"0998736653";
-                    flage=true;
+                    flag=true;
                 }
                 NSString *script1 = [NSString stringWithFormat:@"document.getElementById('telnum').value='%@'",_phnumlist];
                 [_CHTWebView stringByEvaluatingJavaScriptFromString:script1];
@@ -127,6 +155,8 @@
         
     }
 }
+
+
 
 - (NSString *)stringByEvaluatingJavaScriptFromString:(NSString *)script{
     return nil;

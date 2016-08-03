@@ -15,6 +15,7 @@
     NSInteger WebPageNum;
     NSInteger PhoneElementNum;
     BOOL flag;
+    BOOL flag1;
 }
 
 
@@ -38,6 +39,7 @@
     WebPageNum =1;
     PhoneElementNum=1;
     flag = true;
+    flag1 = false;
     _TheFirstPhoneNumberarray = [NSMutableArray array];
     
     NSURL *url = [NSURL URLWithString:@"http://auth.emome.net/emome/membersvc/AuthServlet?serviceId=mobilebms&url=qryTelnum.jsp"];
@@ -107,15 +109,13 @@
             }else if([FormWhichCompany rangeOfString:@"網外"].location != NSNotFound){
             _FromWhichCompanyinfo=@"網外";
             }
+            NSLog(@"%@",_FromWhichCompanyinfo);
+            if(_FromWhichCompanyinfo != nil){
+            [_FormWhichCompanyList addObject:_FromWhichCompanyinfo];
+            NSLog(@"wenet:%@",_FormWhichCompanyList);
+                
+            }
             
-           
-           
-//            [[[MyContactList sharedContacts]totalPhoneNumberArray][PhoneElementNum-1]
-//            setObject:_FromWhichCompanyinfo forKey:@"name"];
-            
-            
-            
-        
             
             _phnumlist=_TheFirstPhoneNumberarray[PhoneElementNum-1];
             PhoneElementNum+=1;

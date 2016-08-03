@@ -173,5 +173,11 @@
     // Pass the selected object to the new view controller.
 }
 */
+- (IBAction)writeToAddressBook:(id)sender {
+    
+    [[MyContactList sharedContacts]updateContactFromContact:@"John"NetLabel:@"網內" ContactPhone:@"0911122233"];
+    
+    
+}
 
 @end

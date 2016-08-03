@@ -33,7 +33,7 @@
 
 ///fetch contacts from Addressbooks or Contacts framework
 -(void)fetchAllContacts; //Method of fetch contacts from Addressbooks or Contacts framework
-- (void)updateContact:(CNMutableContact *)newContact;
+- (void)updateContactFromContact:(NSString*)contactName NetLabel:(NSString*)netLabel ContactPhone:(NSString*)origincontactphone;
 
 
 @end

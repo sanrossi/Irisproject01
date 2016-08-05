@@ -15,6 +15,8 @@
 		030AF60D1D41BDE6004C451F /* IrisProject001Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 030AF60C1D41BDE6004C451F /* IrisProject001Tests.m */; };
 		030AF6181D41BDE6004C451F /* IrisProject001UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 030AF6171D41BDE6004C451F /* IrisProject001UITests.m */; };
 		03922FDA1D48929C009C3E0F /* CarriersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03922FD91D48929C009C3E0F /* CarriersViewController.m */; };
+		0394C0951D54F30E004591B5 /* TWMainFunctionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0394C0941D54F30E004591B5 /* TWMainFunctionViewController.m */; };
+		0394C0981D54F344004591B5 /* FetNetMainFunctionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0394C0971D54F344004591B5 /* FetNetMainFunctionViewController.m */; };
 		03A01CF71D48F19F00882331 /* CHTLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A01CF61D48F19F00882331 /* CHTLoginViewController.m */; };
 		03A01CFA1D48F22000882331 /* CHTMainFunctionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A01CF91D48F22000882331 /* CHTMainFunctionViewController.m */; };
 		03A039A01D499C9700B017F8 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03A0399F1D499C9700B017F8 /* Contacts.framework */; };
@@ -56,6 +58,10 @@
 		030AF6191D41BDE6004C451F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03922FD81D48929C009C3E0F /* CarriersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CarriersViewController.h; path = ../CarriersViewController.h; sourceTree = "<group>"; };
 		03922FD91D48929C009C3E0F /* CarriersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CarriersViewController.m; path = ../CarriersViewController.m; sourceTree = "<group>"; };
+		0394C0931D54F30E004591B5 /* TWMainFunctionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWMainFunctionViewController.h; sourceTree = "<group>"; };
+		0394C0941D54F30E004591B5 /* TWMainFunctionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWMainFunctionViewController.m; sourceTree = "<group>"; };
+		0394C0961D54F344004591B5 /* FetNetMainFunctionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetNetMainFunctionViewController.h; sourceTree = "<group>"; };
+		0394C0971D54F344004591B5 /* FetNetMainFunctionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetNetMainFunctionViewController.m; sourceTree = "<group>"; };
 		03A01CF51D48F19F00882331 /* CHTLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHTLoginViewController.h; path = ../CHTLoginViewController.h; sourceTree = "<group>"; };
 		03A01CF61D48F19F00882331 /* CHTLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHTLoginViewController.m; path = ../CHTLoginViewController.m; sourceTree = "<group>"; };
 		03A01CF81D48F22000882331 /* CHTMainFunctionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHTMainFunctionViewController.h; path = ../CHTMainFunctionViewController.h; sourceTree = "<group>"; };
@@ -96,6 +102,10 @@
 		030AF5E61D41BDE6004C451F = {
 			isa = PBXGroup;
 			children = (
+				0394C0961D54F344004591B5 /* FetNetMainFunctionViewController.h */,
+				0394C0971D54F344004591B5 /* FetNetMainFunctionViewController.m */,
+				0394C0931D54F30E004591B5 /* TWMainFunctionViewController.h */,
+				0394C0941D54F30E004591B5 /* TWMainFunctionViewController.m */,
 				03A039A11D499CA500B017F8 /* AddressBook.framework */,
 				03A0399F1D499C9700B017F8 /* Contacts.framework */,
 				030AF5F11D41BDE6004C451F /* IrisProject001 */,
@@ -295,7 +305,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				030AF5F71D41BDE6004C451F /* AppDelegate.m in Sources */,
+				0394C0981D54F344004591B5 /* FetNetMainFunctionViewController.m in Sources */,
 				03A01CFA1D48F22000882331 /* CHTMainFunctionViewController.m in Sources */,
+				0394C0951D54F30E004591B5 /* TWMainFunctionViewController.m in Sources */,
 				03922FDA1D48929C009C3E0F /* CarriersViewController.m in Sources */,
 				03A01CF71D48F19F00882331 /* CHTLoginViewController.m in Sources */,
 				03A039A51D499D8F00B017F8 /* MyContactList.m in Sources */,

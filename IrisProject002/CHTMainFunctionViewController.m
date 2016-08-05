@@ -26,33 +26,66 @@
 @property(nonatomic)NSString*FromWhichCompanyinfo;
 @property(nonatomic)NSMutableArray *ContactNamerarray;
 @property(nonatomic)NSInteger totalContactsNumber;
-//@property(nonatomic)NS *totalContactsNumber;
+@property(nonatomic)UITextField *login;
+@property(nonatomic)UITextField *password;
+
 @end
 
 @implementation CHTMainFunctionViewController
 
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
-    
     // Do any additional setup after loading the view.
+    //_CHTWebView.hidden=YES;
+    _CHTWebView.delegate = self;
     WebPageNum =1;
     PhoneElementNum=0;
     flag = true;
     _FormWhichCompanyList = [NSMutableArray array];
     _TheFirstPhoneNumberarray = [NSMutableArray array];
     _ContactNamerarray= [NSMutableArray array];
-    NSURL *url = [NSURL URLWithString:@"http://auth.emome.net/emome/membersvc/AuthServlet?serviceId=mobilebms&url=qryTelnum.jsp"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [self.CHTWebView loadRequest:request];
-    //load CHT Web page
-    _CHTWebView.delegate = self;
-    _CHTWebView.hidden=YES;
-    //hidden the UIWebview
     
+    UIAlertController * alert= [UIAlertController
+                                alertControllerWithTitle:@"會員登入"
+                                message:@"Enter User Credentials"
+                                preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                               handler:^(UIAlertAction * action) {
+                                                   _login = alert.textFields.firstObject;
+                                                   _password = alert.textFields.lastObject;
+                                                   [self loadCHTWebView];
+                                                   [self expoertAddressBook];
+                                                   
+                                               }];
+    
+    
+    UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
+                                                   handler:^(UIAlertAction * action) {
+                                                       [alert dismissViewControllerAnimated:YES completion:nil];
+                                                   }];
+    [alert addAction:ok];
+    [alert addAction:cancel];
+    
+    [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.placeholder = @"emome帳號";
+    }];
+    
+    [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.placeholder = @"密碼";
+        textField.secureTextEntry = YES;
+    }];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+    [self loadCHTWebView];
+    
+}
+
+
+
+
+
+-(void)expoertAddressBook{
     [[MyContactList sharedContacts] fetchAllContacts];
     //fetch all contacts by calling single to method
     
@@ -60,8 +93,6 @@
         NSLog(@"Fetched Contact Details : %ld",[[MyContactList sharedContacts]totalPhoneNumberArray].count);
         _totalContactsNumber=[[MyContactList sharedContacts]totalPhoneNumberArray].count;
         NSLog(@"%@", [[MyContactList sharedContacts]totalPhoneNumberArray]);
-        
-    
         for(int i=0; i<_totalContactsNumber;i++)
         {self.thefirstphone=[[[MyContactList sharedContacts]totalPhoneNumberArray][i] objectForKey:@"phone"];
             //[_TheFirstPhoneNumberarray insertObject:_thefirstphone[0] atIndex:0];
@@ -74,68 +105,76 @@
             NSString*Contactname=[[[MyContactList sharedContacts]totalPhoneNumberArray][i] objectForKey:@"name"];
             [_ContactNamerarray addObject:Contactname];
             NSLog(@"testname%@",_ContactNamerarray);
-            
-            
         }
-        
-        
-        
-        
-        
-        
-        
+        // }
         [_TheFirstPhoneNumberarray insertObject:@"0999876654" atIndex:0];
         NSLog(@"test%@",_TheFirstPhoneNumberarray);
         //check the firstphone
-        
-        //        for(int m=0;m<=[[MyContactList sharedContacts]totalPhoneNumberArray].count;m++){
-        //                            FormWhichCompanyList[m];
-        //
-        //        }
-        
-        
-        
+}
+
+}
+
+
+
+-(void)loadCHTWebView{
+    if(_login!=nil && _password!=nil){
+        NSURL *url = [NSURL URLWithString:@"http://auth.emome.net/emome/membersvc/AuthServlet?serviceId=mobilebms&url=qryTelnum.jsp"];
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        [self.CHTWebView loadRequest:request];
+        //load CHT Web page
     }
 }
+
+
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+
+
+
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     
     if(WebPageNum==1){
-        WebPageNum+=1;
         
-        [_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('uid').value='0919552512'"];
-        [_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('pw').value='1222o3o9'"];
+        WebPageNum+=1;
+        NSString *loginaccount = [NSString stringWithFormat:@"document.getElementById('uid').value='%@'",_login.text];
+        
+        NSString *loginpassword = [NSString stringWithFormat:@"document.getElementById('pw').value='%@'",_password.text];
+        [_CHTWebView stringByEvaluatingJavaScriptFromString:loginaccount];
+        [_CHTWebView stringByEvaluatingJavaScriptFromString:loginpassword];
         [_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('btn-login').click()"];
         //login member
+        
     }
     else if(WebPageNum==2){
         
-       // if (PhoneElementNum>=0 && PhoneElementNum<=_totalContactsNumber) {
+        // if (PhoneElementNum>=0 && PhoneElementNum<=_totalContactsNumber) {
+        
+        NSString* FormWhichCompany = [_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('telnum').parentNode.parentNode.parentNode.rows[1].cells[0].innerHTML"];
+        //get the information about the Internal network or external network
+        
+        if ([FormWhichCompany rangeOfString:@"查無相關資料"].location != NSNotFound) {
+            _FromWhichCompanyinfo=@"其他";
+        }else if([FormWhichCompany rangeOfString:@"網內"].location != NSNotFound){
+            _FromWhichCompanyinfo=@"網內";
+        }else if([FormWhichCompany rangeOfString:@"網外"].location != NSNotFound){
+            _FromWhichCompanyinfo=@"網外";
+        }
+        //change the html to 網內外 label
+        NSLog(@"login%@",_FromWhichCompanyinfo);
+        if(_FromWhichCompanyinfo != NULL){
+            [_FormWhichCompanyList addObject:_FromWhichCompanyinfo];
+            NSLog(@"wenet:%@",_FormWhichCompanyList);
             
-            NSString* FormWhichCompany = [_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('telnum').parentNode.parentNode.parentNode.rows[1].cells[0].innerHTML"];
-            //get the information about the Internal network or external network
-            
-            if ([FormWhichCompany rangeOfString:@"查無相關資料"].location != NSNotFound) {
-                _FromWhichCompanyinfo=@"其他";
-            }else if([FormWhichCompany rangeOfString:@"網內"].location != NSNotFound){
-                _FromWhichCompanyinfo=@"網內";
-            }else if([FormWhichCompany rangeOfString:@"網外"].location != NSNotFound){
-                _FromWhichCompanyinfo=@"網外";
-            }
-            //change the html to 網內外 label
-            NSLog(@"login%@",_FromWhichCompanyinfo);
-            if(_FromWhichCompanyinfo != NULL){
-                [_FormWhichCompanyList addObject:_FromWhichCompanyinfo];
-                NSLog(@"wenet:%@",_FormWhichCompanyList);
-                
-            }
-            
-            if (PhoneElementNum>=0 && PhoneElementNum<=_totalContactsNumber) {
+        }
+        
+        if (PhoneElementNum>=0 && PhoneElementNum<=_totalContactsNumber) {
             _phnumlist=_TheFirstPhoneNumberarray[PhoneElementNum];
             PhoneElementNum+=1;
             if(_phnumlist.length<=10 && [_phnumlist hasPrefix:@"09"]){
@@ -199,23 +238,23 @@
 
 
 - (IBAction)writeToAddressBook:(id)sender {
-     NSLog(@"count%ld",_FormWhichCompanyList.count);
+    NSLog(@"count%ld",_FormWhichCompanyList.count);
     
     
     
     
     [_TheFirstPhoneNumberarray removeObject:_TheFirstPhoneNumberarray[0]];
     NSLog(@"REMOVE:%@",_TheFirstPhoneNumberarray);
-   for(int count=1;count<=_totalContactsNumber;count++)
+    for(int count=1;count<=_totalContactsNumber;count++)
     {
-//        //_TheFirstPhoneNumberarray//剃出第一個（後進先出）
-//        //_FormWhichCompanyList//取出網內外（後進先出）
-//        //_ContactNamerarray//去名字（後進先出)
+        //        //_TheFirstPhoneNumberarray//剃出第一個（後進先出）
+        //        //_FormWhichCompanyList//取出網內外（後進先出）
+        //        //_ContactNamerarray//去名字（後進先出)
         //_TheFirstPhoneNumberarray[_totalContactsNumber-count-1]
-      [[MyContactList sharedContacts]updateContactFromContact:_ContactNamerarray[_totalContactsNumber-count] NetLabel:_ContactNamerarray[_totalContactsNumber-count] ContactPhone:_TheFirstPhoneNumberarray[_totalContactsNumber-count]];
-//測試多按幾次會當掉
-
-  }
+        [[MyContactList sharedContacts]updateContactFromContact:_ContactNamerarray[_totalContactsNumber-count] NetLabel:_ContactNamerarray[_totalContactsNumber-count] ContactPhone:_TheFirstPhoneNumberarray[_totalContactsNumber-count]];
+        //測試多按幾次會當掉
+        
+    }
 }
 
 

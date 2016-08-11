@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@import WebKit;
+@import UIKit;
 @interface FetNetMainFunctionViewController : UIViewController
-
+@property(nonatomic)NSMutableArray *FormWhichCompanyList;
 @end

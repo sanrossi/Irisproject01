@@ -105,16 +105,23 @@
     
     //generate a custom dictionary to access
     for (CNContact *contact in groupsOfContact) {
-        NSArray *thisOne = [[contact.phoneNumbers valueForKey:@"value"] valueForKey:@"digits"];
+        NSMutableArray *thisOne = [[contact.phoneNumbers valueForKey:@"value"] valueForKey:@"digits"];
         //   [phoneNumberArray addObjectsFromArray:thisOne];
         //  NSLog(@"contact identifier: %@",contact.identifier);
-        
+        if(thisOne.count == 0){
+            peopleDic = @{@"name":contact.givenName,
+                          @"image":contact.thumbnailImageData != nil ? contact.thumbnailImageData:@"",
+                          @"phone":@[@"",@""],
+                          @"selected":@"NO"
+                          };
+        }
+        else {
         peopleDic = @{@"name":contact.givenName,
                       @"image":contact.thumbnailImageData != nil ? contact.thumbnailImageData:@"",
                       @"phone":thisOne,
                       @"selected":@"NO"
                       };
-        
+        }
         [phoneNumberArray addObject:peopleDic]; //add object of people info to array
     }
     

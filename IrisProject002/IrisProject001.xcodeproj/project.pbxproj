@@ -22,6 +22,8 @@
 		03A039A01D499C9700B017F8 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03A0399F1D499C9700B017F8 /* Contacts.framework */; };
 		03A039A21D499CA500B017F8 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03A039A11D499CA500B017F8 /* AddressBook.framework */; };
 		03A039A51D499D8F00B017F8 /* MyContactList.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A039A41D499D8F00B017F8 /* MyContactList.m */; };
+		03C848BC1D5B08720010CECF /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 03C848BB1D5B08720010CECF /* button.png */; };
+		03C848BE1D5B1F7E0010CECF /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 03C848BD1D5B1F7E0010CECF /* background.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,12 +58,13 @@
 		030AF6131D41BDE6004C451F /* IrisProject001UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IrisProject001UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		030AF6171D41BDE6004C451F /* IrisProject001UITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IrisProject001UITests.m; sourceTree = "<group>"; };
 		030AF6191D41BDE6004C451F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		035B4DD91D5C744700BD4A62 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		03922FD81D48929C009C3E0F /* CarriersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CarriersViewController.h; path = ../CarriersViewController.h; sourceTree = "<group>"; };
 		03922FD91D48929C009C3E0F /* CarriersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CarriersViewController.m; path = ../CarriersViewController.m; sourceTree = "<group>"; };
-		0394C0931D54F30E004591B5 /* TWMainFunctionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWMainFunctionViewController.h; sourceTree = "<group>"; };
-		0394C0941D54F30E004591B5 /* TWMainFunctionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWMainFunctionViewController.m; sourceTree = "<group>"; };
-		0394C0961D54F344004591B5 /* FetNetMainFunctionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetNetMainFunctionViewController.h; sourceTree = "<group>"; };
-		0394C0971D54F344004591B5 /* FetNetMainFunctionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetNetMainFunctionViewController.m; sourceTree = "<group>"; };
+		0394C0931D54F30E004591B5 /* TWMainFunctionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TWMainFunctionViewController.h; path = ../TWMainFunctionViewController.h; sourceTree = "<group>"; };
+		0394C0941D54F30E004591B5 /* TWMainFunctionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TWMainFunctionViewController.m; path = ../TWMainFunctionViewController.m; sourceTree = "<group>"; };
+		0394C0961D54F344004591B5 /* FetNetMainFunctionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FetNetMainFunctionViewController.h; path = ../FetNetMainFunctionViewController.h; sourceTree = "<group>"; };
+		0394C0971D54F344004591B5 /* FetNetMainFunctionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FetNetMainFunctionViewController.m; path = ../FetNetMainFunctionViewController.m; sourceTree = "<group>"; };
 		03A01CF51D48F19F00882331 /* CHTLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHTLoginViewController.h; path = ../CHTLoginViewController.h; sourceTree = "<group>"; };
 		03A01CF61D48F19F00882331 /* CHTLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHTLoginViewController.m; path = ../CHTLoginViewController.m; sourceTree = "<group>"; };
 		03A01CF81D48F22000882331 /* CHTMainFunctionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHTMainFunctionViewController.h; path = ../CHTMainFunctionViewController.h; sourceTree = "<group>"; };
@@ -70,6 +73,8 @@
 		03A039A11D499CA500B017F8 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		03A039A31D499D8F00B017F8 /* MyContactList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyContactList.h; sourceTree = "<group>"; };
 		03A039A41D499D8F00B017F8 /* MyContactList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyContactList.m; sourceTree = "<group>"; };
+		03C848BB1D5B08720010CECF /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
+		03C848BD1D5B1F7E0010CECF /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,10 +107,7 @@
 		030AF5E61D41BDE6004C451F = {
 			isa = PBXGroup;
 			children = (
-				0394C0961D54F344004591B5 /* FetNetMainFunctionViewController.h */,
-				0394C0971D54F344004591B5 /* FetNetMainFunctionViewController.m */,
-				0394C0931D54F30E004591B5 /* TWMainFunctionViewController.h */,
-				0394C0941D54F30E004591B5 /* TWMainFunctionViewController.m */,
+				035B4DD91D5C744700BD4A62 /* QuartzCore.framework */,
 				03A039A11D499CA500B017F8 /* AddressBook.framework */,
 				03A0399F1D499C9700B017F8 /* Contacts.framework */,
 				030AF5F11D41BDE6004C451F /* IrisProject001 */,
@@ -128,6 +130,8 @@
 		030AF5F11D41BDE6004C451F /* IrisProject001 */ = {
 			isa = PBXGroup;
 			children = (
+				03C848BB1D5B08720010CECF /* button.png */,
+				03C848BD1D5B1F7E0010CECF /* background.png */,
 				030AF5F51D41BDE6004C451F /* AppDelegate.h */,
 				030AF5F61D41BDE6004C451F /* AppDelegate.m */,
 				03922FD81D48929C009C3E0F /* CarriersViewController.h */,
@@ -136,6 +140,10 @@
 				03A01CF61D48F19F00882331 /* CHTLoginViewController.m */,
 				03A01CF81D48F22000882331 /* CHTMainFunctionViewController.h */,
 				03A01CF91D48F22000882331 /* CHTMainFunctionViewController.m */,
+				0394C0931D54F30E004591B5 /* TWMainFunctionViewController.h */,
+				0394C0941D54F30E004591B5 /* TWMainFunctionViewController.m */,
+				0394C0961D54F344004591B5 /* FetNetMainFunctionViewController.h */,
+				0394C0971D54F344004591B5 /* FetNetMainFunctionViewController.m */,
 				03A039A31D499D8F00B017F8 /* MyContactList.h */,
 				03A039A41D499D8F00B017F8 /* MyContactList.m */,
 				030AF5FB1D41BDE6004C451F /* Main.storyboard */,
@@ -278,6 +286,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				030AF6021D41BDE6004C451F /* LaunchScreen.storyboard in Resources */,
+				03C848BE1D5B1F7E0010CECF /* background.png in Resources */,
+				03C848BC1D5B08720010CECF /* button.png in Resources */,
 				030AF5FF1D41BDE6004C451F /* Assets.xcassets in Resources */,
 				030AF5FD1D41BDE6004C451F /* Main.storyboard in Resources */,
 			);

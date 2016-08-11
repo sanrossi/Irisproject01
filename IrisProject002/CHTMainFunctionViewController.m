@@ -20,14 +20,14 @@
 
 
 @property (weak, nonatomic) IBOutlet UIWebView *CHTWebView;
-@property(weak,nonatomic)NSMutableArray*thefirstphone;
-@property(weak,nonatomic)NSString*phnumlist;
-@property(nonatomic)NSMutableArray *TheFirstPhoneNumberarray;
+@property(weak,nonatomic)NSMutableArray *theFirstPhone;
+@property(weak,nonatomic)NSString *PhoneNumList;
+@property(nonatomic)NSMutableArray *TheFirstPhoneNumberArray;
 @property(nonatomic)NSString*FromWhichCompanyinfo;
 @property(nonatomic)NSMutableArray *ContactNamerarray;
-@property(nonatomic)NSInteger totalContactsNumber;
-@property(nonatomic)UITextField *login;
-@property(nonatomic)UITextField *password;
+@property(nonatomic)NSInteger totalContactsNum;
+@property(nonatomic)UITextField *CHTLogin;
+@property(nonatomic)UITextField *CHTPassword;
 
 @end
 
@@ -42,8 +42,9 @@
     PhoneElementNum=0;
     flag = true;
     _FormWhichCompanyList = [NSMutableArray array];
-    _TheFirstPhoneNumberarray = [NSMutableArray array];
+    _TheFirstPhoneNumberArray = [NSMutableArray array];
     _ContactNamerarray= [NSMutableArray array];
+   
     
     UIAlertController * alert= [UIAlertController
                                 alertControllerWithTitle:@"會員登入"
@@ -52,8 +53,8 @@
     
     UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
                                                handler:^(UIAlertAction * action) {
-                                                   _login = alert.textFields.firstObject;
-                                                   _password = alert.textFields.lastObject;
+                                                   _CHTLogin = alert.textFields.firstObject;
+                                                   _CHTPassword = alert.textFields.lastObject;
                                                    [self loadCHTWebView];
                                                    [self expoertAddressBook];
                                                    
@@ -91,33 +92,47 @@
     
     if ([[MyContactList sharedContacts]totalPhoneNumberArray].count !=0) {
         NSLog(@"Fetched Contact Details : %ld",[[MyContactList sharedContacts]totalPhoneNumberArray].count);
-        _totalContactsNumber=[[MyContactList sharedContacts]totalPhoneNumberArray].count;
+        _totalContactsNum=[[MyContactList sharedContacts]totalPhoneNumberArray].count;
         NSLog(@"%@", [[MyContactList sharedContacts]totalPhoneNumberArray]);
-        for(int i=0; i<_totalContactsNumber;i++)
-        {self.thefirstphone=[[[MyContactList sharedContacts]totalPhoneNumberArray][i] objectForKey:@"phone"];
-            //[_TheFirstPhoneNumberarray insertObject:_thefirstphone[0] atIndex:0];
-            [_TheFirstPhoneNumberarray addObject:_thefirstphone[0]];
-            NSLog(@"test%@",_TheFirstPhoneNumberarray);
-            //check the firstphone
+        
+        
+        
+        
+        for(int i=0; i<_totalContactsNum;i++)
+            
+            
+        {self.theFirstPhone=[[[MyContactList sharedContacts]totalPhoneNumberArray][i] objectForKey:@"phone"];
+            
+            if(_theFirstPhone[0] == nil ){
+                [_TheFirstPhoneNumberArray addObject:@""];
+                NSLog(@"test%@",_TheFirstPhoneNumberArray);
+            }else{
+            
+                [_TheFirstPhoneNumberArray addObject:_theFirstPhone[0]];
+                NSLog(@"test%@",_TheFirstPhoneNumberArray);
+                //check the firstphone
+            }
         }
         for(int i=0; i<[[MyContactList sharedContacts]totalPhoneNumberArray].count;i++)
         {
             NSString*Contactname=[[[MyContactList sharedContacts]totalPhoneNumberArray][i] objectForKey:@"name"];
+         
             [_ContactNamerarray addObject:Contactname];
             NSLog(@"testname%@",_ContactNamerarray);
+            }
         }
         // }
-        [_TheFirstPhoneNumberarray insertObject:@"0999876654" atIndex:0];
-        NSLog(@"test%@",_TheFirstPhoneNumberarray);
+        [_TheFirstPhoneNumberArray insertObject:@"0999876654" atIndex:0];
+        NSLog(@"test%@",_TheFirstPhoneNumberArray);
         //check the firstphone
-}
-
+    
+    
 }
 
 
 
 -(void)loadCHTWebView{
-    if(_login!=nil && _password!=nil){
+    if(_CHTLogin!=nil && _CHTPassword!=nil){
         NSURL *url = [NSURL URLWithString:@"http://auth.emome.net/emome/membersvc/AuthServlet?serviceId=mobilebms&url=qryTelnum.jsp"];
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         [self.CHTWebView loadRequest:request];
@@ -143,9 +158,9 @@
     if(WebPageNum==1){
         
         WebPageNum+=1;
-        NSString *loginaccount = [NSString stringWithFormat:@"document.getElementById('uid').value='%@'",_login.text];
+        NSString *loginaccount = [NSString stringWithFormat:@"document.getElementById('uid').value='%@'",_CHTLogin.text];
         
-        NSString *loginpassword = [NSString stringWithFormat:@"document.getElementById('pw').value='%@'",_password.text];
+        NSString *loginpassword = [NSString stringWithFormat:@"document.getElementById('pw').value='%@'",_CHTPassword.text];
         [_CHTWebView stringByEvaluatingJavaScriptFromString:loginaccount];
         [_CHTWebView stringByEvaluatingJavaScriptFromString:loginpassword];
         [_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('btn-login').click()"];
@@ -174,12 +189,12 @@
             
         }
         
-        if (PhoneElementNum>=0 && PhoneElementNum<=_totalContactsNumber) {
-            _phnumlist=_TheFirstPhoneNumberarray[PhoneElementNum];
+        if (PhoneElementNum>=0 && PhoneElementNum<=_totalContactsNum) {
+            _PhoneNumList=_TheFirstPhoneNumberArray[PhoneElementNum];
             PhoneElementNum+=1;
-            if(_phnumlist.length<=10 && [_phnumlist hasPrefix:@"09"]){
+            if(_PhoneNumList.length<=10 && [_PhoneNumList hasPrefix:@"09"]){
                 
-                NSString *script = [NSString stringWithFormat:@"document.getElementById('telnum').value='%@'", _phnumlist];
+                NSString *script = [NSString stringWithFormat:@"document.getElementById('telnum').value='%@'", _PhoneNumList];
                 
                 [_CHTWebView stringByEvaluatingJavaScriptFromString:script];
                 
@@ -194,13 +209,13 @@
             }
             else{
                 if(flag){
-                    _phnumlist=@"0999876654";
+                    _PhoneNumList=@"0999876654";
                     flag=false;
                 }else{
-                    _phnumlist=@"0998736653";
+                    _PhoneNumList=@"0998736653";
                     flag=true;
                 }
-                NSString *script1 = [NSString stringWithFormat:@"document.getElementById('telnum').value='%@'",_phnumlist];
+                NSString *script1 = [NSString stringWithFormat:@"document.getElementById('telnum').value='%@'",_PhoneNumList];
                 [_CHTWebView stringByEvaluatingJavaScriptFromString:script1];
                 
                 
@@ -209,6 +224,10 @@
                 dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
                     [_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('btn_submit').click()"];
                 });
+                
+                
+                
+                
                 //delay 1 sencond to click the submit
             }
         }
@@ -243,15 +262,15 @@
     
     
     
-    [_TheFirstPhoneNumberarray removeObject:_TheFirstPhoneNumberarray[0]];
-    NSLog(@"REMOVE:%@",_TheFirstPhoneNumberarray);
-    for(int count=1;count<=_totalContactsNumber;count++)
+    [_TheFirstPhoneNumberArray removeObject:_TheFirstPhoneNumberArray[0]];
+    NSLog(@"REMOVE:%@",_TheFirstPhoneNumberArray);
+    for(int count=1;count<=_totalContactsNum;count++)
     {
         //        //_TheFirstPhoneNumberarray//剃出第一個（後進先出）
         //        //_FormWhichCompanyList//取出網內外（後進先出）
         //        //_ContactNamerarray//去名字（後進先出)
         //_TheFirstPhoneNumberarray[_totalContactsNumber-count-1]
-        [[MyContactList sharedContacts]updateContactFromContact:_ContactNamerarray[_totalContactsNumber-count] NetLabel:_ContactNamerarray[_totalContactsNumber-count] ContactPhone:_TheFirstPhoneNumberarray[_totalContactsNumber-count]];
+        [[MyContactList sharedContacts]updateContactFromContact:_ContactNamerarray[_totalContactsNum-count] NetLabel:_ContactNamerarray[_totalContactsNum-count] ContactPhone:_TheFirstPhoneNumberArray[_totalContactsNum-count]];
         //測試多按幾次會當掉
         
     }

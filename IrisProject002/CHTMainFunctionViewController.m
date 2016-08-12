@@ -8,7 +8,7 @@
 
 #import "CHTMainFunctionViewController.h"
 #import "MyContactList.h"
-
+#import <QuartzCore/QuartzCore.h>
 @interface CHTMainFunctionViewController ()<UIWebViewDelegate>
 
 {
@@ -45,7 +45,6 @@
     _TheFirstPhoneNumberArray = [NSMutableArray array];
     _ContactNamerarray= [NSMutableArray array];
    
-    
     UIAlertController * alert= [UIAlertController
                                 alertControllerWithTitle:@"會員登入"
                                 message:@"Enter User Credentials"
@@ -79,8 +78,16 @@
     
     [self presentViewController:alert animated:YES completion:nil];
     [self loadCHTWebView];
-    
+
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -234,6 +241,13 @@
         
     }
 }
+
+
+
+
+
+
+
 
 
 

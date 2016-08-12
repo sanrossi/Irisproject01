@@ -44,7 +44,50 @@
     
     //_TWWebView.scrollView.scrollEnabled = NO;
     //_TWWebView.hidden=YES;
+    
+    
+    
+    
     [self loadTWWebView];
+    
+
+    double delayInSeconds = 3;
+    
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        
+        NSData *imageData = [self getImageFromView:_TWWebView];
+        //[imageData writeToFile:[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"new.png"] atomically:YES];
+        
+        
+        NSLog(@"%@",imageData);
+        NSLog(@"%@",NSHomeDirectory());
+        UIImageView *dyImageView = [[UIImageView alloc] initWithFrame: CGRectMake(0,0,125,50)];
+        
+        UIImage *aimage = [UIImage imageWithData: imageData];
+        NSLog(@"%f",aimage.size.height);
+        NSLog(@"%@",aimage);
+        
+        CGRect rect = CGRectMake(_TWWebView.bounds.size.width/3-30, _TWWebView.bounds.size.height/2-33, 125, 50);
+        CGImageRef imageRef = CGImageCreateWithImageInRect([aimage CGImage], rect);
+        UIImage *cutimage = [UIImage imageWithCGImage:imageRef];
+        CGImageRelease(imageRef);
+        
+        dyImageView.image = cutimage;
+        NSLog(@"dyImageView height ==> %f", dyImageView.image.size.height);
+        
+        
+        dispatch_async(dispatch_get_main_queue(),
+                       ^{
+                           [_TWWebView addSubview:dyImageView];
+                           
+                       });
+        
+    });
+    
+    
+    
+    
     UIAlertController * alert= [UIAlertController
                                 alertControllerWithTitle:@"會員登入"
                                 message:@"Enter User Credentials"
@@ -62,35 +105,7 @@
                                                    
                                                }];
    
-    
 
-    
-    
-
-   
-//    NSString *randimg = [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('randImg').src .toString()"];
-//    NSLog(@"tts%@",randimg);
-//    NSData* data = [randimg dataUsingEncoding:NSUTF8StringEncoding];
-//    NSLog(@"tt%@",data);
-//    //設定圖片的url位址
-//  //  NSURL *url = [NSURL URLWithString:@"https://www.catch.net.tw/auth/random_image.jsp"];
-//    
-//    //使用NSData的方法將影像指定給UIImage
-//    UIImage *urlImage = [[UIImage alloc] initWithData:data];
-//    
-//    //顯示影像
-//    UIImageView *imageView = [[UIImageView alloc] initWithImage:urlImage];
-//    
-//    imageView.frame = CGRectMake(40.0, 150.0, urlImage.size.width, urlImage.size.height);
-//    [alert.view addSubview:imageView];
-//    
-    
-    
-    
-
-    
-   
-    
     
     UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
                                                    handler:^(UIAlertAction * action) {
@@ -116,12 +131,22 @@
     
     [self presentViewController:alert animated:YES completion:nil];
     
+    
+    
+
+    
 
 
     
     
     // Do any additional setup after loading the view.
 }
+
+
+
+
+
+
 
 -(void)loadTWWebView{
 //    if(_TWLogin!=nil && _TWPassword!=nil){
@@ -131,6 +156,42 @@
    
 //    }
 }
+
+
+
+
+- (NSData *)getImageFromView:(UIWebView *)view
+{
+    NSData *pngImg;
+    CGFloat max, scale = 1.0;
+    CGSize viewSize = [view bounds].size;
+    
+    // 获取全屏的Size，包含可见部分和不可见部分(滚动部分)
+    CGSize size = [view sizeThatFits:CGSizeZero];
+    
+    max = (viewSize.width > viewSize.height) ? viewSize.width : viewSize.height;
+    if( max > 960 )
+    {
+        scale = 960/max;
+    }
+    
+    UIGraphicsBeginImageContextWithOptions(size,YES,scale);
+    
+    // 设置view成全部展开效果
+    [view setFrame: CGRectMake(0, 0, size.width, size.height)];
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [view.layer renderInContext:context];
+    pngImg = UIImagePNGRepresentation( UIGraphicsGetImageFromCurrentImageContext() );
+    
+    UIGraphicsEndImageContext();
+    return pngImg;
+}
+
+
+
+
+
 
 
 

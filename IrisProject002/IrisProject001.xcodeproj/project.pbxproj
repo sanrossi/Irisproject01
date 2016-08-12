@@ -24,6 +24,7 @@
 		03A039A51D499D8F00B017F8 /* MyContactList.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A039A41D499D8F00B017F8 /* MyContactList.m */; };
 		03C848BC1D5B08720010CECF /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 03C848BB1D5B08720010CECF /* button.png */; };
 		03C848BE1D5B1F7E0010CECF /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 03C848BD1D5B1F7E0010CECF /* background.png */; };
+		03E1AF2C1D5D60DD009B20CB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 035B4DD91D5C744700BD4A62 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03E1AF2C1D5D60DD009B20CB /* QuartzCore.framework in Frameworks */,
 				03A039A21D499CA500B017F8 /* AddressBook.framework in Frameworks */,
 				03A039A01D499C9700B017F8 /* Contacts.framework in Frameworks */,
 			);

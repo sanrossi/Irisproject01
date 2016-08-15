@@ -26,6 +26,8 @@
 @property(nonatomic)UITextField *TWLogin;
 @property(nonatomic)UITextField *TWPassword;
 @property(nonatomic)UITextField *TWChkNum;
+@property(nonatomic)UIImageView *dyImageView;
+@property(nonatomic)NSString *FromWhichCompany;
 
 
 @end
@@ -41,7 +43,8 @@
     _FormWhichCompanyList = [NSMutableArray array];
     _TheFirstPhoneNumberArray = [NSMutableArray array];
      _ContactNamerarray= [NSMutableArray array];
-    
+     WebPageNum =1;
+    _FromWhichCompany=@"";
     //_TWWebView.scrollView.scrollEnabled = NO;
     //_TWWebView.hidden=YES;
     
@@ -51,7 +54,7 @@
     [self loadTWWebView];
     
 
-    double delayInSeconds = 3;
+    double delayInSeconds = 2;
     
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -62,7 +65,7 @@
         
         NSLog(@"%@",imageData);
         NSLog(@"%@",NSHomeDirectory());
-        UIImageView *dyImageView = [[UIImageView alloc] initWithFrame: CGRectMake(0,0,125,50)];
+        _dyImageView = [[UIImageView alloc] initWithFrame: CGRectMake(0,0,125,50)];
         
         UIImage *aimage = [UIImage imageWithData: imageData];
         NSLog(@"%f",aimage.size.height);
@@ -73,25 +76,43 @@
         UIImage *cutimage = [UIImage imageWithCGImage:imageRef];
         CGImageRelease(imageRef);
         
-        dyImageView.image = cutimage;
-        NSLog(@"dyImageView height ==> %f", dyImageView.image.size.height);
+        _dyImageView.image = cutimage;
+        NSLog(@"dyImageView height ==> %f", _dyImageView.image.size.height);
         
         
         dispatch_async(dispatch_get_main_queue(),
                        ^{
-                           [_TWWebView addSubview:dyImageView];
+         [_TWWebView addSubview:_dyImageView];
                            
                        });
         
+   
     });
-    
-    
+
     
     
     UIAlertController * alert= [UIAlertController
                                 alertControllerWithTitle:@"會員登入"
-                                message:@"Enter User Credentials"
+                                message:@"驗證碼：                  "
                                 preferredStyle:UIAlertControllerStyleAlert];
+    
+   
+//    UIImageView *viewe = [[UIImageView alloc] initWithFrame:CGRectMake(60.0, 50.0, 45.0, 45.0)];
+//    viewe.image = [UIImage imageNamed:@"button.png"];
+    
+    
+    
+    
+    
+    
+    
+    
+    dispatch_async(dispatch_get_main_queue(),
+                   ^{
+    [alert.view addSubview:_dyImageView];
+    });
+    
+    
     
     UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
                                                handler:^(UIAlertAction * action) {
@@ -129,13 +150,15 @@
         textField.secureTextEntry = YES;
     }];
     
+    
+   
+    
     [self presentViewController:alert animated:YES completion:nil];
     
     
     
 
-    
-
+ 
 
     
     
@@ -195,11 +218,6 @@
 
 
 
-
-
-
-
-
 -(void)expoertAddressBook{
     [[MyContactList sharedContacts] fetchAllContacts];
     //fetch all contacts by calling single to method
@@ -208,27 +226,39 @@
         NSLog(@"Fetched Contact Details : %ld",[[MyContactList sharedContacts]totalPhoneNumberArray].count);
         _totalContactsNum=[[MyContactList sharedContacts]totalPhoneNumberArray].count;
         NSLog(@"%@", [[MyContactList sharedContacts]totalPhoneNumberArray]);
-        
         for(int i=0; i<_totalContactsNum;i++)
         {self.theFirstPhone=[[[MyContactList sharedContacts]totalPhoneNumberArray][i] objectForKey:@"phone"];
-            [_TheFirstPhoneNumberArray addObject:_theFirstPhone[0]];
-            NSLog(@"test%@",_TheFirstPhoneNumberArray);
-            //check the firstphone
+            if(_theFirstPhone[0] == nil ){
+                [_TheFirstPhoneNumberArray addObject:@""];
+                NSLog(@"test%@",_TheFirstPhoneNumberArray);
+            }else{
+                
+                [_TheFirstPhoneNumberArray addObject:_theFirstPhone[0]];
+                NSLog(@"test%@",_TheFirstPhoneNumberArray);
+                //check the firstphone
+            }
         }
         for(int i=0; i<[[MyContactList sharedContacts]totalPhoneNumberArray].count;i++)
         {
             NSString*Contactname=[[[MyContactList sharedContacts]totalPhoneNumberArray][i] objectForKey:@"name"];
+            
             [_ContactNamerarray addObject:Contactname];
             NSLog(@"testname%@",_ContactNamerarray);
         }
-        // }
-        [_TheFirstPhoneNumberArray insertObject:@"0999876654" atIndex:0];
-        NSLog(@"test%@",_TheFirstPhoneNumberArray);
-        //check the firstphone
     }
-
+    // }
+    [_TheFirstPhoneNumberArray insertObject:@"0999876654" atIndex:0];
+    NSLog(@"test%@",_TheFirstPhoneNumberArray);
+    //check the firstphone
+    
+    
 }
+
+
+
+
 -(void)inputtheLoginNum{
+
     NSString *loginaccount = [NSString stringWithFormat:@"document.getElementById('msisdn').value='%@'",_TWLogin.text];
     
     NSString *loginpasswordtxt = [NSString stringWithFormat:@"document.getElementById('passtxt').value='%@'",_TWPassword.text];
@@ -247,6 +277,9 @@
      });
    
     
+    
+    
+    
 }
 
 
@@ -259,22 +292,62 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)WebView {
     self.TWWebView.scrollView.contentOffset = CGPointMake(15,473);
-
-   
-    NSString *script = [NSString stringWithFormat:@"document.getElementsByName('phoneNbr')[0].value='%@'",@"0919552512"];
+    //self.TWWebView.scrollView.bounces = NO;// fix the webview
+    if(WebPageNum==1){
+        
+        WebPageNum += 1;
+    
+    
+    
+//    NSString *script2 =[_TWWebView stringByEvaluatingJavaScriptFromString:
+//                       @"function(){var img = document.getElementById('randImg');"
+//                       "var canvas = document.createElement('canvas');"
+//                       "var context = canvas.getContext('2d');"
+//                       "canvas.width = img.width;"
+//                       "canvas.height = img.height;"
+//                       "context.drawImage(img,0,0,img.width,img.height);"
+//                        "return canvas.toDataURL('image/png');}"
+//                       ];
+//    NSLog(@"image%@",script2);
+    }
+    else if (WebPageNum == 2){
+    //[_TWWebView stringByEvaluatingJavaScriptFromString:@"history.go(-1)"];
+   if([_FromWhichCompany  isEqual:@""]){
+    
+    _FromWhichCompany = [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByClassName('red')[0].innerHTML"];
+    NSLog(@"台灣大哥大:%@",_FromWhichCompany);
+   }else if(![_FromWhichCompany  isEqual:@""]){
+      PhoneElementNum+=1;
+       _FromWhichCompany=@"";
+     [_TWWebView stringByEvaluatingJavaScriptFromString:@"history.go(-1)"];
+   }
+    
+        
+      
+        
+    if (PhoneElementNum>=0 && PhoneElementNum<=_totalContactsNum) {
+            _PhoneNumList=_TheFirstPhoneNumberArray[PhoneElementNum];
+        
+            // if(_PhoneNumList.length<=10 && [_PhoneNumList hasPrefix:@"09"]){
+        
+        
+    NSString *script = [NSString stringWithFormat:@"document.getElementsByName('phoneNbr')[0].value='%@'",_PhoneNumList];
     [_TWWebView stringByEvaluatingJavaScriptFromString:script];
     if(flag){
-        double delayInSeconds = 3;
+      
+          [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.forms[0].submit()"];
         
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-    [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.forms[0].submit()"];
-    NSLog(@"aaa");
-             });
-     //    [_TWWebView stringByEvaluatingJavaScriptFromString:@"history.go(-1)"];
+           }
+        }
     }
 
+    
+    
     }
+
+
+
+
 
 
 - (NSString *)stringByEvaluatingJavaScriptFromString:(NSString *)script{

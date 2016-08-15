@@ -47,8 +47,12 @@
    
     UIAlertController * alert= [UIAlertController
                                 alertControllerWithTitle:@"會員登入"
-                                message:@"Enter User Credentials"
+                                message:@""
                                 preferredStyle:UIAlertControllerStyleAlert];
+    
+    
+    
+    
     
     UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
                                                handler:^(UIAlertAction * action) {
@@ -58,6 +62,8 @@
                                                    [self expoertAddressBook];
                                                    
                                                }];
+    
+    
     
     
     UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
@@ -173,19 +179,26 @@
         [_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('btn-login').click()"];
         //login member
         
+        
+        
+        
+        
+        
+        
+        
     }
     else if(WebPageNum==2){
         
-        // if (PhoneElementNum>=0 && PhoneElementNum<=_totalContactsNumber) {
+      
         
-        NSString* FormWhichCompany = [_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('telnum').parentNode.parentNode.parentNode.rows[1].cells[0].innerHTML"];
+        NSString* FromWhichCompany = [_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('telnum').parentNode.parentNode.parentNode.rows[1].cells[0].innerHTML"];
         //get the information about the Internal network or external network
         
-        if ([FormWhichCompany rangeOfString:@"查無相關資料"].location != NSNotFound) {
+        if ([FromWhichCompany rangeOfString:@"查無相關資料"].location != NSNotFound) {
             _FromWhichCompanyinfo=@"其他";
-        }else if([FormWhichCompany rangeOfString:@"網內"].location != NSNotFound){
+        }else if([FromWhichCompany rangeOfString:@"網內"].location != NSNotFound){
             _FromWhichCompanyinfo=@"網內";
-        }else if([FormWhichCompany rangeOfString:@"網外"].location != NSNotFound){
+        }else if([FromWhichCompany rangeOfString:@"網外"].location != NSNotFound){
             _FromWhichCompanyinfo=@"網外";
         }
         //change the html to 網內外 label

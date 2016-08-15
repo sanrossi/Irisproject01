@@ -17,7 +17,6 @@
 		03922FDA1D48929C009C3E0F /* CarriersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03922FD91D48929C009C3E0F /* CarriersViewController.m */; };
 		0394C0951D54F30E004591B5 /* TWMainFunctionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0394C0941D54F30E004591B5 /* TWMainFunctionViewController.m */; };
 		0394C0981D54F344004591B5 /* FetNetMainFunctionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0394C0971D54F344004591B5 /* FetNetMainFunctionViewController.m */; };
-		03A01CF71D48F19F00882331 /* CHTLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A01CF61D48F19F00882331 /* CHTLoginViewController.m */; };
 		03A01CFA1D48F22000882331 /* CHTMainFunctionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A01CF91D48F22000882331 /* CHTMainFunctionViewController.m */; };
 		03A039A01D499C9700B017F8 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03A0399F1D499C9700B017F8 /* Contacts.framework */; };
 		03A039A21D499CA500B017F8 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03A039A11D499CA500B017F8 /* AddressBook.framework */; };
@@ -66,8 +65,6 @@
 		0394C0941D54F30E004591B5 /* TWMainFunctionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TWMainFunctionViewController.m; path = ../TWMainFunctionViewController.m; sourceTree = "<group>"; };
 		0394C0961D54F344004591B5 /* FetNetMainFunctionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FetNetMainFunctionViewController.h; path = ../FetNetMainFunctionViewController.h; sourceTree = "<group>"; };
 		0394C0971D54F344004591B5 /* FetNetMainFunctionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FetNetMainFunctionViewController.m; path = ../FetNetMainFunctionViewController.m; sourceTree = "<group>"; };
-		03A01CF51D48F19F00882331 /* CHTLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHTLoginViewController.h; path = ../CHTLoginViewController.h; sourceTree = "<group>"; };
-		03A01CF61D48F19F00882331 /* CHTLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHTLoginViewController.m; path = ../CHTLoginViewController.m; sourceTree = "<group>"; };
 		03A01CF81D48F22000882331 /* CHTMainFunctionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHTMainFunctionViewController.h; path = ../CHTMainFunctionViewController.h; sourceTree = "<group>"; };
 		03A01CF91D48F22000882331 /* CHTMainFunctionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHTMainFunctionViewController.m; path = ../CHTMainFunctionViewController.m; sourceTree = "<group>"; };
 		03A0399F1D499C9700B017F8 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
@@ -138,8 +135,6 @@
 				030AF5F61D41BDE6004C451F /* AppDelegate.m */,
 				03922FD81D48929C009C3E0F /* CarriersViewController.h */,
 				03922FD91D48929C009C3E0F /* CarriersViewController.m */,
-				03A01CF51D48F19F00882331 /* CHTLoginViewController.h */,
-				03A01CF61D48F19F00882331 /* CHTLoginViewController.m */,
 				03A01CF81D48F22000882331 /* CHTMainFunctionViewController.h */,
 				03A01CF91D48F22000882331 /* CHTMainFunctionViewController.m */,
 				0394C0931D54F30E004591B5 /* TWMainFunctionViewController.h */,
@@ -321,7 +316,6 @@
 				03A01CFA1D48F22000882331 /* CHTMainFunctionViewController.m in Sources */,
 				0394C0951D54F30E004591B5 /* TWMainFunctionViewController.m in Sources */,
 				03922FDA1D48929C009C3E0F /* CarriersViewController.m in Sources */,
-				03A01CF71D48F19F00882331 /* CHTLoginViewController.m in Sources */,
 				03A039A51D499D8F00B017F8 /* MyContactList.m in Sources */,
 				030AF5F41D41BDE6004C451F /* main.m in Sources */,
 			);

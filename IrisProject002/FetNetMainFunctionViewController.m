@@ -39,7 +39,7 @@
     _ContactNamerarray= [NSMutableArray array];
     //_FetNetWebView.hidden=YES;
     [self loadFetNetWebView];
-   // [self expoertAddressBook];
+    [self expoertAddressBook];
 
 }
 
@@ -62,23 +62,37 @@
         _totalContactsNum=[[MyContactList sharedContacts]totalPhoneNumberArray].count;
         NSLog(@"%@", [[MyContactList sharedContacts]totalPhoneNumberArray]);
         
+        
+        
+        
         for(int i=0; i<_totalContactsNum;i++)
+            
+            
         {self.theFirstPhone=[[[MyContactList sharedContacts]totalPhoneNumberArray][i] objectForKey:@"phone"];
-            [_TheFirstPhoneNumberArray addObject:_theFirstPhone[0]];
-            NSLog(@"test%@",_TheFirstPhoneNumberArray);
-            //check the firstphone
+            
+            if(_theFirstPhone[0] == nil ){
+                [_TheFirstPhoneNumberArray addObject:@""];
+                NSLog(@"test%@",_TheFirstPhoneNumberArray);
+            }else{
+                
+                [_TheFirstPhoneNumberArray addObject:_theFirstPhone[0]];
+                NSLog(@"test%@",_TheFirstPhoneNumberArray);
+                //check the firstphone
+            }
         }
         for(int i=0; i<[[MyContactList sharedContacts]totalPhoneNumberArray].count;i++)
         {
             NSString*Contactname=[[[MyContactList sharedContacts]totalPhoneNumberArray][i] objectForKey:@"name"];
+            
             [_ContactNamerarray addObject:Contactname];
             NSLog(@"testname%@",_ContactNamerarray);
         }
-        // }
-        [_TheFirstPhoneNumberArray insertObject:@"0999876654" atIndex:0];
-        NSLog(@"test%@",_TheFirstPhoneNumberArray);
-        //check the firstphone
     }
+    // }
+    [_TheFirstPhoneNumberArray insertObject:@"0999876654" atIndex:0];
+    NSLog(@"test%@",_TheFirstPhoneNumberArray);
+    //check the firstphone
+    
     
 }
 
@@ -89,16 +103,33 @@
 
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
+  
 
-    NSString *script1 = [NSString stringWithFormat:@"document.getElementById('msisdn').value='%@'",@"0919552512"];
-    [_FetNetWebView stringByEvaluatingJavaScriptFromString:script1];
-         NSLog(@"aaa");
+    NSString* FromWhichCompany = [_FetNetWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('font')[0].innerHTML"];
+    NSLog(@"遠傳:%@",FromWhichCompany);
     
     
-   
-    [_FetNetWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('queryButton').click()"];
-    NSLog(@"aaa");
     
+    if (PhoneElementNum>=0 && PhoneElementNum<=_totalContactsNum) {
+        _PhoneNumList=_TheFirstPhoneNumberArray[PhoneElementNum];
+        PhoneElementNum+=1;
+       // if(_PhoneNumList.length<=10 && [_PhoneNumList hasPrefix:@"09"]){
+            
+            
+            NSString *script1 = [NSString stringWithFormat:@"document.getElementById('msisdn').value='%@'",_PhoneNumList];
+            double delayInSeconds = 0.5;
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                
+                
+                [_FetNetWebView stringByEvaluatingJavaScriptFromString:script1];
+                
+                [_FetNetWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('queryButton').click()"];
+                
+            });
+        //}
+    
+    }
 }
 
 

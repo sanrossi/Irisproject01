@@ -24,6 +24,7 @@
 @property(nonatomic)NSInteger totalContactsNum;
 @property(nonatomic)UITextField *FetNetLogin;
 @property(nonatomic)UITextField *FetNetPassword;
+@property(nonatomic)NSString *FromWhichCompany;
 @end
 
 @implementation FetNetMainFunctionViewController
@@ -103,19 +104,20 @@
 
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
-  
-
-    NSString* FromWhichCompany = [_FetNetWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('font')[0].innerHTML"];
-    NSLog(@"遠傳:%@",FromWhichCompany);
+    
+    
+        _FromWhichCompany = [_FetNetWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('font')[0].innerHTML"];
+    
+    
+   
+    NSLog(@"遠傳:%@",_FromWhichCompany);
     
     
     
     if (PhoneElementNum>=0 && PhoneElementNum<=_totalContactsNum) {
         _PhoneNumList=_TheFirstPhoneNumberArray[PhoneElementNum];
         PhoneElementNum+=1;
-       // if(_PhoneNumList.length<=10 && [_PhoneNumList hasPrefix:@"09"]){
-            
-            
+       if(_PhoneNumList.length<=10 && [_PhoneNumList hasPrefix:@"09"]){
             NSString *script1 = [NSString stringWithFormat:@"document.getElementById('msisdn').value='%@'",_PhoneNumList];
             double delayInSeconds = 0.5;
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
@@ -125,9 +127,35 @@
                 [_FetNetWebView stringByEvaluatingJavaScriptFromString:script1];
                 
                 [_FetNetWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('queryButton').click()"];
-                
+
             });
-        //}
+        }
+       else {
+           if(flag){
+               _PhoneNumList=@"0999876654";
+               flag=false;
+           }else{
+               _PhoneNumList=@"0998736653";
+               flag=true;
+           }
+           NSString *script1 = [NSString stringWithFormat:@"document.getElementById('msisdn').value='%@'",_PhoneNumList];
+           double delayInSeconds = 0.5;
+           dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+           dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+               
+               
+               [_FetNetWebView stringByEvaluatingJavaScriptFromString:script1];
+               
+               [_FetNetWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('queryButton').click()"];
+               
+           });
+
+           
+           
+       
+       
+       
+       }
     
     }
 }

@@ -13,7 +13,7 @@
 {
     NSInteger WebPageNum;
     NSInteger PhoneElementNum;
-    BOOL flag;
+    
     
 }
 @property (weak, nonatomic) IBOutlet UIWebView *TWWebView;
@@ -38,7 +38,6 @@
     [super viewDidLoad];
     PhoneElementNum=0;
     _TWWebView.delegate = self;
-    flag = false;
     _TWWebView.scrollView.delegate = self;
     _FormWhichCompanyList = [NSMutableArray array];
     _TheFirstPhoneNumberArray = [NSMutableArray array];
@@ -269,7 +268,6 @@
     [_TWWebView stringByEvaluatingJavaScriptFromString:loginpasswordtxt];
     [_TWWebView stringByEvaluatingJavaScriptFromString:loginpassword];
     [_TWWebView stringByEvaluatingJavaScriptFromString:logincchknum];
-     flag = true;
     double delayInSeconds = 1;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -293,57 +291,66 @@
 - (void)webViewDidFinishLoad:(UIWebView *)WebView {
     self.TWWebView.scrollView.contentOffset = CGPointMake(15,473);
     //self.TWWebView.scrollView.bounces = NO;// fix the webview
-    if(WebPageNum==1){
-        
-        WebPageNum += 1;
     
-    
-    
-//    NSString *script2 =[_TWWebView stringByEvaluatingJavaScriptFromString:
-//                       @"function(){var img = document.getElementById('randImg');"
-//                       "var canvas = document.createElement('canvas');"
-//                       "var context = canvas.getContext('2d');"
-//                       "canvas.width = img.width;"
-//                       "canvas.height = img.height;"
-//                       "context.drawImage(img,0,0,img.width,img.height);"
-//                        "return canvas.toDataURL('image/png');}"
-//                       ];
-//    NSLog(@"image%@",script2);
-    }
-    else if (WebPageNum == 2){
-    //[_TWWebView stringByEvaluatingJavaScriptFromString:@"history.go(-1)"];
-   if([_FromWhichCompany  isEqual:@""]){
-    
-    _FromWhichCompany = [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByClassName('red')[0].innerHTML"];
-    NSLog(@"台灣大哥大:%@",_FromWhichCompany);
-   }else if(![_FromWhichCompany  isEqual:@""]){
-      PhoneElementNum+=1;
-       _FromWhichCompany=@"";
-     [_TWWebView stringByEvaluatingJavaScriptFromString:@"history.go(-1)"];
-   }
-    
-        
-      
-        
-    if (PhoneElementNum>=0 && PhoneElementNum<=_totalContactsNum) {
+    if ([[[[_TWWebView request]URL]absoluteString]  isEqualToString: @"https://cs.taiwanmobile.com/wap-portal/smpQueryTwmPhoneNbr.action"]){
+        if (PhoneElementNum>=0 && PhoneElementNum<=_totalContactsNum) {
             _PhoneNumList=_TheFirstPhoneNumberArray[PhoneElementNum];
-        
+            
             // if(_PhoneNumList.length<=10 && [_PhoneNumList hasPrefix:@"09"]){
-        
-        
-    NSString *script = [NSString stringWithFormat:@"document.getElementsByName('phoneNbr')[0].value='%@'",_PhoneNumList];
-    [_TWWebView stringByEvaluatingJavaScriptFromString:script];
-    if(flag){
-      
-          [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.forms[0].submit()"];
-        
-           }
+            if(_TWWebView.loading==NO){
+                NSString *script = [NSString stringWithFormat:@"document.getElementsByName('phoneNbr')[0].value='%@'",_PhoneNumList];
+                [_TWWebView stringByEvaluatingJavaScriptFromString:script];
+                
+                [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.forms[0].submit()"];
+                
+            }
         }
     }
-
-    
-    
+    else if ([[[[_TWWebView request]URL]absoluteString]  isEqualToString: @"https://cs.taiwanmobile.com/wap-portal/smpCheckTwmPhoneNbr.action"]){
+        if([_FromWhichCompany  isEqual:@""]){
+            if(_TWWebView.loading==NO){
+                _FromWhichCompany = [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByClassName('red')[0].innerHTML"];
+                
+                if([_FromWhichCompany  isEqual:@""]){
+                    _FromWhichCompany = [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('font')[0].innerHTML"];
+                }
+                
+                NSLog(@"didFinish: %@; stillLoading: %@", [[_TWWebView request]URL],
+                      (_TWWebView.loading?@"YES":@"NO"));
+                NSLog(@"台灣大哥大:%@",_FromWhichCompany);
+                [_TWWebView stringByEvaluatingJavaScriptFromString:@"history.go(-1)"];
+            }
+        }else if(![_FromWhichCompany  isEqual:@""]){
+            PhoneElementNum+=1;
+            _FromWhichCompany=@"";
+            [_TWWebView stringByEvaluatingJavaScriptFromString:@"history.go(-1)"];
+        }
+  
+        
     }
+    
+
+}
+
+- (IBAction)writeToAddressBook:(id)sender {
+    NSLog(@"count%ld",_FormWhichCompanyList.count);
+
+    [_TheFirstPhoneNumberArray removeObject:_TheFirstPhoneNumberArray[0]];
+    NSLog(@"REMOVE:%@",_TheFirstPhoneNumberArray);
+    for(int count=1;count<=_totalContactsNum;count++)
+    {
+        //        //_TheFirstPhoneNumberarray//剃出第一個（後進先出）
+        //        //_FormWhichCompanyList//取出網內外（後進先出）
+        //        //_ContactNamerarray//去名字（後進先出)
+        //_TheFirstPhoneNumberarray[_totalContactsNumber-count-1]
+        [[MyContactList sharedContacts]updateContactFromContact:_ContactNamerarray[_totalContactsNum-count] NetLabel:_ContactNamerarray[_totalContactsNum-count] ContactPhone:_TheFirstPhoneNumberArray[_totalContactsNum-count]];
+        //測試多按幾次會當掉
+        
+    }
+}
+
+
+
 
 
 

@@ -27,8 +27,9 @@
 @property(nonatomic)UITextField *TWPassword;
 @property(nonatomic)UITextField *TWChkNum;
 @property(nonatomic)UIImageView *dyImageView;
+@property(nonatomic)UIImageView *dyImageViewac;
 @property(nonatomic)NSString *FromWhichCompany;
-
+@property(nonatomic)UIImage*image;
 
 @end
 
@@ -53,64 +54,55 @@
     [self loadTWWebView];
     
 
+//    double delayInSeconds = 2;
+//    
+//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+//    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//        
+//        NSData *imageData = [self getImageFromView:_TWWebView];
+//        //[imageData writeToFile:[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"new.png"] atomically:YES];
+//        
+//
+//        _dyImageView = [[UIImageView alloc] initWithFrame: CGRectMake(0,0,125,50)];
+//        
+//        UIImage *aimage = [UIImage imageWithData: imageData];
+//        
+//        CGRect rect = CGRectMake(_TWWebView.bounds.size.width/3-30, _TWWebView.bounds.size.height/2-33, 125, 50);
+//        CGImageRef imageRef = CGImageCreateWithImageInRect([aimage CGImage], rect);
+//        UIImage *cutimage = [UIImage imageWithCGImage:imageRef];
+//        CGImageRelease(imageRef);
+//        
+//        _dyImageView.image = cutimage;
+//        
+//        
+//        dispatch_async(dispatch_get_main_queue(),
+//                       ^{
+//         [_TWWebView addSubview:_dyImageView];
+//                           
+//                       });
+//        
+//    });
+//    // 以上適用全螢幕找到識別碼的方法
+
     double delayInSeconds = 2;
-    
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        
-        NSData *imageData = [self getImageFromView:_TWWebView];
-        //[imageData writeToFile:[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"new.png"] atomically:YES];
-        
-        
-        NSLog(@"%@",imageData);
-        NSLog(@"%@",NSHomeDirectory());
-        _dyImageView = [[UIImageView alloc] initWithFrame: CGRectMake(0,0,125,50)];
-        
-        UIImage *aimage = [UIImage imageWithData: imageData];
-        NSLog(@"%f",aimage.size.height);
-        NSLog(@"%@",aimage);
-        
-        CGRect rect = CGRectMake(_TWWebView.bounds.size.width/3-30, _TWWebView.bounds.size.height/2-33, 125, 50);
-        CGImageRef imageRef = CGImageCreateWithImageInRect([aimage CGImage], rect);
-        UIImage *cutimage = [UIImage imageWithCGImage:imageRef];
-        CGImageRelease(imageRef);
-        
-        _dyImageView.image = cutimage;
-        NSLog(@"dyImageView height ==> %f", _dyImageView.image.size.height);
-        
-        
-        dispatch_async(dispatch_get_main_queue(),
-                       ^{
-         [_TWWebView addSubview:_dyImageView];
-                           
-                       });
-        
-   
-    });
-
-    
-    
+     [self getImage];
+            });
     UIAlertController * alert= [UIAlertController
                                 alertControllerWithTitle:@"會員登入"
                                 message:@"驗證碼：                  "
                                 preferredStyle:UIAlertControllerStyleAlert];
     
    
-//    UIImageView *viewe = [[UIImageView alloc] initWithFrame:CGRectMake(60.0, 50.0, 45.0, 45.0)];
-//    viewe.image = [UIImage imageNamed:@"button.png"];
-    
-    
-    
-    
-    
-    
-    
-    
+    UIImageView *viewe = [[UIImageView alloc] initWithFrame:CGRectMake(60.0, 50.0, 45.0, 45.0)];
+    viewe.image = _image;
+
     dispatch_async(dispatch_get_main_queue(),
                    ^{
-    [alert.view addSubview:_dyImageView];
+    [alert.view addSubview:_dyImageViewac];
     });
-    
+    //uialert加入圖片
     
     
     UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
@@ -130,6 +122,7 @@
     UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
                                                    handler:^(UIAlertAction * action) {
                                                        [alert dismissViewControllerAnimated:YES completion:nil];
+                                                       
                                                    }];
     [alert addAction:ok];
     [alert addAction:cancel];
@@ -175,6 +168,9 @@
         NSURL *url = [NSURL URLWithString:@"https://www.catch.net.tw/auth/member_login_m.jsp?return_url=https%3A%2F%2Fcs.taiwanmobile.com%2Fwap-portal%2FssoLogin.action%3Fparam%3DaHR0cHM6Ly9jcy50YWl3YW5tb2JpbGUuY29tL3dhcC1wb3J0YWwvc21wUXVlcnlUd21QaG9uZU5i%0D%0Aci5hY3Rpb24%3D%0D%0A"];
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         [self.TWWebView loadRequest:request];
+    
+    
+    
    
 //    }
 }
@@ -208,9 +204,45 @@
     
     UIGraphicsEndImageContext();
     return pngImg;
+}//獲取全屏的方法
+
+
+
+
+- (void)getImage {
+    
+    NSString *javascript = @""
+    "        var img = document.getElementById(\"randImg\"); "
+    "        var canvas = document.createElement(\"canvas\");\n"
+    "        var context = canvas.getContext(\"2d\");\n"
+    "        canvas.width = img.width;\n"
+    "        canvas.height = img.height;\n"
+    "        context.drawImage(img, 0, 0, img.width, img.height);\n"
+    "        canvas.toDataURL(\"image/png\");\n";
+    
+    NSString*content=[_TWWebView stringByEvaluatingJavaScriptFromString:javascript];
+    NSURL *url = [NSURL URLWithString:content];
+    NSData *imageData = [NSData dataWithContentsOfURL:url];
+    _image = [UIImage imageWithData:imageData];
+    NSLog(@"imagetest%@",_image);
+//    dispatch_async(dispatch_get_main_queue(),^{
+//    _dyImageViewac = [[UIImageView alloc] initWithFrame: CGRectMake(0,0,image.size.width,image.size.height)];
+//        _dyImageViewac.image = image;
+//        [_TWWebView addSubview:_dyImageViewac];
+//    });
+    //check image with height and width
+    NSLog(@"width %f,height %f",_image.size.width,_image.size.height);
+    
+    
 }
 
 
+
+
+
+- (NSString *)stringByEvaluatingJavaScriptFromString:(NSString *)script{
+    return nil;
+}
 
 
 
@@ -356,10 +388,6 @@
 
 
 
-
-- (NSString *)stringByEvaluatingJavaScriptFromString:(NSString *)script{
-    return nil;
-}
 
 /*
 #pragma mark - Navigation

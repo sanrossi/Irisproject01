@@ -72,10 +72,6 @@
                                     <segue destination="sWo-EG-7fR" kind="push" id="0Lu-pd-ldN"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mmx-j1-QHW">
-                                <rect key="frame" x="156" y="310" width="85" height="79"/>
-                                <state key="normal" title="威寶"/>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uDb-Hh-kCn">
                                 <rect key="frame" x="156" y="236" width="85" height="79"/>
                                 <state key="normal" title="台灣大哥大"/>

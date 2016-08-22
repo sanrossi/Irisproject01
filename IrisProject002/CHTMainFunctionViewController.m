@@ -89,16 +89,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
 -(void)expoertAddressBook{
     [[MyContactList sharedContacts] fetchAllContacts];
     //fetch all contacts by calling single to method

@@ -9,20 +9,58 @@
 #import "CarriersViewController.h"
 
 @interface CarriersViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *date;
+@property (weak, nonatomic) IBOutlet UILabel *dayoftheweek;
+@property (weak, nonatomic) IBOutlet UILabel *monthandyear;
+
 
 @end
 
 @implementation CarriersViewController
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"zh_Hant_TW"]];
+    [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"Asia/Taipei"]];
+    [formatter setDateFormat:@" YYYY年 M月 d日(eeee) HH:mm:ss"];
+    // Date to string
+    NSDate *now = [NSDate date];
+    NSString *currentDateString = [formatter stringFromDate:now];
+    NSLog(@"currentDate=%@", currentDateString);
+    NSString *currentDateStringforYear = [currentDateString substringWithRange:NSMakeRange(1,4)];
+    NSString *currentDateStringforMonth = [currentDateString substringWithRange:NSMakeRange(6,2)];
+    NSString* MonthandYear = [NSString stringWithFormat:@"%@/%@",currentDateStringforMonth,currentDateStringforYear];
+    NSString *currentDateStringforDay = [currentDateString substringWithRange:NSMakeRange(10,2)];
+    
+    //拉一下autolayout
+    NSString *currentDateStringfordayoftheweek = [currentDateString substringWithRange:NSMakeRange(14,3)];
+    _date.text=currentDateStringforDay;
+    NSLog(@"currentDate=%@", MonthandYear);
+    _dayoftheweek.text=currentDateStringfordayoftheweek;
+    
+//    [UIView animateWithDuration:(NSTimeInterval)
+//                          delay:(NSTimeInterval)
+//         usingSpringWithDamping:(CGFloat)
+//          initialSpringVelocity:(CGFloat)
+//                        options:(UIViewAnimationOptions)
+//                     animations:^{}
+//                     completion:^(BOOL finished) {}];
+
+    
+    
+
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
+
+
+//- (void)didReceiveMemoryWarning {
+//    [super didReceiveMemoryWarning];
+//    // Dispose of any resources that can be recreated.
+//}
 
 /*
 #pragma mark - Navigation

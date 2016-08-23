@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>Pods-IrisProject001.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>Pods-IrisProject001Tests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>Pods-IrisProject001UITests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>pop.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>11BCDBFCD0572EF640B6BC2869684B22</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>35053E6E8D4AB03F83FC986700E46B32</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>63F41D413D59CD0953ED63F9482FD2A1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>72C86730825F43DCD70CB86A7707075E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>733B9E32D115A97C291080BFFA0B568B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

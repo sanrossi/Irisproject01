@@ -8,7 +8,7 @@
 
 #import "TWMainFunctionViewController.h"
 #import "MyContactList.h"
-
+#import "VMGearLoadingView.h"
 @interface TWMainFunctionViewController ()<UIWebViewDelegate,UIScrollViewDelegate>
 {
     NSInteger WebPageNum;
@@ -49,10 +49,11 @@
     //_TWWebView.hidden=YES;
     
     
-    
-    
+    [VMGearLoadingView showGearLoadingForView:self.view];
     [self loadTWWebView];
     
+    
+    [VMGearLoadingView hideGearLoadingForView:self.view];
 
 //    double delayInSeconds = 2;
 //    
@@ -84,25 +85,25 @@
 //    });
 //    // 以上適用全螢幕找到識別碼的方法
 
-    double delayInSeconds = 2;
+    double delayInSeconds = 1;
+    //delay one second for getting the image
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-     [self getImage];
-            });
+    [self getImage];
+
     UIAlertController * alert= [UIAlertController
                                 alertControllerWithTitle:@"會員登入"
-                                message:@"驗證碼：                  "
+                                message:@"驗證碼:   ＿＿＿＿＿＿＿＿"
                                 preferredStyle:UIAlertControllerStyleAlert];
     
    
-    UIImageView *viewe = [[UIImageView alloc] initWithFrame:CGRectMake(60.0, 50.0, 45.0, 45.0)];
-    viewe.image = _image;
+    
 
-    dispatch_async(dispatch_get_main_queue(),
+     dispatch_async(dispatch_get_main_queue(),
                    ^{
     [alert.view addSubview:_dyImageViewac];
     });
-    //uialert加入圖片
+    
     
     
     UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
@@ -147,7 +148,7 @@
     
     [self presentViewController:alert animated:YES completion:nil];
     
-    
+            });
     
 
  
@@ -225,11 +226,11 @@
     NSData *imageData = [NSData dataWithContentsOfURL:url];
     _image = [UIImage imageWithData:imageData];
     NSLog(@"imagetest%@",_image);
-//    dispatch_async(dispatch_get_main_queue(),^{
-//    _dyImageViewac = [[UIImageView alloc] initWithFrame: CGRectMake(0,0,image.size.width,image.size.height)];
-//        _dyImageViewac.image = image;
-//        [_TWWebView addSubview:_dyImageViewac];
-//    });
+    dispatch_async(dispatch_get_main_queue(),^{
+    _dyImageViewac = [[UIImageView alloc] initWithFrame: CGRectMake(100,40,_image.size.width,_image.size.height)];
+        _dyImageViewac.image = _image;
+     //   [_TWWebView addSubview:_dyImageViewac];
+    });
     //check image with height and width
     NSLog(@"width %f,height %f",_image.size.width,_image.size.height);
     
@@ -350,6 +351,41 @@
                 NSLog(@"didFinish: %@; stillLoading: %@", [[_TWWebView request]URL],
                       (_TWWebView.loading?@"YES":@"NO"));
                 NSLog(@"台灣大哥大:%@",_FromWhichCompany);
+                
+                
+                //get the information about the Internal network or external network
+                
+                if ([_FromWhichCompany rangeOfString:@"請輸入正確的手機號碼"].location != NSNotFound) {
+                    _FromWhichCompanyinfo=@"其他";
+                }else if([_FromWhichCompany rangeOfString:@"台灣大哥大門號"].location != NSNotFound){
+                    _FromWhichCompanyinfo=@"網內";
+                }else if([_FromWhichCompany rangeOfString:@"非台灣大哥大門號"].location != NSNotFound){
+                    _FromWhichCompanyinfo=@"網外";
+                }
+                //change the html to 網內外 label
+                NSLog(@"login%@",_FromWhichCompanyinfo);
+                if(_FromWhichCompanyinfo != NULL){
+                [_FormWhichCompanyList addObject:_FromWhichCompanyinfo];
+                NSLog(@"wenet:%@",_FormWhichCompanyList);
+                    
+                }
+
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
                 [_TWWebView stringByEvaluatingJavaScriptFromString:@"history.go(-1)"];
             }
         }else if(![_FromWhichCompany  isEqual:@""]){

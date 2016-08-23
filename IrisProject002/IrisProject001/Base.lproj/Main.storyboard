@@ -7,7 +7,7 @@
         <!--Main Function View Controller-->
         <scene sceneID="3Hz-az-LFi">
             <objects>
-                <viewController id="D3k-NR-Tme" customClass="CHTMainFunctionViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="two" id="D3k-NR-Tme" customClass="CHTMainFunctionViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gmc-0D-lGi"/>
                         <viewControllerLayoutGuide type="bottom" id="pZr-eI-hlM"/>
@@ -16,25 +16,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bfv-Bx-6Yv">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
-                            </webView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u6l-5f-W3w">
-                                <rect key="frame" x="115" y="224" width="91" height="30"/>
-                                <state key="normal" title="一鍵寫入"/>
+                                <rect key="frame" x="108" y="224" width="105" height="30"/>
+                                <state key="normal" title="寫入聯絡人資訊"/>
                                 <connections>
                                     <action selector="writeToAddressBook:" destination="D3k-NR-Tme" eventType="touchUpInside" id="WdI-B4-hNe"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eUY-PH-8Aa">
-                                <rect key="frame" x="115" y="290" width="90" height="30"/>
-                                <state key="normal" title="會員資料修改"/>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NKC-44-MYh">
                                 <rect key="frame" x="130" y="335" width="60" height="30"/>
+                                <state key="normal" title="雲端寫回"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eUY-PH-8Aa">
+                                <rect key="frame" x="130" y="286" width="60" height="30"/>
                                 <state key="normal" title="備份雲端"/>
                             </button>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bfv-Bx-6Yv">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                            </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -65,35 +65,90 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background.png" translatesAutoresizingMaskIntoConstraints="NO" id="S4c-bM-nA3">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LaO-wS-b41">
-                                <rect key="frame" x="52" y="310" width="85" height="79"/>
+                                <rect key="frame" x="120" y="337" width="85" height="79"/>
                                 <state key="normal" title="遠傳"/>
                                 <connections>
                                     <segue destination="sWo-EG-7fR" kind="push" id="0Lu-pd-ldN"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uDb-Hh-kCn">
-                                <rect key="frame" x="156" y="236" width="85" height="79"/>
+                                <rect key="frame" x="220" y="337" width="85" height="79"/>
                                 <state key="normal" title="台灣大哥大"/>
                                 <connections>
                                     <segue destination="SwV-3u-CGS" kind="push" id="MgO-oE-SqR"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vc3-Rd-AGw">
-                                <rect key="frame" x="20" y="153" width="217" height="64"/>
+                                <rect key="frame" x="25" y="346" width="87" height="60.5"/>
                                 <state key="normal" title="中華電信" image="button.png"/>
                                 <connections>
                                     <segue destination="D3k-NR-Tme" kind="push" id="PvX-2l-q4J"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="星期五" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2jT-Xk-eWz">
+                                <rect key="frame" x="112" y="100" width="66" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="AX9-zp-6Ck"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="0.42352941179999998" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <size key="shadowOffset" width="0.0" height="0.0"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="07/2016" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Atq-47-YnK">
+                                <rect key="frame" x="112" y="131" width="66" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="QyW-2G-ntp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="0.42352941179999998" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <size key="shadowOffset" width="0.0" height="0.0"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="30" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3I3-qx-EgX">
+                                <rect key="frame" x="20" y="86" width="84" height="79"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Bzw-R1-ZzL"/>
+                                    <constraint firstAttribute="width" constant="52" id="WEq-WW-hBV"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="50"/>
+                                <color key="textColor" red="0.31764705879999999" green="0.31764705879999999" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <size key="shadowOffset" width="0.0" height="0.0"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="請選擇您所屬的電信" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j1j-Dj-zUb">
+                                <rect key="frame" x="33" y="262" width="244" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="S4c-bM-nA3" secondAttribute="trailing" id="50i-7d-qtD"/>
+                            <constraint firstItem="S4c-bM-nA3" firstAttribute="leading" secondItem="qU5-68-HDK" secondAttribute="leading" id="6XH-L0-qnC"/>
+                            <constraint firstItem="XCx-Hu-vKX" firstAttribute="top" secondItem="S4c-bM-nA3" secondAttribute="bottom" id="Iv8-1M-oNJ"/>
+                            <constraint firstItem="Atq-47-YnK" firstAttribute="top" secondItem="2jT-Xk-eWz" secondAttribute="bottom" id="Tzg-Ja-8sD"/>
+                            <constraint firstItem="S4c-bM-nA3" firstAttribute="top" secondItem="ePj-va-8N2" secondAttribute="bottom" id="XGn-p1-QcP"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="LHL-RH-Rrp"/>
+                    <connections>
+                        <outlet property="date" destination="3I3-qx-EgX" id="PCk-54-wvO"/>
+                        <outlet property="dayoftheweek" destination="2jT-Xk-eWz" id="0yQ-8U-Vwa"/>
+                        <outlet property="monthandyear" destination="Atq-47-YnK" id="UQ6-NK-etS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FTf-p6-EgV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="729" y="64"/>
+            <point key="canvasLocation" x="734" y="64"/>
         </scene>
         <!--Fet Net Main Function View Controller-->
         <scene sceneID="8lz-JF-C7D">
@@ -190,6 +245,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="background.png" width="2532" height="3289"/>
         <image name="button.png" width="204" height="68"/>
     </resources>
+    <color key="tintColor" red="0.38106205469999999" green="0.57024724520000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

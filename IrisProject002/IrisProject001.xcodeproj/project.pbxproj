@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		014AA556CA988D71382EA968 /* libPods-IrisProject001.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58637C56225857335B50A12B /* libPods-IrisProject001.a */; };
 		030AF5F41D41BDE6004C451F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 030AF5F31D41BDE6004C451F /* main.m */; };
 		030AF5F71D41BDE6004C451F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 030AF5F61D41BDE6004C451F /* AppDelegate.m */; };
 		030AF5FD1D41BDE6004C451F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 030AF5FB1D41BDE6004C451F /* Main.storyboard */; };
@@ -21,9 +22,21 @@
 		03A039A01D499C9700B017F8 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03A0399F1D499C9700B017F8 /* Contacts.framework */; };
 		03A039A21D499CA500B017F8 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03A039A11D499CA500B017F8 /* AddressBook.framework */; };
 		03A039A51D499D8F00B017F8 /* MyContactList.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A039A41D499D8F00B017F8 /* MyContactList.m */; };
+		03B2D1771D6C17C500572A8A /* VMGearLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B2D1761D6C17C500572A8A /* VMGearLoadingView.m */; };
+		03B2D1811D6C180C00572A8A /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B2D1781D6C180C00572A8A /* background@2x.png */; };
+		03B2D1821D6C180C00572A8A /* background@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B2D1791D6C180C00572A8A /* background@3x.png */; };
+		03B2D1831D6C180C00572A8A /* gears 1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B2D17A1D6C180C00572A8A /* gears 1@2x.png */; };
+		03B2D1841D6C180C00572A8A /* gears 1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B2D17B1D6C180C00572A8A /* gears 1@3x.png */; };
+		03B2D1851D6C180C00572A8A /* gears 2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B2D17C1D6C180C00572A8A /* gears 2@2x.png */; };
+		03B2D1861D6C180C00572A8A /* gears 2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B2D17D1D6C180C00572A8A /* gears 2@3x.png */; };
+		03B2D1871D6C180C00572A8A /* gears 3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B2D17E1D6C180C00572A8A /* gears 3@2x.png */; };
+		03B2D1881D6C180C00572A8A /* gears 3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B2D17F1D6C180C00572A8A /* gears 3@3x.png */; };
+		03B2D1891D6C180C00572A8A /* imgDemo.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B2D1801D6C180C00572A8A /* imgDemo.png */; };
 		03C848BC1D5B08720010CECF /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 03C848BB1D5B08720010CECF /* button.png */; };
-		03C848BE1D5B1F7E0010CECF /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 03C848BD1D5B1F7E0010CECF /* background.png */; };
 		03E1AF2C1D5D60DD009B20CB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 035B4DD91D5C744700BD4A62 /* QuartzCore.framework */; };
+		03E8B0211D6AECBD00D8DBE7 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 03E8B0201D6AECBD00D8DBE7 /* background.png */; };
+		2D8BA4A6512EC13F7B7217DD /* libPods-IrisProject001UITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 727DCC97A2DE91FD74B5DB5B /* libPods-IrisProject001UITests.a */; };
+		8021F1EB53781BF0420056D9 /* libPods-IrisProject001Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF31DDF73CF9E721C1959C33 /* libPods-IrisProject001Tests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,8 +84,28 @@
 		03A039A11D499CA500B017F8 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		03A039A31D499D8F00B017F8 /* MyContactList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyContactList.h; sourceTree = "<group>"; };
 		03A039A41D499D8F00B017F8 /* MyContactList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyContactList.m; sourceTree = "<group>"; };
+		03B2D1751D6C17C500572A8A /* VMGearLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VMGearLoadingView.h; sourceTree = "<group>"; };
+		03B2D1761D6C17C500572A8A /* VMGearLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VMGearLoadingView.m; sourceTree = "<group>"; };
+		03B2D1781D6C180C00572A8A /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
+		03B2D1791D6C180C00572A8A /* background@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@3x.png"; sourceTree = "<group>"; };
+		03B2D17A1D6C180C00572A8A /* gears 1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gears 1@2x.png"; sourceTree = "<group>"; };
+		03B2D17B1D6C180C00572A8A /* gears 1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gears 1@3x.png"; sourceTree = "<group>"; };
+		03B2D17C1D6C180C00572A8A /* gears 2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gears 2@2x.png"; sourceTree = "<group>"; };
+		03B2D17D1D6C180C00572A8A /* gears 2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gears 2@3x.png"; sourceTree = "<group>"; };
+		03B2D17E1D6C180C00572A8A /* gears 3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gears 3@2x.png"; sourceTree = "<group>"; };
+		03B2D17F1D6C180C00572A8A /* gears 3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gears 3@3x.png"; sourceTree = "<group>"; };
+		03B2D1801D6C180C00572A8A /* imgDemo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imgDemo.png; sourceTree = "<group>"; };
 		03C848BB1D5B08720010CECF /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
-		03C848BD1D5B1F7E0010CECF /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		03E8B0201D6AECBD00D8DBE7 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		229963209E923445654B6E36 /* Pods-IrisProject001.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IrisProject001.release.xcconfig"; path = "Pods/Target Support Files/Pods-IrisProject001/Pods-IrisProject001.release.xcconfig"; sourceTree = "<group>"; };
+		37B1477CFC186AC2B98DC3F5 /* Pods-IrisProject001.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IrisProject001.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IrisProject001/Pods-IrisProject001.debug.xcconfig"; sourceTree = "<group>"; };
+		58637C56225857335B50A12B /* libPods-IrisProject001.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IrisProject001.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		727DCC97A2DE91FD74B5DB5B /* libPods-IrisProject001UITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IrisProject001UITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BCEC4413C3BFA7F24121818 /* Pods-IrisProject001UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IrisProject001UITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IrisProject001UITests/Pods-IrisProject001UITests.debug.xcconfig"; sourceTree = "<group>"; };
+		9DFA8E82A3ED57BB5785FF7D /* Pods-IrisProject001Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IrisProject001Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-IrisProject001Tests/Pods-IrisProject001Tests.release.xcconfig"; sourceTree = "<group>"; };
+		D93979E97022DEB7060A3616 /* Pods-IrisProject001Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IrisProject001Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IrisProject001Tests/Pods-IrisProject001Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		EB3F73DFA41E39F8F6FC90A5 /* Pods-IrisProject001UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IrisProject001UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-IrisProject001UITests/Pods-IrisProject001UITests.release.xcconfig"; sourceTree = "<group>"; };
+		EF31DDF73CF9E721C1959C33 /* libPods-IrisProject001Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IrisProject001Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +116,7 @@
 				03E1AF2C1D5D60DD009B20CB /* QuartzCore.framework in Frameworks */,
 				03A039A21D499CA500B017F8 /* AddressBook.framework in Frameworks */,
 				03A039A01D499C9700B017F8 /* Contacts.framework in Frameworks */,
+				014AA556CA988D71382EA968 /* libPods-IrisProject001.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +124,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8021F1EB53781BF0420056D9 /* libPods-IrisProject001Tests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +132,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D8BA4A6512EC13F7B7217DD /* libPods-IrisProject001UITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,6 +149,8 @@
 				030AF60B1D41BDE6004C451F /* IrisProject001Tests */,
 				030AF6161D41BDE6004C451F /* IrisProject001UITests */,
 				030AF5F01D41BDE6004C451F /* Products */,
+				AACB3996B2B3331C99F5F75C /* Pods */,
+				3021321EF7E17B564E843C22 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -129,8 +167,11 @@
 		030AF5F11D41BDE6004C451F /* IrisProject001 */ = {
 			isa = PBXGroup;
 			children = (
+				03B2D18A1D6C1BEA00572A8A /* image */,
+				03B2D1751D6C17C500572A8A /* VMGearLoadingView.h */,
+				03B2D1761D6C17C500572A8A /* VMGearLoadingView.m */,
 				03C848BB1D5B08720010CECF /* button.png */,
-				03C848BD1D5B1F7E0010CECF /* background.png */,
+				03E8B0201D6AECBD00D8DBE7 /* background.png */,
 				030AF5F51D41BDE6004C451F /* AppDelegate.h */,
 				030AF5F61D41BDE6004C451F /* AppDelegate.m */,
 				03922FD81D48929C009C3E0F /* CarriersViewController.h */,
@@ -178,6 +219,45 @@
 			path = IrisProject001UITests;
 			sourceTree = "<group>";
 		};
+		03B2D18A1D6C1BEA00572A8A /* image */ = {
+			isa = PBXGroup;
+			children = (
+				03B2D1781D6C180C00572A8A /* background@2x.png */,
+				03B2D1791D6C180C00572A8A /* background@3x.png */,
+				03B2D17A1D6C180C00572A8A /* gears 1@2x.png */,
+				03B2D17B1D6C180C00572A8A /* gears 1@3x.png */,
+				03B2D17C1D6C180C00572A8A /* gears 2@2x.png */,
+				03B2D17D1D6C180C00572A8A /* gears 2@3x.png */,
+				03B2D17E1D6C180C00572A8A /* gears 3@2x.png */,
+				03B2D17F1D6C180C00572A8A /* gears 3@3x.png */,
+				03B2D1801D6C180C00572A8A /* imgDemo.png */,
+			);
+			name = image;
+			sourceTree = "<group>";
+		};
+		3021321EF7E17B564E843C22 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				58637C56225857335B50A12B /* libPods-IrisProject001.a */,
+				EF31DDF73CF9E721C1959C33 /* libPods-IrisProject001Tests.a */,
+				727DCC97A2DE91FD74B5DB5B /* libPods-IrisProject001UITests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AACB3996B2B3331C99F5F75C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				37B1477CFC186AC2B98DC3F5 /* Pods-IrisProject001.debug.xcconfig */,
+				229963209E923445654B6E36 /* Pods-IrisProject001.release.xcconfig */,
+				D93979E97022DEB7060A3616 /* Pods-IrisProject001Tests.debug.xcconfig */,
+				9DFA8E82A3ED57BB5785FF7D /* Pods-IrisProject001Tests.release.xcconfig */,
+				8BCEC4413C3BFA7F24121818 /* Pods-IrisProject001UITests.debug.xcconfig */,
+				EB3F73DFA41E39F8F6FC90A5 /* Pods-IrisProject001UITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -185,9 +265,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 030AF61C1D41BDE6004C451F /* Build configuration list for PBXNativeTarget "IrisProject001" */;
 			buildPhases = (
+				8BBCC0CEFA600E9DEBCCF9EF /* 📦 Check Pods Manifest.lock */,
 				030AF5EB1D41BDE6004C451F /* Sources */,
 				030AF5EC1D41BDE6004C451F /* Frameworks */,
 				030AF5ED1D41BDE6004C451F /* Resources */,
+				C5904D78CD6D9C9C1490B9F1 /* 📦 Embed Pods Frameworks */,
+				6FCF64DE5246F06D8154B932 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -202,9 +285,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 030AF61F1D41BDE6004C451F /* Build configuration list for PBXNativeTarget "IrisProject001Tests" */;
 			buildPhases = (
+				49266B09D4A11E6A46A4A836 /* 📦 Check Pods Manifest.lock */,
 				030AF6041D41BDE6004C451F /* Sources */,
 				030AF6051D41BDE6004C451F /* Frameworks */,
 				030AF6061D41BDE6004C451F /* Resources */,
+				DE47812FA8137B7B434CC8F4 /* 📦 Embed Pods Frameworks */,
+				FAFE4FB53615D1682A034F9E /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -220,9 +306,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 030AF6221D41BDE6004C451F /* Build configuration list for PBXNativeTarget "IrisProject001UITests" */;
 			buildPhases = (
+				51D9A2F86EB7985CEF6B2D06 /* 📦 Check Pods Manifest.lock */,
 				030AF60F1D41BDE6004C451F /* Sources */,
 				030AF6101D41BDE6004C451F /* Frameworks */,
 				030AF6111D41BDE6004C451F /* Resources */,
+				5304CB5EE0A4B31532C2ED99 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -282,11 +370,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03B2D1871D6C180C00572A8A /* gears 3@2x.png in Resources */,
 				030AF6021D41BDE6004C451F /* LaunchScreen.storyboard in Resources */,
-				03C848BE1D5B1F7E0010CECF /* background.png in Resources */,
+				03E8B0211D6AECBD00D8DBE7 /* background.png in Resources */,
+				03B2D1821D6C180C00572A8A /* background@3x.png in Resources */,
 				03C848BC1D5B08720010CECF /* button.png in Resources */,
 				030AF5FF1D41BDE6004C451F /* Assets.xcassets in Resources */,
+				03B2D1851D6C180C00572A8A /* gears 2@2x.png in Resources */,
+				03B2D1811D6C180C00572A8A /* background@2x.png in Resources */,
+				03B2D1841D6C180C00572A8A /* gears 1@3x.png in Resources */,
+				03B2D1831D6C180C00572A8A /* gears 1@2x.png in Resources */,
+				03B2D1891D6C180C00572A8A /* imgDemo.png in Resources */,
 				030AF5FD1D41BDE6004C451F /* Main.storyboard in Resources */,
+				03B2D1861D6C180C00572A8A /* gears 2@3x.png in Resources */,
+				03B2D1881D6C180C00572A8A /* gears 3@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,12 +403,136 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		49266B09D4A11E6A46A4A836 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		51D9A2F86EB7985CEF6B2D06 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		5304CB5EE0A4B31532C2ED99 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IrisProject001UITests/Pods-IrisProject001UITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6FCF64DE5246F06D8154B932 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IrisProject001/Pods-IrisProject001-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8BBCC0CEFA600E9DEBCCF9EF /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C5904D78CD6D9C9C1490B9F1 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IrisProject001/Pods-IrisProject001-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DE47812FA8137B7B434CC8F4 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IrisProject001Tests/Pods-IrisProject001Tests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FAFE4FB53615D1682A034F9E /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IrisProject001Tests/Pods-IrisProject001Tests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		030AF5EB1D41BDE6004C451F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				030AF5F71D41BDE6004C451F /* AppDelegate.m in Sources */,
+				03B2D1771D6C17C500572A8A /* VMGearLoadingView.m in Sources */,
 				0394C0981D54F344004591B5 /* FetNetMainFunctionViewController.m in Sources */,
 				03A01CFA1D48F22000882331 /* CHTMainFunctionViewController.m in Sources */,
 				0394C0951D54F30E004591B5 /* TWMainFunctionViewController.m in Sources */,
@@ -456,6 +677,7 @@
 		};
 		030AF61D1D41BDE6004C451F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 37B1477CFC186AC2B98DC3F5 /* Pods-IrisProject001.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -471,6 +693,7 @@
 		};
 		030AF61E1D41BDE6004C451F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 229963209E923445654B6E36 /* Pods-IrisProject001.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -486,6 +709,7 @@
 		};
 		030AF6201D41BDE6004C451F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D93979E97022DEB7060A3616 /* Pods-IrisProject001Tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = IrisProject001Tests/Info.plist;
@@ -498,6 +722,7 @@
 		};
 		030AF6211D41BDE6004C451F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9DFA8E82A3ED57BB5785FF7D /* Pods-IrisProject001Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = IrisProject001Tests/Info.plist;
@@ -510,6 +735,7 @@
 		};
 		030AF6231D41BDE6004C451F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8BCEC4413C3BFA7F24121818 /* Pods-IrisProject001UITests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = IrisProject001UITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -521,6 +747,7 @@
 		};
 		030AF6241D41BDE6004C451F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EB3F73DFA41E39F8F6FC90A5 /* Pods-IrisProject001UITests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = IrisProject001UITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

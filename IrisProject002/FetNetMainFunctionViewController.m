@@ -63,9 +63,7 @@
         _totalContactsNum=[[MyContactList sharedContacts]totalPhoneNumberArray].count;
         NSLog(@"%@", [[MyContactList sharedContacts]totalPhoneNumberArray]);
         
-        
-        
-        
+    
         for(int i=0; i<_totalContactsNum;i++)
             
             
@@ -107,12 +105,24 @@
     
     
         _FromWhichCompany = [_FetNetWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('font')[0].innerHTML"];
+  
+         NSLog(@"遠傳:%@",_FromWhichCompany);
     
-    
-   
-    NSLog(@"遠傳:%@",_FromWhichCompany);
-    
-    
+    if ([_FromWhichCompany rangeOfString:@"非行動電話號碼"].location != NSNotFound) {
+        _FromWhichCompanyinfo=@"其他";
+    }else if([_FromWhichCompany rangeOfString:@"網內"].location != NSNotFound){
+        _FromWhichCompanyinfo=@"網內";
+    }else if([_FromWhichCompany rangeOfString:@"網外"].location != NSNotFound){
+        _FromWhichCompanyinfo=@"網外";
+    }
+    //change the html to 網內外 label
+    NSLog(@"login%@",_FromWhichCompanyinfo);
+    if(_FromWhichCompanyinfo != NULL){
+        [_FormWhichCompanyList addObject:_FromWhichCompanyinfo];
+        NSLog(@"wenet:%@",_FormWhichCompanyList);
+        
+    }
+
     
     if (PhoneElementNum>=0 && PhoneElementNum<=_totalContactsNum) {
         _PhoneNumList=_TheFirstPhoneNumberArray[PhoneElementNum];
@@ -161,7 +171,22 @@
 }
 
 
-
+- (IBAction)writeToAddressBook:(id)sender {
+    NSLog(@"count%ld",_FormWhichCompanyList.count);
+    
+    [_TheFirstPhoneNumberArray removeObject:_TheFirstPhoneNumberArray[0]];
+    NSLog(@"REMOVE:%@",_TheFirstPhoneNumberArray);
+    for(int count=1;count<=_totalContactsNum;count++)
+    {
+        //        //_TheFirstPhoneNumberarray//剃出第一個（後進先出）
+        //        //_FormWhichCompanyList//取出網內外（後進先出）
+        //        //_ContactNamerarray//去名字（後進先出)
+        //_TheFirstPhoneNumberarray[_totalContactsNumber-count-1]
+        [[MyContactList sharedContacts]updateContactFromContact:_ContactNamerarray[_totalContactsNum-count] NetLabel:_ContactNamerarray[_totalContactsNum-count] ContactPhone:_TheFirstPhoneNumberArray[_totalContactsNum-count]];
+        //測試多按幾次會當掉
+        
+    }
+}
 
 
 

@@ -30,7 +30,6 @@
 @property(nonatomic)UITextField *CHTLogin;
 @property(nonatomic)UITextField *CHTPassword;
 @property(nonatomic)UITextField *CHTConfirmcode;
-@property(nonatomic)UIImage*image;
 @property(nonatomic)UIImageView *dyImageViewac;
 
 @end
@@ -53,7 +52,7 @@
     
     
     UIAlertController * alert= [UIAlertController
-                                alertControllerWithTitle:@"會員登入\n\n"
+                                alertControllerWithTitle:@"會員登入\n"
                                 message:@""
                                 preferredStyle:UIAlertControllerStyleAlert];
     
@@ -67,10 +66,7 @@
                                                    
                                                    
                                                }];
-    
-    
-    
-    
+
     UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
                                                    handler:^(UIAlertAction * action) {
                                                        [alert dismissViewControllerAnimated:YES completion:nil];
@@ -148,7 +144,14 @@
 
 
 -(void)inputtheLoginNum{
-    
+    if((_CHTLogin.text.length==0 || _CHTLogin.text.length != 10)){
+        [self displayUIAlertAction:@"提醒" message:@"請輸入帳號"];
+        
+    }
+    else if((_CHTPassword.text.length  == 0)){
+        [self displayUIAlertAction:@"提醒" message:@"請輸入密碼"];
+        
+    }else if(_CHTLogin.text.length!= 0 && _CHTPassword.text.length!= 0){
     WebPageNum+=1;
     NSString *loginaccount = [NSString stringWithFormat:@"document.getElementById('uid').value='%@'",_CHTLogin.text];
     NSString *loginpassword = [NSString stringWithFormat:@"document.getElementById('pw').value='%@'",_CHTPassword.text];
@@ -156,10 +159,20 @@
     [_CHTWebView stringByEvaluatingJavaScriptFromString:loginpassword];
     [_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('btn-login').click()"];
     //login member
-
+    }
     
 }
 -(void)inputtheLoginNumWrong{
+    if((_CHTLogin.text.length==0 || _CHTLogin.text.length != 10)){
+        [self displayUIAlertActionWhenWrongtype:@"提醒" message:@"請輸入帳號"];
+    }
+    else if((_CHTPassword.text.length  == 0)){
+        [self displayUIAlertActionWhenWrongtype:@"提醒" message:@"請輸入密碼"];
+        
+    }else if((_CHTConfirmcode.text.length  == 0)){
+        [self displayUIAlertActionWhenWrongtype:@"提醒" message:@"請輸入密碼"];
+        
+    }else if(_CHTLogin.text.length  != 0 && _CHTPassword.text.length  != 0 && _CHTConfirmcode.text.length  != 0){
     NSString *loginaccount = [NSString stringWithFormat:@"document.getElementById('uid').value='%@'",_CHTLogin.text];
     NSString *loginpassword = [NSString stringWithFormat:@"document.getElementById('pw').value='%@'",_CHTPassword.text];
     NSString *confirmcode = [NSString stringWithFormat:@"document.getElementById('confirmcode').value='%@'",_CHTConfirmcode.text];
@@ -167,9 +180,42 @@
     [_CHTWebView stringByEvaluatingJavaScriptFromString:loginpassword];
     [_CHTWebView stringByEvaluatingJavaScriptFromString:confirmcode];
     [_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('btn-login').click()"];
-    
+    }
 
 }
+
+-(void)displayUIAlertAction:(NSString *)title  message:(NSString *)message {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"確認" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        [self viewDidLoad];
+    }];
+    [alertController addAction:okAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+    
+    
+}
+
+-(void)displayUIAlertActionWhenWrongtype:(NSString *)title  message:(NSString *)message {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"確認" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        [self CHTWebView];
+    }];
+    [alertController addAction:okAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+
 
 - (void)getImage {
     
@@ -185,17 +231,36 @@
     NSString*content=[_CHTWebView stringByEvaluatingJavaScriptFromString:javascript];
     NSURL *url = [NSURL URLWithString:content];
     NSData *imageData = [NSData dataWithContentsOfURL:url];
-    _image = [UIImage imageWithData:imageData];
-    NSLog(@"imagetest%@",_image);
+    UIImage *image = [UIImage imageWithData:imageData];
+    UIImage*thumbnail=[self imageCompressWithSimple:image scale:0.7];
     dispatch_async(dispatch_get_main_queue(),^{
-        _dyImageViewac = [[UIImageView alloc] initWithFrame: CGRectMake(100,40,_image.size.width,_image.size.height)];
-        _dyImageViewac.image = _image;
+        _dyImageViewac = [[UIImageView alloc] initWithFrame: CGRectMake(100,70,image.size.width,image.size.height)];
+        _dyImageViewac.image = thumbnail;
            [_CHTWebView addSubview:_dyImageViewac];
     });
     //check image with height and width
-    NSLog(@"width %f,height %f",_image.size.width,_image.size.height);
+    NSLog(@"width %f,height %f",image.size.width,image.size.height);
     
 }
+
+
+
+- (UIImage*)imageCompressWithSimple:(UIImage*)image scale:(float)scale
+{
+    CGSize size = image.size;
+    CGFloat width = size.width;
+    CGFloat height = size.height;
+    CGFloat scaledWidth = width * scale;
+    CGFloat scaledHeight = height * scale;
+    UIGraphicsBeginImageContext(size);
+    [image drawInRect:CGRectMake(0,0,scaledWidth,scaledHeight)];
+    UIImage* newImage= UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+    //we can make the thumbnail for the confirm image.
+}
+
+
 
 
 
@@ -218,7 +283,7 @@
         [self getImage];
         UIAlertController * alert= [UIAlertController
                                     alertControllerWithTitle:@"會員登入\n\n"
-                                    message:@"驗證碼:    ____________"
+                                    message:@"驗證碼:      _________________"
                                     preferredStyle:UIAlertControllerStyleAlert];
         
         
@@ -281,8 +346,18 @@
         
         if (PhoneElementNum>=0 && PhoneElementNum<=_totalContactsNum) {
             _PhoneNumList=_TheFirstPhoneNumberArray[PhoneElementNum];
+            
+            
+            
+            
             PhoneElementNum+=1;
-            if(_PhoneNumList.length<=10 && [_PhoneNumList hasPrefix:@"09"]){
+            if(_PhoneNumList.length<=10 && [_PhoneNumList hasPrefix:@"09"] &&[_PhoneNumList hasPrefix:@"8869"]){
+                if([_PhoneNumList hasPrefix:@"8869"]){
+                    [_PhoneNumList substringFromIndex:3];
+                    _PhoneNumList=[@"0" stringByAppendingString:_PhoneNumList];
+                  //去除八八六還沒有測試
+                }
+        
                 
                 NSString *script = [NSString stringWithFormat:@"document.getElementById('telnum').value='%@'", _PhoneNumList];
                 
@@ -297,6 +372,7 @@
                 });
                 //delay 1 sencond to click the submit
             }
+        
             else{
                 if(flag1){
                     _PhoneNumList=@"0999876654";
@@ -354,9 +430,29 @@
 
 
 
+-(void)distinguishLandline{
+    
+    [_TheFirstPhoneNumberArray removeObject:_TheFirstPhoneNumberArray[0]];
+     //去除掉第一個位元
+    for (PhoneElementNum=0 ; PhoneElementNum<_totalContactsNum;PhoneElementNum++) {
+    NSString *CheckPhoneNumList=_TheFirstPhoneNumberArray[PhoneElementNum];
+        if(CheckPhoneNumList){
+        }
+    
+            }
+
+}
+
+
+
+
+
+
+
+
 
 - (IBAction)writeToAddressBook:(id)sender {
-
+    
     
     
     [_TheFirstPhoneNumberArray removeObject:_TheFirstPhoneNumberArray[0]];

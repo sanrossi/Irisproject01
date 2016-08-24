@@ -29,7 +29,7 @@
 @property(nonatomic)UIImageView *dyImageView;
 @property(nonatomic)UIImageView *dyImageViewac;
 @property(nonatomic)NSString *FromWhichCompany;
-@property(nonatomic)UIImage*image;
+
 
 @end
 
@@ -85,75 +85,7 @@
 //    });
 //    // 以上適用全螢幕找到識別碼的方法
 
-    double delayInSeconds = 1;
-    //delay one second for getting the image
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-    [self getImage];
 
-    UIAlertController * alert= [UIAlertController
-                                alertControllerWithTitle:@"會員登入"
-                                message:@"驗證碼:   ＿＿＿＿＿＿＿＿"
-                                preferredStyle:UIAlertControllerStyleAlert];
-    
-   
-    
-
-     dispatch_async(dispatch_get_main_queue(),
-                   ^{
-    [alert.view addSubview:_dyImageViewac];
-    });
-    
-    
-    
-    UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-                                               handler:^(UIAlertAction * action) {
-                                                   NSArray * textfields = alert.textFields;
-                                                   _TWLogin = textfields[0];
-                                                   _TWPassword = textfields[1];
-                                                   _TWChkNum =textfields[2];
-                                                   [self inputtheLoginNum];
-                                                   [self expoertAddressBook];
-                                                   
-                                                   
-                                               }];
-   
-
-    
-    UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
-                                                   handler:^(UIAlertAction * action) {
-                                                       [alert dismissViewControllerAnimated:YES completion:nil];
-                                                       
-                                                   }];
-    [alert addAction:ok];
-    [alert addAction:cancel];
-    
-    [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-        textField.placeholder = @"台灣大哥大帳號";
-    }];
-    
-    [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-        textField.placeholder = @"密碼";
-        textField.secureTextEntry = YES;
-    }];
-    
-    
-    [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-        textField.placeholder = @"驗證碼";
-        textField.secureTextEntry = YES;
-    }];
-    
-    
-   
-    
-    [self presentViewController:alert animated:YES completion:nil];
-    
-            });
-    
-
- 
-
-    
     
     // Do any additional setup after loading the view.
 }
@@ -224,17 +156,32 @@
     NSString*content=[_TWWebView stringByEvaluatingJavaScriptFromString:javascript];
     NSURL *url = [NSURL URLWithString:content];
     NSData *imageData = [NSData dataWithContentsOfURL:url];
-    _image = [UIImage imageWithData:imageData];
-    NSLog(@"imagetest%@",_image);
+    UIImage *image = [UIImage imageWithData:imageData];
+    UIImage *thumbnail=[self imageCompressWithSimple:image scale:0.95];
     dispatch_async(dispatch_get_main_queue(),^{
-    _dyImageViewac = [[UIImageView alloc] initWithFrame: CGRectMake(100,40,_image.size.width,_image.size.height)];
-        _dyImageViewac.image = _image;
+    _dyImageViewac = [[UIImageView alloc] initWithFrame: CGRectMake(110,60,image.size.width,image.size.height)];
+        _dyImageViewac.image = thumbnail;
      //   [_TWWebView addSubview:_dyImageViewac];
     });
     //check image with height and width
-    NSLog(@"width %f,height %f",_image.size.width,_image.size.height);
+    NSLog(@"width %f,height %f",image.size.width,image.size.height);
     
     
+}
+
+- (UIImage*)imageCompressWithSimple:(UIImage*)image scale:(float)scale
+{
+    CGSize size = image.size;
+    CGFloat width = size.width;
+    CGFloat height = size.height;
+    CGFloat scaledWidth = width * scale;
+    CGFloat scaledHeight = height * scale;
+    UIGraphicsBeginImageContext(size);
+    [image drawInRect:CGRectMake(0,0,scaledWidth,scaledHeight)];
+    UIImage* newImage= UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+    //we can make the thumbnail for the confirm image.
 }
 
 
@@ -244,7 +191,6 @@
 - (NSString *)stringByEvaluatingJavaScriptFromString:(NSString *)script{
     return nil;
 }
-
 
 
 
@@ -285,33 +231,54 @@
     
     
 }
-
-
-
+//如果非台灣帳號https://www.catch.net.tw/auth/loginMessage_m.jsp這個判別還沒寫
 
 -(void)inputtheLoginNum{
 
-    NSString *loginaccount = [NSString stringWithFormat:@"document.getElementById('msisdn').value='%@'",_TWLogin.text];
-    
-    NSString *loginpasswordtxt = [NSString stringWithFormat:@"document.getElementById('passtxt').value='%@'",_TWPassword.text];
+    if((_TWLogin.text.length==0 || _TWLogin.text.length != 10)){
+        [self displayUIAlertAction:@"提醒" message:@"請輸入帳號"];
+        
+    }
+    else if((_TWPassword.text.length  == 0)){
+        [self displayUIAlertAction:@"提醒" message:@"請輸入密碼"];
+        
+    }else if((_TWChkNum.text.length == 0)){
+        [self displayUIAlertAction:@"提醒" message:@"請輸入驗證碼"];
+        
+    }else if(_TWLogin.text.length!= 0 && _TWPassword.text.length!= 0 &&_TWChkNum.text.length!= 0){
+        NSString *loginaccount = [NSString stringWithFormat:@"document.getElementById('msisdn').value='%@'",_TWLogin.text];
+        
+        NSString *loginpasswordtxt = [NSString stringWithFormat:@"document.getElementById('passtxt').value='%@'",_TWPassword.text];
         NSString *loginpassword = [NSString stringWithFormat:@"document.getElementById('passwd').value='%@'",_TWPassword.text];
-    
-    NSString *logincchknum = [NSString stringWithFormat:@"document.getElementById('chkNum').value='%@'",_TWChkNum.text];
-    [_TWWebView stringByEvaluatingJavaScriptFromString:loginaccount];
-    [_TWWebView stringByEvaluatingJavaScriptFromString:loginpasswordtxt];
-    [_TWWebView stringByEvaluatingJavaScriptFromString:loginpassword];
-    [_TWWebView stringByEvaluatingJavaScriptFromString:logincchknum];
-    double delayInSeconds = 1;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-    [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByClassName('btn01')[0].childNodes[0].click()"];
-     });
-   
-    
-    
-    
+        
+        NSString *logincchknum = [NSString stringWithFormat:@"document.getElementById('chkNum').value='%@'",_TWChkNum.text];
+        [_TWWebView stringByEvaluatingJavaScriptFromString:loginaccount];
+        [_TWWebView stringByEvaluatingJavaScriptFromString:loginpasswordtxt];
+        [_TWWebView stringByEvaluatingJavaScriptFromString:loginpassword];
+        [_TWWebView stringByEvaluatingJavaScriptFromString:logincchknum];
+        double delayInSeconds = 1;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByClassName('btn01')[0].childNodes[0].click()"];
+        });
+    }
     
 }
+
+
+
+
+-(void)displayUIAlertAction:(NSString *)title  message:(NSString *)message{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"確認" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        [self loadTWWebView];
+    }];
+    [alertController addAction:okAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+
+
+}
+
 
 
 
@@ -325,7 +292,86 @@
     self.TWWebView.scrollView.contentOffset = CGPointMake(15,473);
     //self.TWWebView.scrollView.bounces = NO;// fix the webview
     
-    if ([[[[_TWWebView request]URL]absoluteString]  isEqualToString: @"https://cs.taiwanmobile.com/wap-portal/smpQueryTwmPhoneNbr.action"]){
+
+    
+    if([[[[_TWWebView request]URL]absoluteString]  isEqualToString: @"https://www.catch.net.tw/auth/member_login_m.jsp?return_url=https%3A%2F%2Fcs.taiwanmobile.com%2Fwap-portal%2FssoLogin.action%3Fparam%3DaHR0cHM6Ly9jcy50YWl3YW5tb2JpbGUuY29tL3dhcC1wb3J0YWwvc21wUXVlcnlUd21QaG9uZU5i%0D%0Aci5hY3Rpb24%3D%0D%0A"] || [[[[_TWWebView request]URL]absoluteString]  isEqualToString: @"https://www.catch.net.tw/auth/member_login_m.jsp"])
+        //if url is not the url of the iframe then transfer to iframe's url
+    {
+        if([[[[_TWWebView request]URL]absoluteString]  isEqualToString: @"https://www.catch.net.tw/auth/member_login_m.jsp"]){
+            [self loadTWWebView];
+        }
+        double delayInSeconds = 1;
+        //delay one second for getting the image
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            
+            
+            [self getImage];
+            
+            UIAlertController * alert= [UIAlertController
+                                        alertControllerWithTitle:@"會員登入\n"
+                                        message:@"驗證碼:   ＿＿＿＿＿＿＿＿"
+                                        preferredStyle:UIAlertControllerStyleAlert];
+            
+            
+            
+            
+            dispatch_async(dispatch_get_main_queue(),
+                           ^{
+                               [alert.view addSubview:_dyImageViewac];
+                           });
+            
+            
+            
+            UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                       handler:^(UIAlertAction * action) {
+                                                           NSArray * textfields = alert.textFields;
+                                                           _TWLogin = textfields[0];
+                                                           _TWPassword = textfields[1];
+                                                           _TWChkNum =textfields[2];
+                                                           [self inputtheLoginNum];
+                                                           [self expoertAddressBook];
+                                                           
+                                                           
+                                                       }];
+            
+            
+            
+            UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
+                                                           handler:^(UIAlertAction * action) {
+                                                               [alert dismissViewControllerAnimated:YES completion:nil];
+                                                               
+                                                           }];
+            [alert addAction:ok];
+            [alert addAction:cancel];
+            
+            [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+                textField.placeholder = @"台灣大哥大帳號";
+            }];
+            
+            [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+                textField.placeholder = @"密碼";
+                textField.secureTextEntry = YES;
+            }];
+            
+            
+            [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+                textField.placeholder = @"驗證碼";
+                textField.secureTextEntry = YES;
+            }];
+            
+            
+            
+            
+            [self presentViewController:alert animated:YES completion:nil];
+            
+        });
+        
+        
+        
+    }
+    
+    else if ([[[[_TWWebView request]URL]absoluteString]  isEqualToString: @"https://cs.taiwanmobile.com/wap-portal/smpQueryTwmPhoneNbr.action"]){
         if (PhoneElementNum>=0 && PhoneElementNum<=_totalContactsNum) {
             _PhoneNumList=_TheFirstPhoneNumberArray[PhoneElementNum];
             
@@ -416,12 +462,6 @@
         
     }
 }
-
-
-
-
-
-
 
 
 

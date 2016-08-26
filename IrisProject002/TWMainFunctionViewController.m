@@ -7,6 +7,7 @@
 //
 
 #import "TWMainFunctionViewController.h"
+#import "CHTMainFunctionViewController.h"
 #import "MyContactList.h"
 #import "VMGearLoadingView.h"
 @interface TWMainFunctionViewController ()<UIWebViewDelegate,UIScrollViewDelegate>
@@ -21,7 +22,8 @@
 @property(weak,nonatomic)NSString *PhoneNumList;
 @property(nonatomic)NSMutableArray *TheFirstPhoneNumberArray;
 @property(nonatomic)NSString*FromWhichCompanyinfo;
-@property(nonatomic)NSMutableArray *ContactNamerarray;
+@property(nonatomic)NSMutableArray *ContactGivenNameArray;
+@property(nonatomic)NSMutableArray *ContactFamilyNameArray;
 @property(nonatomic)NSInteger totalContactsNum;
 @property(nonatomic)UITextField *TWLogin;
 @property(nonatomic)UITextField *TWPassword;
@@ -42,17 +44,15 @@
     _TWWebView.scrollView.delegate = self;
     _FormWhichCompanyList = [NSMutableArray array];
     _TheFirstPhoneNumberArray = [NSMutableArray array];
-     _ContactNamerarray= [NSMutableArray array];
+     _ContactGivenNameArray= [NSMutableArray array];
      WebPageNum =1;
     _FromWhichCompany=@"";
     //_TWWebView.scrollView.scrollEnabled = NO;
     //_TWWebView.hidden=YES;
-    
-    
+
     [VMGearLoadingView showGearLoadingForView:self.view];
     [self loadTWWebView];
-    
-    
+
     [VMGearLoadingView hideGearLoadingForView:self.view];
 
 //    double delayInSeconds = 2;
@@ -160,7 +160,7 @@
     UIImage *thumbnail=[self imageCompressWithSimple:image scale:0.95];
     dispatch_async(dispatch_get_main_queue(),^{
     _dyImageViewac = [[UIImageView alloc] initWithFrame: CGRectMake(110,60,image.size.width,image.size.height)];
-        _dyImageViewac.image = thumbnail;
+    _dyImageViewac.image = thumbnail;
      //   [_TWWebView addSubview:_dyImageViewac];
     });
     //check image with height and width
@@ -194,9 +194,7 @@
 
 
 
-
-
--(void)expoertAddressBook{
+-(void)exportAddressBook{
     [[MyContactList sharedContacts] fetchAllContacts];
     //fetch all contacts by calling single to method
     
@@ -204,8 +202,11 @@
         NSLog(@"Fetched Contact Details : %ld",[[MyContactList sharedContacts]totalPhoneNumberArray].count);
         _totalContactsNum=[[MyContactList sharedContacts]totalPhoneNumberArray].count;
         NSLog(@"%@", [[MyContactList sharedContacts]totalPhoneNumberArray]);
+        
         for(int i=0; i<_totalContactsNum;i++)
+            
         {self.theFirstPhone=[[[MyContactList sharedContacts]totalPhoneNumberArray][i] objectForKey:@"phone"];
+            
             if(_theFirstPhone[0] == nil ){
                 [_TheFirstPhoneNumberArray addObject:@""];
                 NSLog(@"test%@",_TheFirstPhoneNumberArray);
@@ -218,17 +219,29 @@
         }
         for(int i=0; i<[[MyContactList sharedContacts]totalPhoneNumberArray].count;i++)
         {
-            NSString*Contactname=[[[MyContactList sharedContacts]totalPhoneNumberArray][i] objectForKey:@"name"];
+            NSString*ContactGivenname=[[[MyContactList sharedContacts]totalPhoneNumberArray][i] objectForKey:@"givenname"];
+            if(ContactGivenname==nil){
+                [_ContactGivenNameArray addObject:@""];
+            }else{
+                [_ContactGivenNameArray addObject:ContactGivenname];
+            }
+            NSLog(@"givenname%@",_ContactGivenNameArray);
             
-            [_ContactNamerarray addObject:Contactname];
-            NSLog(@"testname%@",_ContactNamerarray);
+            NSString*ContactFamilynname=[[[MyContactList sharedContacts]totalPhoneNumberArray][i] objectForKey:@"familyName"];
+            if(ContactFamilynname==nil){
+                [_ContactFamilyNameArray addObject:@""];
+            }
+            else{
+                [_ContactFamilyNameArray addObject:ContactFamilynname];
+            }
+            NSLog(@"familyName%@",_ContactFamilyNameArray);
         }
     }
+    
     // }
     [_TheFirstPhoneNumberArray insertObject:@"0999876654" atIndex:0];
     NSLog(@"test%@",_TheFirstPhoneNumberArray);
     //check the firstphone
-    
     
 }
 //如果非台灣帳號https://www.catch.net.tw/auth/loginMessage_m.jsp這個判別還沒寫
@@ -330,7 +343,7 @@
                                                            _TWPassword = textfields[1];
                                                            _TWChkNum =textfields[2];
                                                            [self inputtheLoginNum];
-                                                           [self expoertAddressBook];
+                                                           [self exportAddressBook];
                                                            
                                                            
                                                        }];
@@ -372,17 +385,38 @@
     }
     
     else if ([[[[_TWWebView request]URL]absoluteString]  isEqualToString: @"https://cs.taiwanmobile.com/wap-portal/smpQueryTwmPhoneNbr.action"]){
+        switchLabel:
+        _PhoneNumList=_TheFirstPhoneNumberArray[PhoneElementNum];
+        //正則化
+        NSString *letters = @"0123456789";
+        NSCharacterSet *notLetters = [[NSCharacterSet characterSetWithCharactersInString:letters] invertedSet];
+        _PhoneNumList = [[_PhoneNumList componentsSeparatedByCharactersInSet:notLetters] componentsJoinedByString:@""];
+        NSLog(@"newString: %@", _PhoneNumList);
+        //正則化
+
         if (PhoneElementNum>=0 && PhoneElementNum<=_totalContactsNum) {
-            _PhoneNumList=_TheFirstPhoneNumberArray[PhoneElementNum];
-            
-            // if(_PhoneNumList.length<=10 && [_PhoneNumList hasPrefix:@"09"]){
+
+            if((_PhoneNumList.length==10 && [_PhoneNumList hasPrefix:@"09"]) || ([_PhoneNumList hasPrefix:@"8869"] && _PhoneNumList.length==12)){
+                if([_PhoneNumList hasPrefix:@"8869"]){
+                    _PhoneNumList = [_PhoneNumList substringWithRange:NSMakeRange(3,9)];
+                    
+                    NSLog(@"去除886%@",_PhoneNumList);
+                    
+                    _PhoneNumList=[NSString stringWithFormat:@"0%@",_PhoneNumList];
+                    //去除八八六還沒有測試
+                    NSLog(@"加0%@",_PhoneNumList);
+                }
             if(_TWWebView.loading==NO){
                 NSString *script = [NSString stringWithFormat:@"document.getElementsByName('phoneNbr')[0].value='%@'",_PhoneNumList];
                 [_TWWebView stringByEvaluatingJavaScriptFromString:script];
                 
                 [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.forms[0].submit()"];
-                
+              }
             }
+        }
+        else if(_PhoneNumList ==nil){
+            
+        //改這裡
         }
     }
     else if ([[[[_TWWebView request]URL]absoluteString]  isEqualToString: @"https://cs.taiwanmobile.com/wap-portal/smpCheckTwmPhoneNbr.action"]){
@@ -401,11 +435,11 @@
                 
                 //get the information about the Internal network or external network
                 
-                if ([_FromWhichCompany rangeOfString:@"請輸入正確的手機號碼"].location != NSNotFound) {
+                if ([_FromWhichCompany isEqualToString:@"請輸入正確的手機號碼"]) {
                     _FromWhichCompanyinfo=@"其他";
-                }else if([_FromWhichCompany rangeOfString:@"台灣大哥大門號"].location != NSNotFound){
+                }else if([_FromWhichCompany isEqualToString:@"台灣大哥大門號"]){
                     _FromWhichCompanyinfo=@"網內";
-                }else if([_FromWhichCompany rangeOfString:@"非台灣大哥大門號"].location != NSNotFound){
+                }else if([_FromWhichCompany isEqualToString:@"非台灣大哥大門號"]){
                     _FromWhichCompanyinfo=@"網外";
                 }
                 //change the html to 網內外 label
@@ -416,21 +450,7 @@
                     
                 }
 
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
+
                 
                 [_TWWebView stringByEvaluatingJavaScriptFromString:@"history.go(-1)"];
             }
@@ -457,7 +477,7 @@
         //        //_FormWhichCompanyList//取出網內外（後進先出）
         //        //_ContactNamerarray//去名字（後進先出)
         //_TheFirstPhoneNumberarray[_totalContactsNumber-count-1]
-        [[MyContactList sharedContacts]updateContactFromContact:_ContactNamerarray[_totalContactsNum-count] NetLabel:_ContactNamerarray[_totalContactsNum-count] ContactPhone:_TheFirstPhoneNumberArray[_totalContactsNum-count]];
+        [[MyContactList sharedContacts]updateContactFromContact:_ContactGivenNameArray[_totalContactsNum-count] NetLabel:_ContactGivenNameArray[_totalContactsNum-count] ContactPhone:_TheFirstPhoneNumberArray[_totalContactsNum-count]];
         //測試多按幾次會當掉
         
     }

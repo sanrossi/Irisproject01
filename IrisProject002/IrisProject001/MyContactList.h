@@ -12,6 +12,7 @@
 #import <Contacts/Contacts.h> //Contacts.framework for above iOS 9
 #import "CHTMainFunctionViewController.h"
 #import "TWMainFunctionViewController.h"
+#import "FetNetMainFunctionViewController.h"
 @interface MyContactList : NSObject{
     
     NSMutableArray *totalPhoneNumberArray; //Total Mobile Contacts from access from this variable

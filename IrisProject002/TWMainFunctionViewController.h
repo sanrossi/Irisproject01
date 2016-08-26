@@ -5,7 +5,7 @@
 //  Created by 沈秋蕙 on 2016/8/6.
 //  Copyright © 2016年 iris shen. All rights reserved.
 //
-
+#import "CHTMainFunctionViewController.h"
 #import <UIKit/UIKit.h>
 @import WebKit;
 @import UIKit;

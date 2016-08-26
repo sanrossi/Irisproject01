@@ -20,7 +20,8 @@
 @property(weak,nonatomic)NSString *PhoneNumList;
 @property(nonatomic)NSMutableArray *TheFirstPhoneNumberArray;
 @property(nonatomic)NSString*FromWhichCompanyinfo;
-@property(nonatomic)NSMutableArray *ContactNamerarray;
+@property(nonatomic)NSMutableArray *ContactGivenNameArray;
+@property(nonatomic)NSMutableArray *ContactFamilyNameArray;
 @property(nonatomic)NSInteger totalContactsNum;
 @property(nonatomic)UITextField *FetNetLogin;
 @property(nonatomic)UITextField *FetNetPassword;
@@ -37,10 +38,11 @@
     flag = true;
     _FormWhichCompanyList = [NSMutableArray array];
     _TheFirstPhoneNumberArray = [NSMutableArray array];
-    _ContactNamerarray= [NSMutableArray array];
+    _ContactGivenNameArray= [NSMutableArray array];
+    _ContactFamilyNameArray= [NSMutableArray array];
     //_FetNetWebView.hidden=YES;
     [self loadFetNetWebView];
-    [self expoertAddressBook];
+    [self exportAddressBook];
 
 }
 
@@ -54,7 +56,7 @@
 }
 
 
--(void)expoertAddressBook{
+-(void)exportAddressBook{
     [[MyContactList sharedContacts] fetchAllContacts];
     //fetch all contacts by calling single to method
     
@@ -63,9 +65,7 @@
         _totalContactsNum=[[MyContactList sharedContacts]totalPhoneNumberArray].count;
         NSLog(@"%@", [[MyContactList sharedContacts]totalPhoneNumberArray]);
         
-    
         for(int i=0; i<_totalContactsNum;i++)
-            
             
         {self.theFirstPhone=[[[MyContactList sharedContacts]totalPhoneNumberArray][i] objectForKey:@"phone"];
             
@@ -81,17 +81,29 @@
         }
         for(int i=0; i<[[MyContactList sharedContacts]totalPhoneNumberArray].count;i++)
         {
-            NSString*Contactname=[[[MyContactList sharedContacts]totalPhoneNumberArray][i] objectForKey:@"name"];
+            NSString*ContactGivenname=[[[MyContactList sharedContacts]totalPhoneNumberArray][i] objectForKey:@"givenname"];
+            if(ContactGivenname==nil){
+                [_ContactGivenNameArray addObject:@""];
+            }else{
+                [_ContactGivenNameArray addObject:ContactGivenname];
+            }
+            NSLog(@"givenname%@",_ContactGivenNameArray);
             
-            [_ContactNamerarray addObject:Contactname];
-            NSLog(@"testname%@",_ContactNamerarray);
+            NSString*ContactFamilynname=[[[MyContactList sharedContacts]totalPhoneNumberArray][i] objectForKey:@"familyName"];
+            if(ContactFamilynname==nil){
+                [_ContactFamilyNameArray addObject:@""];
+            }
+            else{
+                [_ContactFamilyNameArray addObject:ContactFamilynname];
+            }
+            NSLog(@"familyName%@",_ContactFamilyNameArray);
         }
     }
+    
     // }
     [_TheFirstPhoneNumberArray insertObject:@"0999876654" atIndex:0];
     NSLog(@"test%@",_TheFirstPhoneNumberArray);
     //check the firstphone
-    
     
 }
 
@@ -182,7 +194,7 @@
         //        //_FormWhichCompanyList//取出網內外（後進先出）
         //        //_ContactNamerarray//去名字（後進先出)
         //_TheFirstPhoneNumberarray[_totalContactsNumber-count-1]
-        [[MyContactList sharedContacts]updateContactFromContact:_ContactNamerarray[_totalContactsNum-count] NetLabel:_ContactNamerarray[_totalContactsNum-count] ContactPhone:_TheFirstPhoneNumberArray[_totalContactsNum-count]];
+        [[MyContactList sharedContacts]updateContactFromContact:_ContactGivenNameArray[_totalContactsNum-count] NetLabel:_ContactGivenNameArray[_totalContactsNum-count] ContactPhone:_TheFirstPhoneNumberArray[_totalContactsNum-count]];
         //測試多按幾次會當掉
         
     }

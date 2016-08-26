@@ -109,14 +109,16 @@
         //   [phoneNumberArray addObjectsFromArray:thisOne];
         //  NSLog(@"contact identifier: %@",contact.identifier);
         if(thisOne.count == 0){
-            peopleDic = @{@"name":contact.givenName,
+            peopleDic = @{@"givenname":contact.givenName,
+                          @"familyname":contact.familyName,
                           @"image":contact.thumbnailImageData != nil ? contact.thumbnailImageData:@"",
                           @"phone":@[@"",@""],
                           @"selected":@"NO"
                           };
         }
         else {
-        peopleDic = @{@"name":contact.givenName,
+        peopleDic = @{@"givenname":contact.givenName,
+                      @"familyName":contact.familyName,
                       @"image":contact.thumbnailImageData != nil ? contact.thumbnailImageData:@"",
                       @"phone":thisOne,
                       @"selected":@"NO"
@@ -259,7 +261,8 @@
          //检索条件，检索所有名字中有san的联系人
          NSPredicate * predicate = [CNContact predicateForContactsMatchingName:contactName];
       //提取数据
-         NSArray * contactsphone = [store unifiedContactsMatchingPredicate:predicate keysToFetch:@[CNContactPhoneNumbersKey] error:nil];
+     
+         NSArray * contactsphone = [store unifiedContactsMatchingPredicate:predicate keysToFetch:@[CNContactGivenNameKey,CNContactFamilyNameKey,CNContactPhoneNumbersKey] error:nil];
     
         CNMutableContact *contactphone2 = [[contactsphone objectAtIndex:0] mutableCopy];
      //    修改联系人的属性
@@ -274,6 +277,13 @@
     
 }
 
+
+
+
+
+
+
+//測試用
 #pragma mark - 添加联系人
 - (void)creatContact{
     

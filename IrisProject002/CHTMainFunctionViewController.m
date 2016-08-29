@@ -16,6 +16,7 @@
     NSInteger WebPageNum;
     NSInteger PhoneElementNum;
     BOOL flag1;
+    BOOL flag2;
    
 }
 
@@ -25,6 +26,7 @@
 @property(nonatomic)UITextField *CHTPassword;
 @property(nonatomic)UITextField *CHTConfirmcode;
 @property(nonatomic)UIImageView *dyImageViewac;
+
 
 @end
 
@@ -38,6 +40,7 @@
     WebPageNum =1;
     PhoneElementNum=0;
     flag1 = true;
+    flag2 = true;
     
     _FormWhichCompanyList = [NSMutableArray array];
     _TheFirstPhoneNumberArray = [NSMutableArray array];
@@ -57,6 +60,7 @@
                                                    _CHTPassword = alert.textFields.lastObject;
                                                    [self loadCHTWebView];
                                                    [self exportAddressBook];
+                                                   [VMGearLoadingView showGearLoadingForView:self.view];
                                                    
                                                    
                                                }];
@@ -80,6 +84,10 @@
     [self presentViewController:alert animated:YES completion:nil];
      [self loadCHTWebView];
    
+    
+    
+    
+    
 
 }
 
@@ -407,6 +415,10 @@
                 
                 
                 //delay 1 sencond to click the submit
+            }
+            if(PhoneElementNum == _totalContactsNum-1){
+                [VMGearLoadingView hideGearLoadingForView:self.view];
+
             }
         }
         

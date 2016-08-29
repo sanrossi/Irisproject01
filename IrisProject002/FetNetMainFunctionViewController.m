@@ -12,7 +12,7 @@
 {
     NSInteger WebPageNum;
     NSInteger PhoneElementNum;
-    BOOL flag;
+    BOOL flag1;
     
 }
 @property (weak, nonatomic) IBOutlet UIWebView *FetNetWebView;
@@ -35,7 +35,7 @@
     // Do any additional setup after loading the view.
     PhoneElementNum=0;
     _FetNetWebView.delegate = self;
-    flag = true;
+    flag1 = true;
     _FormWhichCompanyList = [NSMutableArray array];
     _TheFirstPhoneNumberArray = [NSMutableArray array];
     _ContactGivenNameArray= [NSMutableArray array];
@@ -54,7 +54,6 @@
     
     //    }
 }
-
 
 -(void)exportAddressBook{
     [[MyContactList sharedContacts] fetchAllContacts];
@@ -101,11 +100,12 @@
     }
     
     // }
-    [_TheFirstPhoneNumberArray insertObject:@"0999876654" atIndex:0];
-    NSLog(@"test%@",_TheFirstPhoneNumberArray);
+//    [_TheFirstPhoneNumberArray insertObject:@"0999876654" atIndex:0];
+//    NSLog(@"test%@",_TheFirstPhoneNumberArray);
     //check the firstphone
     
 }
+
 
 
 - (NSString *)stringByEvaluatingJavaScriptFromString:(NSString *)script{
@@ -116,8 +116,16 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     
     
-        _FromWhichCompany = [_FetNetWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('font')[0].innerHTML"];
-  
+    
+    
+    if([_PhoneNumList isEqual:@"0999876654"]||[_PhoneNumList isEqual:@"0998736653"]){
+        _FromWhichCompany = @"非行動電話號碼";
+    }else{
+     _FromWhichCompany = [_FetNetWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('font')[0].innerHTML"];
+    
+    }
+
+   
          NSLog(@"遠傳:%@",_FromWhichCompany);
     
     if ([_FromWhichCompany rangeOfString:@"非行動電話號碼"].location != NSNotFound) {
@@ -136,10 +144,33 @@
     }
 
     
-    if (PhoneElementNum>=0 && PhoneElementNum<=_totalContactsNum) {
-        _PhoneNumList=_TheFirstPhoneNumberArray[PhoneElementNum];
+    
+    
+    
+    _PhoneNumList=_TheFirstPhoneNumberArray[PhoneElementNum];
+    //正則化
+    NSString *letters = @"0123456789";
+    NSCharacterSet *notLetters = [[NSCharacterSet characterSetWithCharactersInString:letters] invertedSet];
+    _PhoneNumList = [[_PhoneNumList componentsSeparatedByCharactersInSet:notLetters] componentsJoinedByString:@""];
+    NSLog(@"newString: %@", _PhoneNumList);
+    //正則化
+    if (PhoneElementNum>=0 && PhoneElementNum<_totalContactsNum) {
         PhoneElementNum+=1;
-       if(_PhoneNumList.length<=10 && [_PhoneNumList hasPrefix:@"09"]){
+       if((_PhoneNumList.length==10 && [_PhoneNumList hasPrefix:@"09"]) || ([_PhoneNumList hasPrefix:@"8869"] && _PhoneNumList.length==12)){
+           
+           
+           if([_PhoneNumList hasPrefix:@"8869"]){
+               _PhoneNumList = [_PhoneNumList substringWithRange:NSMakeRange(3,9)];
+               
+               NSLog(@"去除886%@",_PhoneNumList);
+               
+               _PhoneNumList=[NSString stringWithFormat:@"0%@",_PhoneNumList];
+               //去除八八六還沒有測試
+               NSLog(@"加0%@",_PhoneNumList);
+           }
+
+           
+           
             NSString *script1 = [NSString stringWithFormat:@"document.getElementById('msisdn').value='%@'",_PhoneNumList];
             double delayInSeconds = 0.5;
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
@@ -152,52 +183,85 @@
 
             });
         }
-       else {
-           if(flag){
+     
+       else{
+           if(flag1){
                _PhoneNumList=@"0999876654";
-               flag=false;
+               flag1=false;
            }else{
                _PhoneNumList=@"0998736653";
-               flag=true;
+               flag1=true;
            }
-           NSString *script1 = [NSString stringWithFormat:@"document.getElementById('msisdn').value='%@'",_PhoneNumList];
-           double delayInSeconds = 0.5;
-           dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-           dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-               
-               
-               [_FetNetWebView stringByEvaluatingJavaScriptFromString:script1];
-               
-               [_FetNetWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('queryButton').click()"];
-               
-           });
-
+           NSString *script = [NSString stringWithFormat:@"document.getElementById('msisdn').value='%@'",_PhoneNumList];
+           [_FetNetWebView stringByEvaluatingJavaScriptFromString:script];
            
+           [_FetNetWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('queryButton').click()"];
            
-       
-       
-       
+           //改這裡
+           
        }
+
     
     }
 }
 
 
+-(void)distinguishLandline{
+
+    for (PhoneElementNum=0 ; PhoneElementNum<_totalContactsNum;PhoneElementNum++) {
+        NSString *CheckPhoneNumList=_TheFirstPhoneNumberArray[PhoneElementNum];
+        //正則化
+        NSString *letters = @"0123456789";
+        NSCharacterSet *notLetters = [[NSCharacterSet characterSetWithCharactersInString:letters] invertedSet];
+        CheckPhoneNumList= [[CheckPhoneNumList componentsSeparatedByCharactersInSet:notLetters] componentsJoinedByString:@""];
+        NSLog(@"newString: %@", CheckPhoneNumList);
+        //正則化
+        
+        NSArray *twRegionCod =[ [ NSArray alloc ] initWithObjects:@"02",@"03",@"037",@"04",@"049",@"05",@"06",@"07",@"089",@"082",@"0826",@"0836",@"8862",@"8863",@"88637",@"8864",@"88649",@"8865",@"8866",@"8867",@"88989",@"88682",@"886826",@"886836", nil];
+        
+        for(int twRegionCodElement=0;twRegionCodElement<twRegionCod.count;twRegionCodElement++){
+            NSString * stringFromtwRegionCod = [twRegionCod objectAtIndex:twRegionCodElement];
+            if ([CheckPhoneNumList hasPrefix:stringFromtwRegionCod]) {
+                _FormWhichCompanyList[PhoneElementNum]=@"市話";
+                
+            }
+            NSLog(@"市話%@",_FormWhichCompanyList);
+        }
+    }
+    
+}
+
+
+
 - (IBAction)writeToAddressBook:(id)sender {
+
+    [self distinguishLandline];
+    //[_FormWhichCompanyList removeObject:_FormWhichCompanyList[0]];
     NSLog(@"count%ld",_FormWhichCompanyList.count);
     
-    [_TheFirstPhoneNumberArray removeObject:_TheFirstPhoneNumberArray[0]];
-    NSLog(@"REMOVE:%@",_TheFirstPhoneNumberArray);
-    for(int count=1;count<=_totalContactsNum;count++)
+    for(int count=0;count<_totalContactsNum;count++)
     {
         //        //_TheFirstPhoneNumberarray//剃出第一個（後進先出）
         //        //_FormWhichCompanyList//取出網內外（後進先出）
-        //        //_ContactNamerarray//去名字（後進先出)
+        //        //_ContactGivenNameArray//去名字（後進先出)
         //_TheFirstPhoneNumberarray[_totalContactsNumber-count-1]
-        [[MyContactList sharedContacts]updateContactFromContact:_ContactGivenNameArray[_totalContactsNum-count] NetLabel:_ContactGivenNameArray[_totalContactsNum-count] ContactPhone:_TheFirstPhoneNumberArray[_totalContactsNum-count]];
-        //測試多按幾次會當掉
         
+        
+        if(_TheFirstPhoneNumberArray[count]==nil){
+            _TheFirstPhoneNumberArray[count]=@""; }
+        
+        if([_ContactGivenNameArray[count] isEqual:@""]){
+            [[MyContactList sharedContacts]updateContactFromContact:_ContactFamilyNameArray[count] NetLabel:_FormWhichCompanyList[count] ContactPhone:_TheFirstPhoneNumberArray[count]];}
+        
+        else{
+            [[MyContactList sharedContacts]updateContactFromContact:_ContactGivenNameArray[count] NetLabel:_FormWhichCompanyList[count] ContactPhone:_TheFirstPhoneNumberArray[count]];
+        }
+        
+        
+        //測試多按幾次會當掉
+        //改過了
     }
+
 }
 
 

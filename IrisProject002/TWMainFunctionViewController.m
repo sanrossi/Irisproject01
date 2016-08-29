@@ -45,6 +45,7 @@
     _FormWhichCompanyList = [NSMutableArray array];
     _TheFirstPhoneNumberArray = [NSMutableArray array];
      _ContactGivenNameArray= [NSMutableArray array];
+    _ContactFamilyNameArray= [NSMutableArray array];
      WebPageNum =1;
     _FromWhichCompany=@"";
     //_TWWebView.scrollView.scrollEnabled = NO;
@@ -239,8 +240,8 @@
     }
     
     // }
-    [_TheFirstPhoneNumberArray insertObject:@"0999876654" atIndex:0];
-    NSLog(@"test%@",_TheFirstPhoneNumberArray);
+//    [_TheFirstPhoneNumberArray insertObject:@"0999876654" atIndex:0];
+//    NSLog(@"test%@",_TheFirstPhoneNumberArray);
     //check the firstphone
     
 }
@@ -394,7 +395,7 @@
         NSLog(@"newString: %@", _PhoneNumList);
         //正則化
 
-        if (PhoneElementNum>=0 && PhoneElementNum<=_totalContactsNum) {
+        if (PhoneElementNum>=0 && PhoneElementNum<_totalContactsNum) {
 
             if((_PhoneNumList.length==10 && [_PhoneNumList hasPrefix:@"09"]) || ([_PhoneNumList hasPrefix:@"8869"] && _PhoneNumList.length==12)){
                 if([_PhoneNumList hasPrefix:@"8869"]){
@@ -411,15 +412,35 @@
                 [_TWWebView stringByEvaluatingJavaScriptFromString:script];
                 
                 [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.forms[0].submit()"];
-              }
+                
+                }
             }
-        }
-        else if(_PhoneNumList ==nil){
+            else if([_PhoneNumList isEqualToString:@""]){
+                _PhoneNumList=@"11111111111";
+                NSString *script = [NSString stringWithFormat:@"document.getElementsByName('phoneNbr')[0].value='%@'",_PhoneNumList];
+                [_TWWebView stringByEvaluatingJavaScriptFromString:script];
+                
+                [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.forms[0].submit()"];
+                
+                //改這裡
+            }
+            else{
+                _PhoneNumList=@"11111111111";
+                NSString *script = [NSString stringWithFormat:@"document.getElementsByName('phoneNbr')[0].value='%@'",_PhoneNumList];
+                [_TWWebView stringByEvaluatingJavaScriptFromString:script];
+                
+                [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.forms[0].submit()"];
+                
+                //改這裡
+        
+            }
+           
             
-        //改這裡
         }
+       
     }
     else if ([[[[_TWWebView request]URL]absoluteString]  isEqualToString: @"https://cs.taiwanmobile.com/wap-portal/smpCheckTwmPhoneNbr.action"]){
+        
         if([_FromWhichCompany  isEqual:@""]){
             if(_TWWebView.loading==NO){
                 _FromWhichCompany = [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByClassName('red')[0].innerHTML"];
@@ -449,8 +470,6 @@
                 NSLog(@"wenet:%@",_FormWhichCompanyList);
                     
                 }
-
-
                 
                 [_TWWebView stringByEvaluatingJavaScriptFromString:@"history.go(-1)"];
             }
@@ -466,21 +485,71 @@
 
 }
 
-- (IBAction)writeToAddressBook:(id)sender {
-    NSLog(@"count%ld",_FormWhichCompanyList.count);
 
-    [_TheFirstPhoneNumberArray removeObject:_TheFirstPhoneNumberArray[0]];
-    NSLog(@"REMOVE:%@",_TheFirstPhoneNumberArray);
-    for(int count=1;count<=_totalContactsNum;count++)
+-(void)distinguishLandline{
+    
+    
+   
+    for (PhoneElementNum=0 ; PhoneElementNum<_totalContactsNum;PhoneElementNum++) {
+        NSString *CheckPhoneNumList=_TheFirstPhoneNumberArray[PhoneElementNum];
+        //正則化
+        NSString *letters = @"0123456789";
+        NSCharacterSet *notLetters = [[NSCharacterSet characterSetWithCharactersInString:letters] invertedSet];
+        CheckPhoneNumList= [[CheckPhoneNumList componentsSeparatedByCharactersInSet:notLetters] componentsJoinedByString:@""];
+        NSLog(@"newString: %@", CheckPhoneNumList);
+        //正則化
+        
+        NSArray *twRegionCod =[ [ NSArray alloc ] initWithObjects:@"02",@"03",@"037",@"04",@"049",@"05",@"06",@"07",@"089",@"082",@"0826",@"0836",@"8862",@"8863",@"88637",@"8864",@"88649",@"8865",@"8866",@"8867",@"88989",@"88682",@"886826",@"886836", nil];
+        
+        for(int twRegionCodElement=0;twRegionCodElement<twRegionCod.count;twRegionCodElement++){
+            NSString * stringFromtwRegionCod = [twRegionCod objectAtIndex:twRegionCodElement];
+            if ([CheckPhoneNumList hasPrefix:stringFromtwRegionCod]) {
+                _FormWhichCompanyList[PhoneElementNum+1]=@"市話";
+                
+            }
+            NSLog(@"市話%@",_FormWhichCompanyList);
+        }
+    }
+    
+}
+
+
+
+
+
+
+- (IBAction)writeToAddressBook:(id)sender {
+    [self distinguishLandline];
+    //[_FormWhichCompanyList removeObject:_FormWhichCompanyList[0]];
+    NSLog(@"count%ld",_FormWhichCompanyList.count);
+   
+    for(int count=0;count<_totalContactsNum;count++)
     {
         //        //_TheFirstPhoneNumberarray//剃出第一個（後進先出）
         //        //_FormWhichCompanyList//取出網內外（後進先出）
-        //        //_ContactNamerarray//去名字（後進先出)
+        //        //_ContactGivenNameArray//去名字（後進先出)
         //_TheFirstPhoneNumberarray[_totalContactsNumber-count-1]
-        [[MyContactList sharedContacts]updateContactFromContact:_ContactGivenNameArray[_totalContactsNum-count] NetLabel:_ContactGivenNameArray[_totalContactsNum-count] ContactPhone:_TheFirstPhoneNumberArray[_totalContactsNum-count]];
-        //測試多按幾次會當掉
         
+        
+        if(_TheFirstPhoneNumberArray[count]==nil){
+            _TheFirstPhoneNumberArray[count]=@""; }
+        
+        if([_ContactGivenNameArray[count] isEqual:@""]){
+            [[MyContactList sharedContacts]updateContactFromContact:_ContactFamilyNameArray[count] NetLabel:_FormWhichCompanyList[count+1] ContactPhone:_TheFirstPhoneNumberArray[count]];}
+        
+        else{
+            [[MyContactList sharedContacts]updateContactFromContact:_ContactGivenNameArray[count] NetLabel:_FormWhichCompanyList[count+1] ContactPhone:_TheFirstPhoneNumberArray[count]];
+        }
+        
+        
+        //測試多按幾次會當掉
+        //改過了
     }
+
+    
+    
+    
+    
 }
 
 

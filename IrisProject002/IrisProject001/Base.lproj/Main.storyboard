@@ -75,10 +75,10 @@
             </objects>
             <point key="canvasLocation" x="1211" y="-550"/>
         </scene>
-        <!--View Controller-->
+        <!--Member Modify View Controller-->
         <scene sceneID="4XC-ow-nlh">
             <objects>
-                <viewController id="xhM-ls-LMp" sceneMemberID="viewController">
+                <viewController id="xhM-ls-LMp" customClass="CHTMemberModifyViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2z1-ST-5Ye"/>
                         <viewControllerLayoutGuide type="bottom" id="rCq-Dp-Nhs"/>
@@ -87,9 +87,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="CHTHome.png" translatesAutoresizingMaskIntoConstraints="NO" id="mnV-DV-V8F">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="會員資料" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rsx-cK-qBn">
                                 <rect key="frame" x="124" y="109" width="72" height="42"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -109,7 +106,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Qa-mc-rdb">
-                                <rect key="frame" x="169" y="413" width="97" height="30"/>
+                                <rect key="frame" x="169" y="408" width="97" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -118,10 +115,32 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K3h-5V-3b5">
+                                <rect key="frame" x="228" y="512" width="43" height="30"/>
+                                <state key="normal" title="確認">
+                                    <color key="titleColor" red="0.99989169836044312" green="1" blue="0.99988096952438354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="checkBtn:" destination="xhM-ls-LMp" eventType="touchUpInside" id="8yq-Vj-Ong"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CHTHome.png" translatesAutoresizingMaskIntoConstraints="NO" id="mnV-DV-V8F">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="mnV-DV-V8F" firstAttribute="leading" secondItem="ZsA-2a-IO9" secondAttribute="leading" id="EIt-6l-EAg"/>
+                            <constraint firstAttribute="trailing" secondItem="mnV-DV-V8F" secondAttribute="trailing" id="G9S-SZ-Thg"/>
+                            <constraint firstItem="rCq-Dp-Nhs" firstAttribute="top" secondItem="mnV-DV-V8F" secondAttribute="bottom" id="TPM-qo-FZt"/>
+                            <constraint firstItem="mnV-DV-V8F" firstAttribute="top" secondItem="2z1-ST-5Ye" secondAttribute="bottom" id="ctl-hn-EfD"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="9Ck-Dg-R5F"/>
+                    <connections>
+                        <outlet property="CHTLogin" destination="9Qa-mc-rdb" id="jST-8j-OKH"/>
+                        <outlet property="CHTPassWord" destination="moz-nC-y4c" id="UtR-KT-oxm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nPY-sb-4j2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -284,7 +303,7 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="XCx-Hu-vKX" firstAttribute="top" secondItem="vc3-Rd-AGw" secondAttribute="bottom" constant="210" id="4Wi-TS-2rh"/>
+                            <constraint firstItem="XCx-Hu-vKX" firstAttribute="top" secondItem="vc3-Rd-AGw" secondAttribute="bottom" priority="800" constant="210" id="4Wi-TS-2rh"/>
                             <constraint firstItem="C2S-kd-8Ky" firstAttribute="leading" secondItem="MQa-d1-xBQ" secondAttribute="leading" id="5Jl-B4-hfQ"/>
                             <constraint firstItem="vc3-Rd-AGw" firstAttribute="leading" secondItem="qU5-68-HDK" secondAttribute="leading" constant="41" id="8MO-u6-Igv"/>
                             <constraint firstAttribute="trailing" secondItem="LaO-wS-b41" secondAttribute="trailing" constant="13" id="Dh3-YF-2iV"/>
@@ -293,6 +312,7 @@
                             <constraint firstItem="XCx-Hu-vKX" firstAttribute="top" secondItem="gPm-i3-PTy" secondAttribute="bottom" id="MIf-nX-Xu9"/>
                             <constraint firstItem="C2S-kd-8Ky" firstAttribute="top" secondItem="MQa-d1-xBQ" secondAttribute="bottom" constant="4" id="OkZ-Qk-ZQM"/>
                             <constraint firstAttribute="trailing" secondItem="gPm-i3-PTy" secondAttribute="trailing" id="Tl4-Z9-6sZ"/>
+                            <constraint firstItem="vc3-Rd-AGw" firstAttribute="top" secondItem="ePj-va-8N2" secondAttribute="bottom" constant="261" id="UXP-ez-XjE"/>
                             <constraint firstItem="uDb-Hh-kCn" firstAttribute="top" secondItem="ePj-va-8N2" secondAttribute="bottom" constant="220" id="UuI-m7-ovn"/>
                             <constraint firstItem="XCx-Hu-vKX" firstAttribute="top" secondItem="LaO-wS-b41" secondAttribute="bottom" constant="65" id="WB6-TL-9Nj"/>
                             <constraint firstAttribute="trailingMargin" secondItem="uDb-Hh-kCn" secondAttribute="trailing" constant="29" id="Xa9-Cc-ycO"/>
@@ -332,18 +352,18 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FetNetHome.png" translatesAutoresizingMaskIntoConstraints="NO" id="tcW-T5-Erq">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H0o-xB-iCA">
-                                <rect key="frame" x="113" y="168" width="75" height="30"/>
-                                <state key="normal" title="寫入聯絡人"/>
-                                <connections>
-                                    <action selector="writeToAddressBook:" destination="sWo-EG-7fR" eventType="touchUpInside" id="jJ5-Ru-lh8"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="81e-aX-Lqc">
-                                <rect key="frame" x="123" y="213" width="75" height="30"/>
+                                <rect key="frame" x="140" y="504" width="75" height="30"/>
                                 <state key="normal" title="分析網內外"/>
                                 <connections>
                                     <segue destination="sjx-gL-toH" kind="push" id="Y5Z-2b-a6T"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H0o-xB-iCA">
+                                <rect key="frame" x="38" y="504" width="75" height="30"/>
+                                <state key="normal" title="寫入聯絡人"/>
+                                <connections>
+                                    <action selector="writeToAddressBook:" destination="sWo-EG-7fR" eventType="touchUpInside" id="jJ5-Ru-lh8"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -366,7 +386,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UBv-BA-d7n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1244" y="451"/>
+            <point key="canvasLocation" x="1211" y="546"/>
         </scene>
         <!--Fet Net Analysis Chart View Controller-->
         <scene sceneID="j2g-UN-tSH">
@@ -398,6 +418,62 @@
             </objects>
             <point key="canvasLocation" x="1756" y="694"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="dys-wl-VuJ">
+            <objects>
+                <viewController id="4Xg-VG-tgi" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="eaS-1T-DuL"/>
+                        <viewControllerLayoutGuide type="bottom" id="G8d-53-39y"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yNQ-W3-IxN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="帳號" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ShX-GU-yx1">
+                                <rect key="frame" x="62" y="458" width="34" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="密碼" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9XZ-xv-hTC">
+                                <rect key="frame" x="62" y="501" width="34" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ccK-8Z-avj">
+                                <rect key="frame" x="127" y="455" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5pd-WF-UpE">
+                                <rect key="frame" x="127" y="497" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ycQ-F5-5zl">
+                                <rect key="frame" x="262" y="518" width="30" height="30"/>
+                                <state key="normal" title="確認"/>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TWHome.png" translatesAutoresizingMaskIntoConstraints="NO" id="KpA-em-EUl">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="KpA-em-EUl" firstAttribute="top" secondItem="eaS-1T-DuL" secondAttribute="bottom" id="EMG-YR-7ak"/>
+                            <constraint firstAttribute="trailing" secondItem="KpA-em-EUl" secondAttribute="trailing" id="GJi-fm-y2D"/>
+                            <constraint firstItem="KpA-em-EUl" firstAttribute="leading" secondItem="yNQ-W3-IxN" secondAttribute="leading" id="XfQ-yH-7o8"/>
+                            <constraint firstItem="G8d-53-39y" firstAttribute="top" secondItem="KpA-em-EUl" secondAttribute="bottom" id="nnd-y8-WTy"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="oHE-cv-PP5"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BwK-9d-7Vd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2224" y="713"/>
+        </scene>
         <!--Main Function View Controller-->
         <scene sceneID="Zee-H8-tlc">
             <objects>
@@ -417,18 +493,25 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TWHome.png" translatesAutoresizingMaskIntoConstraints="NO" id="AMe-kW-Cfr">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VmT-Xu-fYV">
-                                <rect key="frame" x="130" y="196" width="75" height="30"/>
-                                <state key="normal" title="分析網內外"/>
-                                <connections>
-                                    <segue destination="BgW-ww-cw1" kind="push" id="Vh1-aC-TSR"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZVs-ux-4YZ">
                                 <rect key="frame" x="38" y="445" width="60" height="30"/>
                                 <state key="normal" title="一鍵寫入"/>
                                 <connections>
                                     <action selector="writeToAddressBook:" destination="SwV-3u-CGS" eventType="touchUpInside" id="bTF-uq-bfO"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xqy-Er-Rfl">
+                                <rect key="frame" x="115" y="445" width="90" height="30"/>
+                                <state key="normal" title="會員資料修改"/>
+                                <connections>
+                                    <segue destination="4Xg-VG-tgi" kind="push" id="dVe-PH-FvX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VmT-Xu-fYV">
+                                <rect key="frame" x="225" y="445" width="75" height="30"/>
+                                <state key="normal" title="分析網內外"/>
+                                <connections>
+                                    <segue destination="BgW-ww-cw1" kind="push" id="Vh1-aC-TSR"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -451,7 +534,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RoN-7H-dLP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1700" y="35"/>
+            <point key="canvasLocation" x="1745" y="82"/>
         </scene>
         <!--Analysis Chart View Controller-->
         <scene sceneID="CWV-K6-rH5">
@@ -481,7 +564,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5pY-aO-JMP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2086" y="35"/>
+            <point key="canvasLocation" x="2224" y="98"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="bfw-uy-ghK">

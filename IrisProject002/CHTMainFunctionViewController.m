@@ -10,6 +10,8 @@
 #import "MyContactList.h"
 #import <QuartzCore/QuartzCore.h>
 #import "VMGearLoadingView.h"
+#import "LoginDetail.h"
+#import "CoreDataHelper.h"
 @interface CHTMainFunctionViewController ()<UIWebViewDelegate>
 
 {
@@ -26,7 +28,10 @@
 @property(nonatomic)UITextField *CHTPassword;
 @property(nonatomic)UITextField *CHTConfirmcode;
 @property(nonatomic)UIImageView *dyImageViewac;
-
+@property(nonatomic)NSMutableArray *innerNet;
+@property(nonatomic)NSMutableArray *outerNet;
+@property(nonatomic)NSMutableArray *localphone;
+@property(nonatomic)NSMutableArray *otherphone;
 
 @end
 
@@ -46,6 +51,23 @@
     _TheFirstPhoneNumberArray = [NSMutableArray array];
     _ContactGivenNameArray= [NSMutableArray array];
     _ContactFamilyNameArray= [NSMutableArray array];
+    _innerNet= [NSMutableArray array];
+    _outerNet= [NSMutableArray array];
+    _localphone= [NSMutableArray array];
+    _otherphone= [NSMutableArray array];
+
+
+    NSManagedObjectContext *context =[CoreDataHelper sharedInstance].managedObjectContext;
+     LoginDetail *login = [NSEntityDescription insertNewObjectForEntityForName:@"LoginDetail" inManagedObjectContext:context];
+
+    
+//        NSManagedObjectContext *context =[CoreDataHelper sharedInstance].managedObjectContext;
+        NSFetchRequest *request =[[NSFetchRequest alloc]initWithEntityName:@"LoginDetail"];
+    
+    
+
+
+    
     
     
     UIAlertController * alert= [UIAlertController
@@ -56,8 +78,19 @@
   
     UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
                                                handler:^(UIAlertAction * action) {
+                                                   
                                                    _CHTLogin = alert.textFields.firstObject;
-                                                   _CHTPassword = alert.textFields.lastObject;
+                                                    _CHTPassword = alert.textFields.lastObject;
+                                                   
+                                                   
+                                                login.chtLogin=_CHTLogin.text;
+                                                   NSLog(@"%@",login.chtLogin);
+                                                   login.chtPassword=_CHTPassword.text;
+                                                   [context save:nil];
+                                                   NSLog(@"%@",context);
+                                                   
+                                               
+                                                   
                                                    [self loadCHTWebView];
                                                    [[MyContactList sharedContacts] exportAddressBook];
                                                    _totalContactsNum=[[MyContactList sharedContacts]totalContactsNum];
@@ -93,6 +126,16 @@
     [self presentViewController:alert animated:YES completion:nil];
      [self loadCHTWebView];
    
+    NSArray *detail=[context executeFetchRequest:request error:nil];
+    NSLog(@"%@",detail);
+    LoginDetail *loginDetail = [detail objectAtIndex:0];
+   _CHTLogin=detail[0];
+    alert.textFields[0].text= loginDetail.chtLogin;
+    alert.textFields[1].text=loginDetail.chtPassword;
+    
+
+   
+    
     
     
     
@@ -298,6 +341,7 @@
         
     }
     else if(WebPageNum==2){
+        
         NSString* FromWhichCompany = [_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('telnum').parentNode.parentNode.parentNode.rows[1].cells[0].innerHTML"];
         //get the information about the Internal network or external network
         
@@ -316,15 +360,16 @@
             
         }
         
-        _PhoneNumList=_TheFirstPhoneNumberArray[PhoneElementNum];
-        
-        //正則化
-        NSString *letters = @"0123456789";
-        NSCharacterSet *notLetters = [[NSCharacterSet characterSetWithCharactersInString:letters] invertedSet];
-        _PhoneNumList = [[_PhoneNumList componentsSeparatedByCharactersInSet:notLetters] componentsJoinedByString:@""];
-        NSLog(@"newString: %@", _PhoneNumList);
-        //正則化
-        if (PhoneElementNum>=0 && PhoneElementNum<=_totalContactsNum) {
+            if (PhoneElementNum>=0 && PhoneElementNum<_totalContactsNum+1) {
+                    _PhoneNumList=_TheFirstPhoneNumberArray[PhoneElementNum];
+                    
+                    //正則化
+                    NSString *letters = @"0123456789";
+                    NSCharacterSet *notLetters = [[NSCharacterSet characterSetWithCharactersInString:letters] invertedSet];
+                    _PhoneNumList = [[_PhoneNumList componentsSeparatedByCharactersInSet:notLetters] componentsJoinedByString:@""];
+                    NSLog(@"newString: %@", _PhoneNumList);
+                    //正則化
+
             PhoneElementNum+=1;
             if((_PhoneNumList.length==10 && [_PhoneNumList hasPrefix:@"09"]) || ([_PhoneNumList hasPrefix:@"8869"] && _PhoneNumList.length==12)){
                 if([_PhoneNumList hasPrefix:@"8869"]){
@@ -370,11 +415,10 @@
                 });
                 
                 
-                
+            }
                 
                 //delay 1 sencond to click the submit
-            }
-            if(PhoneElementNum == _totalContactsNum-1){
+             if(PhoneElementNum == _totalContactsNum){
                 [VMGearLoadingView hideGearLoadingForView:self.view];
 
             }
@@ -463,15 +507,40 @@
         else{
         [[MyContactList sharedContacts]updateContactFromContact:_ContactGivenNameArray[count] NetLabel:_FormWhichCompanyList[count] ContactPhone:_TheFirstPhoneNumberArray[count]];
         }
-        
+       
         
         //測試多按幾次會當掉
         //改過了
     }
+     [self calculateNumbersOfInternalNetwork];
 }
 -(void)calculateNumbersOfInternalNetwork{
-//    _FormWhichCompanyList
+    for(int count=0;count<_FormWhichCompanyList.count;count++){
+     NSString *Netname= _FormWhichCompanyList[count];
+        //unicode转中文
+     
+      //  NSString* strA = [Netname stringByReplacingPercentEscapesUsingEncoding:NSUnicodeStringEncoding];
+        
+                         
+       
+        if([Netname isEqualToString:@"網內" ]){
+            [_innerNet addObject:Netname];
+        }else if([Netname isEqualToString:@"網內"]){
+            [_outerNet addObject:Netname];
+        }else if([Netname isEqualToString:@"市話"]){
+            [_localphone addObject:Netname];
+        }else{
+            [_otherphone addObject:Netname];
+        }
+        
+        NSLog(@"網內%@",_innerNet);
+        NSLog(@"網外%@",_outerNet);
+        NSLog(@"市話%@",_localphone);
+        NSLog(@"其他%@",_otherphone);
 
+    }
+    
+    
 }
 
 

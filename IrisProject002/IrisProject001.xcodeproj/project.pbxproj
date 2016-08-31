@@ -36,6 +36,10 @@
 		03A1F5B01D76A21F003EEB62 /* CHTHome.png in Resources */ = {isa = PBXBuildFile; fileRef = 03A1F5AF1D76A21F003EEB62 /* CHTHome.png */; };
 		03A1F5B41D76A389003EEB62 /* FetNetHome.png in Resources */ = {isa = PBXBuildFile; fileRef = 03A1F5B31D76A389003EEB62 /* FetNetHome.png */; };
 		03A1F5B61D76A38D003EEB62 /* TWHome.png in Resources */ = {isa = PBXBuildFile; fileRef = 03A1F5B51D76A38D003EEB62 /* TWHome.png */; };
+		03A1F5BE1D76BC5D003EEB62 /* LoginDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A1F5BD1D76BC5D003EEB62 /* LoginDetail.m */; };
+		03A1F5C11D76C517003EEB62 /* LoginDetailModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 03A1F5BF1D76C517003EEB62 /* LoginDetailModel.xcdatamodeld */; };
+		03A1F5C41D76C74A003EEB62 /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A1F5C31D76C74A003EEB62 /* CoreDataHelper.m */; };
+		03B181131D7723C2005E64A8 /* CHTMemberModifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B181121D7723C2005E64A8 /* CHTMemberModifyViewController.m */; };
 		03B2D1771D6C17C500572A8A /* VMGearLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B2D1761D6C17C500572A8A /* VMGearLoadingView.m */; };
 		03B2D1811D6C180C00572A8A /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B2D1781D6C180C00572A8A /* background@2x.png */; };
 		03B2D1821D6C180C00572A8A /* background@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B2D1791D6C180C00572A8A /* background@3x.png */; };
@@ -114,6 +118,13 @@
 		03A1F5AF1D76A21F003EEB62 /* CHTHome.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CHTHome.png; sourceTree = "<group>"; };
 		03A1F5B31D76A389003EEB62 /* FetNetHome.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FetNetHome.png; sourceTree = "<group>"; };
 		03A1F5B51D76A38D003EEB62 /* TWHome.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TWHome.png; sourceTree = "<group>"; };
+		03A1F5BC1D76BC5D003EEB62 /* LoginDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginDetail.h; sourceTree = "<group>"; };
+		03A1F5BD1D76BC5D003EEB62 /* LoginDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginDetail.m; sourceTree = "<group>"; };
+		03A1F5C01D76C517003EEB62 /* LoginDetailModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LoginDetailModel.xcdatamodel; sourceTree = "<group>"; };
+		03A1F5C21D76C74A003EEB62 /* CoreDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataHelper.h; sourceTree = "<group>"; };
+		03A1F5C31D76C74A003EEB62 /* CoreDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataHelper.m; sourceTree = "<group>"; };
+		03B181111D7723C2005E64A8 /* CHTMemberModifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHTMemberModifyViewController.h; sourceTree = "<group>"; };
+		03B181121D7723C2005E64A8 /* CHTMemberModifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHTMemberModifyViewController.m; sourceTree = "<group>"; };
 		03B2D1751D6C17C500572A8A /* VMGearLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VMGearLoadingView.h; sourceTree = "<group>"; };
 		03B2D1761D6C17C500572A8A /* VMGearLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VMGearLoadingView.m; sourceTree = "<group>"; };
 		03B2D1781D6C180C00572A8A /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
@@ -216,7 +227,12 @@
 				030AF5FE1D41BDE6004C451F /* Assets.xcassets */,
 				030AF6001D41BDE6004C451F /* LaunchScreen.storyboard */,
 				030AF6031D41BDE6004C451F /* Info.plist */,
+				03A1F5C21D76C74A003EEB62 /* CoreDataHelper.h */,
+				03A1F5C31D76C74A003EEB62 /* CoreDataHelper.m */,
 				030AF5F21D41BDE6004C451F /* Supporting Files */,
+				03A1F5BC1D76BC5D003EEB62 /* LoginDetail.h */,
+				03A1F5BD1D76BC5D003EEB62 /* LoginDetail.m */,
+				03A1F5BF1D76C517003EEB62 /* LoginDetailModel.xcdatamodeld */,
 			);
 			path = IrisProject001;
 			sourceTree = "<group>";
@@ -251,6 +267,8 @@
 			isa = PBXGroup;
 			children = (
 				03A01CF81D48F22000882331 /* CHTMainFunctionViewController.h */,
+				03B181111D7723C2005E64A8 /* CHTMemberModifyViewController.h */,
+				03B181121D7723C2005E64A8 /* CHTMemberModifyViewController.m */,
 				03A01CF91D48F22000882331 /* CHTMainFunctionViewController.m */,
 				035C2CBB1D75273500CD00F2 /* CHTAnalysisChartViewController.h */,
 				035C2CBC1D75273500CD00F2 /* CHTAnalysisChartViewController.m */,
@@ -618,17 +636,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03A1F5C11D76C517003EEB62 /* LoginDetailModel.xcdatamodeld in Sources */,
 				030AF5F71D41BDE6004C451F /* AppDelegate.m in Sources */,
 				03B2D1771D6C17C500572A8A /* VMGearLoadingView.m in Sources */,
 				0394C0981D54F344004591B5 /* FetNetMainFunctionViewController.m in Sources */,
 				03A01CFA1D48F22000882331 /* CHTMainFunctionViewController.m in Sources */,
 				0394C0951D54F30E004591B5 /* TWMainFunctionViewController.m in Sources */,
+				03A1F5C41D76C74A003EEB62 /* CoreDataHelper.m in Sources */,
 				035C2CBD1D75273500CD00F2 /* CHTAnalysisChartViewController.m in Sources */,
 				03922FDA1D48929C009C3E0F /* CarriersViewController.m in Sources */,
 				035C2CCF1D75559100CD00F2 /* TWAnalysisChartViewController.m in Sources */,
+				03A1F5BE1D76BC5D003EEB62 /* LoginDetail.m in Sources */,
 				035C2CCC1D75557900CD00F2 /* FetNetAnalysisChartViewController.m in Sources */,
 				03A039A51D499D8F00B017F8 /* MyContactList.m in Sources */,
 				030AF5F41D41BDE6004C451F /* main.m in Sources */,
+				03B181131D7723C2005E64A8 /* CHTMemberModifyViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -887,6 +909,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		03A1F5BF1D76C517003EEB62 /* LoginDetailModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				03A1F5C01D76C517003EEB62 /* LoginDetailModel.xcdatamodel */,
+			);
+			currentVersion = 03A1F5C01D76C517003EEB62 /* LoginDetailModel.xcdatamodel */;
+			path = LoginDetailModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 030AF5E71D41BDE6004C451F /* Project object */;
 }

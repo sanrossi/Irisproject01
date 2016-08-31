@@ -106,14 +106,15 @@
     
     
     
-    _PhoneNumList=_TheFirstPhoneNumberArray[PhoneElementNum];
-    //正則化
-    NSString *letters = @"0123456789";
-    NSCharacterSet *notLetters = [[NSCharacterSet characterSetWithCharactersInString:letters] invertedSet];
-    _PhoneNumList = [[_PhoneNumList componentsSeparatedByCharactersInSet:notLetters] componentsJoinedByString:@""];
-    NSLog(@"newString: %@", _PhoneNumList);
-    //正則化
+
     if (PhoneElementNum>=0 && PhoneElementNum<_totalContactsNum) {
+        _PhoneNumList=_TheFirstPhoneNumberArray[PhoneElementNum];
+        //正則化
+        NSString *letters = @"0123456789";
+        NSCharacterSet *notLetters = [[NSCharacterSet characterSetWithCharactersInString:letters] invertedSet];
+        _PhoneNumList = [[_PhoneNumList componentsSeparatedByCharactersInSet:notLetters] componentsJoinedByString:@""];
+        NSLog(@"newString: %@", _PhoneNumList);
+        //正則化
         PhoneElementNum+=1;
        if((_PhoneNumList.length==10 && [_PhoneNumList hasPrefix:@"09"]) || ([_PhoneNumList hasPrefix:@"8869"] && _PhoneNumList.length==12)){
            

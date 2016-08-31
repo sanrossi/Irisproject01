@@ -12,6 +12,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *date;
 @property (weak, nonatomic) IBOutlet UILabel *dayoftheweek;
 @property (weak, nonatomic) IBOutlet UILabel *monthandyear;
+@property (weak, nonatomic) IBOutlet UIImageView *TWimage;
+@property (weak, nonatomic) IBOutlet UIImageView *CHTimage;
 
 
 @end
@@ -54,7 +56,12 @@
 
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    
+//    [UIView animateWithDuration:1.0 animations:^{self.TWimage
+//        = CGRectMake(self.TWimage.center.x +10 , self.TWimage.center.y+10)} completion:];
 
+}
 
 
 //- (void)didReceiveMemoryWarning {

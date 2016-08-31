@@ -20,5 +20,5 @@
 @property(nonatomic)NSString*FromWhichCompanyinfo;
 @property(nonatomic)NSInteger totalContactsNum;
 
--(void)exportAddressBook;
+
 @end

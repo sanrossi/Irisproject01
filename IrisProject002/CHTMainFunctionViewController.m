@@ -59,8 +59,17 @@
                                                    _CHTLogin = alert.textFields.firstObject;
                                                    _CHTPassword = alert.textFields.lastObject;
                                                    [self loadCHTWebView];
-                                                   [self exportAddressBook];
+                                                   [[MyContactList sharedContacts] exportAddressBook];
+                                                   _totalContactsNum=[[MyContactList sharedContacts]totalContactsNum];
+                                                   _theFirstPhone=[[MyContactList sharedContacts]theFirstPhone];
+                                                   _TheFirstPhoneNumberArray=[[MyContactList sharedContacts]TheFirstPhoneNumberArray];
+                                                   _ContactFamilyNameArray =[[MyContactList sharedContacts]ContactFamilyNameArray];
+                                                   _ContactGivenNameArray =[[MyContactList sharedContacts]ContactGivenNameArray];
                                                    [VMGearLoadingView showGearLoadingForView:self.view];
+                                                   // }
+                                                   [_TheFirstPhoneNumberArray insertObject:@"0999876654" atIndex:0];
+                                                   NSLog(@"test%@",_TheFirstPhoneNumberArray);
+                                                   //check the firstphone
                                                    
                                                    
                                                }];
@@ -92,57 +101,6 @@
 }
 
 
-
--(void)exportAddressBook{
-    [[MyContactList sharedContacts] fetchAllContacts];
-    //fetch all contacts by calling single to method
-    
-    if ([[MyContactList sharedContacts]totalPhoneNumberArray].count !=0) {
-        NSLog(@"Fetched Contact Details : %ld",[[MyContactList sharedContacts]totalPhoneNumberArray].count);
-        _totalContactsNum=[[MyContactList sharedContacts]totalPhoneNumberArray].count;
-        NSLog(@"%@", [[MyContactList sharedContacts]totalPhoneNumberArray]);
-
-        for(int i=0; i<_totalContactsNum;i++)
-  
-        {self.theFirstPhone=[[[MyContactList sharedContacts]totalPhoneNumberArray][i] objectForKey:@"phone"];
-            
-            if(_theFirstPhone[0] == nil ){
-                [_TheFirstPhoneNumberArray addObject:@""];
-                NSLog(@"test%@",_TheFirstPhoneNumberArray);
-            }else{
-            
-                [_TheFirstPhoneNumberArray addObject:_theFirstPhone[0]];
-                NSLog(@"test%@",_TheFirstPhoneNumberArray);
-                //check the firstphone
-            }
-        }
-        for(int i=0; i<[[MyContactList sharedContacts]totalPhoneNumberArray].count;i++)
-        {
-            NSString*ContactGivenname=[[[MyContactList sharedContacts]totalPhoneNumberArray][i] objectForKey:@"givenname"];
-            if(ContactGivenname==nil){
-                [_ContactGivenNameArray addObject:@""];
-            }else{
-                 [_ContactGivenNameArray addObject:ContactGivenname];
-            }
-             NSLog(@"givenname%@",_ContactGivenNameArray);
-            
-            NSString*ContactFamilynname=[[[MyContactList sharedContacts]totalPhoneNumberArray][i] objectForKey:@"familyName"];
-            if(ContactFamilynname==nil){
-            [_ContactFamilyNameArray addObject:@""];
-            }
-            else{
-            [_ContactFamilyNameArray addObject:ContactFamilynname];
-            }
-            NSLog(@"familyName%@",_ContactFamilyNameArray);
-            }
-        }
-
-        // }
-        [_TheFirstPhoneNumberArray insertObject:@"0999876654" atIndex:0];
-        NSLog(@"test%@",_TheFirstPhoneNumberArray);
-        //check the firstphone
- 
-}
 
 
 
@@ -458,9 +416,6 @@
  
     [_TheFirstPhoneNumberArray removeObject:_TheFirstPhoneNumberArray[0]];
     
-    
-    
-    
     //去除掉第一個位元
     for (PhoneElementNum=0 ; PhoneElementNum<_totalContactsNum;PhoneElementNum++) {
         NSString *CheckPhoneNumList=_TheFirstPhoneNumberArray[PhoneElementNum];
@@ -513,6 +468,10 @@
         //測試多按幾次會當掉
         //改過了
     }
+}
+-(void)calculateNumbersOfInternalNetwork{
+//    _FormWhichCompanyList
+
 }
 
 

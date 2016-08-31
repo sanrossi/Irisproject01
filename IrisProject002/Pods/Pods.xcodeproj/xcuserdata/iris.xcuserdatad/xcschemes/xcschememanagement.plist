@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>PNChart.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
 		<key>Pods-IrisProject001.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -19,6 +24,11 @@
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
+		<key>UICountingLabel.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
 		<key>pop.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -27,6 +37,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>11929A53A8AD141288485C2968E5803E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>11BCDBFCD0572EF640B6BC2869684B22</key>
 		<dict>
 			<key>primary</key>
@@ -48,6 +63,16 @@
 			<true/>
 		</dict>
 		<key>733B9E32D115A97C291080BFFA0B568B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7CEEB7F4CD0B847C8524FB6C3FD41570</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8913F80B9E6726658D36E71041FF5B53</key>
 		<dict>
 			<key>primary</key>
 			<true/>

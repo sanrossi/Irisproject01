@@ -15,6 +15,19 @@
 		030AF6021D41BDE6004C451F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 030AF6001D41BDE6004C451F /* LaunchScreen.storyboard */; };
 		030AF60D1D41BDE6004C451F /* IrisProject001Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 030AF60C1D41BDE6004C451F /* IrisProject001Tests.m */; };
 		030AF6181D41BDE6004C451F /* IrisProject001UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 030AF6171D41BDE6004C451F /* IrisProject001UITests.m */; };
+		035C2CBD1D75273500CD00F2 /* CHTAnalysisChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 035C2CBC1D75273500CD00F2 /* CHTAnalysisChartViewController.m */; };
+		035C2CBF1D752B6C00CD00F2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 035C2CBE1D752B6C00CD00F2 /* Foundation.framework */; };
+		035C2CC11D752B7400CD00F2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 035C2CC01D752B7400CD00F2 /* UIKit.framework */; };
+		035C2CC31D752B7F00CD00F2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 035C2CC21D752B7F00CD00F2 /* CoreGraphics.framework */; };
+		035C2CCC1D75557900CD00F2 /* FetNetAnalysisChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 035C2CCB1D75557900CD00F2 /* FetNetAnalysisChartViewController.m */; };
+		035C2CCF1D75559100CD00F2 /* TWAnalysisChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 035C2CCE1D75559100CD00F2 /* TWAnalysisChartViewController.m */; };
+		035C2CD31D75748400CD00F2 /* airport.png in Resources */ = {isa = PBXBuildFile; fileRef = 035C2CD01D75748400CD00F2 /* airport.png */; };
+		035C2CD41D75748400CD00F2 /* hotairballoon.png in Resources */ = {isa = PBXBuildFile; fileRef = 035C2CD11D75748400CD00F2 /* hotairballoon.png */; };
+		035C2CD51D75748400CD00F2 /* boat.png in Resources */ = {isa = PBXBuildFile; fileRef = 035C2CD21D75748400CD00F2 /* boat.png */; };
+		035C2CD91D75769500CD00F2 /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = 035C2CD81D75769500CD00F2 /* home.png */; };
+		0369A4921D75DCB900092F7C /* CHTbtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 0369A4911D75DCB900092F7C /* CHTbtn.png */; };
+		0369A4951D75DDEA00092F7C /* FetNetbtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 0369A4931D75DDEA00092F7C /* FetNetbtn.png */; };
+		0369A4961D75DDEA00092F7C /* TWbtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 0369A4941D75DDEA00092F7C /* TWbtn.png */; };
 		03922FDA1D48929C009C3E0F /* CarriersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03922FD91D48929C009C3E0F /* CarriersViewController.m */; };
 		0394C0951D54F30E004591B5 /* TWMainFunctionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0394C0941D54F30E004591B5 /* TWMainFunctionViewController.m */; };
 		0394C0981D54F344004591B5 /* FetNetMainFunctionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0394C0971D54F344004591B5 /* FetNetMainFunctionViewController.m */; };
@@ -34,7 +47,6 @@
 		03B2D1891D6C180C00572A8A /* imgDemo.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B2D1801D6C180C00572A8A /* imgDemo.png */; };
 		03C848BC1D5B08720010CECF /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 03C848BB1D5B08720010CECF /* button.png */; };
 		03E1AF2C1D5D60DD009B20CB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 035B4DD91D5C744700BD4A62 /* QuartzCore.framework */; };
-		03E8B0211D6AECBD00D8DBE7 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 03E8B0201D6AECBD00D8DBE7 /* background.png */; };
 		2D8BA4A6512EC13F7B7217DD /* libPods-IrisProject001UITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 727DCC97A2DE91FD74B5DB5B /* libPods-IrisProject001UITests.a */; };
 		8021F1EB53781BF0420056D9 /* libPods-IrisProject001Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF31DDF73CF9E721C1959C33 /* libPods-IrisProject001Tests.a */; };
 /* End PBXBuildFile section */
@@ -72,6 +84,22 @@
 		030AF6171D41BDE6004C451F /* IrisProject001UITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IrisProject001UITests.m; sourceTree = "<group>"; };
 		030AF6191D41BDE6004C451F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		035B4DD91D5C744700BD4A62 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		035C2CBB1D75273500CD00F2 /* CHTAnalysisChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHTAnalysisChartViewController.h; sourceTree = "<group>"; };
+		035C2CBC1D75273500CD00F2 /* CHTAnalysisChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHTAnalysisChartViewController.m; sourceTree = "<group>"; };
+		035C2CBE1D752B6C00CD00F2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		035C2CC01D752B7400CD00F2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		035C2CC21D752B7F00CD00F2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		035C2CCA1D75557900CD00F2 /* FetNetAnalysisChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetNetAnalysisChartViewController.h; sourceTree = "<group>"; };
+		035C2CCB1D75557900CD00F2 /* FetNetAnalysisChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetNetAnalysisChartViewController.m; sourceTree = "<group>"; };
+		035C2CCD1D75559100CD00F2 /* TWAnalysisChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWAnalysisChartViewController.h; sourceTree = "<group>"; };
+		035C2CCE1D75559100CD00F2 /* TWAnalysisChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWAnalysisChartViewController.m; sourceTree = "<group>"; };
+		035C2CD01D75748400CD00F2 /* airport.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airport.png; sourceTree = "<group>"; };
+		035C2CD11D75748400CD00F2 /* hotairballoon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hotairballoon.png; sourceTree = "<group>"; };
+		035C2CD21D75748400CD00F2 /* boat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = boat.png; sourceTree = "<group>"; };
+		035C2CD81D75769500CD00F2 /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
+		0369A4911D75DCB900092F7C /* CHTbtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CHTbtn.png; sourceTree = "<group>"; };
+		0369A4931D75DDEA00092F7C /* FetNetbtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FetNetbtn.png; sourceTree = "<group>"; };
+		0369A4941D75DDEA00092F7C /* TWbtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TWbtn.png; sourceTree = "<group>"; };
 		03922FD81D48929C009C3E0F /* CarriersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CarriersViewController.h; path = ../CarriersViewController.h; sourceTree = "<group>"; };
 		03922FD91D48929C009C3E0F /* CarriersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CarriersViewController.m; path = ../CarriersViewController.m; sourceTree = "<group>"; };
 		0394C0931D54F30E004591B5 /* TWMainFunctionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TWMainFunctionViewController.h; path = ../TWMainFunctionViewController.h; sourceTree = "<group>"; };
@@ -96,7 +124,6 @@
 		03B2D17F1D6C180C00572A8A /* gears 3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gears 3@3x.png"; sourceTree = "<group>"; };
 		03B2D1801D6C180C00572A8A /* imgDemo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imgDemo.png; sourceTree = "<group>"; };
 		03C848BB1D5B08720010CECF /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
-		03E8B0201D6AECBD00D8DBE7 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		229963209E923445654B6E36 /* Pods-IrisProject001.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IrisProject001.release.xcconfig"; path = "Pods/Target Support Files/Pods-IrisProject001/Pods-IrisProject001.release.xcconfig"; sourceTree = "<group>"; };
 		37B1477CFC186AC2B98DC3F5 /* Pods-IrisProject001.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IrisProject001.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IrisProject001/Pods-IrisProject001.debug.xcconfig"; sourceTree = "<group>"; };
 		58637C56225857335B50A12B /* libPods-IrisProject001.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IrisProject001.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,6 +140,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				035C2CC31D752B7F00CD00F2 /* CoreGraphics.framework in Frameworks */,
+				035C2CC11D752B7400CD00F2 /* UIKit.framework in Frameworks */,
+				035C2CBF1D752B6C00CD00F2 /* Foundation.framework in Frameworks */,
 				03E1AF2C1D5D60DD009B20CB /* QuartzCore.framework in Frameworks */,
 				03A039A21D499CA500B017F8 /* AddressBook.framework in Frameworks */,
 				03A039A01D499C9700B017F8 /* Contacts.framework in Frameworks */,
@@ -170,18 +200,21 @@
 				03B2D18A1D6C1BEA00572A8A /* image */,
 				03B2D1751D6C17C500572A8A /* VMGearLoadingView.h */,
 				03B2D1761D6C17C500572A8A /* VMGearLoadingView.m */,
+				0369A4911D75DCB900092F7C /* CHTbtn.png */,
+				0369A4931D75DDEA00092F7C /* FetNetbtn.png */,
+				0369A4941D75DDEA00092F7C /* TWbtn.png */,
+				035C2CD81D75769500CD00F2 /* home.png */,
+				035C2CD01D75748400CD00F2 /* airport.png */,
+				035C2CD11D75748400CD00F2 /* hotairballoon.png */,
+				035C2CD21D75748400CD00F2 /* boat.png */,
 				03C848BB1D5B08720010CECF /* button.png */,
-				03E8B0201D6AECBD00D8DBE7 /* background.png */,
-				030AF5F51D41BDE6004C451F /* AppDelegate.h */,
-				030AF5F61D41BDE6004C451F /* AppDelegate.m */,
 				03922FD81D48929C009C3E0F /* CarriersViewController.h */,
 				03922FD91D48929C009C3E0F /* CarriersViewController.m */,
-				03A01CF81D48F22000882331 /* CHTMainFunctionViewController.h */,
-				03A01CF91D48F22000882331 /* CHTMainFunctionViewController.m */,
-				0394C0931D54F30E004591B5 /* TWMainFunctionViewController.h */,
-				0394C0941D54F30E004591B5 /* TWMainFunctionViewController.m */,
-				0394C0961D54F344004591B5 /* FetNetMainFunctionViewController.h */,
-				0394C0971D54F344004591B5 /* FetNetMainFunctionViewController.m */,
+				035C2CC71D75546600CD00F2 /* CHT */,
+				035C2CC81D75547A00CD00F2 /* FetNet */,
+				035C2CC91D7554D300CD00F2 /* TW */,
+				030AF5F51D41BDE6004C451F /* AppDelegate.h */,
+				030AF5F61D41BDE6004C451F /* AppDelegate.m */,
 				03A039A31D499D8F00B017F8 /* MyContactList.h */,
 				03A039A41D499D8F00B017F8 /* MyContactList.m */,
 				030AF5FB1D41BDE6004C451F /* Main.storyboard */,
@@ -219,6 +252,39 @@
 			path = IrisProject001UITests;
 			sourceTree = "<group>";
 		};
+		035C2CC71D75546600CD00F2 /* CHT */ = {
+			isa = PBXGroup;
+			children = (
+				03A01CF81D48F22000882331 /* CHTMainFunctionViewController.h */,
+				03A01CF91D48F22000882331 /* CHTMainFunctionViewController.m */,
+				035C2CBB1D75273500CD00F2 /* CHTAnalysisChartViewController.h */,
+				035C2CBC1D75273500CD00F2 /* CHTAnalysisChartViewController.m */,
+			);
+			name = CHT;
+			sourceTree = "<group>";
+		};
+		035C2CC81D75547A00CD00F2 /* FetNet */ = {
+			isa = PBXGroup;
+			children = (
+				0394C0961D54F344004591B5 /* FetNetMainFunctionViewController.h */,
+				0394C0971D54F344004591B5 /* FetNetMainFunctionViewController.m */,
+				035C2CCA1D75557900CD00F2 /* FetNetAnalysisChartViewController.h */,
+				035C2CCB1D75557900CD00F2 /* FetNetAnalysisChartViewController.m */,
+			);
+			name = FetNet;
+			sourceTree = "<group>";
+		};
+		035C2CC91D7554D300CD00F2 /* TW */ = {
+			isa = PBXGroup;
+			children = (
+				0394C0931D54F30E004591B5 /* TWMainFunctionViewController.h */,
+				0394C0941D54F30E004591B5 /* TWMainFunctionViewController.m */,
+				035C2CCD1D75559100CD00F2 /* TWAnalysisChartViewController.h */,
+				035C2CCE1D75559100CD00F2 /* TWAnalysisChartViewController.m */,
+			);
+			name = TW;
+			sourceTree = "<group>";
+		};
 		03B2D18A1D6C1BEA00572A8A /* image */ = {
 			isa = PBXGroup;
 			children = (
@@ -238,6 +304,9 @@
 		3021321EF7E17B564E843C22 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				035C2CC21D752B7F00CD00F2 /* CoreGraphics.framework */,
+				035C2CC01D752B7400CD00F2 /* UIKit.framework */,
+				035C2CBE1D752B6C00CD00F2 /* Foundation.framework */,
 				58637C56225857335B50A12B /* libPods-IrisProject001.a */,
 				EF31DDF73CF9E721C1959C33 /* libPods-IrisProject001Tests.a */,
 				727DCC97A2DE91FD74B5DB5B /* libPods-IrisProject001UITests.a */,
@@ -372,18 +441,24 @@
 			files = (
 				03B2D1871D6C180C00572A8A /* gears 3@2x.png in Resources */,
 				030AF6021D41BDE6004C451F /* LaunchScreen.storyboard in Resources */,
-				03E8B0211D6AECBD00D8DBE7 /* background.png in Resources */,
+				035C2CD41D75748400CD00F2 /* hotairballoon.png in Resources */,
+				035C2CD31D75748400CD00F2 /* airport.png in Resources */,
 				03B2D1821D6C180C00572A8A /* background@3x.png in Resources */,
 				03C848BC1D5B08720010CECF /* button.png in Resources */,
+				035C2CD91D75769500CD00F2 /* home.png in Resources */,
 				030AF5FF1D41BDE6004C451F /* Assets.xcassets in Resources */,
+				0369A4921D75DCB900092F7C /* CHTbtn.png in Resources */,
 				03B2D1851D6C180C00572A8A /* gears 2@2x.png in Resources */,
 				03B2D1811D6C180C00572A8A /* background@2x.png in Resources */,
 				03B2D1841D6C180C00572A8A /* gears 1@3x.png in Resources */,
 				03B2D1831D6C180C00572A8A /* gears 1@2x.png in Resources */,
 				03B2D1891D6C180C00572A8A /* imgDemo.png in Resources */,
+				035C2CD51D75748400CD00F2 /* boat.png in Resources */,
 				030AF5FD1D41BDE6004C451F /* Main.storyboard in Resources */,
+				0369A4951D75DDEA00092F7C /* FetNetbtn.png in Resources */,
 				03B2D1861D6C180C00572A8A /* gears 2@3x.png in Resources */,
 				03B2D1881D6C180C00572A8A /* gears 3@3x.png in Resources */,
+				0369A4961D75DDEA00092F7C /* TWbtn.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -536,7 +611,10 @@
 				0394C0981D54F344004591B5 /* FetNetMainFunctionViewController.m in Sources */,
 				03A01CFA1D48F22000882331 /* CHTMainFunctionViewController.m in Sources */,
 				0394C0951D54F30E004591B5 /* TWMainFunctionViewController.m in Sources */,
+				035C2CBD1D75273500CD00F2 /* CHTAnalysisChartViewController.m in Sources */,
 				03922FDA1D48929C009C3E0F /* CarriersViewController.m in Sources */,
+				035C2CCF1D75559100CD00F2 /* TWAnalysisChartViewController.m in Sources */,
+				035C2CCC1D75557900CD00F2 /* FetNetAnalysisChartViewController.m in Sources */,
 				03A039A51D499D8F00B017F8 /* MyContactList.m in Sources */,
 				030AF5F41D41BDE6004C451F /* main.m in Sources */,
 			);

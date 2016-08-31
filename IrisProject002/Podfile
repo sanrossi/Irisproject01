@@ -18,6 +18,7 @@ target 'IrisProject001' do
     inherit! :search_paths
     # Pods for testing
   end
+  pod 'PNChart'
   
 
 end

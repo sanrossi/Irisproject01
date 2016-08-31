@@ -21,10 +21,6 @@
 		035C2CC31D752B7F00CD00F2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 035C2CC21D752B7F00CD00F2 /* CoreGraphics.framework */; };
 		035C2CCC1D75557900CD00F2 /* FetNetAnalysisChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 035C2CCB1D75557900CD00F2 /* FetNetAnalysisChartViewController.m */; };
 		035C2CCF1D75559100CD00F2 /* TWAnalysisChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 035C2CCE1D75559100CD00F2 /* TWAnalysisChartViewController.m */; };
-		035C2CD31D75748400CD00F2 /* airport.png in Resources */ = {isa = PBXBuildFile; fileRef = 035C2CD01D75748400CD00F2 /* airport.png */; };
-		035C2CD41D75748400CD00F2 /* hotairballoon.png in Resources */ = {isa = PBXBuildFile; fileRef = 035C2CD11D75748400CD00F2 /* hotairballoon.png */; };
-		035C2CD51D75748400CD00F2 /* boat.png in Resources */ = {isa = PBXBuildFile; fileRef = 035C2CD21D75748400CD00F2 /* boat.png */; };
-		035C2CD91D75769500CD00F2 /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = 035C2CD81D75769500CD00F2 /* home.png */; };
 		0369A4921D75DCB900092F7C /* CHTbtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 0369A4911D75DCB900092F7C /* CHTbtn.png */; };
 		0369A4951D75DDEA00092F7C /* FetNetbtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 0369A4931D75DDEA00092F7C /* FetNetbtn.png */; };
 		0369A4961D75DDEA00092F7C /* TWbtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 0369A4941D75DDEA00092F7C /* TWbtn.png */; };
@@ -35,6 +31,11 @@
 		03A039A01D499C9700B017F8 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03A0399F1D499C9700B017F8 /* Contacts.framework */; };
 		03A039A21D499CA500B017F8 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03A039A11D499CA500B017F8 /* AddressBook.framework */; };
 		03A039A51D499D8F00B017F8 /* MyContactList.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A039A41D499D8F00B017F8 /* MyContactList.m */; };
+		03A1F5A61D769C02003EEB62 /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = 03A1F5A51D769C02003EEB62 /* home.png */; };
+		03A1F5AE1D76A149003EEB62 /* hotairballoon.png in Resources */ = {isa = PBXBuildFile; fileRef = 03A1F5AD1D76A149003EEB62 /* hotairballoon.png */; };
+		03A1F5B01D76A21F003EEB62 /* CHTHome.png in Resources */ = {isa = PBXBuildFile; fileRef = 03A1F5AF1D76A21F003EEB62 /* CHTHome.png */; };
+		03A1F5B41D76A389003EEB62 /* FetNetHome.png in Resources */ = {isa = PBXBuildFile; fileRef = 03A1F5B31D76A389003EEB62 /* FetNetHome.png */; };
+		03A1F5B61D76A38D003EEB62 /* TWHome.png in Resources */ = {isa = PBXBuildFile; fileRef = 03A1F5B51D76A38D003EEB62 /* TWHome.png */; };
 		03B2D1771D6C17C500572A8A /* VMGearLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B2D1761D6C17C500572A8A /* VMGearLoadingView.m */; };
 		03B2D1811D6C180C00572A8A /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B2D1781D6C180C00572A8A /* background@2x.png */; };
 		03B2D1821D6C180C00572A8A /* background@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B2D1791D6C180C00572A8A /* background@3x.png */; };
@@ -93,10 +94,6 @@
 		035C2CCB1D75557900CD00F2 /* FetNetAnalysisChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetNetAnalysisChartViewController.m; sourceTree = "<group>"; };
 		035C2CCD1D75559100CD00F2 /* TWAnalysisChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWAnalysisChartViewController.h; sourceTree = "<group>"; };
 		035C2CCE1D75559100CD00F2 /* TWAnalysisChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWAnalysisChartViewController.m; sourceTree = "<group>"; };
-		035C2CD01D75748400CD00F2 /* airport.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airport.png; sourceTree = "<group>"; };
-		035C2CD11D75748400CD00F2 /* hotairballoon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hotairballoon.png; sourceTree = "<group>"; };
-		035C2CD21D75748400CD00F2 /* boat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = boat.png; sourceTree = "<group>"; };
-		035C2CD81D75769500CD00F2 /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
 		0369A4911D75DCB900092F7C /* CHTbtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CHTbtn.png; sourceTree = "<group>"; };
 		0369A4931D75DDEA00092F7C /* FetNetbtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FetNetbtn.png; sourceTree = "<group>"; };
 		0369A4941D75DDEA00092F7C /* TWbtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TWbtn.png; sourceTree = "<group>"; };
@@ -112,6 +109,11 @@
 		03A039A11D499CA500B017F8 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		03A039A31D499D8F00B017F8 /* MyContactList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyContactList.h; sourceTree = "<group>"; };
 		03A039A41D499D8F00B017F8 /* MyContactList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyContactList.m; sourceTree = "<group>"; };
+		03A1F5A51D769C02003EEB62 /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
+		03A1F5AD1D76A149003EEB62 /* hotairballoon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hotairballoon.png; sourceTree = "<group>"; };
+		03A1F5AF1D76A21F003EEB62 /* CHTHome.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CHTHome.png; sourceTree = "<group>"; };
+		03A1F5B31D76A389003EEB62 /* FetNetHome.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FetNetHome.png; sourceTree = "<group>"; };
+		03A1F5B51D76A38D003EEB62 /* TWHome.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TWHome.png; sourceTree = "<group>"; };
 		03B2D1751D6C17C500572A8A /* VMGearLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VMGearLoadingView.h; sourceTree = "<group>"; };
 		03B2D1761D6C17C500572A8A /* VMGearLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VMGearLoadingView.m; sourceTree = "<group>"; };
 		03B2D1781D6C180C00572A8A /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
@@ -200,14 +202,7 @@
 				03B2D18A1D6C1BEA00572A8A /* image */,
 				03B2D1751D6C17C500572A8A /* VMGearLoadingView.h */,
 				03B2D1761D6C17C500572A8A /* VMGearLoadingView.m */,
-				0369A4911D75DCB900092F7C /* CHTbtn.png */,
-				0369A4931D75DDEA00092F7C /* FetNetbtn.png */,
-				0369A4941D75DDEA00092F7C /* TWbtn.png */,
-				035C2CD81D75769500CD00F2 /* home.png */,
-				035C2CD01D75748400CD00F2 /* airport.png */,
-				035C2CD11D75748400CD00F2 /* hotairballoon.png */,
-				035C2CD21D75748400CD00F2 /* boat.png */,
-				03C848BB1D5B08720010CECF /* button.png */,
+				03A1F5B81D76A98D003EEB62 /* HomeImage */,
 				03922FD81D48929C009C3E0F /* CarriersViewController.h */,
 				03922FD91D48929C009C3E0F /* CarriersViewController.m */,
 				035C2CC71D75546600CD00F2 /* CHT */,
@@ -283,6 +278,22 @@
 				035C2CCE1D75559100CD00F2 /* TWAnalysisChartViewController.m */,
 			);
 			name = TW;
+			sourceTree = "<group>";
+		};
+		03A1F5B81D76A98D003EEB62 /* HomeImage */ = {
+			isa = PBXGroup;
+			children = (
+				03A1F5AF1D76A21F003EEB62 /* CHTHome.png */,
+				0369A4911D75DCB900092F7C /* CHTbtn.png */,
+				03A1F5AD1D76A149003EEB62 /* hotairballoon.png */,
+				0369A4931D75DDEA00092F7C /* FetNetbtn.png */,
+				03A1F5B31D76A389003EEB62 /* FetNetHome.png */,
+				0369A4941D75DDEA00092F7C /* TWbtn.png */,
+				03A1F5B51D76A38D003EEB62 /* TWHome.png */,
+				03A1F5A51D769C02003EEB62 /* home.png */,
+				03C848BB1D5B08720010CECF /* button.png */,
+			);
+			name = HomeImage;
 			sourceTree = "<group>";
 		};
 		03B2D18A1D6C1BEA00572A8A /* image */ = {
@@ -441,19 +452,20 @@
 			files = (
 				03B2D1871D6C180C00572A8A /* gears 3@2x.png in Resources */,
 				030AF6021D41BDE6004C451F /* LaunchScreen.storyboard in Resources */,
-				035C2CD41D75748400CD00F2 /* hotairballoon.png in Resources */,
-				035C2CD31D75748400CD00F2 /* airport.png in Resources */,
+				03A1F5B01D76A21F003EEB62 /* CHTHome.png in Resources */,
 				03B2D1821D6C180C00572A8A /* background@3x.png in Resources */,
 				03C848BC1D5B08720010CECF /* button.png in Resources */,
-				035C2CD91D75769500CD00F2 /* home.png in Resources */,
 				030AF5FF1D41BDE6004C451F /* Assets.xcassets in Resources */,
+				03A1F5B61D76A38D003EEB62 /* TWHome.png in Resources */,
 				0369A4921D75DCB900092F7C /* CHTbtn.png in Resources */,
+				03A1F5A61D769C02003EEB62 /* home.png in Resources */,
 				03B2D1851D6C180C00572A8A /* gears 2@2x.png in Resources */,
 				03B2D1811D6C180C00572A8A /* background@2x.png in Resources */,
 				03B2D1841D6C180C00572A8A /* gears 1@3x.png in Resources */,
 				03B2D1831D6C180C00572A8A /* gears 1@2x.png in Resources */,
+				03A1F5B41D76A389003EEB62 /* FetNetHome.png in Resources */,
 				03B2D1891D6C180C00572A8A /* imgDemo.png in Resources */,
-				035C2CD51D75748400CD00F2 /* boat.png in Resources */,
+				03A1F5AE1D76A149003EEB62 /* hotairballoon.png in Resources */,
 				030AF5FD1D41BDE6004C451F /* Main.storyboard in Resources */,
 				0369A4951D75DDEA00092F7C /* FetNetbtn.png in Resources */,
 				03B2D1861D6C180C00572A8A /* gears 2@3x.png in Resources */,

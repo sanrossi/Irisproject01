@@ -8,12 +8,10 @@
 
 #import "CarriersViewController.h"
 
-@interface CarriersViewController ()
-@property (weak, nonatomic) IBOutlet UILabel *date;
+@interface CarriersViewController ()@property (weak, nonatomic) IBOutlet UILabel *date;
 @property (weak, nonatomic) IBOutlet UILabel *dayoftheweek;
 @property (weak, nonatomic) IBOutlet UILabel *monthandyear;
-@property (weak, nonatomic) IBOutlet UIImageView *TWimage;
-@property (weak, nonatomic) IBOutlet UIImageView *CHTimage;
+
 
 
 @end
@@ -24,6 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+   
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"zh_Hant_TW"]];
     [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"Asia/Taipei"]];
@@ -57,9 +56,8 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    
-//    [UIView animateWithDuration:1.0 animations:^{self.TWimage
-//        = CGRectMake(self.TWimage.center.x +10 , self.TWimage.center.y+10)} completion:];
+//    
+//    [UIView animateWithDuration:1.0 delay:0 options:UIViewAnimationOptionRepeat animations:^{self.TWimage.alpha = 0.0;} completion:^(BOOL finished){ self.TWimage.transform= ; }];
 
 }
 

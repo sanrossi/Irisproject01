@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@interface NETCount : NSObject
-
+#import <CoreData/CoreData.h>
+@interface NETCount : NSManagedObject
+@property(nonatomic)NSNumber *innerNetCount;
+@property(nonatomic)NSNumber *outerNetCount;
+@property(nonatomic)NSNumber *localPhoneCount;
+@property(nonatomic)NSNumber *otherPhoneCount;
 @end

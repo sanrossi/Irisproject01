@@ -2,6 +2,42 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:NETCount+CoreDataProperties.h">
+   </FileRef>
+   <FileRef
+      location = "group:NETCount+CoreDataProperties.m">
+   </FileRef>
+   <FileRef
+      location = "group:NETCount.h">
+   </FileRef>
+   <FileRef
+      location = "group:NETCount.m">
+   </FileRef>
+   <FileRef
+      location = "group:FetNetLoginDetail+CoreDataProperties.h">
+   </FileRef>
+   <FileRef
+      location = "group:FetNetLoginDetail+CoreDataProperties.m">
+   </FileRef>
+   <FileRef
+      location = "group:FetNetLoginDetail.h">
+   </FileRef>
+   <FileRef
+      location = "group:FetNetLoginDetail.m">
+   </FileRef>
+   <FileRef
+      location = "group:CHTLoginDetail+CoreDataProperties.h">
+   </FileRef>
+   <FileRef
+      location = "group:CHTLoginDetail+CoreDataProperties.m">
+   </FileRef>
+   <FileRef
+      location = "group:CHTLoginDetail.h">
+   </FileRef>
+   <FileRef
+      location = "group:CHTLoginDetail.m">
+   </FileRef>
+   <FileRef
       location = "group:IrisProject001.xcodeproj">
    </FileRef>
    <FileRef

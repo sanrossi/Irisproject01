@@ -24,6 +24,8 @@
 		0369A4921D75DCB900092F7C /* CHTbtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 0369A4911D75DCB900092F7C /* CHTbtn.png */; };
 		0369A4951D75DDEA00092F7C /* FetNetbtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 0369A4931D75DDEA00092F7C /* FetNetbtn.png */; };
 		0369A4961D75DDEA00092F7C /* TWbtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 0369A4941D75DDEA00092F7C /* TWbtn.png */; };
+		0386F9561D780A2E007BE7FC /* NETCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 0386F9551D780A2E007BE7FC /* NETCount.m */; };
+		0386F95C1D781429007BE7FC /* FetNetLoginDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 0386F95B1D781428007BE7FC /* FetNetLoginDetail.m */; };
 		03922FDA1D48929C009C3E0F /* CarriersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03922FD91D48929C009C3E0F /* CarriersViewController.m */; };
 		0394C0951D54F30E004591B5 /* TWMainFunctionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0394C0941D54F30E004591B5 /* TWMainFunctionViewController.m */; };
 		0394C0981D54F344004591B5 /* FetNetMainFunctionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0394C0971D54F344004591B5 /* FetNetMainFunctionViewController.m */; };
@@ -36,7 +38,6 @@
 		03A1F5B01D76A21F003EEB62 /* CHTHome.png in Resources */ = {isa = PBXBuildFile; fileRef = 03A1F5AF1D76A21F003EEB62 /* CHTHome.png */; };
 		03A1F5B41D76A389003EEB62 /* FetNetHome.png in Resources */ = {isa = PBXBuildFile; fileRef = 03A1F5B31D76A389003EEB62 /* FetNetHome.png */; };
 		03A1F5B61D76A38D003EEB62 /* TWHome.png in Resources */ = {isa = PBXBuildFile; fileRef = 03A1F5B51D76A38D003EEB62 /* TWHome.png */; };
-		03A1F5BE1D76BC5D003EEB62 /* LoginDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A1F5BD1D76BC5D003EEB62 /* LoginDetail.m */; };
 		03A1F5C11D76C517003EEB62 /* LoginDetailModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 03A1F5BF1D76C517003EEB62 /* LoginDetailModel.xcdatamodeld */; };
 		03A1F5C41D76C74A003EEB62 /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A1F5C31D76C74A003EEB62 /* CoreDataHelper.m */; };
 		03B181131D7723C2005E64A8 /* CHTMemberModifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B181121D7723C2005E64A8 /* CHTMemberModifyViewController.m */; };
@@ -50,6 +51,11 @@
 		03B2D1871D6C180C00572A8A /* gears 3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B2D17E1D6C180C00572A8A /* gears 3@2x.png */; };
 		03B2D1881D6C180C00572A8A /* gears 3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B2D17F1D6C180C00572A8A /* gears 3@3x.png */; };
 		03B2D1891D6C180C00572A8A /* imgDemo.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B2D1801D6C180C00572A8A /* imgDemo.png */; };
+		03B8BB5E1D783E86007E84D1 /* CHTLoginDetail+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B8BB571D783E86007E84D1 /* CHTLoginDetail+CoreDataProperties.m */; };
+		03B8BB5F1D783E86007E84D1 /* CHTLoginDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B8BB591D783E86007E84D1 /* CHTLoginDetail.m */; };
+		03C223B61D787D450010B1AB /* TWMemberModifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03C223B51D787D450010B1AB /* TWMemberModifyViewController.m */; };
+		03C223BB1D78825D0010B1AB /* TWLoginDetail+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 03C223B81D78825D0010B1AB /* TWLoginDetail+CoreDataProperties.m */; };
+		03C223BC1D78825D0010B1AB /* TWLoginDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 03C223BA1D78825D0010B1AB /* TWLoginDetail.m */; };
 		03C848BC1D5B08720010CECF /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 03C848BB1D5B08720010CECF /* button.png */; };
 		03E1AF2C1D5D60DD009B20CB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 035B4DD91D5C744700BD4A62 /* QuartzCore.framework */; };
 		2D8BA4A6512EC13F7B7217DD /* libPods-IrisProject001UITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 727DCC97A2DE91FD74B5DB5B /* libPods-IrisProject001UITests.a */; };
@@ -101,6 +107,10 @@
 		0369A4911D75DCB900092F7C /* CHTbtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CHTbtn.png; sourceTree = "<group>"; };
 		0369A4931D75DDEA00092F7C /* FetNetbtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FetNetbtn.png; sourceTree = "<group>"; };
 		0369A4941D75DDEA00092F7C /* TWbtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TWbtn.png; sourceTree = "<group>"; };
+		0386F9541D780A2E007BE7FC /* NETCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NETCount.h; sourceTree = "<group>"; };
+		0386F9551D780A2E007BE7FC /* NETCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NETCount.m; sourceTree = "<group>"; };
+		0386F95A1D781428007BE7FC /* FetNetLoginDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetNetLoginDetail.h; sourceTree = "<group>"; };
+		0386F95B1D781428007BE7FC /* FetNetLoginDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetNetLoginDetail.m; sourceTree = "<group>"; };
 		03922FD81D48929C009C3E0F /* CarriersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CarriersViewController.h; path = ../CarriersViewController.h; sourceTree = "<group>"; };
 		03922FD91D48929C009C3E0F /* CarriersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CarriersViewController.m; path = ../CarriersViewController.m; sourceTree = "<group>"; };
 		0394C0931D54F30E004591B5 /* TWMainFunctionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TWMainFunctionViewController.h; path = ../TWMainFunctionViewController.h; sourceTree = "<group>"; };
@@ -118,8 +128,6 @@
 		03A1F5AF1D76A21F003EEB62 /* CHTHome.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CHTHome.png; sourceTree = "<group>"; };
 		03A1F5B31D76A389003EEB62 /* FetNetHome.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FetNetHome.png; sourceTree = "<group>"; };
 		03A1F5B51D76A38D003EEB62 /* TWHome.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TWHome.png; sourceTree = "<group>"; };
-		03A1F5BC1D76BC5D003EEB62 /* LoginDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginDetail.h; sourceTree = "<group>"; };
-		03A1F5BD1D76BC5D003EEB62 /* LoginDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginDetail.m; sourceTree = "<group>"; };
 		03A1F5C01D76C517003EEB62 /* LoginDetailModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LoginDetailModel.xcdatamodel; sourceTree = "<group>"; };
 		03A1F5C21D76C74A003EEB62 /* CoreDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataHelper.h; sourceTree = "<group>"; };
 		03A1F5C31D76C74A003EEB62 /* CoreDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataHelper.m; sourceTree = "<group>"; };
@@ -136,6 +144,16 @@
 		03B2D17E1D6C180C00572A8A /* gears 3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gears 3@2x.png"; sourceTree = "<group>"; };
 		03B2D17F1D6C180C00572A8A /* gears 3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gears 3@3x.png"; sourceTree = "<group>"; };
 		03B2D1801D6C180C00572A8A /* imgDemo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imgDemo.png; sourceTree = "<group>"; };
+		03B8BB561D783E86007E84D1 /* CHTLoginDetail+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CHTLoginDetail+CoreDataProperties.h"; sourceTree = "<group>"; };
+		03B8BB571D783E86007E84D1 /* CHTLoginDetail+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CHTLoginDetail+CoreDataProperties.m"; sourceTree = "<group>"; };
+		03B8BB581D783E86007E84D1 /* CHTLoginDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHTLoginDetail.h; sourceTree = "<group>"; };
+		03B8BB591D783E86007E84D1 /* CHTLoginDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHTLoginDetail.m; sourceTree = "<group>"; };
+		03C223B41D787D450010B1AB /* TWMemberModifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWMemberModifyViewController.h; sourceTree = "<group>"; };
+		03C223B51D787D450010B1AB /* TWMemberModifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWMemberModifyViewController.m; sourceTree = "<group>"; };
+		03C223B71D78825D0010B1AB /* TWLoginDetail+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TWLoginDetail+CoreDataProperties.h"; sourceTree = "<group>"; };
+		03C223B81D78825D0010B1AB /* TWLoginDetail+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TWLoginDetail+CoreDataProperties.m"; sourceTree = "<group>"; };
+		03C223B91D78825D0010B1AB /* TWLoginDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWLoginDetail.h; sourceTree = "<group>"; };
+		03C223BA1D78825D0010B1AB /* TWLoginDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWLoginDetail.m; sourceTree = "<group>"; };
 		03C848BB1D5B08720010CECF /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
 		229963209E923445654B6E36 /* Pods-IrisProject001.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IrisProject001.release.xcconfig"; path = "Pods/Target Support Files/Pods-IrisProject001/Pods-IrisProject001.release.xcconfig"; sourceTree = "<group>"; };
 		37B1477CFC186AC2B98DC3F5 /* Pods-IrisProject001.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IrisProject001.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IrisProject001/Pods-IrisProject001.debug.xcconfig"; sourceTree = "<group>"; };
@@ -185,6 +203,7 @@
 		030AF5E61D41BDE6004C451F = {
 			isa = PBXGroup;
 			children = (
+				03B8BB4D1D783E74007E84D1 /* CoreData */,
 				035B4DD91D5C744700BD4A62 /* QuartzCore.framework */,
 				03A039A11D499CA500B017F8 /* AddressBook.framework */,
 				03A0399F1D499C9700B017F8 /* Contacts.framework */,
@@ -230,8 +249,10 @@
 				03A1F5C21D76C74A003EEB62 /* CoreDataHelper.h */,
 				03A1F5C31D76C74A003EEB62 /* CoreDataHelper.m */,
 				030AF5F21D41BDE6004C451F /* Supporting Files */,
-				03A1F5BC1D76BC5D003EEB62 /* LoginDetail.h */,
-				03A1F5BD1D76BC5D003EEB62 /* LoginDetail.m */,
+				0386F9541D780A2E007BE7FC /* NETCount.h */,
+				0386F9551D780A2E007BE7FC /* NETCount.m */,
+				0386F95A1D781428007BE7FC /* FetNetLoginDetail.h */,
+				0386F95B1D781428007BE7FC /* FetNetLoginDetail.m */,
 				03A1F5BF1D76C517003EEB62 /* LoginDetailModel.xcdatamodeld */,
 			);
 			path = IrisProject001;
@@ -267,9 +288,9 @@
 			isa = PBXGroup;
 			children = (
 				03A01CF81D48F22000882331 /* CHTMainFunctionViewController.h */,
+				03A01CF91D48F22000882331 /* CHTMainFunctionViewController.m */,
 				03B181111D7723C2005E64A8 /* CHTMemberModifyViewController.h */,
 				03B181121D7723C2005E64A8 /* CHTMemberModifyViewController.m */,
-				03A01CF91D48F22000882331 /* CHTMainFunctionViewController.m */,
 				035C2CBB1D75273500CD00F2 /* CHTAnalysisChartViewController.h */,
 				035C2CBC1D75273500CD00F2 /* CHTAnalysisChartViewController.m */,
 			);
@@ -294,6 +315,8 @@
 				0394C0941D54F30E004591B5 /* TWMainFunctionViewController.m */,
 				035C2CCD1D75559100CD00F2 /* TWAnalysisChartViewController.h */,
 				035C2CCE1D75559100CD00F2 /* TWAnalysisChartViewController.m */,
+				03C223B41D787D450010B1AB /* TWMemberModifyViewController.h */,
+				03C223B51D787D450010B1AB /* TWMemberModifyViewController.m */,
 			);
 			name = TW;
 			sourceTree = "<group>";
@@ -328,6 +351,21 @@
 				03B2D1801D6C180C00572A8A /* imgDemo.png */,
 			);
 			name = image;
+			sourceTree = "<group>";
+		};
+		03B8BB4D1D783E74007E84D1 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				03C223B71D78825D0010B1AB /* TWLoginDetail+CoreDataProperties.h */,
+				03C223B81D78825D0010B1AB /* TWLoginDetail+CoreDataProperties.m */,
+				03C223B91D78825D0010B1AB /* TWLoginDetail.h */,
+				03C223BA1D78825D0010B1AB /* TWLoginDetail.m */,
+				03B8BB561D783E86007E84D1 /* CHTLoginDetail+CoreDataProperties.h */,
+				03B8BB571D783E86007E84D1 /* CHTLoginDetail+CoreDataProperties.m */,
+				03B8BB581D783E86007E84D1 /* CHTLoginDetail.h */,
+				03B8BB591D783E86007E84D1 /* CHTLoginDetail.m */,
+			);
+			name = CoreData;
 			sourceTree = "<group>";
 		};
 		3021321EF7E17B564E843C22 /* Frameworks */ = {
@@ -636,19 +674,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03B8BB5E1D783E86007E84D1 /* CHTLoginDetail+CoreDataProperties.m in Sources */,
 				03A1F5C11D76C517003EEB62 /* LoginDetailModel.xcdatamodeld in Sources */,
 				030AF5F71D41BDE6004C451F /* AppDelegate.m in Sources */,
 				03B2D1771D6C17C500572A8A /* VMGearLoadingView.m in Sources */,
 				0394C0981D54F344004591B5 /* FetNetMainFunctionViewController.m in Sources */,
 				03A01CFA1D48F22000882331 /* CHTMainFunctionViewController.m in Sources */,
+				03C223BC1D78825D0010B1AB /* TWLoginDetail.m in Sources */,
 				0394C0951D54F30E004591B5 /* TWMainFunctionViewController.m in Sources */,
+				03B8BB5F1D783E86007E84D1 /* CHTLoginDetail.m in Sources */,
+				0386F95C1D781429007BE7FC /* FetNetLoginDetail.m in Sources */,
 				03A1F5C41D76C74A003EEB62 /* CoreDataHelper.m in Sources */,
+				03C223B61D787D450010B1AB /* TWMemberModifyViewController.m in Sources */,
 				035C2CBD1D75273500CD00F2 /* CHTAnalysisChartViewController.m in Sources */,
 				03922FDA1D48929C009C3E0F /* CarriersViewController.m in Sources */,
+				0386F9561D780A2E007BE7FC /* NETCount.m in Sources */,
 				035C2CCF1D75559100CD00F2 /* TWAnalysisChartViewController.m in Sources */,
-				03A1F5BE1D76BC5D003EEB62 /* LoginDetail.m in Sources */,
 				035C2CCC1D75557900CD00F2 /* FetNetAnalysisChartViewController.m in Sources */,
 				03A039A51D499D8F00B017F8 /* MyContactList.m in Sources */,
+				03C223BB1D78825D0010B1AB /* TWLoginDetail+CoreDataProperties.m in Sources */,
 				030AF5F41D41BDE6004C451F /* main.m in Sources */,
 				03B181131D7723C2005E64A8 /* CHTMemberModifyViewController.m in Sources */,
 			);

@@ -8,7 +8,12 @@
 
 #import "TWAnalysisChartViewController.h"
 
-@interface TWAnalysisChartViewController ()
+@interface TWAnalysisChartViewController (){
+    BOOL flag1;
+    
+}
+
+
 
 @end
 
@@ -18,6 +23,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

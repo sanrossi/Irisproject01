@@ -9,5 +9,8 @@
 #import "NETCount.h"
 
 @implementation NETCount
-
+@dynamic innerNetCount;
+@dynamic outerNetCount;
+@dynamic localPhoneCount;
+@dynamic otherPhoneCount;
 @end

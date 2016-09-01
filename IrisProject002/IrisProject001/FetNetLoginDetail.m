@@ -9,5 +9,9 @@
 #import "FetNetLoginDetail.h"
 
 @implementation FetNetLoginDetail
+@dynamic innerNetCount;
+@dynamic outerNetCount;
+@dynamic localPhoneCount;
+@dynamic otherPhoneCount;
 
 @end

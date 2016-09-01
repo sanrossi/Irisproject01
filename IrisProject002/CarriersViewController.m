@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *monthandyear;
 
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomLayout;
 
 @end
 
@@ -26,6 +27,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSLog(@"%@",NSHomeDirectory());
     // Do any additional setup after loading the view.
    
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -55,9 +57,7 @@
 //                     animations:^{}
 //                     completion:^(BOOL finished) {}];
 
-    
-    
-
+    self.bottomLayout.constant =  [UIScreen mainScreen].bounds.size.height * 0.5;
 }
 
 -(void)viewWillAppear:(BOOL)animated{

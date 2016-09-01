@@ -5,8 +5,12 @@
 //  Created by 沈秋蕙 on 2016/8/30.
 //  Copyright © 2016年 iris shen. All rights reserved.
 //
-
+//#import "CHTLoginDetail+CoreDataProperties.h"
 #import "CHTAnalysisChartViewController.h"
+#import "CHTMainFunctionViewController.h"
+#import "CHTLoginDetail.h"
+#import "CoreDataHelper.h"
+#import "NETCount.h"
 
 @interface CHTAnalysisChartViewController ()
 
@@ -23,9 +27,44 @@
     self.leftLabel.hidden = NO;
     self.rightLabel.hidden = NO;
     
-    NSArray *items = @[[PNPieChartDataItem dataItemWithValue:10 color:PNLightGreen],
-                       [PNPieChartDataItem dataItemWithValue:20 color:PNFreshGreen description:@"網內"],
-                       [PNPieChartDataItem dataItemWithValue:40 color:PNDeepGreen description:@"網外"],
+    NSManagedObjectContext *context =[CoreDataHelper sharedInstance].managedObjectContext;
+    
+    NETCount *login1 = [NSEntityDescription insertNewObjectForEntityForName:@"NETCount" inManagedObjectContext:context];
+    CHTLoginDetail *login = [NSEntityDescription insertNewObjectForEntityForName:@"CHTLoginDetail" inManagedObjectContext:context];
+    NSNumber *myNum = [NSNumber numberWithInteger:_innerNetCount];
+    NSNumber *myNum1 = [NSNumber numberWithInteger:_outerNetCount];
+    NSNumber *myNum2 = [NSNumber numberWithInteger:_localPhoneCount];
+    NSNumber *myNum3 = [NSNumber numberWithInteger:_otherPhoneCount];
+    login1.innerNetCount=myNum;
+    NSLog(@"innerNetCount:%@",login1.innerNetCount);
+    login1.outerNetCount=myNum1;
+    login1.localPhoneCount=myNum2;
+    login1.otherPhoneCount=myNum3;
+    [login addChtLogintonetCountObject:login1];
+    [context save:nil];
+    
+    NSFetchRequest *request =[[NSFetchRequest alloc]initWithEntityName:@"NETCount"];
+    NSArray *detail=[context executeFetchRequest:request error:nil];
+    NSLog(@"%@",detail);
+    
+   // for(int i=0;i<detail.count;i++){
+    NETCount *loginDetail = [detail objectAtIndex:0];
+    NSInteger innerNum = [loginDetail.innerNetCount integerValue];
+    NSInteger outerNum = [loginDetail.outerNetCount integerValue];
+    NSInteger localPhoneNum = [loginDetail.localPhoneCount integerValue];
+    NSInteger otherPhoneNum = [loginDetail.otherPhoneCount integerValue];
+//        if(loginDetail=nil;
+//
+//    NSManagedObject *board = boardList[0];
+//    [board setValue:newBoardName forKey:@"name"];
+//    
+//    然後使用 [context save:nil] 即可存進資料庫
+    
+    
+    NSArray *items = @[[PNPieChartDataItem dataItemWithValue:innerNum color:PNLightGreen description:@"網內"],
+                       [PNPieChartDataItem dataItemWithValue:outerNum color:PNFreshGreen description:@"網外"],
+                       [PNPieChartDataItem dataItemWithValue:localPhoneNum color:PNDeepGreen description:@"市話"],
+                       [PNPieChartDataItem dataItemWithValue:otherPhoneNum color:PNCleanGrey description:@"其他"]
                        ];
     
     self.pieChart = [[PNPieChart alloc] initWithFrame:CGRectMake(SCREEN_WIDTH /2.0 - 100, 135, 200.0, 200.0) items:items];
@@ -46,9 +85,9 @@
     
     [self.view addSubview:self.pieChart];
 //    self.changeValueButton.hidden = YES;
+    }
 
 
-}
 
 - (IBAction)rightSwitchChanged:(id)sender {
 

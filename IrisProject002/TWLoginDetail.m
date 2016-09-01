@@ -7,7 +7,10 @@
 //
 
 #import "TWLoginDetail.h"
+#import "NETCount.h"
 
 @implementation TWLoginDetail
+
+// Insert code here to add functionality to your managed object subclass
 
 @end

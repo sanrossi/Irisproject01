@@ -1,10 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15F34" minimumToolsVersion="Xcode 7.0">
-    <entity name="LoginDetail" representedClassName=".LoginDetail" syncable="YES">
+    <entity name="CHTLoginDetail" representedClassName=".CHTLoginDetail" syncable="YES">
         <attribute name="chtLogin" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="chtPassword" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="chtLogintonetCount" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="NETCount" inverseName="chtLogintoNetcount" inverseEntity="NETCount" syncable="YES"/>
+    </entity>
+    <entity name="FetNetLoginDetail" representedClassName=".FetNetLoginDetail" syncable="YES">
+        <attribute name="innerNetCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="localPhoneCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="otherPhoneCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="outerNetCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="NETCount" representedClassName=".NETCount" syncable="YES">
+        <attribute name="innerNetCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="localPhoneCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="otherPhoneCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="outerNetCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="chtLogintoNetcount" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CHTLoginDetail" inverseName="chtLogintonetCount" inverseEntity="CHTLoginDetail" syncable="YES"/>
+    </entity>
+    <entity name="TWLoginDetail" representedClassName="TWLoginDetail" syncable="YES">
+        <attribute name="twLogin" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="twPassword" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="twLogintonetCount" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="NETCount" syncable="YES"/>
     </entity>
     <elements>
-        <element name="LoginDetail" positionX="-54" positionY="-9" width="128" height="75"/>
+        <element name="CHTLoginDetail" positionX="-1134" positionY="-945" width="128" height="88"/>
+        <element name="FetNetLoginDetail" positionX="-1127" positionY="-612" width="128" height="105"/>
+        <element name="NETCount" positionX="-774" positionY="-864" width="128" height="118"/>
+        <element name="TWLoginDetail" positionX="-1125" positionY="-792" width="128" height="88"/>
     </elements>
 </model>

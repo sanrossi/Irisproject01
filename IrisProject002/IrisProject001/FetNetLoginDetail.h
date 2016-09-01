@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@interface FetNetLoginDetail : NSObject
-
+#import <CoreData/CoreData.h>
+@interface FetNetLoginDetail : NSManagedObject
+@property(nonatomic)NSNumber *innerNetCount;
+@property(nonatomic)NSNumber *outerNetCount;
+@property(nonatomic)NSNumber *localPhoneCount;
+@property(nonatomic)NSNumber *otherPhoneCount;
 @end

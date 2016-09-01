@@ -18,7 +18,10 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightSwitch;
 @property (weak, nonatomic) IBOutlet UILabel *rightLabel;
 @property (nonatomic) PNRadarChart *radarChart;
-
+@property(nonatomic)NSInteger innerNetCount;
+@property(nonatomic)NSInteger outerNetCount;
+@property(nonatomic)NSInteger localPhoneCount;
+@property(nonatomic)NSInteger otherPhoneCount;
 
 
 

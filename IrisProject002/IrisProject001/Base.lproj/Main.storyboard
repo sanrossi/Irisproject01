@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="S2m-f0-Mp8">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -39,7 +40,7 @@
                                 <rect key="frame" x="211" y="479" width="75" height="30"/>
                                 <state key="normal" title="分析網內外"/>
                                 <connections>
-                                    <segue destination="cs8-Ws-QWY" kind="push" id="oBG-Uf-kLZ"/>
+                                    <segue destination="cs8-Ws-QWY" kind="push" identifier="CHTPieChart" id="oBG-Uf-kLZ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ufx-R8-TmB">
@@ -87,10 +88,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CHTHome.png" translatesAutoresizingMaskIntoConstraints="NO" id="mnV-DV-V8F">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="會員資料" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rsx-cK-qBn">
                                 <rect key="frame" x="124" y="109" width="72" height="42"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="emome帳號：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gbx-fm-uxe">
@@ -124,9 +128,6 @@
                                     <action selector="checkBtn:" destination="xhM-ls-LMp" eventType="touchUpInside" id="8yq-Vj-Ong"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CHTHome.png" translatesAutoresizingMaskIntoConstraints="NO" id="mnV-DV-V8F">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -214,7 +215,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mpg-W6-ukG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1635" y="-1211"/>
+            <point key="canvasLocation" x="1635" y="-1210.9999999999998"/>
         </scene>
         <!--Carriers View Controller-->
         <scene sceneID="l8N-3h-hAB">
@@ -228,8 +229,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home.png" translatesAutoresizingMaskIntoConstraints="NO" id="gPm-i3-PTy">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="home.png" translatesAutoresizingMaskIntoConstraints="NO" id="gPm-i3-PTy">
+                                <rect key="frame" x="1" y="64" width="320" height="504"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LaO-wS-b41">
                                 <rect key="frame" x="263" y="471" width="44" height="32"/>
@@ -240,17 +241,6 @@
                                 <state key="normal" title="遠傳" image="FetNetbtn.png"/>
                                 <connections>
                                     <segue destination="sWo-EG-7fR" kind="push" id="0Lu-pd-ldN"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vc3-Rd-AGw">
-                                <rect key="frame" x="41" y="325" width="72" height="33"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="72" id="Sf0-ED-fYT"/>
-                                    <constraint firstAttribute="height" constant="33" id="oTJ-Dh-iRA"/>
-                                </constraints>
-                                <state key="normal" title="中華電信" image="CHTbtn.png"/>
-                                <connections>
-                                    <segue destination="D3k-NR-Tme" kind="push" id="PvX-2l-q4J"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="60" translatesAutoresizingMaskIntoConstraints="NO" id="3I3-qx-EgX">
@@ -289,8 +279,8 @@
                                 <color key="shadowColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uDb-Hh-kCn">
-                                <rect key="frame" x="200" y="284" width="75" height="33"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uDb-Hh-kCn">
+                                <rect key="frame" x="204" y="247" width="75" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="75" id="3Cg-Jv-b2Z"/>
                                     <constraint firstAttribute="height" constant="33" id="6Hi-03-xzw"/>
@@ -300,9 +290,21 @@
                                     <segue destination="SwV-3u-CGS" kind="push" id="MgO-oE-SqR"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vc3-Rd-AGw">
+                                <rect key="frame" x="45" y="299" width="72" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="72" id="Sf0-ED-fYT"/>
+                                    <constraint firstAttribute="height" constant="33" id="oTJ-Dh-iRA"/>
+                                </constraints>
+                                <state key="normal" title="中華電信" image="CHTbtn.png"/>
+                                <connections>
+                                    <segue destination="D3k-NR-Tme" kind="push" id="PvX-2l-q4J"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="vc3-Rd-AGw" firstAttribute="width" secondItem="gPm-i3-PTy" secondAttribute="height" multiplier="1:7" id="0sI-SP-lIb"/>
                             <constraint firstItem="XCx-Hu-vKX" firstAttribute="top" secondItem="vc3-Rd-AGw" secondAttribute="bottom" priority="800" constant="210" id="4Wi-TS-2rh"/>
                             <constraint firstItem="C2S-kd-8Ky" firstAttribute="leading" secondItem="MQa-d1-xBQ" secondAttribute="leading" id="5Jl-B4-hfQ"/>
                             <constraint firstItem="vc3-Rd-AGw" firstAttribute="leading" secondItem="qU5-68-HDK" secondAttribute="leading" constant="41" id="8MO-u6-Igv"/>
@@ -324,6 +326,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="LHL-RH-Rrp"/>
                     <connections>
+                        <outlet property="bottomLayout" destination="4Wi-TS-2rh" id="Wp5-Vf-0Bq"/>
                         <outlet property="date" destination="3I3-qx-EgX" id="PCk-54-wvO"/>
                         <outlet property="dayoftheweek" destination="C2S-kd-8Ky" id="oD7-5S-rFf"/>
                         <outlet property="monthandyear" destination="MQa-d1-xBQ" id="awL-Za-Yx4"/>
@@ -386,7 +389,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UBv-BA-d7n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1211" y="546"/>
+            <point key="canvasLocation" x="1211" y="545.99999999999989"/>
         </scene>
         <!--Fet Net Analysis Chart View Controller-->
         <scene sceneID="j2g-UN-tSH">
@@ -418,10 +421,10 @@
             </objects>
             <point key="canvasLocation" x="1756" y="694"/>
         </scene>
-        <!--View Controller-->
+        <!--Member Modify View Controller-->
         <scene sceneID="dys-wl-VuJ">
             <objects>
-                <viewController id="4Xg-VG-tgi" sceneMemberID="viewController">
+                <viewController id="4Xg-VG-tgi" customClass="TWMemberModifyViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eaS-1T-DuL"/>
                         <viewControllerLayoutGuide type="bottom" id="G8d-53-39y"/>
@@ -433,13 +436,13 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="帳號" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ShX-GU-yx1">
                                 <rect key="frame" x="62" y="458" width="34" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="密碼" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9XZ-xv-hTC">
                                 <rect key="frame" x="62" y="501" width="34" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ccK-8Z-avj">
@@ -459,6 +462,34 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TWHome.png" translatesAutoresizingMaskIntoConstraints="NO" id="KpA-em-EUl">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="密碼：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e8L-Av-Gb2">
+                                <rect key="frame" x="66" y="496" width="51" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="z4h-gc-SWs">
+                                <rect key="frame" x="181" y="437" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mS6-JB-uTx">
+                                <rect key="frame" x="181" y="493" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dbq-Nj-JNh">
+                                <rect key="frame" x="139" y="128" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="帳號：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ItT-rP-cU1">
+                                <rect key="frame" x="66" y="432" width="55" height="40"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -469,10 +500,14 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="oHE-cv-PP5"/>
+                    <connections>
+                        <outlet property="TWLogin" destination="z4h-gc-SWs" id="6gG-hp-K4b"/>
+                        <outlet property="TWPassWord" destination="mS6-JB-uTx" id="NhA-ia-DOn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BwK-9d-7Vd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2224" y="713"/>
+            <point key="canvasLocation" x="2143" y="734"/>
         </scene>
         <!--Main Function View Controller-->
         <scene sceneID="Zee-H8-tlc">
@@ -582,7 +617,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yqt-SK-3Bn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="197" y="63.999999999999993"/>
+            <point key="canvasLocation" x="197" y="63.999999999999979"/>
         </scene>
     </scenes>
     <resources>

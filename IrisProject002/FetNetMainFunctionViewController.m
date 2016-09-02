@@ -26,6 +26,10 @@
 @property(nonatomic)UITextField *FetNetLogin;
 @property(nonatomic)UITextField *FetNetPassword;
 @property(nonatomic)NSString *FromWhichCompany;
+
+
+
+
 @end
 
 @implementation FetNetMainFunctionViewController
@@ -51,6 +55,7 @@
     _ContactFamilyNameArray =[[MyContactList sharedContacts]ContactFamilyNameArray];
     _ContactGivenNameArray =[[MyContactList sharedContacts]ContactGivenNameArray];
     NSLog(@"ttttttt%@",_TheFirstPhoneNumberArray);
+  
 
 }
 

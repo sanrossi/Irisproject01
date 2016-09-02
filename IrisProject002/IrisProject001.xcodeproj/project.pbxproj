@@ -24,7 +24,6 @@
 		0369A4921D75DCB900092F7C /* CHTbtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 0369A4911D75DCB900092F7C /* CHTbtn.png */; };
 		0369A4951D75DDEA00092F7C /* FetNetbtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 0369A4931D75DDEA00092F7C /* FetNetbtn.png */; };
 		0369A4961D75DDEA00092F7C /* TWbtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 0369A4941D75DDEA00092F7C /* TWbtn.png */; };
-		0386F9561D780A2E007BE7FC /* NETCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 0386F9551D780A2E007BE7FC /* NETCount.m */; };
 		0386F95C1D781429007BE7FC /* FetNetLoginDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 0386F95B1D781428007BE7FC /* FetNetLoginDetail.m */; };
 		03922FDA1D48929C009C3E0F /* CarriersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03922FD91D48929C009C3E0F /* CarriersViewController.m */; };
 		0394C0951D54F30E004591B5 /* TWMainFunctionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0394C0941D54F30E004591B5 /* TWMainFunctionViewController.m */; };
@@ -51,6 +50,11 @@
 		03B2D1871D6C180C00572A8A /* gears 3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B2D17E1D6C180C00572A8A /* gears 3@2x.png */; };
 		03B2D1881D6C180C00572A8A /* gears 3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B2D17F1D6C180C00572A8A /* gears 3@3x.png */; };
 		03B2D1891D6C180C00572A8A /* imgDemo.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B2D1801D6C180C00572A8A /* imgDemo.png */; };
+		03B3D8D11D79392A00EC47D1 /* WriteBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B3D8CE1D79392A00EC47D1 /* WriteBack.png */; };
+		03B3D8D31D793FF100EC47D1 /* ModifyMB.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B3D8D21D793FF100EC47D1 /* ModifyMB.png */; };
+		03B3D8D51D79404F00EC47D1 /*  Analysis chart.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B3D8D41D79404F00EC47D1 /*  Analysis chart.png */; };
+		03B3D8DA1D79777B00EC47D1 /* NETCount+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B3D8D71D79777B00EC47D1 /* NETCount+CoreDataProperties.m */; };
+		03B3D8DB1D79777B00EC47D1 /* NETCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B3D8D91D79777B00EC47D1 /* NETCount.m */; };
 		03B8BB5E1D783E86007E84D1 /* CHTLoginDetail+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B8BB571D783E86007E84D1 /* CHTLoginDetail+CoreDataProperties.m */; };
 		03B8BB5F1D783E86007E84D1 /* CHTLoginDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B8BB591D783E86007E84D1 /* CHTLoginDetail.m */; };
 		03C223B61D787D450010B1AB /* TWMemberModifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03C223B51D787D450010B1AB /* TWMemberModifyViewController.m */; };
@@ -107,8 +111,6 @@
 		0369A4911D75DCB900092F7C /* CHTbtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CHTbtn.png; sourceTree = "<group>"; };
 		0369A4931D75DDEA00092F7C /* FetNetbtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FetNetbtn.png; sourceTree = "<group>"; };
 		0369A4941D75DDEA00092F7C /* TWbtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TWbtn.png; sourceTree = "<group>"; };
-		0386F9541D780A2E007BE7FC /* NETCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NETCount.h; sourceTree = "<group>"; };
-		0386F9551D780A2E007BE7FC /* NETCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NETCount.m; sourceTree = "<group>"; };
 		0386F95A1D781428007BE7FC /* FetNetLoginDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetNetLoginDetail.h; sourceTree = "<group>"; };
 		0386F95B1D781428007BE7FC /* FetNetLoginDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetNetLoginDetail.m; sourceTree = "<group>"; };
 		03922FD81D48929C009C3E0F /* CarriersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CarriersViewController.h; path = ../CarriersViewController.h; sourceTree = "<group>"; };
@@ -144,6 +146,13 @@
 		03B2D17E1D6C180C00572A8A /* gears 3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gears 3@2x.png"; sourceTree = "<group>"; };
 		03B2D17F1D6C180C00572A8A /* gears 3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gears 3@3x.png"; sourceTree = "<group>"; };
 		03B2D1801D6C180C00572A8A /* imgDemo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imgDemo.png; sourceTree = "<group>"; };
+		03B3D8CE1D79392A00EC47D1 /* WriteBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WriteBack.png; sourceTree = "<group>"; };
+		03B3D8D21D793FF100EC47D1 /* ModifyMB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ModifyMB.png; sourceTree = "<group>"; };
+		03B3D8D41D79404F00EC47D1 /*  Analysis chart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = " Analysis chart.png"; sourceTree = "<group>"; };
+		03B3D8D61D79777B00EC47D1 /* NETCount+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NETCount+CoreDataProperties.h"; sourceTree = "<group>"; };
+		03B3D8D71D79777B00EC47D1 /* NETCount+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NETCount+CoreDataProperties.m"; sourceTree = "<group>"; };
+		03B3D8D81D79777B00EC47D1 /* NETCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NETCount.h; sourceTree = "<group>"; };
+		03B3D8D91D79777B00EC47D1 /* NETCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NETCount.m; sourceTree = "<group>"; };
 		03B8BB561D783E86007E84D1 /* CHTLoginDetail+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CHTLoginDetail+CoreDataProperties.h"; sourceTree = "<group>"; };
 		03B8BB571D783E86007E84D1 /* CHTLoginDetail+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CHTLoginDetail+CoreDataProperties.m"; sourceTree = "<group>"; };
 		03B8BB581D783E86007E84D1 /* CHTLoginDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHTLoginDetail.h; sourceTree = "<group>"; };
@@ -249,8 +258,6 @@
 				03A1F5C21D76C74A003EEB62 /* CoreDataHelper.h */,
 				03A1F5C31D76C74A003EEB62 /* CoreDataHelper.m */,
 				030AF5F21D41BDE6004C451F /* Supporting Files */,
-				0386F9541D780A2E007BE7FC /* NETCount.h */,
-				0386F9551D780A2E007BE7FC /* NETCount.m */,
 				0386F95A1D781428007BE7FC /* FetNetLoginDetail.h */,
 				0386F95B1D781428007BE7FC /* FetNetLoginDetail.m */,
 				03A1F5BF1D76C517003EEB62 /* LoginDetailModel.xcdatamodeld */,
@@ -340,6 +347,9 @@
 		03B2D18A1D6C1BEA00572A8A /* image */ = {
 			isa = PBXGroup;
 			children = (
+				03B3D8D41D79404F00EC47D1 /*  Analysis chart.png */,
+				03B3D8CE1D79392A00EC47D1 /* WriteBack.png */,
+				03B3D8D21D793FF100EC47D1 /* ModifyMB.png */,
 				03B2D1781D6C180C00572A8A /* background@2x.png */,
 				03B2D1791D6C180C00572A8A /* background@3x.png */,
 				03B2D17A1D6C180C00572A8A /* gears 1@2x.png */,
@@ -356,6 +366,10 @@
 		03B8BB4D1D783E74007E84D1 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				03B3D8D61D79777B00EC47D1 /* NETCount+CoreDataProperties.h */,
+				03B3D8D71D79777B00EC47D1 /* NETCount+CoreDataProperties.m */,
+				03B3D8D81D79777B00EC47D1 /* NETCount.h */,
+				03B3D8D91D79777B00EC47D1 /* NETCount.m */,
 				03C223B71D78825D0010B1AB /* TWLoginDetail+CoreDataProperties.h */,
 				03C223B81D78825D0010B1AB /* TWLoginDetail+CoreDataProperties.m */,
 				03C223B91D78825D0010B1AB /* TWLoginDetail.h */,
@@ -517,6 +531,8 @@
 				03A1F5A61D769C02003EEB62 /* home.png in Resources */,
 				03B2D1851D6C180C00572A8A /* gears 2@2x.png in Resources */,
 				03B2D1811D6C180C00572A8A /* background@2x.png in Resources */,
+				03B3D8D11D79392A00EC47D1 /* WriteBack.png in Resources */,
+				03B3D8D51D79404F00EC47D1 /*  Analysis chart.png in Resources */,
 				03B2D1841D6C180C00572A8A /* gears 1@3x.png in Resources */,
 				03B2D1831D6C180C00572A8A /* gears 1@2x.png in Resources */,
 				03A1F5B41D76A389003EEB62 /* FetNetHome.png in Resources */,
@@ -527,6 +543,7 @@
 				03B2D1861D6C180C00572A8A /* gears 2@3x.png in Resources */,
 				03B2D1881D6C180C00572A8A /* gears 3@3x.png in Resources */,
 				0369A4961D75DDEA00092F7C /* TWbtn.png in Resources */,
+				03B3D8D31D793FF100EC47D1 /* ModifyMB.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -687,10 +704,11 @@
 				03A1F5C41D76C74A003EEB62 /* CoreDataHelper.m in Sources */,
 				03C223B61D787D450010B1AB /* TWMemberModifyViewController.m in Sources */,
 				035C2CBD1D75273500CD00F2 /* CHTAnalysisChartViewController.m in Sources */,
+				03B3D8DA1D79777B00EC47D1 /* NETCount+CoreDataProperties.m in Sources */,
 				03922FDA1D48929C009C3E0F /* CarriersViewController.m in Sources */,
-				0386F9561D780A2E007BE7FC /* NETCount.m in Sources */,
 				035C2CCF1D75559100CD00F2 /* TWAnalysisChartViewController.m in Sources */,
 				035C2CCC1D75557900CD00F2 /* FetNetAnalysisChartViewController.m in Sources */,
+				03B3D8DB1D79777B00EC47D1 /* NETCount.m in Sources */,
 				03A039A51D499D8F00B017F8 /* MyContactList.m in Sources */,
 				03C223BB1D78825D0010B1AB /* TWLoginDetail+CoreDataProperties.m in Sources */,
 				030AF5F41D41BDE6004C451F /* main.m in Sources */,

@@ -37,6 +37,8 @@
 @property(nonatomic)NSMutableArray *otherphone;
 @property(nonatomic)NSMutableArray *loginaccount;
 @property(nonatomic)NSMutableArray *loginpassword;
+@property(nonatomic)NSArray *detail;
+@property(nonatomic)NSArray *fetchArray;
 
 @end
 
@@ -62,14 +64,14 @@
     _otherphone= [NSMutableArray array];
     _loginaccount=[NSMutableArray array];
     _loginpassword=[NSMutableArray array];
+    _fetchArray=[NSMutableArray array];
+    _detail=[NSArray array];
     flag3=false;
     
 
     NSManagedObjectContext *context =[CoreDataHelper sharedInstance].managedObjectContext;
-     CHTLoginDetail *login = [NSEntityDescription insertNewObjectForEntityForName:@"CHTLoginDetail" inManagedObjectContext:context];
-    if([self shouldSavetheFile:_CHTLogin.text chtPassword:_CHTLogin.text]){
-        flag3=true;
-    }
+   
+   
     
     
     
@@ -87,10 +89,16 @@
                                                    _CHTLogin = alert.textFields.firstObject;
                                                     _CHTPassword = alert.textFields.lastObject;
                                                    NSLog(@"%@",context);
-                                                   login.chtLogin=_CHTLogin.text;
-                                                   NSLog(@"%@",login.chtLogin);
-                                                   login.chtPassword=_CHTPassword.text;
+                                                   [self shouldSavetheFile:_CHTLogin.text chtPassword:_CHTPassword.text];
+                                                 
                                                    if(flag3){
+                                                        NSManagedObjectContext *context =[CoreDataHelper sharedInstance].managedObjectContext;
+                                                           CHTLoginDetail *login = [NSEntityDescription insertNewObjectForEntityForName:@"CHTLoginDetail" inManagedObjectContext:context];
+                                                       
+                                                       
+                                                       login.chtLogin=_CHTLogin.text;
+                                                       NSLog(@"%@",login.chtLogin);
+                                                       login.chtPassword=_CHTPassword.text;
                                                          if(login.chtLogin.length !=0 &&login.chtPassword.length !=0){
                                                        [context save:nil];
                                                        }
@@ -134,42 +142,79 @@
     [self loadCHTWebView];
     
     NSFetchRequest *request =[[NSFetchRequest alloc]initWithEntityName:@"CHTLoginDetail"];
+    
     NSArray *detail=[context executeFetchRequest:request error:nil];
     NSLog(@"%@",detail);
-    CHTLoginDetail *loginDetail = [detail objectAtIndex:0];
-   _CHTLogin=detail[0];
-    alert.textFields[0].text= loginDetail.chtLogin;
-    alert.textFields[1].text=loginDetail.chtPassword;
+    NSPredicate *myPrdicate=[NSPredicate predicateWithFormat:@"chtLogin == %@ && chtPassword = %@ ",nil,nil];
+ 
+    [request setPredicate:myPrdicate];
+    _fetchArray=[context executeFetchRequest:request error:nil];
+     NSLog(@"fetchArray%@",_fetchArray);
+    // 執行fetch request  return 你的搜尋結果在fetcharray中
+    
+    if(_fetchArray.count==0){
+        CHTLoginDetail *loginDetail = [detail objectAtIndex:0];
+        NSLog(@">>>>>>>>>>%@",loginDetail);
+        
+        alert.textFields[0].text= loginDetail.chtLogin;
+        alert.textFields[1].text=loginDetail.chtPassword;
+        
+    }else{
+        
+            for (CHTLoginDetail *managedObject1 in _fetchArray) {
+                [context deleteObject:managedObject1];
+                //                [context deletedObjects];
+            }
+        
+    
+            CHTLoginDetail *loginDetail = [detail objectAtIndex:0];
+            alert.textFields[0].text= loginDetail.chtLogin;
+            NSLog(@"CHTLogin:%@",alert.textFields[0].text);
+            alert.textFields[1].text=loginDetail.chtPassword;
+
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 }
 
--(BOOL)shouldSavetheFile:(NSString*)chtLoginName chtPassword:(NSString*)chtpassword{
+-(void)shouldSavetheFile:(NSString*)chtLoginName chtPassword:(NSString*)chtpassword{
     NSManagedObjectContext *context =[CoreDataHelper sharedInstance].managedObjectContext;
     NSFetchRequest *request =[[NSFetchRequest alloc]initWithEntityName:@"CHTLoginDetail"];
-    NSArray *detail=[context executeFetchRequest:request error:nil];
-    for(int i=0;i<detail.count;i++){
-        CHTLoginDetail *loginDetail = [detail objectAtIndex:i];
-        if(loginDetail.chtLogin.length !=0 &&loginDetail.chtPassword.length !=0){
-            [_loginaccount addObject:loginDetail.chtLogin];
-            [_loginpassword addObject:loginDetail.chtPassword];
-        }
-    }
-    for(int i=0;i<_loginpassword.count;i++){
-        
-        if([[_loginaccount objectAtIndex:i]length]!=0 &&[[_loginpassword objectAtIndex:i] length]!=0){
-            NSString *login=[_loginaccount objectAtIndex:i];
-            NSString *password =[_loginpassword objectAtIndex:i];
-            
-            if(![chtLoginName isEqualToString:login] && ![chtpassword isEqualToString:password]){
-                
-                return true;
+    _detail=[context executeFetchRequest:request error:nil];
+        NSPredicate *myPrdicate=[NSPredicate predicateWithFormat:@"chtLogin == %@ && chtPassword = %@ ",chtLoginName,chtpassword];
+        [request setPredicate:myPrdicate];
+    NSArray *fetchArray=[context executeFetchRequest:request error:nil];
+    // 執行fetch request  return 你的搜尋結果在fetcharray中
+    
+    if(fetchArray.count==0){
+        if(_detail.count != 0){
+            for (CHTLoginDetail *managedObject in _detail) {
+                [context deleteObject:managedObject];
+//                [context deletedObjects];
             }
-            
         }
         
-    }
-    return false;
+        flag3=true;
+    }else{
+        
+        flag3=false;
+                }
+    
 }
+
+
+
+
 
 
 //-(BOOL)shouldSavetheFile:(NSString*)chtLoginName chtPassword:(NSString*)chtpassword{
@@ -263,6 +308,18 @@
     
     
 }
+-(void)displayUIAlertAction1:(NSString *)title  message:(NSString *)message {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"確認" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        
+    }];
+    [alertController addAction:okAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+    
+    
+}
+
+
 
 -(void)displayUIAlertActionWhenWrongtype:(NSString *)title  message:(NSString *)message {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
@@ -567,6 +624,7 @@
         //改過了
     }
      [self calculateNumbersOfInternalNetwork];
+    [self displayUIAlertAction1:@"恭喜完成寫入" message:@"趕快查看您的通訊錄唷!!"];
 }
 -(void)calculateNumbersOfInternalNetwork{
     for(int count=0;count<_FormWhichCompanyList.count;count++){
@@ -601,12 +659,15 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([segue.identifier isEqualToString:@"CHTPieChart"])
     {   CHTAnalysisChartViewController *chtAnalysisChartViewController =segue.destinationViewController;
-       
-       chtAnalysisChartViewController.innerNetCount=_innerNet.count;
- 
-         chtAnalysisChartViewController.outerNetCount=_outerNet.count;
-        chtAnalysisChartViewController.localPhoneCount=_localphone.count;
-        chtAnalysisChartViewController.otherPhoneCount=_otherphone.count;
+         NSNumber *myNum = @(_innerNet.count);
+        NSNumber *myNum1 = @(_outerNet.count);
+        NSNumber *myNum2 = @(_localphone.count);
+        NSNumber *myNum3 = @(_otherphone.count);
+        
+        chtAnalysisChartViewController.innerNetCount=myNum;
+        chtAnalysisChartViewController.outerNetCount=myNum1;
+        chtAnalysisChartViewController.localPhoneCount=myNum2;
+        chtAnalysisChartViewController.otherPhoneCount=myNum3;
         
         NSLog(@"\n _innerNet.count: %ld, \n _outerNet.count: %ld, \n _outerNet.count: %ld, \n _otherphone.count: %ld", _innerNet.count, _outerNet.count, _localphone.count, _otherphone.count);
       

@@ -12,8 +12,12 @@
 #import "CoreDataHelper.h"
 #import "NETCount.h"
 
-@interface CHTAnalysisChartViewController ()
+@interface CHTAnalysisChartViewController (){
+    BOOL flag3;
 
+
+}
+@property(nonatomic)NSArray *detail;
 @end
 
 @implementation CHTAnalysisChartViewController
@@ -21,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.titleLabel.text = @"Pie Chart";
+    self.titleLabel.text = @"網內外資料分析圖";
     self.leftSwitch.hidden = NO;
  //   self.rightSwitch.hidden = NO;
     self.leftLabel.hidden = NO;
@@ -29,45 +33,46 @@
     
     NSManagedObjectContext *context =[CoreDataHelper sharedInstance].managedObjectContext;
     
-    NETCount *login1 = [NSEntityDescription insertNewObjectForEntityForName:@"NETCount" inManagedObjectContext:context];
+   NETCount *login1 = [NSEntityDescription insertNewObjectForEntityForName:@"NETCount" inManagedObjectContext:context];
     CHTLoginDetail *login = [NSEntityDescription insertNewObjectForEntityForName:@"CHTLoginDetail" inManagedObjectContext:context];
-    NSNumber *myNum = [NSNumber numberWithInteger:_innerNetCount];
-    NSNumber *myNum1 = [NSNumber numberWithInteger:_outerNetCount];
-    NSNumber *myNum2 = [NSNumber numberWithInteger:_localPhoneCount];
-    NSNumber *myNum3 = [NSNumber numberWithInteger:_otherPhoneCount];
-    login1.innerNetCount=myNum;
+    
+//-----
+//    NSFetchRequest *request1 = [NSFetchRequest fetchRequestWithEntityName:@"CHTLoginDetail"];
+//    
+//    NSArray *result = [context executeFetchRequest:request1 error:nil];
+//    CHTLoginDetail *login = (CHTLoginDetail *)result.firstObject;
+//    //-----
+    
+
+    login1.innerNetCount=_innerNetCount;
     NSLog(@"innerNetCount:%@",login1.innerNetCount);
-    login1.outerNetCount=myNum1;
-    login1.localPhoneCount=myNum2;
-    login1.otherPhoneCount=myNum3;
+    login1.outerNetCount=_outerNetCount;
+    login1.localPhoneCount=_localPhoneCount;
+    login1.otherPhoneCount=_otherPhoneCount;
+    if(flag3){
+        NSManagedObjectContext *context =[CoreDataHelper sharedInstance].managedObjectContext;
+        CHTLoginDetail *login = [NSEntityDescription insertNewObjectForEntityForName:@"NETCount" inManagedObjectContext:context];
+        
+
     [login addChtLogintonetCountObject:login1];
     [context save:nil];
-    
-    NSFetchRequest *request =[[NSFetchRequest alloc]initWithEntityName:@"NETCount"];
-    NSArray *detail=[context executeFetchRequest:request error:nil];
-    NSLog(@"%@",detail);
-    
-   // for(int i=0;i<detail.count;i++){
-    NETCount *loginDetail = [detail objectAtIndex:0];
-    NSInteger innerNum = [loginDetail.innerNetCount integerValue];
-    NSInteger outerNum = [loginDetail.outerNetCount integerValue];
-    NSInteger localPhoneNum = [loginDetail.localPhoneCount integerValue];
-    NSInteger otherPhoneNum = [loginDetail.otherPhoneCount integerValue];
-//        if(loginDetail=nil;
-//
-//    NSManagedObject *board = boardList[0];
-//    [board setValue:newBoardName forKey:@"name"];
-//    
-//    然後使用 [context save:nil] 即可存進資料庫
+    }
+
+    NSInteger innerNum = [login1.innerNetCount integerValue];
+    NSInteger outerNum = [login1.outerNetCount integerValue];
+    NSInteger localPhoneNum = [login1.localPhoneCount integerValue];
+    NSInteger otherPhoneNum = [login1.otherPhoneCount integerValue];
+
+
     
     
     NSArray *items = @[[PNPieChartDataItem dataItemWithValue:innerNum color:PNLightGreen description:@"網內"],
                        [PNPieChartDataItem dataItemWithValue:outerNum color:PNFreshGreen description:@"網外"],
                        [PNPieChartDataItem dataItemWithValue:localPhoneNum color:PNDeepGreen description:@"市話"],
-                       [PNPieChartDataItem dataItemWithValue:otherPhoneNum color:PNCleanGrey description:@"其他"]
+                       [PNPieChartDataItem dataItemWithValue:otherPhoneNum color:PNLightGreen description:@"其他"]
                        ];
     
-    self.pieChart = [[PNPieChart alloc] initWithFrame:CGRectMake(SCREEN_WIDTH /2.0 - 100, 135, 200.0, 200.0) items:items];
+    self.pieChart = [[PNPieChart alloc] initWithFrame:CGRectMake(SCREEN_WIDTH /2.0 - 100, 200, 200.0, 200.0) items:items];
     self.pieChart.descriptionTextColor = [UIColor whiteColor];
     self.pieChart.descriptionTextFont  = [UIFont fontWithName:@"Avenir-Medium" size:11.0];
     self.pieChart.descriptionTextShadowColor = [UIColor clearColor];
@@ -80,12 +85,16 @@
     self.pieChart.legendFont = [UIFont boldSystemFontOfSize:12.0f];
     
     UIView *legend = [self.pieChart getLegendWithMaxWidth:200];
-    [legend setFrame:CGRectMake(130, 350, legend.frame.size.width, legend.frame.size.height)];
+    [legend setFrame:CGRectMake(130, 480, legend.frame.size.width, legend.frame.size.height)];
     [self.view addSubview:legend];
     
     [self.view addSubview:self.pieChart];
 //    self.changeValueButton.hidden = YES;
     }
+
+
+
+
 
 
 
@@ -119,6 +128,33 @@
     
 
 }
+
+
+-(void)shouldSavetheFile:(NSInteger*)innerNet outterNet:(NSInteger*)outterNet localphone:(NSInteger*)localphone otherphone:(NSInteger*)otherphone{
+    NSManagedObjectContext *context =[CoreDataHelper sharedInstance].managedObjectContext;
+    NSFetchRequest *request =[[NSFetchRequest alloc]initWithEntityName:@"NETCount"];
+    _detail=[context executeFetchRequest:request error:nil];
+    NSPredicate *myPrdicate=[NSPredicate predicateWithFormat:@"innerNetCount == %@ && localPhoneCount == %@ &&otherPhoneCount == %@ &&otherNetCount == %@",innerNet,outterNet,localphone,otherphone];
+    [request setPredicate:myPrdicate];
+    NSArray *fetchArray=[context executeFetchRequest:request error:nil];
+    // 執行fetch request  return 你的搜尋結果在fetcharray中
+    
+    if(fetchArray.count==0){
+        if(_detail.count != 0){
+            for (CHTLoginDetail *managedObject in _detail) {
+                [context deleteObject:managedObject];
+                
+            }
+        }
+        
+        flag3=true;
+    }else{
+        
+        flag3=false;
+    }
+    
+}
+
 
 
 

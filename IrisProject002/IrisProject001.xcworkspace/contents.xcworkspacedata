@@ -2,18 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:NETCount+CoreDataProperties.h">
-   </FileRef>
-   <FileRef
-      location = "group:NETCount+CoreDataProperties.m">
-   </FileRef>
-   <FileRef
-      location = "group:NETCount.h">
-   </FileRef>
-   <FileRef
-      location = "group:NETCount.m">
-   </FileRef>
-   <FileRef
       location = "group:FetNetLoginDetail+CoreDataProperties.h">
    </FileRef>
    <FileRef

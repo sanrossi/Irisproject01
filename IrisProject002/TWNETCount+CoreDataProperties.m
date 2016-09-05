@@ -1,5 +1,5 @@
 //
-//  NETCount+CoreDataProperties.m
+//  TWNETCount+CoreDataProperties.m
 //  IrisProject001
 //
 //  Created by 沈秋蕙 on 2016/9/4.
@@ -9,9 +9,9 @@
 //  to delete and recreate this implementation file for your updated model.
 //
 
-#import "NETCount+CoreDataProperties.h"
+#import "TWNETCount+CoreDataProperties.h"
 
-@implementation NETCount (CoreDataProperties)
+@implementation TWNETCount (CoreDataProperties)
 
 @dynamic innerNetCount;
 @dynamic localPhoneCount;

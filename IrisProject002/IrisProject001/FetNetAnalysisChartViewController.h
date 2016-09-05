@@ -12,4 +12,16 @@
 
 @interface FetNetAnalysisChartViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UISwitch *leftSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *rightSwitch;
+@property (weak, nonatomic) IBOutlet UILabel *rightLabel;
+@property (weak, nonatomic) IBOutlet UILabel *leftLabel;
+@property (nonatomic) PNPieChart *pieChart;
+
+@property (nonatomic) PNRadarChart *radarChart;
+@property(nonatomic)NSNumber *innerNetCount;
+@property(nonatomic)NSNumber *outerNetCount;
+@property(nonatomic)NSNumber *localPhoneCount;
+@property(nonatomic)NSNumber *otherPhoneCount;
 @end

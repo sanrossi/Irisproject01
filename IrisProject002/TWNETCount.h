@@ -1,5 +1,5 @@
 //
-//  NETCount.h
+//  TWNETCount.h
 //  IrisProject001
 //
 //  Created by 沈秋蕙 on 2016/9/4.
@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NETCount : NSManagedObject
+@interface TWNETCount : NSManagedObject
 
 // Insert code here to declare functionality of your managed object subclass
 
@@ -19,4 +19,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
-#import "NETCount+CoreDataProperties.h"
+#import "TWNETCount+CoreDataProperties.h"

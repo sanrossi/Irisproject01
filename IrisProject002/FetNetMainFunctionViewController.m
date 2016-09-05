@@ -8,6 +8,7 @@
 
 #import "FetNetMainFunctionViewController.h"
 #import "MyContactList.h"
+#import "FetNetLoginDetail.h"
 @interface FetNetMainFunctionViewController ()<UIWebViewDelegate>
 {
     NSInteger WebPageNum;
@@ -26,7 +27,14 @@
 @property(nonatomic)UITextField *FetNetLogin;
 @property(nonatomic)UITextField *FetNetPassword;
 @property(nonatomic)NSString *FromWhichCompany;
-
+@property(nonatomic)NSArray *detail;
+@property(nonatomic)NSArray *fetchArray;
+@property(nonatomic)NSMutableArray *innerNet;
+@property(nonatomic)NSMutableArray *outerNet;
+@property(nonatomic)NSMutableArray *localphone;
+@property(nonatomic)NSMutableArray *otherphone;
+@property(nonatomic)NSMutableArray *loginaccount;
+@property(nonatomic)NSMutableArray *loginpassword;
 
 
 
@@ -44,8 +52,15 @@
     _TheFirstPhoneNumberArray = [NSMutableArray array];
     _ContactGivenNameArray= [NSMutableArray array];
     _ContactFamilyNameArray= [NSMutableArray array];
-   
-   
+    _innerNet= [NSMutableArray array];
+    _outerNet= [NSMutableArray array];
+    _localphone= [NSMutableArray array];
+    _otherphone= [NSMutableArray array];
+    _loginaccount=[NSMutableArray array];
+    _loginpassword=[NSMutableArray array];
+    _fetchArray=[NSMutableArray array];
+    _detail=[NSArray array];
+  
     //_FetNetWebView.hidden=YES;
     [self loadFetNetWebView];
     [[MyContactList sharedContacts] exportAddressBook];
@@ -108,10 +123,6 @@
     }
 
     
-    
-    
-    
-
     if (PhoneElementNum>=0 && PhoneElementNum<_totalContactsNum) {
         _PhoneNumList=_TheFirstPhoneNumberArray[PhoneElementNum];
         //正則化
@@ -203,7 +214,7 @@
     [self distinguishLandline];
     //[_FormWhichCompanyList removeObject:_FormWhichCompanyList[0]];
     NSLog(@"count%ld",_FormWhichCompanyList.count);
-    
+    if(_FormWhichCompanyList.count==_TheFirstPhoneNumberArray.count){
     for(int count=0;count<_totalContactsNum;count++)
     {
         //        //_TheFirstPhoneNumberarray//剃出第一個（後進先出）
@@ -221,13 +232,96 @@
         else{
             [[MyContactList sharedContacts]updateContactFromContact:_ContactGivenNameArray[count] NetLabel:_FormWhichCompanyList[count] ContactPhone:_TheFirstPhoneNumberArray[count]];
         }
-        
+        [self calculateNumbersOfInternalNetwork];
+        [self displayUIAlertAction1:@"恭喜完成寫入" message:@"趕快查看您的通訊錄唷!!"];
         
         //測試多按幾次會當掉
         //改過了
     }
-
+    }
+else{
+    [self calculateNumbersOfInternalNetwork];
+    [self displayUIAlertAction1:@"請檢查網路狀態" message:@"請改wifi連線!!"];
 }
+        
+        
+}
+
+
+-(void)displayUIAlertAction1:(NSString *)title  message:(NSString *)message {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"確認" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        
+    }];
+    [alertController addAction:okAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+    
+    
+}
+
+
+
+-(void)calculateNumbersOfInternalNetwork{
+    for(int count=0;count<_FormWhichCompanyList.count;count++){
+        NSString *NetNameData= _FormWhichCompanyList[count];
+        
+        NSData *unicodedStringData =
+        [NetNameData dataUsingEncoding:NSUTF8StringEncoding];
+        NSString *Netname =
+        [[NSString alloc] initWithData:unicodedStringData encoding:NSUTF8StringEncoding];
+        NSLog(@"netname:%@",Netname);
+        
+        if([Netname isEqualToString:@"網內" ]){
+            [_innerNet addObject:Netname];
+        }else if([Netname isEqualToString:@"網外"]){
+            [_outerNet addObject:Netname];
+        }else if([Netname isEqualToString:@"市話"]){
+            [_localphone addObject:Netname];
+        }else if([Netname isEqualToString:@"其他"]){
+            [_otherphone addObject:Netname];
+        }
+        
+        
+        NSLog(@"網內%ld",_innerNet.count);
+        NSLog(@"網外%ld",_outerNet.count);
+        NSLog(@"市話%ld",_localphone.count);
+        NSLog(@"其他%ld",_otherphone.count);
+        
+    }
+    
+    
+}
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([segue.identifier isEqualToString:@"FetNetPieChart"])
+    {   FetNetLoginDetail *fetnetAnalysisChartViewController =segue.destinationViewController;
+        NSNumber *myNum = @(_innerNet.count);
+        NSNumber *myNum1 = @(_outerNet.count);
+        NSNumber *myNum2 = @(_localphone.count);
+        NSNumber *myNum3 = @(_otherphone.count);
+        
+        fetnetAnalysisChartViewController.innerNetCount=myNum;
+        fetnetAnalysisChartViewController.outerNetCount=myNum1;
+        fetnetAnalysisChartViewController.localPhoneCount=myNum2;
+        fetnetAnalysisChartViewController.otherPhoneCount=myNum3;
+        
+        NSLog(@"\n _innerNet.count: %ld, \n _outerNet.count: %ld, \n _outerNet.count: %ld, \n _otherphone.count: %ld", _innerNet.count, _outerNet.count, _localphone.count, _otherphone.count);
+        
+    }
+    
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

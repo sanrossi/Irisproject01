@@ -3,7 +3,6 @@
     <entity name="CHTLoginDetail" representedClassName=".CHTLoginDetail" syncable="YES">
         <attribute name="chtLogin" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="chtPassword" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="chtLogintonetCount" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="NETCount" inverseName="chtLogintoNetcount" inverseEntity="NETCount" syncable="YES"/>
     </entity>
     <entity name="FetNetLoginDetail" representedClassName=".FetNetLoginDetail" syncable="YES">
         <attribute name="innerNetCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -16,17 +15,22 @@
         <attribute name="localPhoneCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="otherPhoneCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="outerNetCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <relationship name="chtLogintoNetcount" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CHTLoginDetail" inverseName="chtLogintonetCount" inverseEntity="CHTLoginDetail" syncable="YES"/>
     </entity>
     <entity name="TWLoginDetail" representedClassName="TWLoginDetail" syncable="YES">
         <attribute name="twLogin" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="twPassword" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="twLogintonetCount" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="NETCount" syncable="YES"/>
+    </entity>
+    <entity name="TWNETCount" representedClassName="TWNETCount" syncable="YES">
+        <attribute name="innerNetCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="localPhoneCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="otherPhoneCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="outerNetCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
     </entity>
     <elements>
-        <element name="CHTLoginDetail" positionX="-1134" positionY="-945" width="128" height="88"/>
-        <element name="FetNetLoginDetail" positionX="-1127" positionY="-612" width="128" height="105"/>
-        <element name="NETCount" positionX="-774" positionY="-864" width="128" height="118"/>
-        <element name="TWLoginDetail" positionX="-1125" positionY="-792" width="128" height="88"/>
+        <element name="CHTLoginDetail" positionX="-1134" positionY="-945" width="128" height="73"/>
+        <element name="FetNetLoginDetail" positionX="-812" positionY="-630" width="128" height="105"/>
+        <element name="NETCount" positionX="-819" positionY="-936" width="128" height="103"/>
+        <element name="TWLoginDetail" positionX="-1125" positionY="-792" width="128" height="73"/>
+        <element name="TWNETCount" positionX="-819" positionY="-774" width="128" height="103"/>
     </elements>
 </model>

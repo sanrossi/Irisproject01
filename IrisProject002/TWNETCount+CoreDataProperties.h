@@ -1,5 +1,5 @@
 //
-//  NETCount+CoreDataProperties.h
+//  TWNETCount+CoreDataProperties.h
 //  IrisProject001
 //
 //  Created by 沈秋蕙 on 2016/9/4.
@@ -9,11 +9,11 @@
 //  to delete and recreate this implementation file for your updated model.
 //
 
-#import "NETCount.h"
+#import "TWNETCount.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NETCount (CoreDataProperties)
+@interface TWNETCount (CoreDataProperties)
 
 @property (nullable, nonatomic, retain) NSNumber *innerNetCount;
 @property (nullable, nonatomic, retain) NSNumber *localPhoneCount;

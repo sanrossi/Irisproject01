@@ -8,13 +8,16 @@
 
 #import "TWMainFunctionViewController.h"
 #import "CHTMainFunctionViewController.h"
+#import "TWAnalysisChartViewController.h"
 #import "MyContactList.h"
 #import "VMGearLoadingView.h"
+#import "TWLoginDetail.h"
+#import "CoreDataHelper.h"
 @interface TWMainFunctionViewController ()<UIWebViewDelegate,UIScrollViewDelegate>
 {
     NSInteger WebPageNum;
     NSInteger PhoneElementNum;
-    
+    BOOL flag3;
     
 }
 @property (weak, nonatomic) IBOutlet UIWebView *TWWebView;
@@ -31,7 +34,12 @@
 @property(nonatomic)UIImageView *dyImageView;
 @property(nonatomic)UIImageView *dyImageViewac;
 @property(nonatomic)NSString *FromWhichCompany;
-
+@property(nonatomic)NSArray *detail;
+@property(nonatomic)NSArray *fetchArray;
+@property(nonatomic)NSMutableArray *innerNet;
+@property(nonatomic)NSMutableArray *outerNet;
+@property(nonatomic)NSMutableArray *localphone;
+@property(nonatomic)NSMutableArray *otherphone;
 
 @end
 
@@ -46,21 +54,35 @@
     _TheFirstPhoneNumberArray = [NSMutableArray array];
      _ContactGivenNameArray= [NSMutableArray array];
     _ContactFamilyNameArray= [NSMutableArray array];
+    _fetchArray=[NSMutableArray array];
+    _detail=[NSArray array];
+    _innerNet= [NSMutableArray array];
+    _outerNet= [NSMutableArray array];
+    _localphone= [NSMutableArray array];
+    _otherphone= [NSMutableArray array];
      WebPageNum =1;
     _FromWhichCompany=@"";
     //_TWWebView.scrollView.scrollEnabled = NO;
     //_TWWebView.hidden=YES;
 
-    [VMGearLoadingView showGearLoadingForView:self.view];
+    //[VMGearLoadingView showGearLoadingForView:self.view];
     [self loadTWWebView];
     
-    [VMGearLoadingView hideGearLoadingForView:self.view];
+    //[VMGearLoadingView hideGearLoadingForView:self.view];
+    
+    [[MyContactList sharedContacts] exportAddressBook];
+    _totalContactsNum=[[MyContactList sharedContacts]totalContactsNum];
+    _theFirstPhone=[[MyContactList sharedContacts]theFirstPhone];
+    _TheFirstPhoneNumberArray=[[MyContactList sharedContacts]TheFirstPhoneNumberArray];
+    _ContactFamilyNameArray =[[MyContactList sharedContacts]ContactFamilyNameArray];
+    _ContactGivenNameArray =[[MyContactList sharedContacts]ContactGivenNameArray];
+    
 
 //    double delayInSeconds = 2;
-//    
+//
 //    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
 //    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-//        
+//
 //        NSData *imageData = [self getImageFromView:_TWWebView];
 //        //[imageData writeToFile:[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"new.png"] atomically:YES];
 //        
@@ -232,6 +254,8 @@
 
 
 
+
+
 -(void)displayUIAlertAction:(NSString *)title  message:(NSString *)message{
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"確認" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
@@ -252,6 +276,70 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+//-(void)shouldSavetheFile:(NSString*)twLoginName chtPassword:(NSString*)twpassword{
+//    NSManagedObjectContext *context =[CoreDataHelper sharedInstance].managedObjectContext;
+//    NSFetchRequest *request =[[NSFetchRequest alloc]initWithEntityName:@"TWLoginDetail"];
+//     if(_detail !=0){
+//    _detail=[context executeFetchRequest:request error:nil];
+//    NSPredicate *myPrdicate=[NSPredicate predicateWithFormat:@"twLogin == %@ && twPassword = %@ ",twLoginName,twpassword];
+//    [request setPredicate:myPrdicate];
+//   
+//    NSArray *fetchArray=[context executeFetchRequest:request error:nil];
+//    // 執行fetch request  return 你的搜尋結果在fetcharray中
+//    
+//    if(fetchArray.count==0){
+//        if(_detail.count != 0){
+//            for (TWLoginDetail *managedObject in _detail) {
+//                [context deleteObject:managedObject];
+//                //                [context deletedObjects];
+//            }
+//        }
+//        
+//        flag3=true;
+//    }else{
+//        
+//        flag3=false;
+//    }
+//    
+//    }else{
+//        flag3=true;
+//    
+//    }
+//    
+//}
+
+-(void)shouldSavetheFile:(NSString*)twLoginName twPassword:(NSString*)twpassword{
+    NSManagedObjectContext *context =[CoreDataHelper sharedInstance].managedObjectContext;
+    NSFetchRequest *request =[[NSFetchRequest alloc]initWithEntityName:@"TWLoginDetail"];
+    _detail=[context executeFetchRequest:request error:nil];
+    
+    if(_detail.count != 0){
+        NSPredicate *myPrdicate=[NSPredicate predicateWithFormat:@"twLogin == %@ && twPassword = %@ ",nil,nil];
+        [request setPredicate:myPrdicate];
+        
+        _fetchArray=[context executeFetchRequest:request error:nil];
+        if(_fetchArray.count !=0){
+            NSLog(@"fetchArray:%@",_fetchArray);
+        for (TWLoginDetail *managedObject in _fetchArray) {
+            [context deleteObject:managedObject];
+            
+        }
+        }
+        flag3=true;}
+    else{
+        flag3=true;
+    }
+    
+    
+}
+
+
+
+
+
+
+
 - (void)webViewDidFinishLoad:(UIWebView *)WebView {
     self.TWWebView.scrollView.contentOffset = CGPointMake(15,473);
     //self.TWWebView.scrollView.bounces = NO;// fix the webview
@@ -268,13 +356,13 @@
         //delay one second for getting the image
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            
+          
             
             [self getImage];
-            
+      
             UIAlertController * alert= [UIAlertController
                                         alertControllerWithTitle:@"會員登入\n"
-                                        message:@"驗證碼:   ＿＿＿＿＿＿＿＿"
+                                        message:@"驗證碼:   ＿＿＿＿＿＿"
                                         preferredStyle:UIAlertControllerStyleAlert];
             
             
@@ -294,12 +382,21 @@
                                                            _TWPassword = textfields[1];
                                                            _TWChkNum =textfields[2];
                                                            [self inputtheLoginNum];
-                                                           [[MyContactList sharedContacts] exportAddressBook];
-                                                           _totalContactsNum=[[MyContactList sharedContacts]totalContactsNum];
-                                                           _theFirstPhone=[[MyContactList sharedContacts]theFirstPhone];
-                                                           _TheFirstPhoneNumberArray=[[MyContactList sharedContacts]TheFirstPhoneNumberArray];
-                                                           _ContactFamilyNameArray =[[MyContactList sharedContacts]ContactFamilyNameArray];
-                                                           _ContactGivenNameArray =[[MyContactList sharedContacts]ContactGivenNameArray];
+                                                           [self shouldSavetheFile:_TWLogin.text twPassword:_TWPassword.text];
+                                                       
+                                                           
+                                                           if(flag3){
+                                                               NSManagedObjectContext *context =[CoreDataHelper sharedInstance].managedObjectContext;
+                                                               TWLoginDetail *login = [NSEntityDescription insertNewObjectForEntityForName:@"TWLoginDetail" inManagedObjectContext:context];
+                                                               
+                                                               login.twLogin=_TWLogin.text;
+                                                               NSLog(@"%@",login.twLogin);
+                                                               login.twPassword=_TWPassword.text;
+                                                               if(login.twLogin.length !=0 &&login.twPassword.length !=0){
+                                                                   [context save:nil];
+                                                               }
+                                                           };
+
                                                            
                                                        }];
             
@@ -331,9 +428,57 @@
             
             
             
+            
+            
             [self presentViewController:alert animated:YES completion:nil];
             
-        });
+            
+            NSFetchRequest *request =[[NSFetchRequest alloc]initWithEntityName:@"TWLoginDetail"];
+            NSManagedObjectContext *context =[CoreDataHelper sharedInstance].managedObjectContext;
+            
+            if(_detail !=0){
+            NSArray *detail=[context executeFetchRequest:request error:nil];
+            NSLog(@"%@",detail);
+            NSPredicate *myPrdicate=[NSPredicate predicateWithFormat:@"twLogin == %@ && twPassword = %@ ",nil,nil];
+            
+            [request setPredicate:myPrdicate];
+            
+            _fetchArray=[context executeFetchRequest:request error:nil];
+            NSLog(@"fetchArray%@",_fetchArray);
+            // 執行fetch request  return 你的搜尋結果在fetcharray中
+            
+            if(_fetchArray.count==0){
+                if(detail.count !=0){
+                TWLoginDetail *loginDetail = [detail objectAtIndex:0];
+                NSLog(@">>>>>>>>>>%@",loginDetail);
+                
+                alert.textFields[0].text= loginDetail.twLogin;
+                alert.textFields[1].text=loginDetail.twPassword;
+                }
+            }else{
+                
+                for (TWLoginDetail *managedObject1 in _fetchArray) {
+                    [context deleteObject:managedObject1];
+                    //                [context deletedObjects];
+                }
+                
+                
+                TWLoginDetail *loginDetail = [detail objectAtIndex:0];
+                alert.textFields[0].text= loginDetail.twLogin;
+                NSLog(@"CHTLogin:%@",alert.textFields[0].text);
+                alert.textFields[1].text=loginDetail.twPassword;
+                
+            }
+            }//括號家這裡
+        
+        
+         });
+        
+    
+        
+        
+        
+        
         
         
         
@@ -341,16 +486,17 @@
     
     else if ([[[[_TWWebView request]URL]absoluteString]  isEqualToString: @"https://cs.taiwanmobile.com/wap-portal/smpQueryTwmPhoneNbr.action"]){
         switchLabel:
-        _PhoneNumList=_TheFirstPhoneNumberArray[PhoneElementNum];
-        //正則化
-        NSString *letters = @"0123456789";
-        NSCharacterSet *notLetters = [[NSCharacterSet characterSetWithCharactersInString:letters] invertedSet];
-        _PhoneNumList = [[_PhoneNumList componentsSeparatedByCharactersInSet:notLetters] componentsJoinedByString:@""];
-        NSLog(@"newString: %@", _PhoneNumList);
-        //正則化
-
+  
         if (PhoneElementNum>=0 && PhoneElementNum<_totalContactsNum) {
-
+  
+            _PhoneNumList=_TheFirstPhoneNumberArray[PhoneElementNum];
+            //正則化
+            NSString *letters = @"0123456789";
+            NSCharacterSet *notLetters = [[NSCharacterSet characterSetWithCharactersInString:letters] invertedSet];
+            _PhoneNumList = [[_PhoneNumList componentsSeparatedByCharactersInSet:notLetters] componentsJoinedByString:@""];
+            NSLog(@"newString: %@", _PhoneNumList);
+            //正則化
+            
             if((_PhoneNumList.length==10 && [_PhoneNumList hasPrefix:@"09"]) || ([_PhoneNumList hasPrefix:@"8869"] && _PhoneNumList.length==12)){
                 if([_PhoneNumList hasPrefix:@"8869"]){
                     _PhoneNumList = [_PhoneNumList substringWithRange:NSMakeRange(3,9)];
@@ -358,56 +504,91 @@
                     NSLog(@"去除886%@",_PhoneNumList);
                     
                     _PhoneNumList=[NSString stringWithFormat:@"0%@",_PhoneNumList];
-                    //去除八八六還沒有測試
+                   
                     NSLog(@"加0%@",_PhoneNumList);
                 }
-            if(_TWWebView.loading==NO){
+               
+          if(_TWWebView.loading){
                 NSString *script = [NSString stringWithFormat:@"document.getElementsByName('phoneNbr')[0].value='%@'",_PhoneNumList];
                 [_TWWebView stringByEvaluatingJavaScriptFromString:script];
-                
+              
+              double delayInSeconds = 0.3;
+              
+              dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+              dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
                 [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.forms[0].submit()"];
-                
+                  NSLog(@"+++++++++++++++++");
+              });
+
+                 }
                 }
-            }
+            
             else if([_PhoneNumList isEqualToString:@""]){
+               
                 _PhoneNumList=@"11111111111";
+                if(_TWWebView.loading){
                 NSString *script = [NSString stringWithFormat:@"document.getElementsByName('phoneNbr')[0].value='%@'",_PhoneNumList];
                 [_TWWebView stringByEvaluatingJavaScriptFromString:script];
                 
+                    double delayInSeconds = 0.3;
+                    
+                    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+                    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
                 [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.forms[0].submit()"];
+                   });
+                    
+                    }
                 
                 //改這裡
             }
             else{
+                if(_TWWebView.loading){
                 _PhoneNumList=@"11111111111";
                 NSString *script = [NSString stringWithFormat:@"document.getElementsByName('phoneNbr')[0].value='%@'",_PhoneNumList];
                 [_TWWebView stringByEvaluatingJavaScriptFromString:script];
-                
+                    double delayInSeconds = 0.3;
+                    
+                    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+                    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+         
                 [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.forms[0].submit()"];
                 
+                  });
+                    
+                }
                 //改這裡
         
             }
-           
+            
+            
             
         }
+            
+            
+      
+        
        
     }
     else if ([[[[_TWWebView request]URL]absoluteString]  isEqualToString: @"https://cs.taiwanmobile.com/wap-portal/smpCheckTwmPhoneNbr.action"]){
         
+        
+        NSLog(@"ooooooooooooooooooooo");
         if([_FromWhichCompany  isEqual:@""]){
-            if(_TWWebView.loading==NO){
+            if(_TWWebView.loading){
+               
                 _FromWhichCompany = [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByClassName('red')[0].innerHTML"];
                 
                 if([_FromWhichCompany  isEqual:@""]){
                     _FromWhichCompany = [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('font')[0].innerHTML"];
+                    
                 }
-                
+            }
+        
                 NSLog(@"didFinish: %@; stillLoading: %@", [[_TWWebView request]URL],
                       (_TWWebView.loading?@"YES":@"NO"));
                 NSLog(@"台灣大哥大:%@",_FromWhichCompany);
-                
-                
+        
+        
                 //get the information about the Internal network or external network
                 
                 if ([_FromWhichCompany isEqualToString:@"請輸入正確的手機號碼"]) {
@@ -420,30 +601,41 @@
                 //change the html to 網內外 label
                 NSLog(@"login%@",_FromWhichCompanyinfo);
                 if(_FromWhichCompanyinfo != NULL){
-                [_FormWhichCompanyList addObject:_FromWhichCompanyinfo];
-                NSLog(@"wenet:%@",_FormWhichCompanyList);
+                    [_FormWhichCompanyList addObject:_FromWhichCompanyinfo];
+                    NSLog(@"wenet:%@",_FormWhichCompanyList);
                     
                 }
-                
+                 if(_TWWebView.loading){
                 [_TWWebView stringByEvaluatingJavaScriptFromString:@"history.go(-1)"];
+                 }
+                
+            }else if(![_FromWhichCompany  isEqual:@""]){
+                 PhoneElementNum+=1;
+                _FromWhichCompany=@"";
+                 if(_TWWebView.loading){
+                [_TWWebView stringByEvaluatingJavaScriptFromString:@"history.go(-1)"];
+                 }
+                
             }
-        }else if(![_FromWhichCompany  isEqual:@""]){
-            PhoneElementNum+=1;
-            _FromWhichCompany=@"";
-            [_TWWebView stringByEvaluatingJavaScriptFromString:@"history.go(-1)"];
-        }
-  
-        
+            
+            
     }
+        
     
-
 }
 
 
+
+
+
+
+
+
+
 -(void)distinguishLandline{
-    
-    
-   
+    if(_FormWhichCompanyList.count == _TheFirstPhoneNumberArray.count+1){
+        [_FormWhichCompanyList removeObjectAtIndex:0];
+    }
     for (PhoneElementNum=0 ; PhoneElementNum<_totalContactsNum;PhoneElementNum++) {
         NSString *CheckPhoneNumList=_TheFirstPhoneNumberArray[PhoneElementNum];
         //正則化
@@ -458,7 +650,7 @@
         for(int twRegionCodElement=0;twRegionCodElement<twRegionCod.count;twRegionCodElement++){
             NSString * stringFromtwRegionCod = [twRegionCod objectAtIndex:twRegionCodElement];
             if ([CheckPhoneNumList hasPrefix:stringFromtwRegionCod]) {
-                _FormWhichCompanyList[PhoneElementNum+1]=@"市話";
+                _FormWhichCompanyList[PhoneElementNum]=@"市話";
                 
             }
             NSLog(@"市話%@",_FormWhichCompanyList);
@@ -474,9 +666,9 @@
 
 - (IBAction)writeToAddressBook:(id)sender {
     [self distinguishLandline];
-    //[_FormWhichCompanyList removeObject:_FormWhichCompanyList[0]];
     NSLog(@"count%ld",_FormWhichCompanyList.count);
-   
+
+    if(_FormWhichCompanyList.count==_TheFirstPhoneNumberArray.count){
     for(int count=0;count<_totalContactsNum;count++)
     {
         //        //_TheFirstPhoneNumberarray//剃出第一個（後進先出）
@@ -489,15 +681,20 @@
             _TheFirstPhoneNumberArray[count]=@""; }
         
         if([_ContactGivenNameArray[count] isEqual:@""]){
-            [[MyContactList sharedContacts]updateContactFromContact:_ContactFamilyNameArray[count] NetLabel:_FormWhichCompanyList[count+1] ContactPhone:_TheFirstPhoneNumberArray[count]];}
+            [[MyContactList sharedContacts]updateContactFromContact:_ContactFamilyNameArray[count] NetLabel:_FormWhichCompanyList[count] ContactPhone:_TheFirstPhoneNumberArray[count]];}
         
         else{
-            [[MyContactList sharedContacts]updateContactFromContact:_ContactGivenNameArray[count] NetLabel:_FormWhichCompanyList[count+1] ContactPhone:_TheFirstPhoneNumberArray[count]];
+            [[MyContactList sharedContacts]updateContactFromContact:_ContactGivenNameArray[count] NetLabel:_FormWhichCompanyList[count] ContactPhone:_TheFirstPhoneNumberArray[count]];
         }
-        
-        
         //測試多按幾次會當掉
- 
+        
+    }
+        [self calculateNumbersOfInternalNetwork];
+        [self displayUIAlertAction1:@"恭喜完成寫入" message:@"趕快查看您的通訊錄唷!!"];
+    }else{
+        
+        [self displayUIAlertAction1:@"請檢查網路狀態" message:@"請改wifi連線"];
+    
     }
 
     
@@ -506,6 +703,70 @@
     
 }
 
+
+-(void)displayUIAlertAction1:(NSString *)title  message:(NSString *)message {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"確認" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        
+    }];
+    [alertController addAction:okAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+    
+    
+}
+
+
+-(void)calculateNumbersOfInternalNetwork{
+    for(int count=0;count<_FormWhichCompanyList.count;count++){
+        NSString *NetNameData= _FormWhichCompanyList[count];
+        
+        NSData *unicodedStringData =
+        [NetNameData dataUsingEncoding:NSUTF8StringEncoding];
+        NSString *Netname =
+        [[NSString alloc] initWithData:unicodedStringData encoding:NSUTF8StringEncoding];
+        NSLog(@"netname:%@",Netname);
+        
+        if([Netname isEqualToString:@"網內" ]){
+            [_innerNet addObject:Netname];
+        }else if([Netname isEqualToString:@"網外"]){
+            [_outerNet addObject:Netname];
+        }else if([Netname isEqualToString:@"市話"]){
+            [_localphone addObject:Netname];
+        }else if([Netname isEqualToString:@"其他"]){
+            [_otherphone addObject:Netname];
+        }
+        
+        
+        NSLog(@"網內%ld",_innerNet.count);
+        NSLog(@"網外%ld",_outerNet.count);
+        NSLog(@"市話%ld",_localphone.count);
+        NSLog(@"其他%ld",_otherphone.count);
+        
+    }
+    
+}
+
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([segue.identifier isEqualToString:@"TWTPieChart"])
+    {   TWAnalysisChartViewController *twAnalysisChartViewController =segue.destinationViewController;
+        NSNumber *myNum = @(_innerNet.count);
+        NSNumber *myNum1 = @(_outerNet.count);
+        NSNumber *myNum2 = @(_localphone.count);
+        NSNumber *myNum3 = @(_otherphone.count);
+        
+        twAnalysisChartViewController.innerNetCount=myNum;
+        twAnalysisChartViewController.outerNetCount=myNum1;
+        twAnalysisChartViewController.localPhoneCount=myNum2;
+        twAnalysisChartViewController.otherPhoneCount=myNum3;
+        
+        NSLog(@"\n _innerNet.count: %ld, \n _outerNet.count: %ld, \n _outerNet.count: %ld, \n _otherphone.count: %ld", _innerNet.count, _outerNet.count, _localphone.count, _otherphone.count);
+        
+    }
+
+
+
+}
 
 
 /*

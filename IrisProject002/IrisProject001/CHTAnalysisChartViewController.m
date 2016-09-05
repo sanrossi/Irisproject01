@@ -30,39 +30,48 @@
  //   self.rightSwitch.hidden = NO;
     self.leftLabel.hidden = NO;
     self.rightLabel.hidden = NO;
-    
+    _detail=[NSArray array];
     NSManagedObjectContext *context =[CoreDataHelper sharedInstance].managedObjectContext;
+   
+    
+    
     
    NETCount *login1 = [NSEntityDescription insertNewObjectForEntityForName:@"NETCount" inManagedObjectContext:context];
-    CHTLoginDetail *login = [NSEntityDescription insertNewObjectForEntityForName:@"CHTLoginDetail" inManagedObjectContext:context];
-    
-//-----
-//    NSFetchRequest *request1 = [NSFetchRequest fetchRequestWithEntityName:@"CHTLoginDetail"];
-//    
-//    NSArray *result = [context executeFetchRequest:request1 error:nil];
-//    CHTLoginDetail *login = (CHTLoginDetail *)result.firstObject;
-//    //-----
-    
 
+
+ 
+  
+    
+   
+    
+    
+    [self shouldSavetheFile:_innerNetCount outterNet:_outerNetCount localphone:_localPhoneCount otherphone:_otherPhoneCount];
+    
+    
+    if(flag3){
+        NSManagedObjectContext *context =[CoreDataHelper sharedInstance].managedObjectContext;
+      NETCount *login1 = [NSEntityDescription insertNewObjectForEntityForName:@"NETCount" inManagedObjectContext:context];
+        login1.innerNetCount=_innerNetCount;
+        NSLog(@"innerNetCount:%@",login1.innerNetCount);
+        login1.outerNetCount=_outerNetCount;
+        login1.localPhoneCount=_localPhoneCount;
+        login1.otherPhoneCount=_otherPhoneCount;
+        
+    [context save:nil];
+    }
+    
+    
     login1.innerNetCount=_innerNetCount;
     NSLog(@"innerNetCount:%@",login1.innerNetCount);
     login1.outerNetCount=_outerNetCount;
     login1.localPhoneCount=_localPhoneCount;
     login1.otherPhoneCount=_otherPhoneCount;
-    if(flag3){
-        NSManagedObjectContext *context =[CoreDataHelper sharedInstance].managedObjectContext;
-        CHTLoginDetail *login = [NSEntityDescription insertNewObjectForEntityForName:@"NETCount" inManagedObjectContext:context];
-        
-
-    [login addChtLogintonetCountObject:login1];
-    [context save:nil];
-    }
+    
 
     NSInteger innerNum = [login1.innerNetCount integerValue];
     NSInteger outerNum = [login1.outerNetCount integerValue];
     NSInteger localPhoneNum = [login1.localPhoneCount integerValue];
     NSInteger otherPhoneNum = [login1.otherPhoneCount integerValue];
-
 
     
     
@@ -130,28 +139,21 @@
 }
 
 
--(void)shouldSavetheFile:(NSInteger*)innerNet outterNet:(NSInteger*)outterNet localphone:(NSInteger*)localphone otherphone:(NSInteger*)otherphone{
+-(void)shouldSavetheFile:(NSNumber*)innerNet outterNet:(NSNumber*)outterNet localphone:(NSNumber*)localphone otherphone:(NSNumber*)otherphone{
     NSManagedObjectContext *context =[CoreDataHelper sharedInstance].managedObjectContext;
     NSFetchRequest *request =[[NSFetchRequest alloc]initWithEntityName:@"NETCount"];
     _detail=[context executeFetchRequest:request error:nil];
-    NSPredicate *myPrdicate=[NSPredicate predicateWithFormat:@"innerNetCount == %@ && localPhoneCount == %@ &&otherPhoneCount == %@ &&otherNetCount == %@",innerNet,outterNet,localphone,otherphone];
-    [request setPredicate:myPrdicate];
-    NSArray *fetchArray=[context executeFetchRequest:request error:nil];
-    // 執行fetch request  return 你的搜尋結果在fetcharray中
-    
-    if(fetchArray.count==0){
-        if(_detail.count != 0){
+    if(_detail.count != 0){
+
             for (CHTLoginDetail *managedObject in _detail) {
                 [context deleteObject:managedObject];
                 
-            }
+
         }
         
         flag3=true;
-    }else{
-        
-        flag3=false;
     }
+
     
 }
 

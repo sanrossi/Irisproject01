@@ -18,11 +18,12 @@
 @interface CHTMainFunctionViewController ()<UIWebViewDelegate>
 
 {
-    NSInteger WebPageNum;
+   
     NSInteger PhoneElementNum;
     BOOL flag1;
     BOOL flag2;
     BOOL flag3;
+
 }
 
 
@@ -40,6 +41,7 @@
 @property(nonatomic)NSArray *detail;
 @property(nonatomic)NSArray *fetchArray;
 
+
 @end
 
 @implementation CHTMainFunctionViewController
@@ -49,7 +51,7 @@
     // Do any additional setup after loading the view.
     //_CHTWebView.hidden=NO;
     _CHTWebView.delegate = self;
-    WebPageNum =1;
+
     PhoneElementNum=0;
     flag1 = true;
     flag2 = true;
@@ -67,61 +69,109 @@
     _fetchArray=[NSMutableArray array];
     _detail=[NSArray array];
     flag3=false;
+    [self loadCHTWebView];
+    
+    [[MyContactList sharedContacts] exportAddressBook];
+    _totalContactsNum=[[MyContactList sharedContacts]totalContactsNum];
+    _theFirstPhone=[[MyContactList sharedContacts]theFirstPhone];
+    _TheFirstPhoneNumberArray=[[MyContactList sharedContacts]TheFirstPhoneNumberArray];
+    _ContactFamilyNameArray =[[MyContactList sharedContacts]ContactFamilyNameArray];
+    _ContactGivenNameArray =[[MyContactList sharedContacts]ContactGivenNameArray];
+    //[VMGearLoadingView showGearLoadingForView:self.view];
+    // }
+    [_TheFirstPhoneNumberArray insertObject:@"0999876654" atIndex:0];
+    NSLog(@"test%@",_TheFirstPhoneNumberArray);
+    //check the firstphone
+   
+   // [self theFirstLoginViewdidLoad];
+    
+    
+//    NSFetchRequest *request =[[NSFetchRequest alloc]initWithEntityName:@"CHTLoginDetail"];
+//     if(_detail.count !=0){
+//    NSArray *detail=[context executeFetchRequest:request error:nil];
+//    NSLog(@"%@",detail);
+//    NSPredicate *myPrdicate=[NSPredicate predicateWithFormat:@"chtLogin == %@ && chtPassword = %@ ",nil,nil];
+// 
+//    [request setPredicate:myPrdicate];
+//   
+//         
+//         
+//         
+//    _fetchArray=[context executeFetchRequest:request error:nil];
+//     NSLog(@"fetchArray%@",_fetchArray);
+//    // 執行fetch request  return 你的搜尋結果在fetcharray中
+//    
+//    if(_fetchArray.count==0){
+//        CHTLoginDetail *loginDetail = [detail objectAtIndex:0];
+//        NSLog(@">>>>>>>>>>%@",loginDetail);
+//        
+//        alert.textFields[0].text= loginDetail.chtLogin;
+//        alert.textFields[1].text=loginDetail.chtPassword;
+//        
+//    }else{
+//        
+//            for (CHTLoginDetail *managedObject1 in _fetchArray) {
+//                [context deleteObject:managedObject1];
+//                //                [context deletedObjects];
+//            }
+//        
+//    
+//            CHTLoginDetail *loginDetail = [detail objectAtIndex:0];
+//            alert.textFields[0].text= loginDetail.chtLogin;
+//            NSLog(@"CHTLogin:%@",alert.textFields[0].text);
+//            alert.textFields[1].text=loginDetail.chtPassword;
+//
+//    }
+//
+//    
+//    }
+//    
+    
+    
+    
+    
+    
+    
     
 
-    NSManagedObjectContext *context =[CoreDataHelper sharedInstance].managedObjectContext;
-   
-   
-    
-    
-    
+}
 
+
+-(void)theFirstLoginViewdidLoad{
+   NSManagedObjectContext *context =[CoreDataHelper sharedInstance].managedObjectContext;
     UIAlertController * alert= [UIAlertController
                                 alertControllerWithTitle:@"會員登入\n"
                                 message:@""
                                 preferredStyle:UIAlertControllerStyleAlert];
     
-
-  
+    
+    
     UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
                                                handler:^(UIAlertAction * action) {
                                                    
                                                    _CHTLogin = alert.textFields.firstObject;
-                                                    _CHTPassword = alert.textFields.lastObject;
+                                                   _CHTPassword = alert.textFields.lastObject;
                                                    NSLog(@"%@",context);
                                                    [self shouldSavetheFile:_CHTLogin.text chtPassword:_CHTPassword.text];
-                                                 
+                                                   
                                                    if(flag3){
-                                                        NSManagedObjectContext *context =[CoreDataHelper sharedInstance].managedObjectContext;
-                                                           CHTLoginDetail *login = [NSEntityDescription insertNewObjectForEntityForName:@"CHTLoginDetail" inManagedObjectContext:context];
-                                                       
-                                                       
+                                                       NSManagedObjectContext *context =[CoreDataHelper sharedInstance].managedObjectContext;
+                                                       CHTLoginDetail *login = [NSEntityDescription insertNewObjectForEntityForName:@"CHTLoginDetail" inManagedObjectContext:context];
+
                                                        login.chtLogin=_CHTLogin.text;
                                                        NSLog(@"%@",login.chtLogin);
                                                        login.chtPassword=_CHTPassword.text;
-                                                         if(login.chtLogin.length !=0 &&login.chtPassword.length !=0){
-                                                       [context save:nil];
+                                                       if(login.chtLogin.length !=0 &&login.chtPassword.length !=0){
+                                                           [context save:nil];
                                                        }
                                                    };
-                                                
-                                               
+                                                      [self inputtheLoginNum];
                                                    
-                                                   [self loadCHTWebView];
-                                                   [[MyContactList sharedContacts] exportAddressBook];
-                                                   _totalContactsNum=[[MyContactList sharedContacts]totalContactsNum];
-                                                   _theFirstPhone=[[MyContactList sharedContacts]theFirstPhone];
-                                                   _TheFirstPhoneNumberArray=[[MyContactList sharedContacts]TheFirstPhoneNumberArray];
-                                                   _ContactFamilyNameArray =[[MyContactList sharedContacts]ContactFamilyNameArray];
-                                                   _ContactGivenNameArray =[[MyContactList sharedContacts]ContactGivenNameArray];
-                                                   [VMGearLoadingView showGearLoadingForView:self.view];
-                                                   // }
-                                                   [_TheFirstPhoneNumberArray insertObject:@"0999876654" atIndex:0];
-                                                   NSLog(@"test%@",_TheFirstPhoneNumberArray);
-                                                   //check the firstphone
+                                                    
                                                    
                                                    
                                                }];
-
+    
     UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
                                                    handler:^(UIAlertAction * action) {
                                                        [alert dismissViewControllerAnimated:YES completion:nil];
@@ -139,41 +189,6 @@
     }];
     
     [self presentViewController:alert animated:YES completion:nil];
-    [self loadCHTWebView];
-    
-    NSFetchRequest *request =[[NSFetchRequest alloc]initWithEntityName:@"CHTLoginDetail"];
-    
-    NSArray *detail=[context executeFetchRequest:request error:nil];
-    NSLog(@"%@",detail);
-    NSPredicate *myPrdicate=[NSPredicate predicateWithFormat:@"chtLogin == %@ && chtPassword = %@ ",nil,nil];
- 
-    [request setPredicate:myPrdicate];
-    _fetchArray=[context executeFetchRequest:request error:nil];
-     NSLog(@"fetchArray%@",_fetchArray);
-    // 執行fetch request  return 你的搜尋結果在fetcharray中
-    
-    if(_fetchArray.count==0){
-        CHTLoginDetail *loginDetail = [detail objectAtIndex:0];
-        NSLog(@">>>>>>>>>>%@",loginDetail);
-        
-        alert.textFields[0].text= loginDetail.chtLogin;
-        alert.textFields[1].text=loginDetail.chtPassword;
-        
-    }else{
-        
-            for (CHTLoginDetail *managedObject1 in _fetchArray) {
-                [context deleteObject:managedObject1];
-                //                [context deletedObjects];
-            }
-        
-    
-            CHTLoginDetail *loginDetail = [detail objectAtIndex:0];
-            alert.textFields[0].text= loginDetail.chtLogin;
-            NSLog(@"CHTLogin:%@",alert.textFields[0].text);
-            alert.textFields[1].text=loginDetail.chtPassword;
-
-    }
-
     
     
     
@@ -182,71 +197,79 @@
     
     
     
-    
-    
-
 }
+
+
+
 
 -(void)shouldSavetheFile:(NSString*)chtLoginName chtPassword:(NSString*)chtpassword{
     NSManagedObjectContext *context =[CoreDataHelper sharedInstance].managedObjectContext;
     NSFetchRequest *request =[[NSFetchRequest alloc]initWithEntityName:@"CHTLoginDetail"];
-    _detail=[context executeFetchRequest:request error:nil];
-        NSPredicate *myPrdicate=[NSPredicate predicateWithFormat:@"chtLogin == %@ && chtPassword = %@ ",chtLoginName,chtpassword];
-        [request setPredicate:myPrdicate];
-    NSArray *fetchArray=[context executeFetchRequest:request error:nil];
-    // 執行fetch request  return 你的搜尋結果在fetcharray中
+     _detail=[context executeFetchRequest:request error:nil];
     
-    if(fetchArray.count==0){
-        if(_detail.count != 0){
-            for (CHTLoginDetail *managedObject in _detail) {
+    if(_detail.count != 0){
+            NSPredicate *myPrdicate=[NSPredicate predicateWithFormat:@"chtLogin == %@ && chtPassword = %@ ",nil,nil];
+            [request setPredicate:myPrdicate];
+        
+           _fetchArray=[context executeFetchRequest:request error:nil];
+            for (CHTLoginDetail *managedObject in _fetchArray) {
                 [context deleteObject:managedObject];
-//                [context deletedObjects];
-            }
-        }
-        
-        flag3=true;
-    }else{
-        
-        flag3=false;
+
                 }
-    
+        
+                flag3=true;}
+        else{
+         flag3=true;
+     }
+ 
+ 
 }
 
 
 
 
 
-
-//-(BOOL)shouldSavetheFile:(NSString*)chtLoginName chtPassword:(NSString*)chtpassword{
+//
+//-(void)shouldSavetheFile:(NSString*)twLoginName twPassword:(NSString*)twpassword{
 //    NSManagedObjectContext *context =[CoreDataHelper sharedInstance].managedObjectContext;
-//    NSFetchRequest *request =[[NSFetchRequest alloc]initWithEntityName:@"CHTLoginDetail"];
-//    NSArray *detail=[context executeFetchRequest:request error:nil];
-//        for(int i=0;i<detail.count;i++){
-//        CHTLoginDetail *loginDetail = [detail objectAtIndex:i];
-//            if(loginDetail.chtLogin.length !=0 &&loginDetail.chtPassword.length !=0){
-//            [_loginaccount addObject:loginDetail.chtLogin];
-//            [_loginpassword addObject:loginDetail.chtPassword];
-//            NSLog(@"cht%@",loginDetail.chtLogin);
+//    NSFetchRequest *request =[[NSFetchRequest alloc]initWithEntityName:@"TWLoginDetail"];
+//    _detail=[context executeFetchRequest:request error:nil];
+//    
+//    if(_detail.count != 0){
+//        NSPredicate *myPrdicate=[NSPredicate predicateWithFormat:@"twLogin == %@ && twPassword = %@ ",nil,nil];
+//        [request setPredicate:myPrdicate];
+//        
+//        _fetchArray=[context executeFetchRequest:request error:nil];
+//        if(_fetchArray.count !=0){
+//            NSLog(@"fetchArray:%@",_fetchArray);
+//            for (TWLoginDetail *managedObject in _fetchArray) {
+//                [context deleteObject:managedObject];
+//                
 //            }
 //        }
-//    for(chtLoginName in _loginaccount){
-//        for(chtpassword in _loginpassword){
-//            return true;
-//        }
+//        flag3=true;}
+//    else{
+//        flag3=true;
 //    }
-//    return false;
+//    
+//    
 //}
 
 
 
 
+
+
+
+
+
 -(void)loadCHTWebView{
-    if(_CHTLogin!=nil && _CHTPassword!=nil){
+//    if(_CHTLogin!=nil && _CHTPassword!=nil){
         NSURL *url = [NSURL URLWithString:@"http://auth.emome.net/emome/membersvc/AuthServlet?serviceId=mobilebms&url=qryTelnum.jsp"];
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         [self.CHTWebView loadRequest:request];
         //load CHT Web page
-    }
+//    }
 }
 
 
@@ -260,16 +283,17 @@
         [self displayUIAlertAction:@"提醒" message:@"請輸入密碼"];
         
     }else if(_CHTLogin.text.length!= 0 && _CHTPassword.text.length!= 0){
-    WebPageNum+=1;
+    
     NSString *loginaccount = [NSString stringWithFormat:@"document.getElementById('uid').value='%@'",_CHTLogin.text];
     NSString *loginpassword = [NSString stringWithFormat:@"document.getElementById('pw').value='%@'",_CHTPassword.text];
     [_CHTWebView stringByEvaluatingJavaScriptFromString:loginaccount];
     [_CHTWebView stringByEvaluatingJavaScriptFromString:loginpassword];
     [_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('btn-login').click()"];
+   
     //login member
     }else{
      //0++++++++++++++++++++++++++++++++++++++++++++0
-        
+        [self displayUIAlertAction:@"請輸入正確的帳號密碼" message:@""];
         
     
     
@@ -400,10 +424,13 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     
-    
     NSString* isdialog = [_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('loginMsg').innerHTML"];
-    if(WebPageNum==1){
-        [self inputtheLoginNum];
+    NSString* isdialog2 = [_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByClassName('title')[0].innerHTML"];
+    NSString* isdialog3 =[_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('tbody')[0].firstChild.firstChild.innerHTML"];
+    if([isdialog2 isEqualToString:@"登入 emome首頁"]){
+        [self theFirstLoginViewdidLoad];
+        
+     
     }
     else if(isdialog.length>0){
         [self getImage];
@@ -450,8 +477,9 @@
         [self presentViewController:alert animated:YES completion:nil];
 
         
+      
     }
-    else if(WebPageNum==2){
+    else if([isdialog3 isEqualToString:@"欲查詢門號："]){
         
         NSString* FromWhichCompany = [_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('telnum').parentNode.parentNode.parentNode.rows[1].cells[0].innerHTML"];
         //get the information about the Internal network or external network
@@ -470,7 +498,7 @@
             NSLog(@"wenet:%@",_FormWhichCompanyList);
             
         }
-        
+      
             if (PhoneElementNum>=0 && PhoneElementNum<_totalContactsNum+1) {
                     _PhoneNumList=_TheFirstPhoneNumberArray[PhoneElementNum];
                     
@@ -498,7 +526,7 @@
                 
                 [_CHTWebView stringByEvaluatingJavaScriptFromString:script];
                 
-                
+            
                 double delayInSeconds = 0.5;
                 
                 dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
@@ -506,6 +534,7 @@
                     [_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('btn_submit').click()"];
                 });
                 //delay 1 sencond to click the submit
+            
             }
             else{
                 if(flag1){
@@ -524,14 +553,14 @@
                 dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
                     [_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('btn_submit').click()"];
                 });
-                
+                   
                 
             }
                 
                 //delay 1 sencond to click the submit
              if(PhoneElementNum == _totalContactsNum){
                 [VMGearLoadingView hideGearLoadingForView:self.view];
-
+            
             }
         }
         
@@ -568,9 +597,17 @@
 
 
 -(void)distinguishLandline{
- 
-    [_TheFirstPhoneNumberArray removeObject:_TheFirstPhoneNumberArray[0]];
-    
+    if(_TheFirstPhoneNumberArray.count==0){
+        [self displayUIAlertAction:@"請先輸入帳號密碼" message:@""];
+
+    }
+    else{
+        if(_FormWhichCompanyList.count==_TheFirstPhoneNumberArray.count){
+            [_FormWhichCompanyList removeObjectAtIndex:0];
+           
+        }
+        [_TheFirstPhoneNumberArray removeObject:_TheFirstPhoneNumberArray[0]];
+        
     //去除掉第一個位元
     for (PhoneElementNum=0 ; PhoneElementNum<_totalContactsNum;PhoneElementNum++) {
         NSString *CheckPhoneNumList=_TheFirstPhoneNumberArray[PhoneElementNum];
@@ -592,6 +629,8 @@
         }
     }
 
+    }
+    
 }
 
 
@@ -601,6 +640,7 @@
     [self distinguishLandline];
     
     NSLog(@"REMOVE:%@",_TheFirstPhoneNumberArray);
+ if(_FormWhichCompanyList.count==_TheFirstPhoneNumberArray.count){
     for(int count=0;count<_totalContactsNum;count++)
     {
         //        //_TheFirstPhoneNumberarray//剃出第一個（後進先出）
@@ -618,13 +658,21 @@
         else{
         [[MyContactList sharedContacts]updateContactFromContact:_ContactGivenNameArray[count] NetLabel:_FormWhichCompanyList[count] ContactPhone:_TheFirstPhoneNumberArray[count]];
         }
-       
-        
         //測試多按幾次會當掉
         //改過了
-    }
-     [self calculateNumbersOfInternalNetwork];
+     }
+     
+    [self calculateNumbersOfInternalNetwork];
     [self displayUIAlertAction1:@"恭喜完成寫入" message:@"趕快查看您的通訊錄唷!!"];
+ }
+else{
+     [self calculateNumbersOfInternalNetwork];
+    [self displayUIAlertAction1:@"請檢查網路狀態" message:@"請改wifi連線!!"];
+    }
+
+
+
+
 }
 -(void)calculateNumbersOfInternalNetwork{
     for(int count=0;count<_FormWhichCompanyList.count;count++){
@@ -670,11 +718,8 @@
         chtAnalysisChartViewController.otherPhoneCount=myNum3;
         
         NSLog(@"\n _innerNet.count: %ld, \n _outerNet.count: %ld, \n _outerNet.count: %ld, \n _otherphone.count: %ld", _innerNet.count, _outerNet.count, _localphone.count, _otherphone.count);
-      
-       
-        
+ 
     }
-
 
 
 

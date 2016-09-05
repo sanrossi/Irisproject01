@@ -11,5 +11,16 @@
 #import "PNChart.h"
 
 @interface TWAnalysisChartViewController : UIViewController
+@property (nonatomic) PNPieChart *pieChart;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UISwitch *leftSwitch;
+@property (weak, nonatomic) IBOutlet UILabel *leftLabel;
+@property (weak, nonatomic) IBOutlet UISwitch *rightSwitch;
+@property (weak, nonatomic) IBOutlet UILabel *rightLabel;
+@property (nonatomic) PNRadarChart *radarChart;
+@property(nonatomic)NSNumber *innerNetCount;
+@property(nonatomic)NSNumber *outerNetCount;
+@property(nonatomic)NSNumber *localPhoneCount;
+@property(nonatomic)NSNumber *otherPhoneCount;
 
 @end

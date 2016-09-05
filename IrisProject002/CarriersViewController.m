@@ -14,6 +14,7 @@
 
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomLayout;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *twBtnLayout;
 
 @end
 
@@ -33,31 +34,30 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"zh_Hant_TW"]];
     [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"Asia/Taipei"]];
-    [formatter setDateFormat:@" YYYY年 M月 d日(eeee) HH:mm:ss"];
+//    [formatter setDateFormat:@" YYYY年 M月 d日(eeee) HH:mm:ss"];
     // Date to string
     NSDate *now = [NSDate date];
-    NSString *currentDateString = [formatter stringFromDate:now];
-    NSLog(@"currentDate=%@", currentDateString);
-    NSString *currentDateStringforYear = [currentDateString substringWithRange:NSMakeRange(1,4)];
-    NSString *currentDateStringforMonth = [currentDateString substringWithRange:NSMakeRange(6,2)];
-    NSString* MonthandYear = [NSString stringWithFormat:@"%@/%@",currentDateStringforMonth,currentDateStringforYear];
-    NSString *currentDateStringforDay = [currentDateString substringWithRange:NSMakeRange(10,2)];
     
-    //拉一下autolayout
-    NSString *currentDateStringfordayoftheweek = [currentDateString substringWithRange:NSMakeRange(14,3)];
-    _date.text=currentDateStringforDay;
-    NSLog(@"currentDate=%@", MonthandYear);
-    _dayoftheweek.text=currentDateStringfordayoftheweek;
     
-//    [UIView animateWithDuration:(NSTimeInterval)
-//                          delay:(NSTimeInterval)
-//         usingSpringWithDamping:(CGFloat)
-//          initialSpringVelocity:(CGFloat)
-//                        options:(UIViewAnimationOptions)
-//                     animations:^{}
-//                     completion:^(BOOL finished) {}];
+    [formatter setDateFormat:@"MM/yyyy"];
+   NSString* MonthandYear = [formatter stringFromDate:now];
+    NSLog(@"%@",MonthandYear);
+ 
+    
+    [formatter setDateFormat:@"cccc"];
+     NSString *currentDateStringfordayoftheweek = [formatter stringFromDate:now];
 
-    self.bottomLayout.constant =  [UIScreen mainScreen].bounds.size.height * 0.5;
+     [formatter setDateFormat:@"d"];
+     NSString *currentDateStringforDay= [formatter stringFromDate:now];
+
+
+    _date.text=currentDateStringforDay;
+    _dayoftheweek.text=currentDateStringfordayoftheweek;
+    _monthandyear.text=MonthandYear;
+
+
+    self.bottomLayout.constant =  [UIScreen mainScreen].bounds.size.height * 0.4;
+    self.twBtnLayout.constant= [UIScreen mainScreen].bounds.size.height * 0.3;
 }
 
 -(void)viewWillAppear:(BOOL)animated{

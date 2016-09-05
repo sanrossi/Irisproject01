@@ -7,9 +7,15 @@
 //
 
 #import "FetNetAnalysisChartViewController.h"
+#import "FetNetMainFunctionViewController.h"
+#import "FetNetLoginDetail.h"
+#import "CoreDataHelper.h"
+#import "FetNetLoginDetail.h"
 
-@interface FetNetAnalysisChartViewController ()
-
+@interface FetNetAnalysisChartViewController (){
+    BOOL flag3;
+}
+@property(nonatomic)NSArray *detail;
 @end
 
 @implementation FetNetAnalysisChartViewController
@@ -17,7 +23,134 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+   
+    
+    
+    self.titleLabel.text = @"網內外資料分析圖";
+    self.leftSwitch.hidden = NO;
+    //   self.rightSwitch.hidden = NO;
+    self.leftLabel.hidden = NO;
+    self.rightLabel.hidden = NO;
+    flag3=false;
+    _detail=[NSArray array];
+    NSManagedObjectContext *context =[CoreDataHelper sharedInstance].managedObjectContext;
+    
+    
+    
+    
+    FetNetLoginDetail *login1 = [NSEntityDescription insertNewObjectForEntityForName:@"FetNetLoginDetail" inManagedObjectContext:context];
+    
+
+    
+  //  [self shouldSavetheFile:_innerNetCount outterNet:_outerNetCount localphone:_localPhoneCount otherphone:_otherPhoneCount];
+    
+    
+    if(flag3){
+        NSManagedObjectContext *context =[CoreDataHelper sharedInstance].managedObjectContext;
+        FetNetLoginDetail *login1 = [NSEntityDescription insertNewObjectForEntityForName:@"FetNetLoginDetail" inManagedObjectContext:context];
+        login1.innerNetCount=_innerNetCount;
+        NSLog(@"innerNetCount:%@",login1.innerNetCount);
+        login1.outerNetCount=_outerNetCount;
+        login1.localPhoneCount=_localPhoneCount;
+        login1.otherPhoneCount=_otherPhoneCount;
+        
+        [context save:nil];
+    }
+    
+    
+    login1.innerNetCount=_innerNetCount;
+    NSLog(@"innerNetCount:%@",login1.innerNetCount);
+    login1.outerNetCount=_outerNetCount;
+    login1.localPhoneCount=_localPhoneCount;
+    login1.otherPhoneCount=_otherPhoneCount;
+    
+    
+    NSInteger innerNum = [login1.innerNetCount integerValue];
+    NSInteger outerNum = [login1.outerNetCount integerValue];
+    NSInteger localPhoneNum = [login1.localPhoneCount integerValue];
+    NSInteger otherPhoneNum = [login1.otherPhoneCount integerValue];
+    
+    
+    
+    NSArray *items = @[[PNPieChartDataItem dataItemWithValue:innerNum color:PNLightGreen description:@"網內"],
+                       [PNPieChartDataItem dataItemWithValue:outerNum color:PNFreshGreen description:@"網外"],
+                       [PNPieChartDataItem dataItemWithValue:localPhoneNum color:PNDeepGreen description:@"市話"],
+                       [PNPieChartDataItem dataItemWithValue:otherPhoneNum color:PNLightGreen description:@"其他"]
+                       ];
+    
+    self.pieChart = [[PNPieChart alloc] initWithFrame:CGRectMake(SCREEN_WIDTH /2.0 - 100, 200, 200.0, 200.0) items:items];
+    self.pieChart.descriptionTextColor = [UIColor whiteColor];
+    self.pieChart.descriptionTextFont  = [UIFont fontWithName:@"Avenir-Medium" size:11.0];
+    self.pieChart.descriptionTextShadowColor = [UIColor clearColor];
+    self.pieChart.showAbsoluteValues = NO;
+    self.pieChart.showOnlyValues = NO;
+    [self.pieChart strokeChart];
+    
+    
+    self.pieChart.legendStyle = PNLegendItemStyleStacked;
+    self.pieChart.legendFont = [UIFont boldSystemFontOfSize:12.0f];
+    
+    UIView *legend = [self.pieChart getLegendWithMaxWidth:200];
+    [legend setFrame:CGRectMake(130, 480, legend.frame.size.width, legend.frame.size.height)];
+    [self.view addSubview:legend];
+    
+    [self.view addSubview:self.pieChart];
+    //    self.changeValueButton.hidden = YES;
+
 }
+
+-(void)shouldSavetheFile:(NSNumber*)innerNet outterNet:(NSNumber*)outterNet localphone:(NSNumber*)localphone otherphone:(NSNumber*)otherphone{
+    NSManagedObjectContext *context =[CoreDataHelper sharedInstance].managedObjectContext;
+    NSFetchRequest *request =[[NSFetchRequest alloc]initWithEntityName:@"FetNetLoginDetail"];
+    _detail=[context executeFetchRequest:request error:nil];
+    if(_detail.count != 0){
+        
+        for (FetNetLoginDetail *managedObject in _detail) {
+            [context deleteObject:managedObject];
+            
+            
+        }
+        
+        flag3=true;
+    }
+    
+    
+}
+
+
+
+- (IBAction)leftSwitchChanged:(id)sender {
+    UISwitch *showRelative = (UISwitch*) sender;
+    if (showRelative.on) {
+        self.pieChart.showAbsoluteValues = NO;
+    }else{
+        self.pieChart.showAbsoluteValues = YES;
+    }
+    [self.pieChart strokeChart];
+    
+    
+    
+}
+
+- (IBAction)rightSwitchChanged:(id)sender {
+    if ([self.titleLabel.text isEqualToString:@"Pie Chart"]){
+        UISwitch *showLabels = (UISwitch*) sender;
+        if (showLabels.on) {
+            self.pieChart.showOnlyValues = NO;
+        }else{
+            self.pieChart.showOnlyValues = YES;
+        }
+        [self.pieChart strokeChart];
+    }
+    
+    
+    
+    
+    
+}
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

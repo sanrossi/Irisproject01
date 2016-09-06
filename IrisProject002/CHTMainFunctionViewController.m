@@ -386,6 +386,7 @@
     NSString* isdialog = [_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('loginMsg').innerHTML"];
     NSString* isdialog2 = [_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByClassName('title')[0].innerHTML"];
     NSString* isdialog3 =[_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('tbody')[0].firstChild.firstChild.innerHTML"];
+    NSString* isdialog4 = [_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByClassName('centered')[0].lastElementChild.innerHTML"];
     if([isdialog2 isEqualToString:@"登入 emome首頁"]){
       if(isdialog.length>0){
         [self getImage];
@@ -495,13 +496,10 @@
                 
                 [_CHTWebView stringByEvaluatingJavaScriptFromString:script];
                 
-            
-                double delayInSeconds = 0.5;
                 
-                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+               if(_CHTWebView.loading==NO){
                     [_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('btn_submit').click()"];
-                });
+                }
                 //delay 1 sencond to click the submit
             
             }
@@ -517,19 +515,27 @@
                 [_CHTWebView stringByEvaluatingJavaScriptFromString:script1];
                 
                 
-                double delayInSeconds = 0.5;
-                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//                double delayInSeconds = 0.5;
+//                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+//                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                  if(_CHTWebView.loading==NO){
                     [_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('btn_submit').click()"];
-                });
-                   
+              //  });
+                  }
                 
             }
                 
-                //delay 1 sencond to click the submit
                 
-        }
+                
+            }
    
+        
+        
+        
+    }
+    else if([isdialog4 isEqualToString:@"請選擇您要登入的帳號"]){
+        [_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('btnPass1').click()"];
+        
         
         
         
@@ -619,9 +625,10 @@
         for(int twRegionCodElement=0;twRegionCodElement<twRegionCod.count;twRegionCodElement++){
             NSString * stringFromtwRegionCod = [twRegionCod objectAtIndex:twRegionCodElement];
                 if ([CheckPhoneNumList hasPrefix:stringFromtwRegionCod]) {
+                    if(_FormWhichCompanyList.count !=0){
                     _FormWhichCompanyList[PhoneElementNum]=@"市話";
-                
-                }
+                    }
+                 }
         }
     }
 
@@ -661,10 +668,14 @@
     [self calculateNumbersOfInternalNetwork];
     [self displayUIAlertAction1:@"恭喜完成寫入" message:@"趕快查看您的通訊錄唷!!"];
  }
+ else if(_FormWhichCompanyList.count ==0){
+    [self displayUIAlertAction1:@"請登入帳號密碼" message:@""];
+ }
 else{
      [self calculateNumbersOfInternalNetwork];
     [self displayUIAlertAction1:@"請檢查網路狀態" message:@"請改wifi連線!!"];
     }
+    
 
 
 

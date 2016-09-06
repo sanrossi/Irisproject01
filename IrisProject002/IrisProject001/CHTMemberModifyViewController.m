@@ -37,9 +37,7 @@
      _fetchArray=[NSMutableArray array];
     _detail=[NSArray array];
     flag1=false;
-// self.BtnRightLayout.constant =  [UIScreen mainScreen].bounds.size.width * 0.2;
-    
- //self.BtnBottomLayout.constant=  [UIScreen mainScreen].bounds.size.height * 0.35;
+
 
 }
 

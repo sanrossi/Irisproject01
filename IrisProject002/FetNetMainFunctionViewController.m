@@ -10,6 +10,7 @@
 #import "FetNetAnalysisChartViewController.h"
 #import "MyContactList.h"
 #import "FetNetLoginDetail.h"
+#import "VMGearLoadingView.h"
 @interface FetNetMainFunctionViewController ()<UIWebViewDelegate>
 {
     NSInteger WebPageNum;
@@ -122,7 +123,14 @@
         NSLog(@"wenet:%@",_FormWhichCompanyList);
         
     }
-
+    if(PhoneElementNum == 0){
+        [VMGearLoadingView showGearLoadingForView:self.view];
+    }
+    
+    
+    if(PhoneElementNum == _totalContactsNum){
+        [VMGearLoadingView hideGearLoadingForView:self.view];
+    }
     
     if (PhoneElementNum>=0 && PhoneElementNum<_totalContactsNum) {
         _PhoneNumList=_TheFirstPhoneNumberArray[PhoneElementNum];
@@ -155,8 +163,9 @@
                 
                 
                 [_FetNetWebView stringByEvaluatingJavaScriptFromString:script1];
-                
+            if(_FetNetWebView.loading==NO){
                 [_FetNetWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('queryButton').click()"];
+            }
 
             });
         }
@@ -171,8 +180,9 @@
            }
            NSString *script = [NSString stringWithFormat:@"document.getElementById('msisdn').value='%@'",_PhoneNumList];
            [_FetNetWebView stringByEvaluatingJavaScriptFromString:script];
-           
+           if(_FetNetWebView.loading==NO){
            [_FetNetWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('queryButton').click()"];
+           }
            
            //改這裡
            

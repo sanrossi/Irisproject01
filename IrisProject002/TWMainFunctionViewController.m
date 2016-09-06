@@ -65,10 +65,8 @@
     //_TWWebView.scrollView.scrollEnabled = NO;
     //_TWWebView.hidden=YES;
 
-    //[VMGearLoadingView showGearLoadingForView:self.view];
     [self loadTWWebView];
-    
-    //[VMGearLoadingView hideGearLoadingForView:self.view];
+
     
     [[MyContactList sharedContacts] exportAddressBook];
     _totalContactsNum=[[MyContactList sharedContacts]totalContactsNum];
@@ -367,7 +365,7 @@
                                                                }
                                                            };
 
-                                                           //[VMGearLoadingView showGearLoadingForView:self.view];
+
 
                                                        }];
             
@@ -448,19 +446,19 @@
     
         
       
-//        if(PhoneElementNum == _totalContactsNum){
-//          [VMGearLoadingView hideGearLoadingForView:self.view];
-//        }
-        
+
         
         
     }
     
     else if ([[[[_TWWebView request]URL]absoluteString]  isEqualToString: @"https://cs.taiwanmobile.com/wap-portal/smpQueryTwmPhoneNbr.action"]){
-        switchLabel:
+
+       
+      
   
         if (PhoneElementNum>=0 && PhoneElementNum<_totalContactsNum) {
-  
+           
+            
             _PhoneNumList=_TheFirstPhoneNumberArray[PhoneElementNum];
             //正則化
             NSString *letters = @"0123456789";
@@ -544,12 +542,12 @@
        
     }
     else if ([[[[_TWWebView request]URL]absoluteString]  isEqualToString: @"https://cs.taiwanmobile.com/wap-portal/smpCheckTwmPhoneNbr.action"]){
-        
-        
+
         NSLog(@"ooooooooooooooooooooo");
         if([_FromWhichCompany  isEqual:@""]){
+            
             if(_TWWebView.loading==NO){
-               
+                
                 _FromWhichCompany = [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByClassName('red')[0].innerHTML"];
                 
                 if([_FromWhichCompany  isEqual:@""]){
@@ -578,22 +576,38 @@
                     NSLog(@"wenet:%@",_FormWhichCompanyList);
                     
                 }
+            
             }
+           
+            if(_TWWebView.loading==NO){
+                if(PhoneElementNum == 0){
+                    [VMGearLoadingView showGearLoadingForView:self.view];
+                }
+            
+            if(PhoneElementNum==_totalContactsNum-1){
+                [VMGearLoadingView hideGearLoadingForView:self.view];
+            }
+            }
+            NSLog(@"TOTALCOUNT%ld",_totalContactsNum);
+            NSLog(@"PHONELEMENT:%ld",PhoneElementNum);
                  if(_TWWebView.loading==NO){
                      
                     
                    
                 [_TWWebView stringByEvaluatingJavaScriptFromString:@"history.go(-1)"];
                      
+   
                             
                  }
                 
             }else if(![_FromWhichCompany  isEqual:@""]){
-                 PhoneElementNum+=1;
-                _FromWhichCompany=@"";
+                
                  if(_TWWebView.loading==NO){
-                  
+                     PhoneElementNum+=1;
+                     _FromWhichCompany=@"";
                 [_TWWebView stringByEvaluatingJavaScriptFromString:@"history.go(-1)"];
+        
+
                      
                  }
                 
@@ -633,8 +647,9 @@
         for(int twRegionCodElement=0;twRegionCodElement<twRegionCod.count;twRegionCodElement++){
             NSString * stringFromtwRegionCod = [twRegionCod objectAtIndex:twRegionCodElement];
             if ([CheckPhoneNumList hasPrefix:stringFromtwRegionCod]) {
+                 if(_FormWhichCompanyList.count !=0){
                 _FormWhichCompanyList[PhoneElementNum]=@"市話";
-                
+                 }
             }
             NSLog(@"市話%@",_FormWhichCompanyList);
         }
@@ -674,7 +689,11 @@
     }
         [self calculateNumbersOfInternalNetwork];
         [self displayUIAlertAction1:@"恭喜完成寫入" message:@"趕快查看您的通訊錄唷!!"];
-    }else{
+    } else if(_FormWhichCompanyList.count ==0){
+        [self displayUIAlertAction1:@"請登入帳號密碼" message:@""];
+    }
+    
+    else{
         
         [self displayUIAlertAction1:@"請檢查網路狀態" message:@"請改wifi連線"];
     

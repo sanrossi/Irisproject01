@@ -8,14 +8,20 @@
 
 #import "FetNetAnalysisChartViewController.h"
 #import "FetNetMainFunctionViewController.h"
-#import "FetNetLoginDetail.h"
 #import "CoreDataHelper.h"
 #import "FetNetLoginDetail.h"
 
 @interface FetNetAnalysisChartViewController (){
     BOOL flag3;
 }
+
 @property(nonatomic)NSArray *detail;
+@property(nonatomic)NSArray *fetchArray;
+@property(nonatomic)NSInteger innerNum;
+@property(nonatomic)NSInteger outerNum;
+@property(nonatomic)NSInteger localPhoneNum;
+@property(nonatomic)NSInteger otherPhoneNum;
+
 @end
 
 @implementation FetNetAnalysisChartViewController
@@ -26,6 +32,8 @@
    
     
     
+    _fetchArray=[NSMutableArray array];
+    
     self.titleLabel.text = @"網內外資料分析圖";
     self.leftSwitch.hidden = NO;
     //   self.rightSwitch.hidden = NO;
@@ -33,49 +41,67 @@
     self.rightLabel.hidden = NO;
     flag3=false;
     _detail=[NSArray array];
-    NSManagedObjectContext *context =[CoreDataHelper sharedInstance].managedObjectContext;
     
+    NSInteger innerNum1 = [_innerNetCount integerValue];
+    NSInteger outerNum1 = [_localPhoneCount  integerValue];
+    NSInteger localPhoneNum1 = [_outerNetCount integerValue];
+    NSInteger otherPhoneNum1 = [_otherPhoneCount integerValue];
     
-    
-    
-    FetNetLoginDetail *login1 = [NSEntityDescription insertNewObjectForEntityForName:@"FetNetLoginDetail" inManagedObjectContext:context];
-    
+    if(innerNum1==0&&outerNum1==0 &&localPhoneNum1==0&&otherPhoneNum1==0){
+        
+        NSManagedObjectContext *context =[CoreDataHelper sharedInstance].managedObjectContext;
+        NSFetchRequest *request1 = [NSFetchRequest fetchRequestWithEntityName:@"FetNetLoginDetail"];
+        NSArray *result = [context executeFetchRequest:request1 error:nil];
+        if(result.count !=0){
+            FetNetLoginDetail *login = (FetNetLoginDetail *)result.firstObject;
+            _innerNum = [login.innerNetCount integerValue];
+            _outerNum = [login.outerNetCount integerValue];
+            _localPhoneNum = [login.localPhoneCount integerValue];
+            _otherPhoneNum = [login.otherPhoneCount integerValue];
+        }
+        else{
+            _innerNum = 0;
+            _outerNum = 0;
+            _localPhoneNum = 0;
+            _otherPhoneNum = 0;
+        }
+        
+    }else{
+        [self shouldSavetheFile:_innerNetCount outterNet:_outerNetCount localphone:_localPhoneCount otherphone:_otherPhoneCount];
+        
+        if(flag3){
+            NSManagedObjectContext *context =[CoreDataHelper sharedInstance].managedObjectContext;
+            FetNetLoginDetail *login = [NSEntityDescription insertNewObjectForEntityForName:@"FetNetLoginDetail" inManagedObjectContext:context];
+            login.innerNetCount=_innerNetCount;
+            NSLog(@"innerNetCount:%@",login.innerNetCount);
+            login.outerNetCount=_outerNetCount;
+            login.localPhoneCount=_localPhoneCount;
+            login.otherPhoneCount=_otherPhoneCount;
+            
+            [context save:nil];
+            
+            login.innerNetCount=_innerNetCount;
+            NSLog(@"innerNetCount:%@",login.innerNetCount);
+            login.outerNetCount=_outerNetCount;
+            login.localPhoneCount=_localPhoneCount;
+            login.otherPhoneCount=_otherPhoneCount;
+            
+            _innerNum = [login.innerNetCount integerValue];
+            _outerNum = [login.outerNetCount integerValue];
+            _localPhoneNum = [login.localPhoneCount integerValue];
+            _otherPhoneNum = [login.otherPhoneCount integerValue];
+        }
+        
+        
+    }
 
     
-  //  [self shouldSavetheFile:_innerNetCount outterNet:_outerNetCount localphone:_localPhoneCount otherphone:_otherPhoneCount];
     
     
-    if(flag3){
-        NSManagedObjectContext *context =[CoreDataHelper sharedInstance].managedObjectContext;
-        FetNetLoginDetail *login1 = [NSEntityDescription insertNewObjectForEntityForName:@"FetNetLoginDetail" inManagedObjectContext:context];
-        login1.innerNetCount=_innerNetCount;
-        NSLog(@"innerNetCount:%@",login1.innerNetCount);
-        login1.outerNetCount=_outerNetCount;
-        login1.localPhoneCount=_localPhoneCount;
-        login1.otherPhoneCount=_otherPhoneCount;
-        
-        [context save:nil];
-    }
-    
-    
-    login1.innerNetCount=_innerNetCount;
-    NSLog(@"innerNetCount:%@",login1.innerNetCount);
-    login1.outerNetCount=_outerNetCount;
-    login1.localPhoneCount=_localPhoneCount;
-    login1.otherPhoneCount=_otherPhoneCount;
-    
-    
-    NSInteger innerNum = [login1.innerNetCount integerValue];
-    NSInteger outerNum = [login1.outerNetCount integerValue];
-    NSInteger localPhoneNum = [login1.localPhoneCount integerValue];
-    NSInteger otherPhoneNum = [login1.otherPhoneCount integerValue];
-    
-    
-    
-    NSArray *items = @[[PNPieChartDataItem dataItemWithValue:innerNum color:PNLightGreen description:@"網內"],
-                       [PNPieChartDataItem dataItemWithValue:outerNum color:PNFreshGreen description:@"網外"],
-                       [PNPieChartDataItem dataItemWithValue:localPhoneNum color:PNDeepGreen description:@"市話"],
-                       [PNPieChartDataItem dataItemWithValue:otherPhoneNum color:PNLightGreen description:@"其他"]
+    NSArray *items = @[[PNPieChartDataItem dataItemWithValue:_innerNum color:PNLightGreen description:@"網內"],
+                       [PNPieChartDataItem dataItemWithValue:_outerNum color:PNFreshGreen description:@"網外"],
+                       [PNPieChartDataItem dataItemWithValue:_localPhoneNum color:PNDeepGreen description:@"市話"],
+                       [PNPieChartDataItem dataItemWithValue:_otherPhoneNum color:PNLightGreen description:@"其他"]
                        ];
     
     self.pieChart = [[PNPieChart alloc] initWithFrame:CGRectMake(SCREEN_WIDTH /2.0 - 100, 200, 200.0, 200.0) items:items];
@@ -112,6 +138,10 @@
         }
         
         flag3=true;
+    }
+    else{
+        flag3=true;
+    
     }
     
     

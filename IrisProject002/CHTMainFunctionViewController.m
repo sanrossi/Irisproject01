@@ -77,62 +77,11 @@
     _TheFirstPhoneNumberArray=[[MyContactList sharedContacts]TheFirstPhoneNumberArray];
     _ContactFamilyNameArray =[[MyContactList sharedContacts]ContactFamilyNameArray];
     _ContactGivenNameArray =[[MyContactList sharedContacts]ContactGivenNameArray];
-    //[VMGearLoadingView showGearLoadingForView:self.view];
-    // }
+  
     [_TheFirstPhoneNumberArray insertObject:@"0999876654" atIndex:0];
     NSLog(@"test%@",_TheFirstPhoneNumberArray);
     //check the firstphone
    
-   // [self theFirstLoginViewdidLoad];
-    
-    
-//    NSFetchRequest *request =[[NSFetchRequest alloc]initWithEntityName:@"CHTLoginDetail"];
-//     if(_detail.count !=0){
-//    NSArray *detail=[context executeFetchRequest:request error:nil];
-//    NSLog(@"%@",detail);
-//    NSPredicate *myPrdicate=[NSPredicate predicateWithFormat:@"chtLogin == %@ && chtPassword = %@ ",nil,nil];
-// 
-//    [request setPredicate:myPrdicate];
-//   
-//         
-//         
-//         
-//    _fetchArray=[context executeFetchRequest:request error:nil];
-//     NSLog(@"fetchArray%@",_fetchArray);
-//    // 執行fetch request  return 你的搜尋結果在fetcharray中
-//    
-//    if(_fetchArray.count==0){
-//        CHTLoginDetail *loginDetail = [detail objectAtIndex:0];
-//        NSLog(@">>>>>>>>>>%@",loginDetail);
-//        
-//        alert.textFields[0].text= loginDetail.chtLogin;
-//        alert.textFields[1].text=loginDetail.chtPassword;
-//        
-//    }else{
-//        
-//            for (CHTLoginDetail *managedObject1 in _fetchArray) {
-//                [context deleteObject:managedObject1];
-//                //                [context deletedObjects];
-//            }
-//        
-//    
-//            CHTLoginDetail *loginDetail = [detail objectAtIndex:0];
-//            alert.textFields[0].text= loginDetail.chtLogin;
-//            NSLog(@"CHTLogin:%@",alert.textFields[0].text);
-//            alert.textFields[1].text=loginDetail.chtPassword;
-//
-//    }
-//
-//    
-//    }
-//    
-    
-    
-    
-    
-    
-    
-    
 
 }
 
@@ -190,13 +139,45 @@
     
     [self presentViewController:alert animated:YES completion:nil];
     
+    NSFetchRequest *request =[[NSFetchRequest alloc]initWithEntityName:@"CHTLoginDetail"];
     
+    if(_detail !=0){
+        NSArray *detail=[context executeFetchRequest:request error:nil];
+        NSLog(@"%@",detail);
+        NSPredicate *myPrdicate=[NSPredicate predicateWithFormat:@"chtLogin == %@ && chtPassword = %@ ",nil,nil];
+        
+        [request setPredicate:myPrdicate];
+        
+        _fetchArray=[context executeFetchRequest:request error:nil];
+        NSLog(@"fetchArray%@",_fetchArray);
+        // 執行fetch request  return 你的搜尋結果在fetcharray中
+        
+        if(_fetchArray.count==0){
+            if(detail.count !=0){
+                CHTLoginDetail *loginDetail = [detail objectAtIndex:0];
+                NSLog(@">>>>>>>>>>%@",loginDetail);
+                
+                alert.textFields[0].text= loginDetail.chtLogin;
+                alert.textFields[1].text=loginDetail.chtPassword;
+            }
+        }else{
+            
+            for (CHTLoginDetail *managedObject1 in _fetchArray) {
+                [context deleteObject:managedObject1];
     
+            }
+            
+            
+            CHTLoginDetail *loginDetail = [detail objectAtIndex:0];
+            alert.textFields[0].text= loginDetail.chtLogin;
+            NSLog(@"CHTLogin:%@",alert.textFields[0].text);
+            alert.textFields[1].text=loginDetail.chtPassword;
+            
+        }
+    }
     
-    
-    
-    
-    
+
+
 }
 
 
@@ -208,19 +189,18 @@
      _detail=[context executeFetchRequest:request error:nil];
     
     if(_detail.count != 0){
-            NSPredicate *myPrdicate=[NSPredicate predicateWithFormat:@"chtLogin == %@ && chtPassword = %@ ",nil,nil];
-            [request setPredicate:myPrdicate];
-        
-           _fetchArray=[context executeFetchRequest:request error:nil];
-            for (CHTLoginDetail *managedObject in _fetchArray) {
-                [context deleteObject:managedObject];
+  
 
-                }
+            for (CHTLoginDetail *managedObject in _detail) {
+                [context deleteObject:managedObject];
+                
+            }
         
-                flag3=true;}
-        else{
-         flag3=true;
-     }
+        flag3=true;
+    }
+    else{
+        flag3=true;
+    }
  
  
 }
@@ -228,32 +208,6 @@
 
 
 
-
-//
-//-(void)shouldSavetheFile:(NSString*)twLoginName twPassword:(NSString*)twpassword{
-//    NSManagedObjectContext *context =[CoreDataHelper sharedInstance].managedObjectContext;
-//    NSFetchRequest *request =[[NSFetchRequest alloc]initWithEntityName:@"TWLoginDetail"];
-//    _detail=[context executeFetchRequest:request error:nil];
-//    
-//    if(_detail.count != 0){
-//        NSPredicate *myPrdicate=[NSPredicate predicateWithFormat:@"twLogin == %@ && twPassword = %@ ",nil,nil];
-//        [request setPredicate:myPrdicate];
-//        
-//        _fetchArray=[context executeFetchRequest:request error:nil];
-//        if(_fetchArray.count !=0){
-//            NSLog(@"fetchArray:%@",_fetchArray);
-//            for (TWLoginDetail *managedObject in _fetchArray) {
-//                [context deleteObject:managedObject];
-//                
-//            }
-//        }
-//        flag3=true;}
-//    else{
-//        flag3=true;
-//    }
-//    
-//    
-//}
 
 
 
@@ -271,12 +225,17 @@
         //load CHT Web page
 //    }
 }
+-(void)logoutCHTWebView{
+    NSURL *url = [NSURL URLWithString:@"http://www.emome.net/"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [self.CHTWebView loadRequest:request];
+}
 
 
 
 -(void)inputtheLoginNum{
     if((_CHTLogin.text.length==0 || _CHTLogin.text.length != 10)){
-        [self displayUIAlertAction:@"提醒" message:@"請輸入帳號"];
+        [self displayUIAlertAction:@"提醒" message:@"請輸入正確emome帳號"];
         
     }
     else if((_CHTPassword.text.length  == 0)){
@@ -289,12 +248,11 @@
     [_CHTWebView stringByEvaluatingJavaScriptFromString:loginaccount];
     [_CHTWebView stringByEvaluatingJavaScriptFromString:loginpassword];
     [_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('btn-login').click()"];
-   
-    //login member
+
     }else{
-     //0++++++++++++++++++++++++++++++++++++++++++++0
+   
         [self displayUIAlertAction:@"請輸入正確的帳號密碼" message:@""];
-        
+        [self viewDidLoad];
     
     
     }
@@ -318,6 +276,7 @@
     [_CHTWebView stringByEvaluatingJavaScriptFromString:loginpassword];
     [_CHTWebView stringByEvaluatingJavaScriptFromString:confirmcode];
     [_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById('btn-login').click()"];
+    //[VMGearLoadingView showGearLoadingForView:self.view];
     }
 
 }
@@ -428,11 +387,7 @@
     NSString* isdialog2 = [_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByClassName('title')[0].innerHTML"];
     NSString* isdialog3 =[_CHTWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('tbody')[0].firstChild.firstChild.innerHTML"];
     if([isdialog2 isEqualToString:@"登入 emome首頁"]){
-        [self theFirstLoginViewdidLoad];
-        
-     
-    }
-    else if(isdialog.length>0){
+      if(isdialog.length>0){
         [self getImage];
         UIAlertController * alert= [UIAlertController
                                     alertControllerWithTitle:@"會員登入\n\n"
@@ -475,7 +430,10 @@
             textField.secureTextEntry = YES;
         }];
         [self presentViewController:alert animated:YES completion:nil];
-
+      }else{
+      
+       [self theFirstLoginViewdidLoad];
+      }
         
       
     }
@@ -498,6 +456,17 @@
             NSLog(@"wenet:%@",_FormWhichCompanyList);
             
         }
+        if(PhoneElementNum == 0){
+            [VMGearLoadingView showGearLoadingForView:self.view];
+        }
+        
+        
+        if(PhoneElementNum == _totalContactsNum){
+            [VMGearLoadingView hideGearLoadingForView:self.view];
+        }
+        
+        
+        
       
             if (PhoneElementNum>=0 && PhoneElementNum<_totalContactsNum+1) {
                     _PhoneNumList=_TheFirstPhoneNumberArray[PhoneElementNum];
@@ -558,13 +527,40 @@
             }
                 
                 //delay 1 sencond to click the submit
-             if(PhoneElementNum == _totalContactsNum){
-                [VMGearLoadingView hideGearLoadingForView:self.view];
-            
-            }
+                
         }
+   
+        
+        
         
     }
+
+    
+    
+    
+    
+    
+    
+//    if([PhoneElementNum isEqual:0]){
+//        double delayInSeconds = 1;
+//        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+//        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//            [VMGearLoadingView showGearLoadingForView:self.view];
+//        });
+//        
+//    }
+//    
+//    
+//    
+//    if(PhoneElementNum == _totalContactsNum){
+//        double delayInSeconds = 1;
+//        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+//        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//            [VMGearLoadingView hideGearLoadingForView:self.view];
+//        });
+//        
+//    }
+
     
     
 }

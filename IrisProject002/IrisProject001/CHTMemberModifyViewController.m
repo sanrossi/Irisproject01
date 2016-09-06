@@ -59,10 +59,7 @@
 
 - (IBAction)checkBtn:(id)sender {
 
-//    [self shouldSavetheFile:_CHTLogin.text chtPassword:_CHTPassWord.text];
-//    
-//    
-//    if(flag3){
+
         NSManagedObjectContext *context =[CoreDataHelper sharedInstance].managedObjectContext;
         NSFetchRequest *request1 = [NSFetchRequest fetchRequestWithEntityName:@"CHTLoginDetail"];
         
@@ -73,7 +70,7 @@
         login.chtPassword=_CHTPassWord.text;
         if(login.chtLogin.length !=0 &&login.chtPassword.length !=0){
             [context save:nil];
-     //   }
+     
     };
     
     [self displayUIAlertAction1:@"恭喜完成會員修改!!" message:@""];
@@ -94,33 +91,7 @@
 
 
 
--(void)shouldSavetheFile:(NSString*)chtLoginName chtPassword:(NSString*)chtpassword{
-    NSManagedObjectContext *context =[CoreDataHelper sharedInstance].managedObjectContext;
-    NSFetchRequest *request =[[NSFetchRequest alloc]initWithEntityName:@"CHTLoginDetail"];
-    if(_detail.count != 0){
-    _detail=[context executeFetchRequest:request error:nil];
-    }
-        NSPredicate *myPrdicate=[NSPredicate predicateWithFormat:@"chtLogin == %@ && chtPassword = %@ ",chtLoginName,chtpassword];
-    [request setPredicate:myPrdicate];
-    NSArray *fetchArray=[context executeFetchRequest:request error:nil];
-    // 執行fetch request  return 你的搜尋結果在fetcharray中
-    NSLog(@"fetchArray:%@",fetchArray);
-    if(fetchArray.count==0){
-        if(_detail.count != 0){
-            for (CHTLoginDetail *managedObject in _detail) {
-                [context deleteObject:managedObject];
-                //                [context deletedObjects];
-            }
-        }
-        
-        
-        flag3=true;
-    }else{
-        
-        flag3=false;
-    }
-    
-}
+
 
 
 

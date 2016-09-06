@@ -122,6 +122,9 @@
 -(void)loadTWWebView{
 //    if(_TWLogin!=nil && _TWPassword!=nil){
         NSURL *url = [NSURL URLWithString:@"https://www.catch.net.tw/auth/member_login_m.jsp?return_url=https%3A%2F%2Fcs.taiwanmobile.com%2Fwap-portal%2FssoLogin.action%3Fparam%3DaHR0cHM6Ly9jcy50YWl3YW5tb2JpbGUuY29tL3dhcC1wb3J0YWwvc21wUXVlcnlUd21QaG9uZU5i%0D%0Aci5hY3Rpb24%3D%0D%0A"];
+    
+
+    
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         [self.TWWebView loadRequest:request];
     
@@ -217,7 +220,6 @@
 
 
 
-//如果非台灣帳號https://www.catch.net.tw/auth/loginMessage_m.jsp這個判別還沒寫
 
 -(void)inputtheLoginNum{
 
@@ -247,8 +249,12 @@
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
             [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByClassName('btn01')[0].childNodes[0].click()"];
         });
+    }else{
+    //0++++++++++++++++++++++++++++++++++++++++++++0
+    [self displayUIAlertAction:@"請輸入正確的帳號密碼" message:@""];
+    [self viewDidLoad];
     }
-    
+
 }
 
 
@@ -277,37 +283,6 @@
 }
 
 
-//-(void)shouldSavetheFile:(NSString*)twLoginName chtPassword:(NSString*)twpassword{
-//    NSManagedObjectContext *context =[CoreDataHelper sharedInstance].managedObjectContext;
-//    NSFetchRequest *request =[[NSFetchRequest alloc]initWithEntityName:@"TWLoginDetail"];
-//     if(_detail !=0){
-//    _detail=[context executeFetchRequest:request error:nil];
-//    NSPredicate *myPrdicate=[NSPredicate predicateWithFormat:@"twLogin == %@ && twPassword = %@ ",twLoginName,twpassword];
-//    [request setPredicate:myPrdicate];
-//   
-//    NSArray *fetchArray=[context executeFetchRequest:request error:nil];
-//    // 執行fetch request  return 你的搜尋結果在fetcharray中
-//    
-//    if(fetchArray.count==0){
-//        if(_detail.count != 0){
-//            for (TWLoginDetail *managedObject in _detail) {
-//                [context deleteObject:managedObject];
-//                //                [context deletedObjects];
-//            }
-//        }
-//        
-//        flag3=true;
-//    }else{
-//        
-//        flag3=false;
-//    }
-//    
-//    }else{
-//        flag3=true;
-//    
-//    }
-//    
-//}
 
 -(void)shouldSavetheFile:(NSString*)twLoginName twPassword:(NSString*)twpassword{
     NSManagedObjectContext *context =[CoreDataHelper sharedInstance].managedObjectContext;
@@ -315,18 +290,13 @@
     _detail=[context executeFetchRequest:request error:nil];
     
     if(_detail.count != 0){
-        NSPredicate *myPrdicate=[NSPredicate predicateWithFormat:@"twLogin == %@ && twPassword = %@ ",nil,nil];
-        [request setPredicate:myPrdicate];
-        
-        _fetchArray=[context executeFetchRequest:request error:nil];
-        if(_fetchArray.count !=0){
-            NSLog(@"fetchArray:%@",_fetchArray);
-        for (TWLoginDetail *managedObject in _fetchArray) {
+
+        for (TWLoginDetail *managedObject in _detail) {
             [context deleteObject:managedObject];
-            
+
         }
-        }
-        flag3=true;}
+        flag3=true;
+    }
     else{
         flag3=true;
     }
@@ -397,7 +367,8 @@
                                                                }
                                                            };
 
-                                                           
+                                                           //[VMGearLoadingView showGearLoadingForView:self.view];
+
                                                        }];
             
             
@@ -476,9 +447,10 @@
         
     
         
-        
-        
-        
+      
+//        if(PhoneElementNum == _totalContactsNum){
+//          [VMGearLoadingView hideGearLoadingForView:self.view];
+//        }
         
         
         
@@ -508,7 +480,7 @@
                     NSLog(@"加0%@",_PhoneNumList);
                 }
                
-          if(_TWWebView.loading){
+          if(_TWWebView.loading==NO){
                 NSString *script = [NSString stringWithFormat:@"document.getElementsByName('phoneNbr')[0].value='%@'",_PhoneNumList];
                 [_TWWebView stringByEvaluatingJavaScriptFromString:script];
               
@@ -519,6 +491,7 @@
                 [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.forms[0].submit()"];
                   NSLog(@"+++++++++++++++++");
               });
+              
 
                  }
                 }
@@ -526,7 +499,7 @@
             else if([_PhoneNumList isEqualToString:@""]){
                
                 _PhoneNumList=@"11111111111";
-                if(_TWWebView.loading){
+                if(_TWWebView.loading==NO){
                 NSString *script = [NSString stringWithFormat:@"document.getElementsByName('phoneNbr')[0].value='%@'",_PhoneNumList];
                 [_TWWebView stringByEvaluatingJavaScriptFromString:script];
                 
@@ -538,11 +511,12 @@
                    });
                     
                     }
-                
+                NSLog(@"didFinish1111: %@; stillLoading: %@", [[_TWWebView request]URL],
+                      (_TWWebView.loading?@"YES":@"NO"));
                 //改這裡
             }
             else{
-                if(_TWWebView.loading){
+                if(_TWWebView.loading==NO){
                 _PhoneNumList=@"11111111111";
                 NSString *script = [NSString stringWithFormat:@"document.getElementsByName('phoneNbr')[0].value='%@'",_PhoneNumList];
                 [_TWWebView stringByEvaluatingJavaScriptFromString:script];
@@ -556,7 +530,7 @@
                   });
                     
                 }
-                //改這裡
+             
         
             }
             
@@ -574,7 +548,7 @@
         
         NSLog(@"ooooooooooooooooooooo");
         if([_FromWhichCompany  isEqual:@""]){
-            if(_TWWebView.loading){
+            if(_TWWebView.loading==NO){
                
                 _FromWhichCompany = [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByClassName('red')[0].innerHTML"];
                 
@@ -582,8 +556,7 @@
                     _FromWhichCompany = [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('font')[0].innerHTML"];
                     
                 }
-            }
-        
+            
                 NSLog(@"didFinish: %@; stillLoading: %@", [[_TWWebView request]URL],
                       (_TWWebView.loading?@"YES":@"NO"));
                 NSLog(@"台灣大哥大:%@",_FromWhichCompany);
@@ -605,22 +578,32 @@
                     NSLog(@"wenet:%@",_FormWhichCompanyList);
                     
                 }
-                 if(_TWWebView.loading){
+            }
+                 if(_TWWebView.loading==NO){
+                     
+                    
+                   
                 [_TWWebView stringByEvaluatingJavaScriptFromString:@"history.go(-1)"];
+                     
+                            
                  }
                 
             }else if(![_FromWhichCompany  isEqual:@""]){
                  PhoneElementNum+=1;
                 _FromWhichCompany=@"";
-                 if(_TWWebView.loading){
+                 if(_TWWebView.loading==NO){
+                  
                 [_TWWebView stringByEvaluatingJavaScriptFromString:@"history.go(-1)"];
+                     
                  }
                 
             }
-            
-            
-    }
+
+    }else if([[[[_TWWebView request]URL]absoluteString]  isEqualToString: @"https://www.catch.net.tw/auth/loginMessage_m.jsp"]){
         
+        [self loadTWWebView];
+
+    }
     
 }
 

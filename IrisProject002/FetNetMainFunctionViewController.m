@@ -7,6 +7,7 @@
 //
 
 #import "FetNetMainFunctionViewController.h"
+#import "FetNetAnalysisChartViewController.h"
 #import "MyContactList.h"
 #import "FetNetLoginDetail.h"
 @interface FetNetMainFunctionViewController ()<UIWebViewDelegate>
@@ -293,7 +294,7 @@ else{
 }
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([segue.identifier isEqualToString:@"FetNetPieChart"])
-    {   FetNetLoginDetail *fetnetAnalysisChartViewController =segue.destinationViewController;
+    {   FetNetAnalysisChartViewController *fetnetAnalysisChartViewController =segue.destinationViewController;
         NSNumber *myNum = @(_innerNet.count);
         NSNumber *myNum1 = @(_outerNet.count);
         NSNumber *myNum2 = @(_localphone.count);
@@ -304,7 +305,7 @@ else{
         fetnetAnalysisChartViewController.localPhoneCount=myNum2;
         fetnetAnalysisChartViewController.otherPhoneCount=myNum3;
         
-        NSLog(@"\n _innerNet.count: %ld, \n _outerNet.count: %ld, \n _outerNet.count: %ld, \n _otherphone.count: %ld", _innerNet.count, _outerNet.count, _localphone.count, _otherphone.count);
+        NSLog(@"\n _innerNet.count: %ld, \n _outerNet.count: %ld, \n _localphone.count: %ld, \n _otherphone.count: %ld", _innerNet.count, _outerNet.count, _localphone.count, _otherphone.count);
         
     }
     

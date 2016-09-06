@@ -35,9 +35,7 @@
     // Do any additional setup after loading the view.
     // Do any additional setup after loading the view.
     _fetchArray=[NSMutableArray array];
-    //_detail=[NSArray array];
-    
-    
+
     self.titleLabel.text = @"網內外資料分析圖";
     self.leftSwitch.hidden = NO;
     //   self.rightSwitch.hidden = NO;
@@ -148,14 +146,15 @@
         
         for (TWNETCount *managedObject in _detail) {
             [context deleteObject:managedObject];
-            
-            
+
         }
         
         flag3=true;
+    }else{
+        flag3=true;
+    
     }
-    
-    
+
 }
 
 

@@ -46,33 +46,7 @@
     // Pass the selected object to the new view controller.
 }
 */
-//-(BOOL)shouldSavetheFile:(NSString*)chtLoginName chtPassword:(NSString*)chtpassword{
-//    NSManagedObjectContext *context =[CoreDataHelper sharedInstance].managedObjectContext;
-//    NSFetchRequest *request =[[NSFetchRequest alloc]initWithEntityName:@"CHTLoginDetail"];
-//    NSArray *detail=[context executeFetchRequest:request error:nil];
-//    for(int i=0;i<detail.count;i++){
-//        CHTLoginDetail *loginDetail = [detail objectAtIndex:i];
-//        if(loginDetail.chtLogin.length !=0 &&loginDetail.chtPassword.length !=0){
-//            [_loginaccount addObject:loginDetail.chtLogin];
-//            [_loginpassword addObject:loginDetail.chtPassword];
-//        }
-//    }
-//    for(int i=0;i<_loginpassword.count;i++){
-//        
-//        if([[_loginaccount objectAtIndex:i]length]!=0 &&[[_loginpassword objectAtIndex:i] length]!=0){
-//            NSString *login=[_loginaccount objectAtIndex:i];
-//            NSString *password =[_loginpassword objectAtIndex:i];
-//            
-//            if(![chtLoginName isEqualToString:login] && ![chtpassword isEqualToString:password]){
-//                
-//                return true;
-//            }
-//            
-//        }
-//        
-//    }
-//    return false;
-//}
+
 - (IBAction)checkBtn:(id)sender {
 
                 NSManagedObjectContext *context =[CoreDataHelper sharedInstance].managedObjectContext;

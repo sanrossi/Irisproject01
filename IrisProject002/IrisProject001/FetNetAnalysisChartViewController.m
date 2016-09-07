@@ -98,10 +98,10 @@
     
     
     
-    NSArray *items = @[[PNPieChartDataItem dataItemWithValue:_innerNum color:PNLightGreen description:@"網內"],
-                       [PNPieChartDataItem dataItemWithValue:_outerNum color:PNFreshGreen description:@"網外"],
-                       [PNPieChartDataItem dataItemWithValue:_localPhoneNum color:PNDeepGreen description:@"市話"],
-                       [PNPieChartDataItem dataItemWithValue:_otherPhoneNum color:PNLightGreen description:@"其他"]
+    NSArray *items = @[[PNPieChartDataItem dataItemWithValue:_innerNum color:[UIColor colorWithRed:67.0/255.0 green:205.0/255.0 blue:112.0/255.0 alpha:1.0] description:@"網內"],
+                       [PNPieChartDataItem dataItemWithValue:_outerNum color:PNLightGreen description:@"網外"],
+                       [PNPieChartDataItem dataItemWithValue:_localPhoneNum color:[UIColor colorWithRed:124.0/255.0 green:205.0/255.0 blue:144.0/255.0 alpha:1.0] description:@"市話"],
+                       [PNPieChartDataItem dataItemWithValue:_otherPhoneNum color:PNDeepGreen description:@"其他"]
                        ];
     
     self.pieChart = [[PNPieChart alloc] initWithFrame:CGRectMake(SCREEN_WIDTH /2.0 - 100, 200, 200.0, 200.0) items:items];

@@ -98,7 +98,7 @@
     
     NSArray *items = @[[PNPieChartDataItem dataItemWithValue:_innerNum color:[UIColor colorWithRed:67.0/255.0 green:205.0/255.0 blue:112.0/255.0 alpha:1.0] description:@"網內"],
                        [PNPieChartDataItem dataItemWithValue:_outerNum color:PNLightGreen description:@"網外"],
-                       [PNPieChartDataItem dataItemWithValue:_otherPhoneNum color:[UIColor colorWithRed:124.0/255.0 green:205.0/255.0 blue:124.0/255.0 alpha:1.0]description:@"其他"],
+                       [PNPieChartDataItem dataItemWithValue:_otherPhoneNum color:[UIColor colorWithRed:124.0/255.0 green:205.0/255.0 blue:144.0/255.0 alpha:1.0]description:@"其他"],
                        [PNPieChartDataItem dataItemWithValue:_localPhoneNum color:PNDeepGreen description:@"市話"],
                        
                        ];

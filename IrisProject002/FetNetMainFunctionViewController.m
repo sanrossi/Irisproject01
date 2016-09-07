@@ -192,8 +192,22 @@
     }
 }
 
-
+-(void)displayUIAlertAction:(NSString *)title  message:(NSString *)message {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"確認" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        [self viewDidLoad];
+    }];
+    [alertController addAction:okAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+    
+    
+}
 -(void)distinguishLandline{
+    if(_FormWhichCompanyList.count==0){
+        [self displayUIAlertAction:@"網路狀態不佳， 請檢查網路狀態！！" message:@""];
+        
+    }
+    else{
 
     for (PhoneElementNum=0 ; PhoneElementNum<_totalContactsNum;PhoneElementNum++) {
         NSString *CheckPhoneNumList=_TheFirstPhoneNumberArray[PhoneElementNum];
@@ -214,8 +228,9 @@
             }
             NSLog(@"市話%@",_FormWhichCompanyList);
         }
+      }
+
     }
-    
 }
 
 
@@ -250,10 +265,13 @@
         //改過了
     }
     }
+    else if(_FormWhichCompanyList.count ==0){
+        [self displayUIAlertAction1:@"網路狀態不佳， 請檢查網路狀態！！" message:@""];
+    }
 else{
     [self calculateNumbersOfInternalNetwork];
     [self displayUIAlertAction1:@"請檢查網路狀態" message:@"請改wifi連線!!"];
-}
+   }
         
         
 }

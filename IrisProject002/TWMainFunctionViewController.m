@@ -630,6 +630,11 @@
 
 
 -(void)distinguishLandline{
+    if(_TheFirstPhoneNumberArray.count==0){
+        [self displayUIAlertAction:@"請先輸入帳號密碼" message:@""];
+        
+    }
+    else{
     if(_FormWhichCompanyList.count == _TheFirstPhoneNumberArray.count+1){
         [_FormWhichCompanyList removeObjectAtIndex:0];
     }
@@ -654,7 +659,7 @@
             NSLog(@"市話%@",_FormWhichCompanyList);
         }
     }
-    
+    }
 }
 
 

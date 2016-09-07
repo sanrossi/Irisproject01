@@ -599,8 +599,8 @@
 
 
 -(void)distinguishLandline{
-    if(_TheFirstPhoneNumberArray.count==0){
-        [self displayUIAlertAction:@"請先輸入帳號密碼" message:@""];
+    if(_FormWhichCompanyList.count==0){
+        [self displayUIAlertAction:@"請先登入帳號密碼" message:@""];
 
     }
     else{
@@ -669,7 +669,7 @@
     [self displayUIAlertAction1:@"恭喜完成寫入" message:@"趕快查看您的通訊錄唷!!"];
  }
  else if(_FormWhichCompanyList.count ==0){
-    [self displayUIAlertAction1:@"請登入帳號密碼" message:@""];
+    [self displayUIAlertAction:@"請先登入帳號密碼" message:@""];
  }
 else{
      [self calculateNumbersOfInternalNetwork];

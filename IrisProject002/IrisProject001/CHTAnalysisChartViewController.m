@@ -72,14 +72,14 @@
             NSManagedObjectContext *context =[CoreDataHelper sharedInstance].managedObjectContext;
             NETCount *login = [NSEntityDescription insertNewObjectForEntityForName:@"NETCount" inManagedObjectContext:context];
             login.innerNetCount=_innerNetCount;
-            NSLog(@"innerNetCount:%@",login.innerNetCount);
+            //NSLog(@"innerNetCount:%@",login.innerNetCount);
             login.outerNetCount=_outerNetCount;
             login.localPhoneCount=_localPhoneCount;
             login.otherPhoneCount=_otherPhoneCount;
             
             [context save:nil];
             login.innerNetCount=_innerNetCount;
-            NSLog(@"innerNetCount:%@",login.innerNetCount);
+            //NSLog(@"innerNetCount:%@",login.innerNetCount);
             login.outerNetCount=_outerNetCount;
             login.localPhoneCount=_localPhoneCount;
             login.otherPhoneCount=_otherPhoneCount;
@@ -130,8 +130,7 @@
 
 
 - (IBAction)rightSwitchChanged:(id)sender {
-
-    if ([self.titleLabel.text isEqualToString:@"Pie Chart"]){
+    if ([self.titleLabel.text isEqualToString:@"網內外資料分析圖"]){
         UISwitch *showLabels = (UISwitch*) sender;
         if (showLabels.on) {
             self.pieChart.showOnlyValues = NO;
@@ -140,7 +139,6 @@
         }
         [self.pieChart strokeChart];
     }
-
 
 
 

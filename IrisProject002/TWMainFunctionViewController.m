@@ -188,7 +188,7 @@
      //   [_TWWebView addSubview:_dyImageViewac];
     });
     //check image with height and width
-    NSLog(@"width %f,height %f",image.size.width,image.size.height);
+    //NSLog(@"width %f,height %f",image.size.width,image.size.height);
     
     
 }
@@ -358,7 +358,7 @@
                                                                TWLoginDetail *login = [NSEntityDescription insertNewObjectForEntityForName:@"TWLoginDetail" inManagedObjectContext:context];
                                                                
                                                                login.twLogin=_TWLogin.text;
-                                                               NSLog(@"%@",login.twLogin);
+                                                               //NSLog(@"%@",login.twLogin);
                                                                login.twPassword=_TWPassword.text;
                                                                if(login.twLogin.length !=0 &&login.twPassword.length !=0){
                                                                    [context save:nil];
@@ -407,19 +407,19 @@
             
             if(_detail !=0){
             NSArray *detail=[context executeFetchRequest:request error:nil];
-            NSLog(@"%@",detail);
+            //NSLog(@"%@",detail);
             NSPredicate *myPrdicate=[NSPredicate predicateWithFormat:@"twLogin == %@ && twPassword = %@ ",nil,nil];
             
             [request setPredicate:myPrdicate];
             
             _fetchArray=[context executeFetchRequest:request error:nil];
-            NSLog(@"fetchArray%@",_fetchArray);
+            //NSLog(@"fetchArray%@",_fetchArray);
             // 執行fetch request  return 你的搜尋結果在fetcharray中
             
             if(_fetchArray.count==0){
                 if(detail.count !=0){
                 TWLoginDetail *loginDetail = [detail objectAtIndex:0];
-                NSLog(@">>>>>>>>>>%@",loginDetail);
+                //NSLog(@">>>>>>>>>>%@",loginDetail);
                 
                 alert.textFields[0].text= loginDetail.twLogin;
                 alert.textFields[1].text=loginDetail.twPassword;
@@ -434,7 +434,7 @@
                 
                 TWLoginDetail *loginDetail = [detail objectAtIndex:0];
                 alert.textFields[0].text= loginDetail.twLogin;
-                NSLog(@"CHTLogin:%@",alert.textFields[0].text);
+                //NSLog(@"CHTLogin:%@",alert.textFields[0].text);
                 alert.textFields[1].text=loginDetail.twPassword;
                 
             }
@@ -464,18 +464,18 @@
             NSString *letters = @"0123456789";
             NSCharacterSet *notLetters = [[NSCharacterSet characterSetWithCharactersInString:letters] invertedSet];
             _PhoneNumList = [[_PhoneNumList componentsSeparatedByCharactersInSet:notLetters] componentsJoinedByString:@""];
-            NSLog(@"newString: %@", _PhoneNumList);
+            //NSLog(@"newString: %@", _PhoneNumList);
             //正則化
             
             if((_PhoneNumList.length==10 && [_PhoneNumList hasPrefix:@"09"]) || ([_PhoneNumList hasPrefix:@"8869"] && _PhoneNumList.length==12)){
                 if([_PhoneNumList hasPrefix:@"8869"]){
                     _PhoneNumList = [_PhoneNumList substringWithRange:NSMakeRange(3,9)];
                     
-                    NSLog(@"去除886%@",_PhoneNumList);
+                    //NSLog(@"去除886%@",_PhoneNumList);
                     
                     _PhoneNumList=[NSString stringWithFormat:@"0%@",_PhoneNumList];
                    
-                    NSLog(@"加0%@",_PhoneNumList);
+                    //NSLog(@"加0%@",_PhoneNumList);
                 }
                
           if(_TWWebView.loading==NO){
@@ -487,7 +487,7 @@
               dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
               dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
                 [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.forms[0].submit()"];
-                  NSLog(@"+++++++++++++++++");
+                  //NSLog(@"+++++++++++++++++");
               });
               
 
@@ -509,8 +509,8 @@
                    });
                     
                     }
-                NSLog(@"didFinish1111: %@; stillLoading: %@", [[_TWWebView request]URL],
-                      (_TWWebView.loading?@"YES":@"NO"));
+//                NSLog(@"didFinish1111: %@; stillLoading: %@", [[_TWWebView request]URL],
+//                      (_TWWebView.loading?@"YES":@"NO"));
                 //改這裡
             }
             else{
@@ -543,7 +543,7 @@
     }
     else if ([[[[_TWWebView request]URL]absoluteString]  isEqualToString: @"https://cs.taiwanmobile.com/wap-portal/smpCheckTwmPhoneNbr.action"]){
 
-        NSLog(@"ooooooooooooooooooooo");
+        //NSLog(@"ooooooooooooooooooooo");
         if([_FromWhichCompany  isEqual:@""]){
             
             if(_TWWebView.loading==NO){
@@ -555,9 +555,9 @@
                     
                 }
             
-                NSLog(@"didFinish: %@; stillLoading: %@", [[_TWWebView request]URL],
-                      (_TWWebView.loading?@"YES":@"NO"));
-                NSLog(@"台灣大哥大:%@",_FromWhichCompany);
+//                NSLog(@"didFinish: %@; stillLoading: %@", [[_TWWebView request]URL],
+//                      (_TWWebView.loading?@"YES":@"NO"));
+                //NSLog(@"台灣大哥大:%@",_FromWhichCompany);
         
         
                 //get the information about the Internal network or external network
@@ -570,10 +570,10 @@
                     _FromWhichCompanyinfo=@"網外";
                 }
                 //change the html to 網內外 label
-                NSLog(@"login%@",_FromWhichCompanyinfo);
+               // NSLog(@"login%@",_FromWhichCompanyinfo);
                 if(_FromWhichCompanyinfo != NULL){
                     [_FormWhichCompanyList addObject:_FromWhichCompanyinfo];
-                    NSLog(@"wenet:%@",_FormWhichCompanyList);
+                    //NSLog(@"wenet:%@",_FormWhichCompanyList);
                     
                 }
             
@@ -588,8 +588,8 @@
                 [VMGearLoadingView hideGearLoadingForView:self.view];
             }
             }
-            NSLog(@"TOTALCOUNT%ld",_totalContactsNum);
-            NSLog(@"PHONELEMENT:%ld",PhoneElementNum);
+            //NSLog(@"TOTALCOUNT%ld",_totalContactsNum);
+            //NSLog(@"PHONELEMENT:%ld",PhoneElementNum);
                  if(_TWWebView.loading==NO){
                      
                     
@@ -644,7 +644,7 @@
         NSString *letters = @"0123456789";
         NSCharacterSet *notLetters = [[NSCharacterSet characterSetWithCharactersInString:letters] invertedSet];
         CheckPhoneNumList= [[CheckPhoneNumList componentsSeparatedByCharactersInSet:notLetters] componentsJoinedByString:@""];
-        NSLog(@"newString: %@", CheckPhoneNumList);
+        //NSLog(@"newString: %@", CheckPhoneNumList);
         //正則化
         
         NSArray *twRegionCod =[ [ NSArray alloc ] initWithObjects:@"02",@"03",@"037",@"04",@"049",@"05",@"06",@"07",@"089",@"082",@"0826",@"0836",@"8862",@"8863",@"88637",@"8864",@"88649",@"8865",@"8866",@"8867",@"88989",@"88682",@"886826",@"886836", nil];
@@ -656,7 +656,7 @@
                 _FormWhichCompanyList[PhoneElementNum]=@"市話";
                  }
             }
-            NSLog(@"市話%@",_FormWhichCompanyList);
+            //NSLog(@"市話%@",_FormWhichCompanyList);
         }
     }
     }
@@ -669,7 +669,7 @@
 
 - (IBAction)writeToAddressBook:(id)sender {
     [self distinguishLandline];
-    NSLog(@"count%ld",_FormWhichCompanyList.count);
+    //NSLog(@"count%ld",_FormWhichCompanyList.count);
 
     if(_FormWhichCompanyList.count==_TheFirstPhoneNumberArray.count){
     for(int count=0;count<_totalContactsNum;count++)
@@ -731,7 +731,7 @@
         [NetNameData dataUsingEncoding:NSUTF8StringEncoding];
         NSString *Netname =
         [[NSString alloc] initWithData:unicodedStringData encoding:NSUTF8StringEncoding];
-        NSLog(@"netname:%@",Netname);
+        //NSLog(@"netname:%@",Netname);
         
         if([Netname isEqualToString:@"網內" ]){
             [_innerNet addObject:Netname];
@@ -744,10 +744,10 @@
         }
         
         
-        NSLog(@"網內%ld",_innerNet.count);
-        NSLog(@"網外%ld",_outerNet.count);
-        NSLog(@"市話%ld",_localphone.count);
-        NSLog(@"其他%ld",_otherphone.count);
+//        NSLog(@"網內%ld",_innerNet.count);
+//        NSLog(@"網外%ld",_outerNet.count);
+//        NSLog(@"市話%ld",_localphone.count);
+//        NSLog(@"其他%ld",_otherphone.count);
         
     }
     
@@ -767,7 +767,7 @@
         twAnalysisChartViewController.localPhoneCount=myNum2;
         twAnalysisChartViewController.otherPhoneCount=myNum3;
         
-        NSLog(@"\n _innerNet.count: %ld, \n _outerNet.count: %ld, \n _outerNet.count: %ld, \n _otherphone.count: %ld", _innerNet.count, _outerNet.count, _localphone.count, _otherphone.count);
+//        NSLog(@"\n _innerNet.count: %ld, \n _outerNet.count: %ld, \n _outerNet.count: %ld, \n _otherphone.count: %ld", _innerNet.count, _outerNet.count, _localphone.count, _otherphone.count);
         
     }
 

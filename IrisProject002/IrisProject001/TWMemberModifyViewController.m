@@ -56,7 +56,7 @@
                 TWLoginDetail *login = (TWLoginDetail *)result.firstObject;
 
         login.twLogin=_TWLogin.text;
-        NSLog(@"%@",login.twLogin);
+        //NSLog(@"%@",login.twLogin);
         login.twPassword=_TWPassWord.text;
         if(login.twLogin.length !=0 &&login.twPassword.length !=0){
             [context save:nil];

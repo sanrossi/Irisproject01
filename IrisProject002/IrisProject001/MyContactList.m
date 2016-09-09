@@ -106,7 +106,7 @@
     //generate a custom dictionary to access
     for (CNContact *contact in groupsOfContact) {
         NSMutableArray *thisOne = [[contact.phoneNumbers valueForKey:@"value"] valueForKey:@"digits"];
-        NSLog(@"digits:%@",thisOne);
+        //NSLog(@"digits:%@",thisOne);
         //   [phoneNumberArray addObjectsFromArray:thisOne];
         //  NSLog(@"contact identifier: %@",contact.identifier);
         if(thisOne.count == 0){
@@ -250,7 +250,7 @@
 #warning TODO: Show alert to the User, for enable the contacts permission in the Settings
     // The user has previously denied access
     // Send an alert telling user to change privacy setting in settings app
-    NSLog(@"Get Permission to User");
+    //NSLog(@"Get Permission to User");
 }
 
 
@@ -264,10 +264,10 @@
       //提取数据
      
          NSArray * contactsphone = [store unifiedContactsMatchingPredicate:predicate keysToFetch:@[CNContactGivenNameKey,CNContactFamilyNameKey,CNContactPhoneNumbersKey] error:nil];
-    NSLog(@"contactsphone:%@",contactsphone);
+    //NSLog(@"contactsphone:%@",contactsphone);
 
         CNMutableContact *contactphone2 = [[contactsphone objectAtIndex:0] mutableCopy];
-    NSLog(@"contactphone2:%@",contactphone2.phoneNumbers);
+    //NSLog(@"contactphone2:%@",contactphone2.phoneNumbers);
      //    修改联系人的属性
     
     CNLabeledValue *cellPhone1 = [CNLabeledValue labeledValueWithLabel:netLabel value:[CNPhoneNumber phoneNumberWithStringValue:origincontactphone]];
@@ -279,7 +279,7 @@
     
     
 
-    NSLog(@"testtest:%@",contactphone2.phoneNumbers);
+    //NSLog(@"testtest:%@",contactphone2.phoneNumbers);
      //    实例化一个CNSaveRequest
          CNSaveRequest * saveRequest = [[CNSaveRequest alloc]init];
          [saveRequest updateContact:contactphone2];
@@ -310,13 +310,14 @@
     _TheThirdPhoneNumberArray = [NSMutableArray array];
     _ContactGivenNameArray= [NSMutableArray array];
     _ContactFamilyNameArray= [NSMutableArray array];
-    [[MyContactList sharedContacts] fetchAllContacts];
+    //[MyContactList sharedContacts];
+    [self fetchAllContacts];
     //fetch all contacts by calling single to method
     
     if ([[MyContactList sharedContacts]totalPhoneNumberArray].count !=0) {
-        NSLog(@"Fetched Contact Details : %ld",[[MyContactList sharedContacts]totalPhoneNumberArray].count);
+        //NSLog(@"Fetched Contact Details : %ld",[[MyContactList sharedContacts]totalPhoneNumberArray].count);
         _totalContactsNum=[[MyContactList sharedContacts]totalPhoneNumberArray].count;
-        NSLog(@"%@", [[MyContactList sharedContacts]totalPhoneNumberArray]);
+        //NSLog(@"%@", [[MyContactList sharedContacts]totalPhoneNumberArray]);
         
         for(int i=0; i<_totalContactsNum;i++)
             
@@ -324,31 +325,31 @@
             
             if([_theFirstPhone[0] length] == 0 ){
                 [_TheFirstPhoneNumberArray addObject:@""];
-                NSLog(@"test%@",_TheFirstPhoneNumberArray);
+                //NSLog(@"test%@",_TheFirstPhoneNumberArray);
                 
             }else{
                 
                 [_TheFirstPhoneNumberArray addObject:_theFirstPhone[0]];
-                NSLog(@"test%@",_TheFirstPhoneNumberArray);
+                //NSLog(@"test%@",_TheFirstPhoneNumberArray);
                 //check the firstphone
             }
             
           
             if( _theFirstPhone.count == 2){
                 [_SecondPhoneNumberArray addObject:_theFirstPhone[1]];
-                NSLog(@"test%@",_SecondPhoneNumberArray);
+                //NSLog(@"test%@",_SecondPhoneNumberArray);
             }else{
                 [_SecondPhoneNumberArray addObject:@""];
-                NSLog(@"test%@",_SecondPhoneNumberArray);
+                //NSLog(@"test%@",_SecondPhoneNumberArray);
                 //check the firstphone
             }
             
             if(_theFirstPhone.count == 3){
                  [_TheThirdPhoneNumberArray  addObject:_theFirstPhone[1]];
-                NSLog(@"test%@",_TheThirdPhoneNumberArray );
+                //NSLog(@"test%@",_TheThirdPhoneNumberArray );
             }else{
                 [_TheThirdPhoneNumberArray addObject:@""];
-                NSLog(@"test%@",_TheThirdPhoneNumberArray );
+                //NSLog(@"test%@",_TheThirdPhoneNumberArray );
                 //check the firstphone
             }
             
@@ -363,7 +364,7 @@
             }else{
                 [_ContactGivenNameArray addObject:ContactGivenname];
             }
-            NSLog(@"givenname%@",_ContactGivenNameArray);
+            //NSLog(@"givenname%@",_ContactGivenNameArray);
             
             NSString*ContactFamilynname=[[[MyContactList sharedContacts]totalPhoneNumberArray][i] objectForKey:@"familyName"];
             if(ContactFamilynname==nil){
@@ -372,7 +373,7 @@
             else{
                 [_ContactFamilyNameArray addObject:ContactFamilynname];
             }
-            NSLog(@"familyName%@",_ContactFamilyNameArray);
+            //NSLog(@"familyName%@",_ContactFamilyNameArray);
         }
     }
     

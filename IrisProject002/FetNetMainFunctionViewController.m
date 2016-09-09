@@ -71,7 +71,7 @@
     _TheFirstPhoneNumberArray=[[MyContactList sharedContacts]TheFirstPhoneNumberArray];
     _ContactFamilyNameArray =[[MyContactList sharedContacts]ContactFamilyNameArray];
     _ContactGivenNameArray =[[MyContactList sharedContacts]ContactGivenNameArray];
-    NSLog(@"ttttttt%@",_TheFirstPhoneNumberArray);
+    //NSLog(@"ttttttt%@",_TheFirstPhoneNumberArray);
   
 
 }
@@ -107,7 +107,7 @@
     }
 
    
-         NSLog(@"遠傳:%@",_FromWhichCompany);
+         //NSLog(@"遠傳:%@",_FromWhichCompany);
     
     if ([_FromWhichCompany rangeOfString:@"非行動電話號碼"].location != NSNotFound) {
         _FromWhichCompanyinfo=@"其他";
@@ -117,10 +117,10 @@
         _FromWhichCompanyinfo=@"網外";
     }
     //change the html to 網內外 label
-    NSLog(@"login%@",_FromWhichCompanyinfo);
+    //NSLog(@"login%@",_FromWhichCompanyinfo);
     if(_FromWhichCompanyinfo != NULL){
         [_FormWhichCompanyList addObject:_FromWhichCompanyinfo];
-        NSLog(@"wenet:%@",_FormWhichCompanyList);
+        //NSLog(@"wenet:%@",_FormWhichCompanyList);
         
     }
     if(PhoneElementNum == 0){
@@ -138,7 +138,7 @@
         NSString *letters = @"0123456789";
         NSCharacterSet *notLetters = [[NSCharacterSet characterSetWithCharactersInString:letters] invertedSet];
         _PhoneNumList = [[_PhoneNumList componentsSeparatedByCharactersInSet:notLetters] componentsJoinedByString:@""];
-        NSLog(@"newString: %@", _PhoneNumList);
+        //NSLog(@"newString: %@", _PhoneNumList);
         //正則化
         PhoneElementNum+=1;
        if((_PhoneNumList.length==10 && [_PhoneNumList hasPrefix:@"09"]) || ([_PhoneNumList hasPrefix:@"8869"] && _PhoneNumList.length==12)){
@@ -147,17 +147,18 @@
            if([_PhoneNumList hasPrefix:@"8869"]){
                _PhoneNumList = [_PhoneNumList substringWithRange:NSMakeRange(3,9)];
                
-               NSLog(@"去除886%@",_PhoneNumList);
+              // NSLog(@"去除886%@",_PhoneNumList);
                
                _PhoneNumList=[NSString stringWithFormat:@"0%@",_PhoneNumList];
                //去除八八六還沒有測試
-               NSLog(@"加0%@",_PhoneNumList);
+               //NSLog(@"加0%@",_PhoneNumList);
            }
 
            
            
             NSString *script1 = [NSString stringWithFormat:@"document.getElementById('msisdn').value='%@'",_PhoneNumList];
-            double delayInSeconds = 0.5;
+           if(_FetNetWebView.loading==NO){
+           double delayInSeconds = 0.5;
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
                 
@@ -168,6 +169,7 @@
             }
 
             });
+           }
         }
      
        else{
@@ -215,7 +217,7 @@
         NSString *letters = @"0123456789";
         NSCharacterSet *notLetters = [[NSCharacterSet characterSetWithCharactersInString:letters] invertedSet];
         CheckPhoneNumList= [[CheckPhoneNumList componentsSeparatedByCharactersInSet:notLetters] componentsJoinedByString:@""];
-        NSLog(@"newString: %@", CheckPhoneNumList);
+        //NSLog(@"newString: %@", CheckPhoneNumList);
         //正則化
         
         NSArray *twRegionCod =[ [ NSArray alloc ] initWithObjects:@"02",@"03",@"037",@"04",@"049",@"05",@"06",@"07",@"089",@"082",@"0826",@"0836",@"8862",@"8863",@"88637",@"8864",@"88649",@"8865",@"8866",@"8867",@"88989",@"88682",@"886826",@"886836", nil];
@@ -223,11 +225,12 @@
         for(int twRegionCodElement=0;twRegionCodElement<twRegionCod.count;twRegionCodElement++){
             NSString * stringFromtwRegionCod = [twRegionCod objectAtIndex:twRegionCodElement];
             if ([CheckPhoneNumList hasPrefix:stringFromtwRegionCod]) {
-                _FormWhichCompanyList[PhoneElementNum]=@"市話";
-                
+                if(_FormWhichCompanyList.count !=0){
+                    _FormWhichCompanyList[PhoneElementNum]=@"市話";
+                }
             }
-            NSLog(@"市話%@",_FormWhichCompanyList);
         }
+
       }
 
     }
@@ -239,7 +242,7 @@
 
     [self distinguishLandline];
     //[_FormWhichCompanyList removeObject:_FormWhichCompanyList[0]];
-    NSLog(@"count%ld",_FormWhichCompanyList.count);
+    //NSLog(@"count%ld",_FormWhichCompanyList.count);
     if(_FormWhichCompanyList.count==_TheFirstPhoneNumberArray.count){
     for(int count=0;count<_totalContactsNum;count++)
     {
@@ -258,12 +261,13 @@
         else{
             [[MyContactList sharedContacts]updateContactFromContact:_ContactGivenNameArray[count] NetLabel:_FormWhichCompanyList[count] ContactPhone:_TheFirstPhoneNumberArray[count]];
         }
+    }
         [self calculateNumbersOfInternalNetwork];
         [self displayUIAlertAction1:@"恭喜完成寫入" message:@"趕快查看您的通訊錄唷!!"];
         
         //測試多按幾次會當掉
         //改過了
-    }
+    
     }
     else if(_FormWhichCompanyList.count ==0){
         [self displayUIAlertAction1:@"網路狀態不佳， 請檢查網路狀態！！" message:@""];
@@ -298,7 +302,7 @@ else{
         [NetNameData dataUsingEncoding:NSUTF8StringEncoding];
         NSString *Netname =
         [[NSString alloc] initWithData:unicodedStringData encoding:NSUTF8StringEncoding];
-        NSLog(@"netname:%@",Netname);
+        //NSLog(@"netname:%@",Netname);
         
         if([Netname isEqualToString:@"網內" ]){
             [_innerNet addObject:Netname];
@@ -311,10 +315,10 @@ else{
         }
         
         
-        NSLog(@"網內%ld",_innerNet.count);
-        NSLog(@"網外%ld",_outerNet.count);
-        NSLog(@"市話%ld",_localphone.count);
-        NSLog(@"其他%ld",_otherphone.count);
+//        NSLog(@"網內%ld",_innerNet.count);
+//        NSLog(@"網外%ld",_outerNet.count);
+//        NSLog(@"市話%ld",_localphone.count);
+//        NSLog(@"其他%ld",_otherphone.count);
         
     }
     
@@ -333,7 +337,7 @@ else{
         fetnetAnalysisChartViewController.localPhoneCount=myNum2;
         fetnetAnalysisChartViewController.otherPhoneCount=myNum3;
         
-        NSLog(@"\n _innerNet.count: %ld, \n _outerNet.count: %ld, \n _localphone.count: %ld, \n _otherphone.count: %ld", _innerNet.count, _outerNet.count, _localphone.count, _otherphone.count);
+//        NSLog(@"\n _innerNet.count: %ld, \n _outerNet.count: %ld, \n _localphone.count: %ld, \n _otherphone.count: %ld", _innerNet.count, _outerNet.count, _localphone.count, _otherphone.count);
         
     }
     

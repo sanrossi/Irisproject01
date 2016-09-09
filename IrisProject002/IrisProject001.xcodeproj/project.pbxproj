@@ -65,6 +65,9 @@
 		03C2BD9A1D7C15B40020245C /* TWHome2.png in Resources */ = {isa = PBXBuildFile; fileRef = 03C2BD981D7C15B40020245C /* TWHome2.png */; };
 		03C2BD9C1D7C16D10020245C /* CHTHome2.png in Resources */ = {isa = PBXBuildFile; fileRef = 03C2BD9B1D7C16D10020245C /* CHTHome2.png */; };
 		03C2BDA21D7C28130020245C /*  Analysis chart.png in Resources */ = {isa = PBXBuildFile; fileRef = 03C2BDA11D7C28130020245C /*  Analysis chart.png */; };
+		03C7CA151D8061FB005854FC /* CHTHome3.png in Resources */ = {isa = PBXBuildFile; fileRef = 03C7CA121D8061FB005854FC /* CHTHome3.png */; };
+		03C7CA161D8061FB005854FC /* TWHome3.png in Resources */ = {isa = PBXBuildFile; fileRef = 03C7CA131D8061FB005854FC /* TWHome3.png */; };
+		03C7CA171D8061FB005854FC /* FetNetHome3.png in Resources */ = {isa = PBXBuildFile; fileRef = 03C7CA141D8061FB005854FC /* FetNetHome3.png */; };
 		03C848BC1D5B08720010CECF /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 03C848BB1D5B08720010CECF /* button.png */; };
 		03E1AF2C1D5D60DD009B20CB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 035B4DD91D5C744700BD4A62 /* QuartzCore.framework */; };
 		2D8BA4A6512EC13F7B7217DD /* libPods-IrisProject001UITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 727DCC97A2DE91FD74B5DB5B /* libPods-IrisProject001UITests.a */; };
@@ -176,6 +179,9 @@
 		03C2BD981D7C15B40020245C /* TWHome2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TWHome2.png; sourceTree = "<group>"; };
 		03C2BD9B1D7C16D10020245C /* CHTHome2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CHTHome2.png; sourceTree = "<group>"; };
 		03C2BDA11D7C28130020245C /*  Analysis chart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = " Analysis chart.png"; sourceTree = "<group>"; };
+		03C7CA121D8061FB005854FC /* CHTHome3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CHTHome3.png; sourceTree = "<group>"; };
+		03C7CA131D8061FB005854FC /* TWHome3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TWHome3.png; sourceTree = "<group>"; };
+		03C7CA141D8061FB005854FC /* FetNetHome3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FetNetHome3.png; sourceTree = "<group>"; };
 		03C848BB1D5B08720010CECF /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
 		229963209E923445654B6E36 /* Pods-IrisProject001.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IrisProject001.release.xcconfig"; path = "Pods/Target Support Files/Pods-IrisProject001/Pods-IrisProject001.release.xcconfig"; sourceTree = "<group>"; };
 		37B1477CFC186AC2B98DC3F5 /* Pods-IrisProject001.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IrisProject001.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IrisProject001/Pods-IrisProject001.debug.xcconfig"; sourceTree = "<group>"; };
@@ -342,6 +348,9 @@
 		03A1F5B81D76A98D003EEB62 /* HomeImage */ = {
 			isa = PBXGroup;
 			children = (
+				03C7CA121D8061FB005854FC /* CHTHome3.png */,
+				03C7CA131D8061FB005854FC /* TWHome3.png */,
+				03C7CA141D8061FB005854FC /* FetNetHome3.png */,
 				0369A4911D75DCB900092F7C /* CHTbtn.png */,
 				03A1F5AD1D76A149003EEB62 /* hotairballoon.png */,
 				0369A4931D75DDEA00092F7C /* FetNetbtn.png */,
@@ -504,7 +513,7 @@
 				TargetAttributes = {
 					030AF5EE1D41BDE6004C451F = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 25684JW57F;
+						DevelopmentTeam = 7SBDW7B6QJ;
 					};
 					030AF6071D41BDE6004C451F = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -550,6 +559,7 @@
 				030AF5FF1D41BDE6004C451F /* Assets.xcassets in Resources */,
 				0369A4921D75DCB900092F7C /* CHTbtn.png in Resources */,
 				03A1F5A61D769C02003EEB62 /* home.png in Resources */,
+				03C7CA161D8061FB005854FC /* TWHome3.png in Resources */,
 				03B2D1851D6C180C00572A8A /* gears 2@2x.png in Resources */,
 				03B2D1811D6C180C00572A8A /* background@2x.png in Resources */,
 				03B3D8D11D79392A00EC47D1 /* WriteBack.png in Resources */,
@@ -558,6 +568,7 @@
 				03B2D1831D6C180C00572A8A /* gears 1@2x.png in Resources */,
 				03A1F5AE1D76A149003EEB62 /* hotairballoon.png in Resources */,
 				03C2BD9A1D7C15B40020245C /* TWHome2.png in Resources */,
+				03C7CA151D8061FB005854FC /* CHTHome3.png in Resources */,
 				03B3595D1D7BC97A00F994DD /* CHTHome.png in Resources */,
 				030AF5FD1D41BDE6004C451F /* Main.storyboard in Resources */,
 				0369A4951D75DDEA00092F7C /* FetNetbtn.png in Resources */,
@@ -566,6 +577,7 @@
 				03B2D1861D6C180C00572A8A /* gears 2@3x.png in Resources */,
 				03B2D1881D6C180C00572A8A /* gears 3@3x.png in Resources */,
 				0369A4961D75DDEA00092F7C /* TWbtn.png in Resources */,
+				03C7CA171D8061FB005854FC /* FetNetHome3.png in Resources */,
 				03B3D8D31D793FF100EC47D1 /* ModifyMB.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -885,7 +897,7 @@
 				INFOPLIST_FILE = IrisProject001/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = yewuihc.IrisProject001;
+				PRODUCT_BUNDLE_IDENTIFIER = tw.blogspot.chiouhwey.WeNet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -901,7 +913,7 @@
 				INFOPLIST_FILE = IrisProject001/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = yewuihc.IrisProject001;
+				PRODUCT_BUNDLE_IDENTIFIER = tw.blogspot.chiouhwey.WeNet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

@@ -7,7 +7,7 @@
 //
 
 #import "CarriersViewController.h"
-
+#import "MyContactList.h"
 @interface CarriersViewController ()@property (weak, nonatomic) IBOutlet UILabel *date;
 @property (weak, nonatomic) IBOutlet UILabel *dayoftheweek;
 @property (weak, nonatomic) IBOutlet UILabel *monthandyear;
@@ -29,6 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"%@",NSHomeDirectory());
+    [[MyContactList sharedContacts]fetchAllContacts];
     // Do any additional setup after loading the view.
    
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];

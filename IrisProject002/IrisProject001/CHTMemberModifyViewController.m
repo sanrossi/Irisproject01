@@ -64,7 +64,7 @@
         NSArray *result = [context executeFetchRequest:request1 error:nil];
         CHTLoginDetail *login = (CHTLoginDetail *)result.firstObject;
         login.chtLogin=_CHTLogin.text;
-        NSLog(@"%@",login.chtLogin);
+        //NSLog(@"%@",login.chtLogin);
         login.chtPassword=_CHTPassWord.text;
         if(login.chtLogin.length !=0 &&login.chtPassword.length !=0){
             [context save:nil];

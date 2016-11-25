@@ -37,7 +37,7 @@
 @property(nonatomic)NSMutableArray *SecondPhoneNumberArray;
 @property(nonatomic)NSMutableArray *TheThirdPhoneNumberArray;
 @property(nonatomic)NSInteger totalContactsNum;
-
+@property(nonatomic)NSMutableArray *ContactId;
 
 
 
@@ -48,6 +48,7 @@
 ///fetch contacts from Addressbooks or Contacts framework
 -(void)fetchAllContacts; //Method of fetch contacts from Addressbooks or Contacts framework
 - (void)updateContactFromContact:(NSString*)contactName NetLabel:(NSString*)netLabel ContactPhone:(NSString*)origincontactphone;
+- (void)updateContactById:(NSArray*)contactId NetLabel:(NSString*)netLabel ContactPhone:(NSString*)origincontactphone;
 -(void)exportAddressBook;
 
 @end

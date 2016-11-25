@@ -40,7 +40,7 @@
 @property(nonatomic)NSMutableArray *outerNet;
 @property(nonatomic)NSMutableArray *localphone;
 @property(nonatomic)NSMutableArray *otherphone;
-
+@property(nonatomic)NSArray *ContactId;
 @end
 
 @implementation TWMainFunctionViewController
@@ -60,6 +60,7 @@
     _outerNet= [NSMutableArray array];
     _localphone= [NSMutableArray array];
     _otherphone= [NSMutableArray array];
+    _ContactId=[NSMutableArray array];
      WebPageNum =1;
     _FromWhichCompany=@"";
     //_TWWebView.scrollView.scrollEnabled = NO;
@@ -232,20 +233,20 @@
         [self displayUIAlertAction:@"提醒" message:@"請輸入驗證碼"];
         
     }else if(_TWLogin.text.length!= 0 && _TWPassword.text.length!= 0 &&_TWChkNum.text.length!= 0){
-        NSString *loginaccount = [NSString stringWithFormat:@"document.getElementById('msisdn').value='%@'",_TWLogin.text];
+        NSString *loginaccount = [NSString stringWithFormat:@"document.getElementById('input-mobile').value='%@'",_TWLogin.text];
         
-        NSString *loginpasswordtxt = [NSString stringWithFormat:@"document.getElementById('passtxt').value='%@'",_TWPassword.text];
-        NSString *loginpassword = [NSString stringWithFormat:@"document.getElementById('passwd').value='%@'",_TWPassword.text];
+        //NSString *loginpasswordtxt = [NSString stringWithFormat:@"document.getElementById('passtxt').value='%@'",_TWPassword.text];
+        NSString *loginpassword = [NSString stringWithFormat:@"document.getElementById('input-password').value='%@'",_TWPassword.text];
         
-        NSString *logincchknum = [NSString stringWithFormat:@"document.getElementById('chkNum').value='%@'",_TWChkNum.text];
+        NSString *logincchknum = [NSString stringWithFormat:@"document.getElementById('input-code').value='%@'",_TWChkNum.text];
         [_TWWebView stringByEvaluatingJavaScriptFromString:loginaccount];
-        [_TWWebView stringByEvaluatingJavaScriptFromString:loginpasswordtxt];
+        //[_TWWebView stringByEvaluatingJavaScriptFromString:loginpasswordtxt];
         [_TWWebView stringByEvaluatingJavaScriptFromString:loginpassword];
         [_TWWebView stringByEvaluatingJavaScriptFromString:logincchknum];
         double delayInSeconds = 1;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByClassName('btn01')[0].childNodes[0].click()"];
+            [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByClassName('btn btn-centerlize btn-login')[0].click()"];
         });
     }else{
     //0++++++++++++++++++++++++++++++++++++++++++++0
@@ -451,7 +452,7 @@
         
     }
     
-    else if ([[[[_TWWebView request]URL]absoluteString]  isEqualToString: @"https://cs.taiwanmobile.com/wap-portal/smpQueryTwmPhoneNbr.action"]){
+    else if ([[[[_TWWebView request]URL]absoluteString]  isEqualToString: @"https://cs.taiwanmobile.com/wap-portal/smpQueryTwmPhoneNbr.action"]||[[[[_TWWebView request]URL]absoluteString]  isEqualToString: @"https://cs.taiwanmobile.com/wap-portal/smpCheckTwmPhoneNbr.action"]){
 
        
       
@@ -479,14 +480,17 @@
                 }
                
           if(_TWWebView.loading==NO){
-                NSString *script = [NSString stringWithFormat:@"document.getElementsByName('phoneNbr')[0].value='%@'",_PhoneNumList];
-                [_TWWebView stringByEvaluatingJavaScriptFromString:script];
+              
+               NSString *script = [NSString stringWithFormat:@"document.getElementById('input-phone').value ='%@'",_PhoneNumList];
+              [_TWWebView stringByEvaluatingJavaScriptFromString:script];
               
               double delayInSeconds = 0.3;
               
               dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
               dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.forms[0].submit()"];
+       
+                  [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByClassName('btn btn-centerlize btn-change ui-link btn-disable')[0].click()"];
+                  
                   //NSLog(@"+++++++++++++++++");
               });
               
@@ -498,14 +502,16 @@
                
                 _PhoneNumList=@"11111111111";
                 if(_TWWebView.loading==NO){
-                NSString *script = [NSString stringWithFormat:@"document.getElementsByName('phoneNbr')[0].value='%@'",_PhoneNumList];
+              
+                NSString *script = [NSString stringWithFormat:@"document.getElementById('input-phone').value ='%@'",_PhoneNumList];
                 [_TWWebView stringByEvaluatingJavaScriptFromString:script];
                 
                     double delayInSeconds = 0.3;
                     
                     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
                     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.forms[0].submit()"];
+             
+                  [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByClassName('btn btn-centerlize btn-change ui-link btn-disable')[0].click()"];
                    });
                     
                     }
@@ -516,15 +522,16 @@
             else{
                 if(_TWWebView.loading==NO){
                 _PhoneNumList=@"11111111111";
-                NSString *script = [NSString stringWithFormat:@"document.getElementsByName('phoneNbr')[0].value='%@'",_PhoneNumList];
+                //NSString *script = [NSString stringWithFormat:@"document.getElementsByName('phoneNbr')[0].value='%@'",_PhoneNumList];
+                NSString *script = [NSString stringWithFormat:@"document.getElementById('input-phone').value ='%@'",_PhoneNumList];
                 [_TWWebView stringByEvaluatingJavaScriptFromString:script];
                     double delayInSeconds = 0.3;
                     
                     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
                     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
          
-                [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.forms[0].submit()"];
-                
+                //[_TWWebView stringByEvaluatingJavaScriptFromString:@"document.forms[0].submit()"];
+                [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByClassName('btn btn-centerlize btn-change ui-link btn-disable')[0].click()"];
                   });
                     
                 }
@@ -548,7 +555,7 @@
             
             if(_TWWebView.loading==NO){
                 
-                _FromWhichCompany = [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByClassName('red')[0].innerHTML"];
+                _FromWhichCompany = [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByClassName('red')[6].innerHTML"];
                 
                 if([_FromWhichCompany  isEqual:@""]){
                     _FromWhichCompany = [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('font')[0].innerHTML"];
@@ -557,7 +564,7 @@
             
 //                NSLog(@"didFinish: %@; stillLoading: %@", [[_TWWebView request]URL],
 //                      (_TWWebView.loading?@"YES":@"NO"));
-                //NSLog(@"台灣大哥大:%@",_FromWhichCompany);
+                NSLog(@"台灣大哥大:%@",_FromWhichCompany);
         
         
                 //get the information about the Internal network or external network
@@ -573,7 +580,7 @@
                // NSLog(@"login%@",_FromWhichCompanyinfo);
                 if(_FromWhichCompanyinfo != NULL){
                     [_FormWhichCompanyList addObject:_FromWhichCompanyinfo];
-                    //NSLog(@"wenet:%@",_FormWhichCompanyList);
+                    NSLog(@"wenet:%@",_FormWhichCompanyList);
                     
                 }
             
@@ -593,10 +600,11 @@
                  if(_TWWebView.loading==NO){
                      
                     
-                   
-                [_TWWebView stringByEvaluatingJavaScriptFromString:@"history.go(-1)"];
+                     PhoneElementNum+=1;
+                //[_TWWebView stringByEvaluatingJavaScriptFromString:@"history.go(-1)"];
+                     [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByClassName('btn ui-link')[0].click()"];
                      
-   
+                
                             
                  }
                 
@@ -605,8 +613,8 @@
                  if(_TWWebView.loading==NO){
                      PhoneElementNum+=1;
                      _FromWhichCompany=@"";
-                [_TWWebView stringByEvaluatingJavaScriptFromString:@"history.go(-1)"];
-        
+                //[_TWWebView stringByEvaluatingJavaScriptFromString:@"history.go(-1)"];
+                [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByClassName('btn ui-link')[0].click()"];
 
                      
                  }
@@ -680,17 +688,16 @@
         //_TheFirstPhoneNumberarray[_totalContactsNumber-count-1]
         
         
-        if(_TheFirstPhoneNumberArray[count]==nil){
-            _TheFirstPhoneNumberArray[count]=@""; }
-        
-        if([_ContactGivenNameArray[count] isEqual:@""]){
-            [[MyContactList sharedContacts]updateContactFromContact:_ContactFamilyNameArray[count] NetLabel:_FormWhichCompanyList[count] ContactPhone:_TheFirstPhoneNumberArray[count]];}
-        
-        else{
-            [[MyContactList sharedContacts]updateContactFromContact:_ContactGivenNameArray[count] NetLabel:_FormWhichCompanyList[count] ContactPhone:_TheFirstPhoneNumberArray[count]];
-        }
-        //測試多按幾次會當掉
-        
+//        if(_TheFirstPhoneNumberArray[count]==nil){
+//            _TheFirstPhoneNumberArray[count]=@""; }
+//        
+//        if([_ContactGivenNameArray[count] isEqual:@""]){
+//            [[MyContactList sharedContacts]updateContactFromContact:_ContactFamilyNameArray[count] NetLabel:_FormWhichCompanyList[count] ContactPhone:_TheFirstPhoneNumberArray[count]];}
+//        
+//        else{
+//            [[MyContactList sharedContacts]updateContactFromContact:_ContactGivenNameArray[count] NetLabel:_FormWhichCompanyList[count] ContactPhone:_TheFirstPhoneNumberArray[count]];
+//        }
+        [[MyContactList sharedContacts]updateContactById:_ContactId[count] NetLabel:_FormWhichCompanyList[count] ContactPhone:_TheFirstPhoneNumberArray[count]];        
     }
         [self calculateNumbersOfInternalNetwork];
         [self displayUIAlertAction1:@"恭喜完成寫入" message:@"趕快查看您的通訊錄唷!!"];

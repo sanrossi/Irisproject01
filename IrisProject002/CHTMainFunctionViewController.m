@@ -40,6 +40,7 @@
 @property(nonatomic)NSMutableArray *loginpassword;
 @property(nonatomic)NSArray *detail;
 @property(nonatomic)NSArray *fetchArray;
+@property(nonatomic)NSArray *ContactId;
 
 
 @end
@@ -68,6 +69,7 @@
     _loginpassword=[NSMutableArray array];
     _fetchArray=[NSMutableArray array];
     _detail=[NSArray array];
+    _ContactId=[NSMutableArray array];
     flag3=false;
     [self loadCHTWebView];
    
@@ -77,11 +79,11 @@
     _TheFirstPhoneNumberArray=[[MyContactList sharedContacts]TheFirstPhoneNumberArray];
     _ContactFamilyNameArray =[[MyContactList sharedContacts]ContactFamilyNameArray];
     _ContactGivenNameArray =[[MyContactList sharedContacts]ContactGivenNameArray];
-  
+    _ContactId =[[MyContactList sharedContacts]ContactId];
     [_TheFirstPhoneNumberArray insertObject:@"0999876654" atIndex:0];
     //NSLog(@"test%@",_TheFirstPhoneNumberArray);
     //check the firstphone
-   
+    NSLog(@"contacid:%@",_ContactId);
 
 }
 
@@ -660,16 +662,21 @@
         //_TheFirstPhoneNumberarray[_totalContactsNumber-count-1]
         
        
-        if(_TheFirstPhoneNumberArray[count]==nil){
-        _TheFirstPhoneNumberArray[count]=@""; }
+//        if(_TheFirstPhoneNumberArray[count]==nil){
+//        _TheFirstPhoneNumberArray[count]=@""; }
+//        
+//        if([_ContactGivenNameArray[count] isEqual:@""]){
+//                [[MyContactList sharedContacts]updateContactFromContact:_ContactFamilyNameArray[count] NetLabel:_FormWhichCompanyList[count] ContactPhone:_TheFirstPhoneNumberArray[count]];}
+//        
+//        else{
+//        [[MyContactList sharedContacts]updateContactFromContact:_ContactGivenNameArray[count] NetLabel:_FormWhichCompanyList[count] ContactPhone:_TheFirstPhoneNumberArray[count]];
+//        }
+
+        [[MyContactList sharedContacts]updateContactById:_ContactId[count] NetLabel:_FormWhichCompanyList[count] ContactPhone:_TheFirstPhoneNumberArray[count]];
         
-        if([_ContactGivenNameArray[count] isEqual:@""]){
-                [[MyContactList sharedContacts]updateContactFromContact:_ContactFamilyNameArray[count] NetLabel:_FormWhichCompanyList[count] ContactPhone:_TheFirstPhoneNumberArray[count]];}
         
-        else{
-        [[MyContactList sharedContacts]updateContactFromContact:_ContactGivenNameArray[count] NetLabel:_FormWhichCompanyList[count] ContactPhone:_TheFirstPhoneNumberArray[count]];
-        }
-      
+        
+        
      }
      
     [self calculateNumbersOfInternalNetwork];

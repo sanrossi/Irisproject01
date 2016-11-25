@@ -87,16 +87,20 @@
 
 #pragma mark - Contacts.framework method
 - (void)fetchContactsFromContactsFrameWork { //access contacts using contacts.framework
-    
+      _ContactId=[NSMutableArray array];
     NSArray *keyToFetch = @[CNContactEmailAddressesKey,CNContactFamilyNameKey,CNContactGivenNameKey,CNContactPhoneNumbersKey,CNContactPostalAddressesKey,CNContactThumbnailImageDataKey]; //contacts list key params to access using contacts.framework contact
     
     CNContactFetchRequest *fetchRequest = [[CNContactFetchRequest alloc] initWithKeysToFetch:keyToFetch]; //Contacts fetch request parrams object allocation
     
     [contactStore enumerateContactsWithFetchRequest:fetchRequest error:nil usingBlock:^(CNContact * _Nonnull contact, BOOL * _Nonnull stop) {
-        //NSLog(@"%@",contact.identifier);
-        [groupsOfContact addObject:contact]; //add objects of all contacts list in array加入所有聯絡人物件在陣列中陣列名字是groupsOfContact
+        
+        [groupsOfContact addObject:contact]; //add objects of all contacts list in array
+      
+        [_ContactId addObject:contact.identifier];
+       
+        
     }];
-
+       NSLog(@"contactid1:%@",_ContactId[26]);
     
     
     NSMutableArray *phoneNumberArray = [@[] mutableCopy]; // init a mutable array初始化一個array
@@ -256,19 +260,77 @@
 
 
 
+- (void)updateContactById:(NSString*)contactId NetLabel:(NSString*)netLabel ContactPhone:(NSString*)origincontactphone{
+    CNContactStore * store = [[CNContactStore alloc]init];
+    NSPredicate * predicate1 = [CNContact predicateForContactsWithIdentifiers:_ContactId];
+    NSArray * contactsphone = [store unifiedContactsMatchingPredicate:predicate1 keysToFetch:@[CNContactGivenNameKey,CNContactFamilyNameKey,CNContactPhoneNumbersKey] error:nil];
+    NSLog(@"contactsphone:%@",contactsphone);
+    
+    for(int n=0;n<contactsphone.count;n++){
+    CNMutableContact *contactphone2 = [[contactsphone objectAtIndex:n] mutableCopy];
+        NSLog(@"contactphone2id:%@",contactphone2.identifier);
+        NSString *identifier = [NSString stringWithString:contactphone2.identifier];
+        if([contactId  isEqualToString:identifier]){
+         CNLabeledValue *cellPhone1 = [CNLabeledValue labeledValueWithLabel:netLabel value:[CNPhoneNumber phoneNumberWithStringValue:origincontactphone]];
+//            
+                //contactphone2.phoneNumbers =@[cellPhone1];
+                NSMutableArray *arrayupdate = [contactphone2.phoneNumbers mutableCopy];
+                arrayupdate[0]=cellPhone1;
+                contactphone2.phoneNumbers =[NSArray arrayWithArray:arrayupdate];
+            
+        
+                //NSLog(@"testtest:%@",contactphone2.phoneNumbers);
+                //    实例化一个CNSaveRequest
+                CNSaveRequest * saveRequest = [[CNSaveRequest alloc]init];
+                [saveRequest updateContact:contactphone2];
+                [store executeSaveRequest:saveRequest error:nil];
+        
+        
+        }
+       
+    
+    }
+    
+    
+
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 - (void)updateContactFromContact:(NSString*)contactName NetLabel:(NSString*)netLabel ContactPhone:(NSString*)origincontactphone{
     CNContactStore * store = [[CNContactStore alloc]init];
          //检索条件，检索所有名字中有san的联系人
+    
+   
+    
+    //NSPredicate * predicate1 = [CNContact predicateForContactsWithIdentifiers:contactId];
+     //(NSArray*)contactId
+    
+    
          NSPredicate * predicate = [CNContact predicateForContactsMatchingName:contactName];
-      //提取数据
+      //提取数据 (NSString*)contactName
      
          NSArray * contactsphone = [store unifiedContactsMatchingPredicate:predicate keysToFetch:@[CNContactGivenNameKey,CNContactFamilyNameKey,CNContactPhoneNumbersKey] error:nil];
     //NSLog(@"contactsphone:%@",contactsphone);
 
-        CNMutableContact *contactphone2 = [[contactsphone objectAtIndex:0] mutableCopy];
+        CNMutableContact *contactphone2 = [[contactsphone objectAtIndex:29] mutableCopy];
     //NSLog(@"contactphone2:%@",contactphone2.phoneNumbers);
      //    修改联系人的属性
+    //check 29的原因
     
     CNLabeledValue *cellPhone1 = [CNLabeledValue labeledValueWithLabel:netLabel value:[CNPhoneNumber phoneNumberWithStringValue:origincontactphone]];
     
@@ -310,6 +372,7 @@
     _TheThirdPhoneNumberArray = [NSMutableArray array];
     _ContactGivenNameArray= [NSMutableArray array];
     _ContactFamilyNameArray= [NSMutableArray array];
+   
     //[MyContactList sharedContacts];
     [self fetchAllContacts];
     //fetch all contacts by calling single to method

@@ -37,6 +37,7 @@
 @property(nonatomic)NSMutableArray *otherphone;
 @property(nonatomic)NSMutableArray *loginaccount;
 @property(nonatomic)NSMutableArray *loginpassword;
+@property(nonatomic)NSArray *ContactId;
 
 
 
@@ -62,7 +63,7 @@
     _loginpassword=[NSMutableArray array];
     _fetchArray=[NSMutableArray array];
     _detail=[NSArray array];
-  
+   _ContactId=[NSMutableArray array];
     //_FetNetWebView.hidden=YES;
     [self loadFetNetWebView];
     [[MyContactList sharedContacts] exportAddressBook];
@@ -71,6 +72,7 @@
     _TheFirstPhoneNumberArray=[[MyContactList sharedContacts]TheFirstPhoneNumberArray];
     _ContactFamilyNameArray =[[MyContactList sharedContacts]ContactFamilyNameArray];
     _ContactGivenNameArray =[[MyContactList sharedContacts]ContactGivenNameArray];
+    _ContactId =[[MyContactList sharedContacts]ContactId];
     //NSLog(@"ttttttt%@",_TheFirstPhoneNumberArray);
   
 
@@ -251,16 +253,21 @@
         //        //_ContactGivenNameArray//去名字（後進先出)
         //_TheFirstPhoneNumberarray[_totalContactsNumber-count-1]
         
+//        
+//        if(_TheFirstPhoneNumberArray[count]==nil){
+//            _TheFirstPhoneNumberArray[count]=@""; }
+//        
+//        if([_ContactGivenNameArray[count] isEqual:@""]){
+//            [[MyContactList sharedContacts]updateContactFromContact:_ContactFamilyNameArray[count] NetLabel:_FormWhichCompanyList[count] ContactPhone:_TheFirstPhoneNumberArray[count]];}
+//        
+//        else{
+//            [[MyContactList sharedContacts]updateContactFromContact:_ContactGivenNameArray[count] NetLabel:_FormWhichCompanyList[count] ContactPhone:_TheFirstPhoneNumberArray[count]];
+//        }
         
-        if(_TheFirstPhoneNumberArray[count]==nil){
-            _TheFirstPhoneNumberArray[count]=@""; }
         
-        if([_ContactGivenNameArray[count] isEqual:@""]){
-            [[MyContactList sharedContacts]updateContactFromContact:_ContactFamilyNameArray[count] NetLabel:_FormWhichCompanyList[count] ContactPhone:_TheFirstPhoneNumberArray[count]];}
-        
-        else{
-            [[MyContactList sharedContacts]updateContactFromContact:_ContactGivenNameArray[count] NetLabel:_FormWhichCompanyList[count] ContactPhone:_TheFirstPhoneNumberArray[count]];
-        }
+      [[MyContactList sharedContacts]updateContactById:_ContactId[count] NetLabel:_FormWhichCompanyList[count] ContactPhone:_TheFirstPhoneNumberArray[count]];
+    
+    
     }
         [self calculateNumbersOfInternalNetwork];
         [self displayUIAlertAction1:@"恭喜完成寫入" message:@"趕快查看您的通訊錄唷!!"];

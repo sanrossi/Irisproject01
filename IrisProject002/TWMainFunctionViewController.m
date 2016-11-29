@@ -75,7 +75,7 @@
     _TheFirstPhoneNumberArray=[[MyContactList sharedContacts]TheFirstPhoneNumberArray];
     _ContactFamilyNameArray =[[MyContactList sharedContacts]ContactFamilyNameArray];
     _ContactGivenNameArray =[[MyContactList sharedContacts]ContactGivenNameArray];
-    
+    _ContactId =[[MyContactList sharedContacts]ContactId];
 
 //    double delayInSeconds = 2;
 //
@@ -452,14 +452,15 @@
         
     }
     
-    else if ([[[[_TWWebView request]URL]absoluteString]  isEqualToString: @"https://cs.taiwanmobile.com/wap-portal/smpQueryTwmPhoneNbr.action"]||[[[[_TWWebView request]URL]absoluteString]  isEqualToString: @"https://cs.taiwanmobile.com/wap-portal/smpCheckTwmPhoneNbr.action"]){
+    else if ([[[[_TWWebView request]URL]absoluteString]  isEqualToString: @"https://cs.taiwanmobile.com/wap-portal/smpQueryTwmPhoneNbr.action"]||[[[[_TWWebView request]URL]absoluteString]  isEqualToString: @"https://cs.taiwanmobile.com/wap-portal/smpQueryTwmPhoneNbr.action#"]){
 
-       
       
   
         if (PhoneElementNum>=0 && PhoneElementNum<_totalContactsNum) {
-           
-            
+            if(PhoneElementNum==_totalContactsNum-1){
+                [VMGearLoadingView hideGearLoadingForView:self.view];
+            }
+        
             _PhoneNumList=_TheFirstPhoneNumberArray[PhoneElementNum];
             //正則化
             NSString *letters = @"0123456789";
@@ -468,8 +469,11 @@
             //NSLog(@"newString: %@", _PhoneNumList);
             //正則化
             
-            if((_PhoneNumList.length==10 && [_PhoneNumList hasPrefix:@"09"]) || ([_PhoneNumList hasPrefix:@"8869"] && _PhoneNumList.length==12)){
-                if([_PhoneNumList hasPrefix:@"8869"]){
+            
+            
+            
+      if((_PhoneNumList.length==10 && [_PhoneNumList hasPrefix:@"09"]) || ([_PhoneNumList hasPrefix:@"8869"] && _PhoneNumList.length==12)){
+            if([_PhoneNumList hasPrefix:@"8869"]){
                     _PhoneNumList = [_PhoneNumList substringWithRange:NSMakeRange(3,9)];
                     
                     //NSLog(@"去除886%@",_PhoneNumList);
@@ -477,10 +481,10 @@
                     _PhoneNumList=[NSString stringWithFormat:@"0%@",_PhoneNumList];
                    
                     //NSLog(@"加0%@",_PhoneNumList);
-                }
-               
+            }
+          
           if(_TWWebView.loading==NO){
-              
+               NSLog(@"加0%@",_PhoneNumList);
                NSString *script = [NSString stringWithFormat:@"document.getElementById('input-phone').value ='%@'",_PhoneNumList];
               [_TWWebView stringByEvaluatingJavaScriptFromString:script];
               
@@ -496,10 +500,18 @@
               
 
                  }
-                }
-            
-            else if([_PhoneNumList isEqualToString:@""]){
-               
+          
+            }
+      
+            else {
+                 PhoneElementNum+=1;
+                
+                
+                NSLog(@"加0%@",_PhoneNumList);
+                _FromWhichCompanyinfo=@"其他";
+                [_FormWhichCompanyList addObject:_FromWhichCompanyinfo];
+                NSLog(@"wenet:%@",_FormWhichCompanyList);
+                
                 _PhoneNumList=@"11111111111";
                 if(_TWWebView.loading==NO){
               
@@ -519,48 +531,37 @@
 //                      (_TWWebView.loading?@"YES":@"NO"));
                 //改這裡
             }
-            else{
-                if(_TWWebView.loading==NO){
-                _PhoneNumList=@"11111111111";
-                //NSString *script = [NSString stringWithFormat:@"document.getElementsByName('phoneNbr')[0].value='%@'",_PhoneNumList];
-                NSString *script = [NSString stringWithFormat:@"document.getElementById('input-phone').value ='%@'",_PhoneNumList];
-                [_TWWebView stringByEvaluatingJavaScriptFromString:script];
-                    double delayInSeconds = 0.3;
-                    
-                    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-                    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-         
-                //[_TWWebView stringByEvaluatingJavaScriptFromString:@"document.forms[0].submit()"];
-                [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByClassName('btn btn-centerlize btn-change ui-link btn-disable')[0].click()"];
-                  });
-                    
-                }
-             
-        
-            }
+
+          }
             
-            
-            
-        }
-            
-            
-      
-        
+
        
     }
     else if ([[[[_TWWebView request]URL]absoluteString]  isEqualToString: @"https://cs.taiwanmobile.com/wap-portal/smpCheckTwmPhoneNbr.action"]){
-
+        
+        
+        
+        
+        
+        
+        
+        
+        
         //NSLog(@"ooooooooooooooooooooo");
-        if([_FromWhichCompany  isEqual:@""]){
-            
+//        if([_FromWhichCompany  isEqual:@""]){
+        
             if(_TWWebView.loading==NO){
+                if(PhoneElementNum == 0){
+                    [VMGearLoadingView showGearLoadingForView:self.view];
+                }
                 
+          
                 _FromWhichCompany = [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByClassName('red')[6].innerHTML"];
                 
-                if([_FromWhichCompany  isEqual:@""]){
-                    _FromWhichCompany = [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('font')[0].innerHTML"];
-                    
-                }
+//                if([_FromWhichCompany  isEqual:@""]){
+//                    _FromWhichCompany = [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('font')[0].innerHTML"];
+//                    
+//                }
             
 //                NSLog(@"didFinish: %@; stillLoading: %@", [[_TWWebView request]URL],
 //                      (_TWWebView.loading?@"YES":@"NO"));
@@ -584,44 +585,47 @@
                     
                 }
             
-            }
-           
-            if(_TWWebView.loading==NO){
-                if(PhoneElementNum == 0){
-                    [VMGearLoadingView showGearLoadingForView:self.view];
-                }
             
-            if(PhoneElementNum==_totalContactsNum-1){
-                [VMGearLoadingView hideGearLoadingForView:self.view];
-            }
-            }
+          //轉轉轉打開這裡        
+       
+//                if(PhoneElementNum == 0){
+//                    [VMGearLoadingView showGearLoadingForView:self.view];
+//                }
+//            
+//            if(PhoneElementNum==_totalContactsNum-1){
+//                [VMGearLoadingView hideGearLoadingForView:self.view];
+//            }
+            //}
+        
+            //轉轉轉打開這裡
             //NSLog(@"TOTALCOUNT%ld",_totalContactsNum);
             //NSLog(@"PHONELEMENT:%ld",PhoneElementNum);
-                 if(_TWWebView.loading==NO){
+                // if(_TWWebView.loading==NO){
                      
                     
                      PhoneElementNum+=1;
-                //[_TWWebView stringByEvaluatingJavaScriptFromString:@"history.go(-1)"];
-                     [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByClassName('btn ui-link')[0].click()"];
+                [_TWWebView stringByEvaluatingJavaScriptFromString:@"history.go(-1)"];
+             //  [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByClassName('btn ui-link')[0].click()"];
                      
                 
                             
                  }
                 
-            }else if(![_FromWhichCompany  isEqual:@""]){
-                
-                 if(_TWWebView.loading==NO){
-                     PhoneElementNum+=1;
-                     _FromWhichCompany=@"";
-                //[_TWWebView stringByEvaluatingJavaScriptFromString:@"history.go(-1)"];
-                [_TWWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByClassName('btn ui-link')[0].click()"];
+//            }else if(![_FromWhichCompany  isEqual:@""]){
+//        
+//                 if(_TWWebView.loading==NO){
+//                     PhoneElementNum+=1;
+//                     _FromWhichCompany=@"";
+//                [_TWWebView stringByEvaluatingJavaScriptFromString:@"history.go(-1)"];
+//                //[_TWWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByClassName('btn ui-link')[0].click()"];
+//
+//                     
+//                 }
+//                
+//            }
 
-                     
-                 }
-                
-            }
-
-    }else if([[[[_TWWebView request]URL]absoluteString]  isEqualToString: @"https://www.catch.net.tw/auth/loginMessage_m.jsp"]){
+    }
+else if([[[[_TWWebView request]URL]absoluteString]  isEqualToString: @"https://www.catch.net.tw/auth/loginMessage_m.jsp"]){
         
         [self loadTWWebView];
 

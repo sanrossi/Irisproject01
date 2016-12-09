@@ -83,7 +83,7 @@
     [_TheFirstPhoneNumberArray insertObject:@"0999876654" atIndex:0];
     //NSLog(@"test%@",_TheFirstPhoneNumberArray);
     //check the firstphone
-    NSLog(@"contacid:%@",_ContactId);
+   // NSLog(@"contacid:%@",_ContactId);
 
 }
 
@@ -131,7 +131,7 @@
     [alert addAction:cancel];
     
     [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-        textField.placeholder = @"emome帳號";
+        textField.placeholder = @"帳號";
     }];
     
     [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {

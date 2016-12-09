@@ -100,7 +100,7 @@
        
         
     }];
-       NSLog(@"contactid1:%@",_ContactId[26]);
+      // NSLog(@"contactid1:%@",_ContactId[26]);
     
     
     NSMutableArray *phoneNumberArray = [@[] mutableCopy]; // init a mutable array初始化一個array

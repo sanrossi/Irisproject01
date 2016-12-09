@@ -109,8 +109,8 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CHTHome3.png" translatesAutoresizingMaskIntoConstraints="NO" id="mnV-DV-V8F">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="emome帳號：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gbx-fm-uxe">
-                                <rect key="frame" x="20" y="179" width="118" height="22"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="     帳號：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gbx-fm-uxe">
+                                <rect key="frame" x="60" y="179" width="118" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="BIG-K8-hNk"/>
                                     <constraint firstAttribute="width" constant="118" id="Wd9-Ca-4a3"/>
@@ -119,8 +119,8 @@
                                 <color key="textColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="highlightedColor" red="0.99987119436264038" green="0.99998223781585693" blue="0.99984109401702881" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登入密碼：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qUP-yn-7cQ">
-                                <rect key="frame" x="20" y="234" width="90" height="22"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="     密碼：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qUP-yn-7cQ">
+                                <rect key="frame" x="60" y="234" width="90" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="E6B-3U-eES"/>
                                     <constraint firstAttribute="width" constant="90" id="F9T-WV-efG"/>
@@ -176,7 +176,7 @@
                         <constraints>
                             <constraint firstItem="K3h-5V-3b5" firstAttribute="top" secondItem="2z1-ST-5Ye" secondAttribute="bottom" constant="163" id="0xi-cM-iTd"/>
                             <constraint firstItem="qUP-yn-7cQ" firstAttribute="top" secondItem="gbx-fm-uxe" secondAttribute="bottom" constant="33" id="2vt-TZ-kei"/>
-                            <constraint firstItem="qUP-yn-7cQ" firstAttribute="leading" secondItem="ZsA-2a-IO9" secondAttribute="leading" constant="20" id="4IO-Ka-mjd"/>
+                            <constraint firstItem="qUP-yn-7cQ" firstAttribute="leading" secondItem="ZsA-2a-IO9" secondAttribute="leading" constant="60" id="4IO-Ka-mjd"/>
                             <constraint firstItem="gbx-fm-uxe" firstAttribute="top" secondItem="rsx-cK-qBn" secondAttribute="bottom" constant="43" id="MHv-L5-dsr"/>
                             <constraint firstItem="moz-nC-y4c" firstAttribute="top" secondItem="9Qa-mc-rdb" secondAttribute="bottom" constant="24" id="WTL-Mb-uNs"/>
                             <constraint firstItem="rsx-cK-qBn" firstAttribute="centerX" secondItem="ZsA-2a-IO9" secondAttribute="centerX" id="Xcr-08-v11"/>
@@ -188,7 +188,7 @@
                             <constraint firstItem="qUP-yn-7cQ" firstAttribute="leading" secondItem="gbx-fm-uxe" secondAttribute="leading" id="lzf-yD-PaO"/>
                             <constraint firstItem="9Qa-mc-rdb" firstAttribute="top" secondItem="rsx-cK-qBn" secondAttribute="bottom" constant="39" id="mJr-mC-XaA"/>
                             <constraint firstAttribute="trailing" secondItem="mnV-DV-V8F" secondAttribute="trailing" id="mwP-3q-nJE"/>
-                            <constraint firstItem="gbx-fm-uxe" firstAttribute="leading" secondItem="ZsA-2a-IO9" secondAttribute="leading" constant="20" id="ory-rL-I9C"/>
+                            <constraint firstItem="gbx-fm-uxe" firstAttribute="leading" secondItem="ZsA-2a-IO9" secondAttribute="leading" constant="60" id="ory-rL-I9C"/>
                             <constraint firstItem="mnV-DV-V8F" firstAttribute="top" secondItem="2z1-ST-5Ye" secondAttribute="bottom" id="ru1-qH-Iya"/>
                             <constraint firstAttribute="trailing" secondItem="9Qa-mc-rdb" secondAttribute="trailing" constant="76" id="wh9-gh-4cR"/>
                             <constraint firstAttribute="trailing" secondItem="K3h-5V-3b5" secondAttribute="trailing" constant="20" id="wkb-OX-Z8f"/>
@@ -632,8 +632,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="台灣大哥大帳號：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ShX-GU-yx1">
-                                <rect key="frame" x="20" y="188" width="136" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 帳號：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ShX-GU-yx1">
+                                <rect key="frame" x="60" y="188" width="136" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="136" id="6eG-nN-Xc1"/>
                                     <constraint firstAttribute="height" constant="21" id="EJr-3o-M6V"/>
@@ -653,8 +653,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登入密碼：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9XZ-xv-hTC">
-                                <rect key="frame" x="20" y="235" width="85" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 密碼：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9XZ-xv-hTC">
+                                <rect key="frame" x="60" y="235" width="85" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="2FQ-gw-Rft"/>
                                     <constraint firstAttribute="width" constant="85" id="vAo-2l-8eS"/>
@@ -672,14 +672,14 @@
                             <constraint firstItem="KpA-em-EUl" firstAttribute="top" secondItem="eaS-1T-DuL" secondAttribute="bottom" id="EMG-YR-7ak"/>
                             <constraint firstAttribute="trailing" secondItem="KpA-em-EUl" secondAttribute="trailing" id="GJi-fm-y2D"/>
                             <constraint firstItem="ccK-8Z-avj" firstAttribute="top" secondItem="PgP-s3-Mn4" secondAttribute="bottom" constant="39" id="Ns3-Pc-yty"/>
-                            <constraint firstItem="9XZ-xv-hTC" firstAttribute="leading" secondItem="yNQ-W3-IxN" secondAttribute="leading" constant="20" id="SkX-wM-9wM"/>
+                            <constraint firstItem="9XZ-xv-hTC" firstAttribute="leading" secondItem="yNQ-W3-IxN" secondAttribute="leading" constant="60" id="SkX-wM-9wM"/>
                             <constraint firstItem="5pd-WF-UpE" firstAttribute="leading" secondItem="ccK-8Z-avj" secondAttribute="leading" id="VVt-Qv-MAJ"/>
                             <constraint firstAttribute="trailing" secondItem="hqb-Ds-VJv" secondAttribute="trailing" constant="20" id="Wf4-rE-epS"/>
                             <constraint firstItem="9XZ-xv-hTC" firstAttribute="top" secondItem="ShX-GU-yx1" secondAttribute="bottom" constant="26" id="XGA-5n-ZYj"/>
                             <constraint firstItem="KpA-em-EUl" firstAttribute="leading" secondItem="yNQ-W3-IxN" secondAttribute="leading" id="XfQ-yH-7o8"/>
                             <constraint firstItem="hqb-Ds-VJv" firstAttribute="top" secondItem="eaS-1T-DuL" secondAttribute="bottom" constant="163" id="YJ0-d6-ulk"/>
                             <constraint firstItem="PgP-s3-Mn4" firstAttribute="top" secondItem="eaS-1T-DuL" secondAttribute="bottom" constant="39" id="aap-ac-dv5"/>
-                            <constraint firstItem="ShX-GU-yx1" firstAttribute="leading" secondItem="yNQ-W3-IxN" secondAttribute="leading" constant="20" id="det-IX-UtF"/>
+                            <constraint firstItem="ShX-GU-yx1" firstAttribute="leading" secondItem="yNQ-W3-IxN" secondAttribute="leading" constant="60" id="det-IX-UtF"/>
                             <constraint firstItem="5pd-WF-UpE" firstAttribute="top" secondItem="ccK-8Z-avj" secondAttribute="bottom" constant="18" id="mzO-Sv-GE7"/>
                             <constraint firstItem="G8d-53-39y" firstAttribute="top" secondItem="KpA-em-EUl" secondAttribute="bottom" id="nnd-y8-WTy"/>
                             <constraint firstItem="ShX-GU-yx1" firstAttribute="top" secondItem="PgP-s3-Mn4" secondAttribute="bottom" constant="43" id="z0j-vl-HPR"/>
@@ -883,7 +883,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="S2m-f0-Mp8" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Kft-ml-ced">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Kft-ml-ced">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
